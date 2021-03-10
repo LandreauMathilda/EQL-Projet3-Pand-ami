@@ -10,13 +10,13 @@
 <h:body>
     <h2>Création de compte</h2>
     <h:form>
-        Nom: <h:inputText value="#{mbConnect.user.surname}" /><br/>
-        Prénom: <h:inputText value="#{mbConnect.user.name}" /><br/>
+        Nom: <p:inputText value="#{mbConnect.user.surname}"/><br/>
+        Prénom: <p:inputText value="#{mbConnect.user.name}"/><br/>
         Date de naissance : <p:datePicker id="time" value="#{mbConnect.user.birthDate}" showTime="true"/><br/>
-        Login: <h:inputText value="#{mbConnect.user.login}" /><br/>
-        Password: <h:inputSecret value="#{mbConnect.user.password}" /><br/>
-        <h:commandButton action="#{mbConnect.createAccount()}" value="Créer un compte" /><br/>
-        <h:outputLabel value="#{mbConnect.message}" />
+        Login: <p:inputText value="#{mbConnect.user.login}"/><br/>
+        Password: <p:inputText value="#{mbConnect.user.password}"/><br/>
+        <p:commandButton action="#{mbConnect.createAccount()}" value="Créer un compte"/><br/>
+        <p:outputLabel value="#{mbConnect.message}" />
     </h:form>
 </h:body>
 </html>
