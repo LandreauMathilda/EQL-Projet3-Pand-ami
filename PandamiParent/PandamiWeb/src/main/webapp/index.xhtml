@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head>
 </h:head>
@@ -11,6 +12,7 @@
     <h:form>
         Nom: <h:inputText value="#{mbConnect.user.surname}" /><br/>
         Prénom: <h:inputText value="#{mbConnect.user.name}" /><br/>
+        Date de naissance : <p:datePicker id="time" value="#{mbConnect.user.birthDate}" showTime="true"/><br/>
         Login: <h:inputText value="#{mbConnect.user.login}" /><br/>
         Password: <h:inputSecret value="#{mbConnect.user.password}" /><br/>
         <h:commandButton action="#{mbConnect.createAccount()}" value="Créer un compte" /><br/>
