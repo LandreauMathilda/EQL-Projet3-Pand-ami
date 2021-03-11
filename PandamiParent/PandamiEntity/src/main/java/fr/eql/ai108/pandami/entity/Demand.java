@@ -36,6 +36,9 @@ public class Demand implements Serializable {
 	private LocalDateTime reportDate;
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
+	private CancelReason cancelReason;
+	@ManyToOne
+	@JoinColumn (referencedColumnName = "id")
 	private City city;
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
@@ -55,8 +58,8 @@ public class Demand implements Serializable {
 
 	public Demand(Integer id, User user, LocalDateTime actionDate, LocalDateTime startHour, LocalDateTime endHour,
 			String street, LocalDateTime publishDate, LocalDateTime cancelDate, LocalDateTime closeDate,
-			LocalDateTime reportDate, City city, Activity activity, EndedType endedType, Set<Reply> replies,
-			ReportIssue reportIssue) {
+			LocalDateTime reportDate, CancelReason cancelReason, City city, Activity activity, EndedType endedType,
+			Set<Reply> replies, ReportIssue reportIssue) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -68,6 +71,7 @@ public class Demand implements Serializable {
 		this.cancelDate = cancelDate;
 		this.closeDate = closeDate;
 		this.reportDate = reportDate;
+		this.cancelReason = cancelReason;
 		this.city = city;
 		this.activity = activity;
 		this.endedType = endedType;
@@ -273,5 +277,13 @@ public class Demand implements Serializable {
 
 	public void setReportIssue(ReportIssue reportIssue) {
 		this.reportIssue = reportIssue;
+	}
+
+	public CancelReason getCancelReason() {
+		return cancelReason;
+	}
+
+	public void setCancelReason(CancelReason cancelReason) {
+		this.cancelReason = cancelReason;
 	}
 }

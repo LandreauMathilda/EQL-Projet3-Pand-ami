@@ -10,6 +10,7 @@
 		<class>fr.eql.ai108.pandami.entity.ActivityCategory</class>
 		<class>fr.eql.ai108.pandami.entity.ActivityPreference</class>
 		<class>fr.eql.ai108.pandami.entity.Availability</class>
+		<class>fr.eql.ai108.pandami.entity.CancelReason</class>
 		<class>fr.eql.ai108.pandami.entity.City</class>
 		<class>fr.eql.ai108.pandami.entity.Demand</class>
 		<class>fr.eql.ai108.pandami.entity.DesistReason</class>
