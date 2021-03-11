@@ -9,72 +9,62 @@
 	<ui:define name="title">Profil</ui:define>
 	<ui:define name="content">
 		<div id="main">
+			<div>TITRE</div>
 			<h:form styleClass="formInfos">
 				<div id="leftPanel">
-					<label>Connexion :</label>
-					<br/>
-					<label>Identifiant</label>
-					<br/>
-					<label>Mot de passe</label>
-					<br/><br/>
-	
-					<label>Etat-Civil</label>
-					<br/>
-					<label>Nom</label>
-					<br/>
-					<label>Prenom</label>
-					<br/>
-					<label>Genre</label>
-					<br/>
-					<br/>
-					
-					<label>Contact d'urgence</label>
-					<br/>
-					<label>Nom</label>
-					<br/>
-					<label>Prenom</label>
-					<br/>
-					<label>N° telephone</label>
-					<br/>
-					<br/>
-					
-					<label>Contact</label>
-					<br/>
-					<label>email</label>
-					<br/>
-					<label>N° telephone</label>
-					<br/>
-					<br/>
-					
-					<label>Adresse</label>
-					<br/>
-					<label>N° et rue</label>
-					<br/>
-					<label>Code postal</label>
-					<br/>
-					<label>Ville</label>
-					<br/>
-					<br/>
-					
+					<div id="connexion">			
+						<h5>Connexion</h5>
+						<label>identifiant</label>
+						<p:inputText value="#" />
+						<label>Mot de passe</label>
+						<p:inputText value="#" />					
+					</div>
+					<div id="civilState">
+					<h5>Etat-civil :</h5>
+						<label>Nom</label>
+						<p:inputText value="#{mbConnect.user.surname}" />
+						<label>Prenom</label>
+						<p:inputText value="#{mbConnect.user.name}" />
+						<label>Genre</label>
+						<p:selectOneRadio id="rbGender" value="#" unselectable="true">
+            			<f:selectItem itemLabel="F" itemValue="feminine"/>
+            			<f:selectItem itemLabel="M" itemValue="masculine"/>
+            			<f:selectItem itemLabel="Autre" itemValue="other"/>
+        				</p:selectOneRadio>		
+					</div>
+					<div id="contact">			
+						<h5>Contact :</h5>
+						<label>email</label>
+						<p:inputText value="#" />
+						<label>N° telephone</label>
+						<p:inputText value="#" />					
+					</div>
 				</div>
-				<div id="rightPanel"></div>
-
-				<!--  -->
-		Nom: <p:inputText value="#{mbConnect.user.surname}" />
-				<br />
-	        Prénom: <p:inputText value="#{mbConnect.user.name}" />
-				<br />
-	        Date de naissance : <p:datePicker id="time"
-					value="#{mbConnect.user.birthDate}" showTime="true" />
-				<br />
-	        Login: <p:inputText value="#{mbConnect.user.login}" />
-				<br />
-	        Password: <p:inputText value="#{mbConnect.user.password}" />
-				<br />
-				<p:commandButton action="#{mbConnect.createAccount()}"
+				<div id="rightPanel">
+					<div id="adress">
+						<h5>Adresse :</h5>
+						<label>N° et rue</label>
+						<p:inputText value="#" />
+						<label>Code postal</label>
+						<p:inputText value="#" />
+						<label>Ville</label>
+						<p:inputText value="#" />
+					</div>
+					<div id="emergencyContact">
+						<h5>Contact d'Urgence:</h5>
+						<label>Nom</label>
+						<p:inputText value="#" />
+						<label>Prenom</label>
+						<p:inputText value="#" />
+						<label>N° telephone</label>
+						<p:inputText value="#" />
+					</div>		
+					<div id="bouton">
+						<p:commandButton action="#{mbConnect.createAccount()}"
 					value="Créer un compte" />
-				<br />
-				<p:outputLabel value="#{mbConnect.message}" />
+						<p:outputLabel value="#{mbConnect.message}" />	
+					</div>
+				</div>
 			</h:form>
 		</div>
 	</ui:define>
