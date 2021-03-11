@@ -1,19 +1,16 @@
 package fr.eql.ai108.pandami.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="category_activity")
-public class CategoryActivity implements Serializable{
+@Table(name="desist_reason")
+public class DesistReason implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -21,18 +18,15 @@ public class CategoryActivity implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String label;
-	@OneToMany (mappedBy = "categoryActivity", cascade = CascadeType.ALL)
-	private Set<Activity> activities;
 	
-	public CategoryActivity() {
+	public DesistReason() {
 		super();
 	}
 
-	public CategoryActivity(Integer id, String label, Set<Activity> activities) {
+	public DesistReason(Integer id, String label) {
 		super();
 		this.id = id;
 		this.label = label;
-		this.activities = activities;
 	}
 
 	@Override
@@ -52,7 +46,7 @@ public class CategoryActivity implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CategoryActivity other = (CategoryActivity) obj;
+		DesistReason other = (DesistReason) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -68,7 +62,7 @@ public class CategoryActivity implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CategoryActivity [id=" + id + ", label=" + label + "]";
+		return "DesistReason [id=" + id + ", label=" + label + "]";
 	}
 
 	public Integer getId() {
@@ -79,19 +73,11 @@ public class CategoryActivity implements Serializable{
 		return label;
 	}
 
-	public Set<Activity> getActivities() {
-		return activities;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public void setLabel(String label) {
 		this.label = label;
-	}
-
-	public void setActivities(Set<Activity> activities) {
-		this.activities = activities;
 	}
 }

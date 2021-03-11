@@ -49,6 +49,10 @@ public class User implements Serializable {
 	private LocalDateTime inscriptionDate;
 	@OneToMany (mappedBy = "volunteer", cascade = CascadeType.ALL)
 	private Set<Reply> replies;
+	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<ActivityPreference> activitiesPreferences;
+	@OneToMany (mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Availability> availabities;
 
 	public User() {
 		super();
@@ -57,7 +61,8 @@ public class User implements Serializable {
 	public User(Integer id, UserType userType, String name, String surname, Gender gender, String street, City city,
 			LocalDateTime birthDate, String phoneNumber, String email, String emergencyContactName,
 			String emergencyContactSurname, String emergencyContactPhoneNumber, String login, String password,
-			LocalDateTime inscriptionDate, Set<Reply> replies) {
+			LocalDateTime inscriptionDate, Set<Reply> replies, Set<ActivityPreference> activitiesPreferences,
+			Set<Availability> availabities) {
 		super();
 		this.id = id;
 		this.userType = userType;
@@ -76,6 +81,8 @@ public class User implements Serializable {
 		this.password = password;
 		this.inscriptionDate = inscriptionDate;
 		this.replies = replies;
+		this.activitiesPreferences = activitiesPreferences;
+		this.availabities = availabities;
 	}
 
 	@Override
@@ -252,6 +259,14 @@ public class User implements Serializable {
 		return replies;
 	}
 
+	public Set<ActivityPreference> getActivitiesPreferences() {
+		return activitiesPreferences;
+	}
+
+	public Set<Availability> getAvailabities() {
+		return availabities;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -318,5 +333,13 @@ public class User implements Serializable {
 
 	public void setReplies(Set<Reply> replies) {
 		this.replies = replies;
+	}
+
+	public void setActivitiesPreferences(Set<ActivityPreference> activitiesPreferences) {
+		this.activitiesPreferences = activitiesPreferences;
+	}
+
+	public void setAvailabities(Set<Availability> availabities) {
+		this.availabities = availabities;
 	}
 }

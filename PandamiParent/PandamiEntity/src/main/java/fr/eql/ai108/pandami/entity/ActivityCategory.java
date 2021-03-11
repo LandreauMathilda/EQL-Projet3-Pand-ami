@@ -8,14 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="activity")
-public class Activity implements Serializable{
+@Table(name="activity_category")
+public class ActivityCategory implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -23,28 +21,18 @@ public class Activity implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String label;
-	@ManyToOne
-	@JoinColumn (referencedColumnName = "id")
-	private ActivityCategory activityCategory;
-	@ManyToOne
-	@JoinColumn (referencedColumnName = "id")
-	private EquipmentType equipmentType;
-	@OneToMany (mappedBy = "activity", cascade = CascadeType.ALL)
-	private Set<ActivityPreference> activitiesPreferences;
+	@OneToMany (mappedBy = "activityCategory", cascade = CascadeType.ALL)
+	private Set<Activity> activities;
 	
-	public Activity() {
+	public ActivityCategory() {
 		super();
-
 	}
 
-	public Activity(Integer id, String label, ActivityCategory activityCategory, EquipmentType equipmentType,
-			Set<ActivityPreference> activitiesPreferences) {
+	public ActivityCategory(Integer id, String label, Set<Activity> activities) {
 		super();
 		this.id = id;
 		this.label = label;
-		this.activityCategory = activityCategory;
-		this.equipmentType = equipmentType;
-		this.activitiesPreferences = activitiesPreferences;
+		this.activities = activities;
 	}
 
 	@Override
@@ -64,7 +52,7 @@ public class Activity implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Activity other = (Activity) obj;
+		ActivityCategory other = (ActivityCategory) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -80,7 +68,7 @@ public class Activity implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + id + ", label=" + label + "]";
+		return "CategoryActivity [id=" + id + ", label=" + label + "]";
 	}
 
 	public Integer getId() {
@@ -91,16 +79,8 @@ public class Activity implements Serializable{
 		return label;
 	}
 
-	public ActivityCategory getActivityCategory() {
-		return activityCategory;
-	}
-
-	public EquipmentType getEquipmentType() {
-		return equipmentType;
-	}
-
-	public Set<ActivityPreference> getActivitiesPreferences() {
-		return activitiesPreferences;
+	public Set<Activity> getActivities() {
+		return activities;
 	}
 
 	public void setId(Integer id) {
@@ -111,15 +91,7 @@ public class Activity implements Serializable{
 		this.label = label;
 	}
 
-	public void setActivityCategory(ActivityCategory activityCategory) {
-		this.activityCategory = activityCategory;
-	}
-
-	public void setEquipmentType(EquipmentType equipmentType) {
-		this.equipmentType = equipmentType;
-	}
-
-	public void setActivitiesPreferences(Set<ActivityPreference> activitiesPreferences) {
-		this.activitiesPreferences = activitiesPreferences;
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
 	}
 }
