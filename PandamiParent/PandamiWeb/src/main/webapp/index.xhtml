@@ -5,18 +5,18 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"> 
 
-<h:head>
-</h:head>
-<h:body>
-    <h2>Création de compte</h2>
-    <h:form>
-        Nom: <p:inputText value="#{mbConnect.user.surname}"/><br/>
-        Prénom: <p:inputText value="#{mbConnect.user.name}"/><br/>
-        Date de naissance : <p:datePicker id="time" value="#{mbConnect.user.birthDate}" showTime="true"/><br/>
-        Login: <p:inputText value="#{mbConnect.user.login}"/><br/>
-        Password: <p:inputText value="#{mbConnect.user.password}"/><br/>
-        <p:commandButton action="#{mbConnect.createAccount()}" value="Créer un compte"/><br/>
-        <p:outputLabel value="#{mbConnect.message}" />
-    </h:form>
-</h:body>
+	<h:head>
+	</h:head>
+	<h:body>
+	    <h2>Création de compte</h2>
+	    <h:form>
+	        Nom: <p:inputText value="#{mbConnect.user.surname}"/><br/>
+	        Prénom: <p:inputText value="#{mbConnect.user.name}"/><br/>
+	        Date de naissance : <p:datePicker id="time" value="#{mbConnect.user.birthDate}" showTime="true"/><br/>
+	        Login: <p:inputText value="#{mbConnect.user.login}"/><br/>
+	        Password: <p:inputText value="#{mbConnect.user.password}"/><br/>
+	        <p:commandButton action="#{mbConnect.createAccount()}" value="Créer un compte"/><br/>
+	        <p:outputLabel value="#{mbConnect.message}" />
+	    </h:form>
+	</h:body>
 </html>
