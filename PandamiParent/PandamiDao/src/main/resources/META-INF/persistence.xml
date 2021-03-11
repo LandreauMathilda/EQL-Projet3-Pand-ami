@@ -11,11 +11,14 @@
 		<class>fr.eql.ai108.pandami.entity.City</class>
 		<class>fr.eql.ai108.pandami.entity.Gender</class>
 		<class>fr.eql.ai108.pandami.entity.Activity</class>
-		<class>fr.eql.ai108.pandami.entity.CategoryActivity</class>
 		<class>fr.eql.ai108.pandami.entity.Reply</class>
 		<class>fr.eql.ai108.pandami.entity.Demand</class>
 		<class>fr.eql.ai108.pandami.entity.EndedType</class>
 		<class>fr.eql.ai108.pandami.entity.EquipmentType</class>
+		<class>fr.eql.ai108.pandami.entity.ActivityCategory</class>
+		<class>fr.eql.ai108.pandami.entity.ActivityPreference</class>
+		<class>fr.eql.ai108.pandami.entity.Availability</class>
+		<class>fr.eql.ai108.pandami.entity.DesistReason</class>
 		<properties>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5InnoDBDialect" />

@@ -26,6 +26,9 @@ public class Reply implements Serializable {
 	private LocalDateTime rejectDate;
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
+	private DesistReason desistReason;
+	@ManyToOne
+	@JoinColumn (referencedColumnName = "id")
 	private User volunteer;
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
