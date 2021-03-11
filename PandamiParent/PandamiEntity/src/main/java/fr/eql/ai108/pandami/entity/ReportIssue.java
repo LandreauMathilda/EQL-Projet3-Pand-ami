@@ -20,17 +20,15 @@ public class ReportIssue implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String label;
-	private Demand demand;
 	
 	public ReportIssue() {
 		super();
 	}
 
-	public ReportIssue(Integer id, String label, Demand demand) {
+	public ReportIssue(Integer id, String label) {
 		super();
 		this.id = id;
 		this.label = label;
-		this.demand = demand;
 	}
 
 	@Override
@@ -77,19 +75,11 @@ public class ReportIssue implements Serializable{
 		return label;
 	}
 
-	public Demand getDemand() {
-		return demand;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public void setLabel(String label) {
 		this.label = label;
-	}
-
-	public void setDemand(Demand demand) {
-		this.demand = demand;
 	}
 }

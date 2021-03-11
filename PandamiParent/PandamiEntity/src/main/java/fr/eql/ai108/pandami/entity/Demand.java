@@ -23,8 +23,12 @@ public class Demand implements Serializable {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private LocalDateTime startActionDate;
-	private LocalDateTime endActionDate;
+	@ManyToOne
+	@JoinColumn (referencedColumnName = "id")
+	private User user;
+	private LocalDateTime actionDate;
+	private LocalDateTime startHour;
+	private LocalDateTime endHour;
 	private String street;
 	private LocalDateTime publishDate;
 	private LocalDateTime cancelDate;
@@ -49,13 +53,16 @@ public class Demand implements Serializable {
 		super();
 	}
 
-	public Demand(Integer id, LocalDateTime startActionDate, LocalDateTime endActionDate, String street,
-			LocalDateTime publishDate, LocalDateTime cancelDate, LocalDateTime closeDate, LocalDateTime reportDate,
-			City city, Activity activity, EndedType endedType, Set<Reply> replies, ReportIssue reportIssue) {
+	public Demand(Integer id, User user, LocalDateTime actionDate, LocalDateTime startHour, LocalDateTime endHour,
+			String street, LocalDateTime publishDate, LocalDateTime cancelDate, LocalDateTime closeDate,
+			LocalDateTime reportDate, City city, Activity activity, EndedType endedType, Set<Reply> replies,
+			ReportIssue reportIssue) {
 		super();
 		this.id = id;
-		this.startActionDate = startActionDate;
-		this.endActionDate = endActionDate;
+		this.user = user;
+		this.actionDate = actionDate;
+		this.startHour = startHour;
+		this.endHour = endHour;
 		this.street = street;
 		this.publishDate = publishDate;
 		this.cancelDate = cancelDate;
@@ -67,18 +74,19 @@ public class Demand implements Serializable {
 		this.replies = replies;
 		this.reportIssue = reportIssue;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((actionDate == null) ? 0 : actionDate.hashCode());
 		result = prime * result + ((cancelDate == null) ? 0 : cancelDate.hashCode());
 		result = prime * result + ((closeDate == null) ? 0 : closeDate.hashCode());
-		result = prime * result + ((endActionDate == null) ? 0 : endActionDate.hashCode());
+		result = prime * result + ((endHour == null) ? 0 : endHour.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((publishDate == null) ? 0 : publishDate.hashCode());
 		result = prime * result + ((reportDate == null) ? 0 : reportDate.hashCode());
-		result = prime * result + ((startActionDate == null) ? 0 : startActionDate.hashCode());
+		result = prime * result + ((startHour == null) ? 0 : startHour.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		return result;
 	}
@@ -92,6 +100,11 @@ public class Demand implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Demand other = (Demand) obj;
+		if (actionDate == null) {
+			if (other.actionDate != null)
+				return false;
+		} else if (!actionDate.equals(other.actionDate))
+			return false;
 		if (cancelDate == null) {
 			if (other.cancelDate != null)
 				return false;
@@ -102,10 +115,10 @@ public class Demand implements Serializable {
 				return false;
 		} else if (!closeDate.equals(other.closeDate))
 			return false;
-		if (endActionDate == null) {
-			if (other.endActionDate != null)
+		if (endHour == null) {
+			if (other.endHour != null)
 				return false;
-		} else if (!endActionDate.equals(other.endActionDate))
+		} else if (!endHour.equals(other.endHour))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -122,10 +135,10 @@ public class Demand implements Serializable {
 				return false;
 		} else if (!reportDate.equals(other.reportDate))
 			return false;
-		if (startActionDate == null) {
-			if (other.startActionDate != null)
+		if (startHour == null) {
+			if (other.startHour != null)
 				return false;
-		} else if (!startActionDate.equals(other.startActionDate))
+		} else if (!startHour.equals(other.startHour))
 			return false;
 		if (street == null) {
 			if (other.street != null)
@@ -137,21 +150,29 @@ public class Demand implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Demand [id=" + id + ", startActionDate=" + startActionDate + ", endActionDate=" + endActionDate
+		return "Demand [id=" + id + ", actionDate=" + actionDate + ", startHour=" + startHour + ", endHour=" + endHour
 				+ ", street=" + street + ", publishDate=" + publishDate + ", cancelDate=" + cancelDate + ", closeDate="
-				+ closeDate + ", reportDate=" + reportDate + "]";
+				+ closeDate + ", reportDate=" + reportDate + ", city=" + city + "]";
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public LocalDateTime getStartActionDate() {
-		return startActionDate;
+	public User getUser() {
+		return user;
 	}
 
-	public LocalDateTime getEndActionDate() {
-		return endActionDate;
+	public LocalDateTime getActionDate() {
+		return actionDate;
+	}
+
+	public LocalDateTime getStartHour() {
+		return startHour;
+	}
+
+	public LocalDateTime getEndHour() {
+		return endHour;
 	}
 
 	public String getStreet() {
@@ -198,12 +219,20 @@ public class Demand implements Serializable {
 		this.id = id;
 	}
 
-	public void setStartActionDate(LocalDateTime startActionDate) {
-		this.startActionDate = startActionDate;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public void setEndActionDate(LocalDateTime endActionDate) {
-		this.endActionDate = endActionDate;
+	public void setActionDate(LocalDateTime actionDate) {
+		this.actionDate = actionDate;
+	}
+
+	public void setStartHour(LocalDateTime startHour) {
+		this.startHour = startHour;
+	}
+
+	public void setEndHour(LocalDateTime endHour) {
+		this.endHour = endHour;
 	}
 
 	public void setStreet(String street) {
