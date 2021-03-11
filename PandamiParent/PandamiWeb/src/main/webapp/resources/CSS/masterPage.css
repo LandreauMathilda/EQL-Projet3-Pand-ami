@@ -31,8 +31,8 @@ body {
 }
 
 #main {
-	background-color:hotpink;
-	color: white;
+	_background-color:hotpink;
+	_color: white;
 	margin:1vh;
 	flex-grow:1;
 	display:flex;

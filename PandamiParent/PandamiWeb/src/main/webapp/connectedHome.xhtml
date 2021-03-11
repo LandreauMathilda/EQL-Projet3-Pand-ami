@@ -2,16 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/masterPage.xhtml">
-	<ui:define name="title">Page 1</ui:define>
+	<ui:define name="title">Home</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<h:form id="formButtons">
-				<h:commandButton class="buttons" action="#"
+			<h:form styleClass="ui-formButtons">
+				<p:commandButton class="buttons" action="#"
 					value="Déposer une demande" />
-				<h:commandButton class="buttons" action="#"
+				<p:commandButton class="buttons" action="#"
 					value="Rechercher une demande" />
 			</h:form>
 		</div>

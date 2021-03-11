@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="title">Profil</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<div>TITRE</div>
+			<h:form styleClass="formInfos">
+				<div id="leftPanel">
+					<div id="connexion">			
+						<h5>Connexion</h5>
+						<label>identifiant</label>
+						<p:inputText value="#" />
+						<label>Mot de passe</label>
+						<p:inputText value="#" />					
+					</div>
+					<div id="civilState">
+					<h5>Etat-civil :</h5>
+						<label>Nom</label>
+						<p:inputText value="#{mbConnect.user.surname}" />
+						<label>Prenom</label>
+						<p:inputText value="#{mbConnect.user.name}" />
+						<label>Genre</label>
+						<p:selectOneRadio id="rbGender" value="#" unselectable="true">
+            			<f:selectItem itemLabel="F" itemValue="feminine"/>
+            			<f:selectItem itemLabel="M" itemValue="masculine"/>
+            			<f:selectItem itemLabel="Autre" itemValue="other"/>
+        				</p:selectOneRadio>		
+					</div>
+					<div id="contact">			
+						<h5>Contact :</h5>
+						<label>email</label>
+						<p:inputText value="#" />
+						<label>N° telephone</label>
+						<p:inputText value="#" />					
+					</div>
+				</div>
+				<div id="rightPanel">
+					<div id="adress">
+						<h5>Adresse :</h5>
+						<label>N° et rue</label>
+						<p:inputText value="#" />
+						<label>Code postal</label>
+						<p:inputText value="#" />
+						<label>Ville</label>
+						<p:inputText value="#" />
+					</div>
+					<div id="emergencyContact">
+						<h5>Contact d'Urgence:</h5>
+						<label>Nom</label>
+						<p:inputText value="#" />
+						<label>Prenom</label>
+						<p:inputText value="#" />
+						<label>N° telephone</label>
+						<p:inputText value="#" />
+					</div>		
+					<div id="bouton">
+						<p:commandButton action="#{mbConnect.createAccount()}"
+					value="Créer un compte" />
+						<p:outputLabel value="#{mbConnect.message}" />	
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/userInfo.css" />
+	</ui:define>
+</ui:composition>
+</html>
