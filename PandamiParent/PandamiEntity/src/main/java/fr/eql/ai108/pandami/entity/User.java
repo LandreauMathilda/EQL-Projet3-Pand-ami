@@ -1,8 +1,7 @@
 package fr.eql.ai108.pandami.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +32,7 @@ public class User implements Serializable {
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
 	private City city;
-	private Date birthDate;
+	private LocalDateTime birthDate;
 	private String phoneNumber;
 	@Column (unique = true)
 	private String email;
@@ -43,16 +42,16 @@ public class User implements Serializable {
 	@Column (unique = true)
 	private String login;
 	private String password;
-	private Date inscriptionDate;
+	private LocalDateTime inscriptionDate;
 
 	public User() {
 		super();
 	}
 
 	public User(Integer id, UserType userType, String name, String surname, Gender gender, String street, City city,
-			Date birthDate, String phoneNumber, String email, String emergencyContactName,
+			LocalDateTime birthDate, String phoneNumber, String email, String emergencyContactName,
 			String emergencyContactSurname, String emergencyContactPhoneNumber, String login, String password,
-			Date inscriptionDate) {
+			LocalDateTime inscriptionDate) {
 		super();
 		this.id = id;
 		this.userType = userType;
@@ -128,11 +127,11 @@ public class User implements Serializable {
 		this.city = city;
 	}
 
-	public Date getBirthDate() {
+	public LocalDateTime getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDateTime birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -192,11 +191,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Date getInscriptionDate() {
+	public LocalDateTime getInscriptionDate() {
 		return inscriptionDate;
 	}
 
-	public void setInscriptionDate(Date inscriptionDate) {
+	public void setInscriptionDate(LocalDateTime inscriptionDate) {
 		this.inscriptionDate = inscriptionDate;
 	}
 
