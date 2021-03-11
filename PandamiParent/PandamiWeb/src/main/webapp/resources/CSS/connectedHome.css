@@ -1,16 +1,26 @@
 #main {
 	align-items: center;
 	justify-content: center;
+	display:flex;
+	flex-direction:column;
 }
 
-#formButtons {
+.ui-formButtons {
 	display: flex;
 	flex-direction: column;
 	padding: 1vh;
 	background-color: teal;
 }
 
-.buttons {
+.ui-formButtons .buttons {
 	padding: 2vw;
 	margin: 1vh;
+	font-weight: bold;
+	font-size: xx-large;
+}
+
+.ui-formButtons .buttons:hover {
+	transition : all 0.3s ease 0s;
+	left : .1em;
+	letter-spacing:3px;
 }

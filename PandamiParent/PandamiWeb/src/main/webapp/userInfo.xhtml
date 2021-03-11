@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="title">Profil</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<h:form styleClass="formInfos">
+				<div id="leftPanel">
+					<label>Connexion :</label>
+					<br/>
+					<label>Identifiant</label>
+					<br/>
+					<label>Mot de passe</label>
+					<br/><br/>
+	
+					<label>Etat-Civil</label>
+					<br/>
+					<label>Nom</label>
+					<br/>
+					<label>Prenom</label>
+					<br/>
+					<label>Genre</label>
+					<br/>
+					<br/>
+					
+					<label>Contact d'urgence</label>
+					<br/>
+					<label>Nom</label>
+					<br/>
+					<label>Prenom</label>
+					<br/>
+					<label>N° telephone</label>
+					<br/>
+					<br/>
+					
+					<label>Contact</label>
+					<br/>
+					<label>email</label>
+					<br/>
+					<label>N° telephone</label>
+					<br/>
+					<br/>
+					
+					<label>Adresse</label>
+					<br/>
+					<label>N° et rue</label>
+					<br/>
+					<label>Code postal</label>
+					<br/>
+					<label>Ville</label>
+					<br/>
+					<br/>
+					
+				</div>
+				<div id="rightPanel"></div>
+
+				<!--  -->
+		Nom: <p:inputText value="#{mbConnect.user.surname}" />
+				<br />
+	        Prénom: <p:inputText value="#{mbConnect.user.name}" />
+				<br />
+	        Date de naissance : <p:datePicker id="time"
+					value="#{mbConnect.user.birthDate}" showTime="true" />
+				<br />
+	        Login: <p:inputText value="#{mbConnect.user.login}" />
+				<br />
+	        Password: <p:inputText value="#{mbConnect.user.password}" />
+				<br />
+				<p:commandButton action="#{mbConnect.createAccount()}"
+					value="Créer un compte" />
+				<br />
+				<p:outputLabel value="#{mbConnect.message}" />
+			</h:form>
+		</div>
+	</ui:define>
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/userInfo.css" />
+	</ui:define>
+</ui:composition>
+</html>
