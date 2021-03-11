@@ -2,6 +2,9 @@ package fr.eql.ai108.pandami.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -43,6 +47,8 @@ public class User implements Serializable {
 	private String login;
 	private String password;
 	private LocalDateTime inscriptionDate;
+	@OneToMany (mappedBy = "volunteer", cascade = CascadeType.ALL)
+	private Set<Reply> replies;
 
 	public User() {
 		super();
@@ -51,7 +57,7 @@ public class User implements Serializable {
 	public User(Integer id, UserType userType, String name, String surname, Gender gender, String street, City city,
 			LocalDateTime birthDate, String phoneNumber, String email, String emergencyContactName,
 			String emergencyContactSurname, String emergencyContactPhoneNumber, String login, String password,
-			LocalDateTime inscriptionDate) {
+			LocalDateTime inscriptionDate, Set<Reply> replies) {
 		super();
 		this.id = id;
 		this.userType = userType;
@@ -69,145 +75,248 @@ public class User implements Serializable {
 		this.login = login;
 		this.password = password;
 		this.inscriptionDate = inscriptionDate;
+		this.replies = replies;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((emergencyContactName == null) ? 0 : emergencyContactName.hashCode());
+		result = prime * result + ((emergencyContactPhoneNumber == null) ? 0 : emergencyContactPhoneNumber.hashCode());
+		result = prime * result + ((emergencyContactSurname == null) ? 0 : emergencyContactSurname.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((inscriptionDate == null) ? 0 : inscriptionDate.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (birthDate == null) {
+			if (other.birthDate != null)
+				return false;
+		} else if (!birthDate.equals(other.birthDate))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (emergencyContactName == null) {
+			if (other.emergencyContactName != null)
+				return false;
+		} else if (!emergencyContactName.equals(other.emergencyContactName))
+			return false;
+		if (emergencyContactPhoneNumber == null) {
+			if (other.emergencyContactPhoneNumber != null)
+				return false;
+		} else if (!emergencyContactPhoneNumber.equals(other.emergencyContactPhoneNumber))
+			return false;
+		if (emergencyContactSurname == null) {
+			if (other.emergencyContactSurname != null)
+				return false;
+		} else if (!emergencyContactSurname.equals(other.emergencyContactSurname))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (inscriptionDate == null) {
+			if (other.inscriptionDate != null)
+				return false;
+		} else if (!inscriptionDate.equals(other.inscriptionDate))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		} else if (!phoneNumber.equals(other.phoneNumber))
+			return false;
+		if (street == null) {
+			if (other.street != null)
+				return false;
+		} else if (!street.equals(other.street))
+			return false;
+		if (surname == null) {
+			if (other.surname != null)
+				return false;
+		} else if (!surname.equals(other.surname))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", street=" + street + ", birthDate="
+				+ birthDate + ", phoneNumber=" + phoneNumber + ", email=" + email + ", emergencyContactName="
+				+ emergencyContactName + ", emergencyContactSurname=" + emergencyContactSurname
+				+ ", emergencyContactPhoneNumber=" + emergencyContactPhoneNumber + ", login=" + login + ", password="
+				+ password + ", inscriptionDate=" + inscriptionDate + "]";
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public UserType getUserType() {
 		return userType;
-	}
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getSurname() {
 		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
 	}
 
 	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
 	public String getStreet() {
 		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
 	}
 
 	public City getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
-		this.city = city;
-	}
-
 	public LocalDateTime getBirthDate() {
 		return birthDate;
-	}
-
-	public void setBirthDate(LocalDateTime birthDate) {
-		this.birthDate = birthDate;
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getEmergencyContactName() {
 		return emergencyContactName;
 	}
 
-	public void setEmergencyContactName(String emergencyContactName) {
-		this.emergencyContactName = emergencyContactName;
-	}
-
 	public String getEmergencyContactSurname() {
 		return emergencyContactSurname;
-	}
-
-	public void setEmergencyContactSurname(String emergencyContactSurname) {
-		this.emergencyContactSurname = emergencyContactSurname;
 	}
 
 	public String getEmergencyContactPhoneNumber() {
 		return emergencyContactPhoneNumber;
 	}
 
-	public void setEmergencyContactPhoneNumber(String emergencyContactPhoneNumber) {
-		this.emergencyContactPhoneNumber = emergencyContactPhoneNumber;
-	}
-
 	public String getLogin() {
 		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public LocalDateTime getInscriptionDate() {
 		return inscriptionDate;
+	}
+
+	public Set<Reply> getReplies() {
+		return replies;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public void setBirthDate(LocalDateTime birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setEmergencyContactName(String emergencyContactName) {
+		this.emergencyContactName = emergencyContactName;
+	}
+
+	public void setEmergencyContactSurname(String emergencyContactSurname) {
+		this.emergencyContactSurname = emergencyContactSurname;
+	}
+
+	public void setEmergencyContactPhoneNumber(String emergencyContactPhoneNumber) {
+		this.emergencyContactPhoneNumber = emergencyContactPhoneNumber;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setInscriptionDate(LocalDateTime inscriptionDate) {
 		this.inscriptionDate = inscriptionDate;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setReplies(Set<Reply> replies) {
+		this.replies = replies;
 	}
-
-
-
-
-
-
-
-
 }
