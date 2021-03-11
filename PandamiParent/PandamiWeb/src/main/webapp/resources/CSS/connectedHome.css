@@ -1,0 +1,16 @@
+#main {
+	align-items: center;
+	justify-content: center;
+}
+
+#formButtons {
+	display: flex;
+	flex-direction: column;
+	padding: 1vh;
+	background-color: teal;
+}
+
+.buttons {
+	padding: 2vw;
+	margin: 1vh;
+}
