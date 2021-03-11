@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="title">Dépôt/modif demande</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<div>DEPOSER / MODIFIER UNE DEMANDE</div>
+			<h:form styleClass="formInfos">
+				<div id="leftPanel">
+					<div id="place">
+						<label>Lieu de réalisation</label>
+						<p:inputText value="#" />
+						<label>Date et heure de début</label>
+						<p:datePicker id="time" value="#{mbConnect.user.birthDate}" showTime="true"/><br/>
+						<label>Durée</label>
+						 <p:datePicker id="timeonly" value="#{mbConnect.user.birthDate}" timeOnly="true" pattern="HH:mm"/>
+						<label>Catégorie de la demande</label>
+					
+						<label>Type de la demande</label>
+					
+
+						<label>Matériel requis</label>
+						
+					</div>
+					
+					<div id="contact">
+						<h5>Contact :</h5>
+						<label>email</label>
+						<p:inputText value="#" />
+						<label>N° telephone</label>
+						<p:inputText value="#" />
+					</div>
+				</div>
+				<div id="rightPanel">
+					<p:commandButton action="#"
+					value="Lieu différent du lieu de résidence" />
+					<div id="adress">
+						<h5>Adresse :</h5>
+						<label>N° et rue</label>
+						<p:inputText value="#" />
+						<label>Code postal</label>
+						<p:inputText value="#" />
+						<label>Ville</label>
+						<p:inputText value="#" />
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/demandDeposit.css" />
+	</ui:define>
+</ui:composition>
+</html>
