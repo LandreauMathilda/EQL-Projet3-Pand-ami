@@ -29,3 +29,4 @@ public class UserDao extends GenericDao<User> implements UserIDao {
 	}
 
 }
+
