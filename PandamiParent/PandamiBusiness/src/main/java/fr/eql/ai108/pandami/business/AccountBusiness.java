@@ -1,11 +1,15 @@
 package fr.eql.ai108.pandami.business;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.AccountIBusiness;
+import fr.eql.ai108.pandami.idao.CityIDao;
 import fr.eql.ai108.pandami.idao.UserIDao;
 
 @Remote (AccountIBusiness.class)
@@ -14,6 +18,8 @@ public class AccountBusiness implements AccountIBusiness{
 
 	@EJB
 	private UserIDao proxyUser;
+	@EJB
+	private CityIDao proxyCity;
 
 	@Override
 	public User createAccount(User user) {
@@ -23,10 +29,10 @@ public class AccountBusiness implements AccountIBusiness{
 		}
 		return returnedUser;
 	}
+
 	@Override
-	public User connection(String login, String password) {
-		
-		return proxyUser.authenticate(login, password);
+	public List<City> displayCities() {
+		return proxyCity.findAll();
 	}
 
 }

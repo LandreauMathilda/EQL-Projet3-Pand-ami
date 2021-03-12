@@ -4,5 +4,5 @@ import fr.eql.ai108.pandami.entity.Demand;
 
 public interface DemandIDao extends GenericIDao<Demand>{
 
-	 Boolean exist(Demand demand);
+	 Demand createDemand();
 }

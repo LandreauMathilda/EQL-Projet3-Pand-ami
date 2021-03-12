@@ -1,11 +1,14 @@
 package fr.eql.ai108.pandami.web;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.AccountIBusiness;
 
@@ -18,9 +21,15 @@ public class AccountManagedBean implements Serializable{
 
     private User user = new User();
     private String message;
+    private List<City> cities;
 
     @EJB
     private AccountIBusiness proxyAccountBu;
+    
+    @PostConstruct
+    public void init() {
+    	cities = proxyAccountBu.displayCities();
+    }
 
     public String createAccount() {
 
@@ -28,30 +37,16 @@ public class AccountManagedBean implements Serializable{
 
         if(user == null) {
             message = "Ce login n'est pas disponible. Choisissez en un autre";
-        }else {
+        } else {
             message = "Merci " + user.getLogin() + ". Votre compte a bien été créé";
         }
-
         user = new User();
-
         return "/index.xhtml?faces-redirect=true";
     }
     
-	public String connection(){
-		user = proxyAccountBu.connection(user.getLogin(), user.getPassword());
-		String retour = "";
-		if(user != null) {
-			retour = "/connectedPage.xhtml?faces-redirect=true";
-			message = "user connected";
-		} else {
-			user = new User();
-			message = "Login/Password incorrectes";
-			retour = "/connectionPage.xhtml?faces-redirect=true";
-			System.out.println("fail");
-		}
-		
-		return retour;
-	}
+    public void printSelectedCity() {
+    	System.out.println(user.getCity().toString());
+    }
 
 	public User getUser() {
 		return user;
@@ -69,5 +64,12 @@ public class AccountManagedBean implements Serializable{
 		this.message = message;
 	}
 
+	public List<City> getCities() {
+		return cities;
+	}
+
+	public void setCities(List<City> cities) {
+		this.cities = cities;
+	}	
 
 }
