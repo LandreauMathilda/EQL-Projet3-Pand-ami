@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import fr.eql.ai108.pandami.idao.GenericIDao;
 
@@ -23,7 +24,7 @@ public abstract class GenericDao<T> implements GenericIDao<T> {
 		}
 		return t;
 	}
-	
+
 	@Override
 	public boolean delete(T t) {
 
@@ -54,7 +55,7 @@ public abstract class GenericDao<T> implements GenericIDao<T> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return t;
 	}
 
@@ -63,9 +64,9 @@ public abstract class GenericDao<T> implements GenericIDao<T> {
 	public T findById(Integer id) {
 
 		T t = null;
-		
+
 		try {
-			
+
 			String className = ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
 			Class<?> clazz;
 			clazz = Class.forName(className);
@@ -74,28 +75,27 @@ public abstract class GenericDao<T> implements GenericIDao<T> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return t;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> getListById(Integer id) {
-
-		List<T> t = null;
+	public List<T> findAll() {
+		
+		List<T> objects = null;
 		
 		try {
-			
-			String className = ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
+			String className= ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
 			Class<?> clazz;
 			clazz = Class.forName(className);
-			t = (List<T>) em.find(clazz, id);
-
-		} catch (Exception e) {
+			Query query = em.createQuery("SELECT * FROM " + clazz.getName());
+			objects = query.getResultList();
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return t;
+		return objects;
 	}
 
 }

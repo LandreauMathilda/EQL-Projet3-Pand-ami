@@ -12,6 +12,6 @@ public interface GenericIDao<T> {
 
 	T findById(Integer id);
 
-	List<T> getListById(Integer id);
+	List<T> findAll();
 	
 }
