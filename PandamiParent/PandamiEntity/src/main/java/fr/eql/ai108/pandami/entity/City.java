@@ -70,7 +70,7 @@ public class City implements Serializable {
 
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", name=" + name + ", zipCode=" + zipCode + "]";
+		return zipCode + " - " + name;
 	}
 
 	public Integer getId() {

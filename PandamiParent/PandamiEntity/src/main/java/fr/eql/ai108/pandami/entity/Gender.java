@@ -61,7 +61,7 @@ public class Gender implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Gender [id=" + id + ", name=" + name + "]";
+		return name;
 	}
 	
 	public Integer getId() {
