@@ -1,0 +1,40 @@
+#main {
+	background-color: hotpink;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	text-align: center;
+}
+
+.formInfos {
+	background-color: aqua;
+	display: flex;
+	justify-content: center;
+}
+
+.formInfos #leftPanel, #rightPanel {
+	display: flex;
+	flex-direction: column;
+	background-color: orange;
+	padding: 2vw;
+	flex-grow:1;
+	margin:2vw;
+	align-items:space-between;
+}
+
+#leftPanel div, #rightPanel div {
+	display: flex;
+	flex-direction: column;
+}
+
+#rightPanel {
+	background-color: teal;
+	position :relative;
+}
+
+#rightPanel #bouton {
+	align-self: flex-end;
+	position: absolute;
+	bottom:1vw;
+}

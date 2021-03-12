@@ -15,40 +15,54 @@
 					<div id="place">
 						<label>Lieu de réalisation</label>
 						<p:inputText value="#" />
-						<label>Date et heure de début</label>
-						<p:datePicker id="time" value="#{mbConnect.user.birthDate}" showTime="true"/><br/>
-						<label>Durée</label>
-						 <p:datePicker id="timeonly" value="#{mbConnect.user.birthDate}" timeOnly="true" pattern="HH:mm"/>
-						<label>Catégorie de la demande</label>
-					
-						<label>Type de la demande</label>
-					
 
-						<label>Matériel requis</label>
-						
+						<div class="p-field p-col-12 p-md-4">
+						<label>Date de réalisation</label>
+                 <p:outputLabel for="basic" value="Basic"/>
+                <p:datePicker id="basic" value="#{mbDemand.demand.actionDate}" />
+            </div>
+						<div>
+							<label>de</label>
+							 <p:outputLabel for="timeonly" value="Time Only"/>
+                <p:datePicker id="timeonly" value="#{mbDemand.demand.startHour}" timeOnly="true" pattern="HH:mm"/>
+							
+							<label>à</label>
+							<p:datePicker value="#{mbDemand.demand.endHour}" timeInput="true" />
+						</div>
+						<div>
+							<label>Catégorie de la demande</label>
+							<p:selectOneMenu id="option3"
+								value="#{mbDemand.selectedEquipment}">
+								<f:selectItem itemLabel="choisissez : " itemValue="" />
+								<f:selectItem itemLabel="voiture" itemValue="voiture" />
+								<f:selectItem itemLabel="laisse" itemValue="laisse" />
+								<f:selectItem itemLabel="tondeuse à gazon"
+									itemValue="tondeuse à gazon" />
+								<f:facet name="footer">
+									<p:divider styleClass="p-mt-0" />
+								</f:facet>
+							</p:selectOneMenu>
+						</div>
+						<div>
+							<label>Matériel nécessaire</label>
+							<p:selectOneMenu id="option" value="#{mbDemand.selectedEquipment}">
+								<f:selectItem itemLabel="choisissez : " itemValue="" />
+								<f:selectItem itemLabel="voiture" itemValue="voiture" />
+								<f:selectItem itemLabel="laisse" itemValue="laisse" />
+								<f:selectItem itemLabel="tondeuse à gazon"
+									itemValue="tondeuse à gazon" />
+								<f:facet name="footer">
+									<p:divider styleClass="p-mt-0" />
+								</f:facet>
+							</p:selectOneMenu>
+						</div>
+
+
 					</div>
-					
-					<div id="contact">
-						<h5>Contact :</h5>
-						<label>email</label>
-						<p:inputText value="#" />
-						<label>N° telephone</label>
-						<p:inputText value="#" />
-					</div>
+
 				</div>
-				<div id="rightPanel">
-					<p:commandButton action="#"
-					value="Lieu différent du lieu de résidence" />
-					<div id="adress">
-						<h5>Adresse :</h5>
-						<label>N° et rue</label>
-						<p:inputText value="#" />
-						<label>Code postal</label>
-						<p:inputText value="#" />
-						<label>Ville</label>
-						<p:inputText value="#" />
-					</div>
-				</div>
+				
+				
 			</h:form>
 		</div>
 	</ui:define>

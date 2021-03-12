@@ -5,6 +5,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai108.pandami.entity.Demand;
+import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 import fr.eql.ai108.pandami.idao.DemandIDao;
 
@@ -14,11 +15,16 @@ public class DemandBusiness implements DemandIBusiness{
 
 	@EJB
 	private DemandIDao proxyDemand;
-	
+
 	@Override
-	public Demand createDemand() {
-		// TODO Auto-generated method stub
-		return null;
+	public Demand createDemand(Demand demand) {
+		Demand returnedDemand = null;
+		if (!proxyDemand.exist(demand)) {
+			returnedDemand = proxyDemand.add(demand);
+		}
+		return returnedDemand;
 	}
+	
+
 
 }

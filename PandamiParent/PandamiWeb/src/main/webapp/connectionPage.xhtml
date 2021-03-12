@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="title">Connexion utilisateur</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<div>Connexion au compte utilisateur</div>
+			<h:form styleClass="formInfos">
+				<div id="leftPanel">
+					<div id="connexion">			
+						<h5>Connexion</h5>
+						<label>Veuillez renseigner votre identifiant</label>
+						<p:inputText value="#{mbConnect.user.login}" /><br/>
+						<label>Veuillez renseigner votre mot de passe</label>
+						<p:inputText value="#{mbConnect.user.password}" /><br/>					
+					</div>
+					<div id="button">
+						<p:commandButton action="#{mbConnect.connection()}" value="Se connecter"/><br/>
+						  
+					</div>
+					<div> <p:outputLabel value="#{mbConnect.message}" /></div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/connectionPage.css" />
+	</ui:define>
+</ui:composition>
+</html>
