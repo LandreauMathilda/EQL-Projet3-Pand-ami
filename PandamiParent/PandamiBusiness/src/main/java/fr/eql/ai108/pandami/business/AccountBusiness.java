@@ -43,5 +43,11 @@ public class AccountBusiness implements AccountIBusiness{
 	public List<Gender> displayGenders() {
 		return proxyGender.findAll();
 	}
+	
+	@Override
+	public User connection(String login, String password) {
+		
+		return proxyUser.authenticate(login, password);
+	}
 
 }
