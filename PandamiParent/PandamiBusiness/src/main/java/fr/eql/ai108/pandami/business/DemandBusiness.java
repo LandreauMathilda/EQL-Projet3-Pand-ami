@@ -1,5 +1,7 @@
 package fr.eql.ai108.pandami.business;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -19,6 +21,13 @@ public class DemandBusiness implements DemandIBusiness{
 	public Demand createDemand() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public List<Demand> getNotOwnedDemands(Integer id) {
+
+		return proxyDemand.getAllNotOwnedById(id);
 	}
 
 }
