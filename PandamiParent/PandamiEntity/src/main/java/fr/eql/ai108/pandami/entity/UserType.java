@@ -29,6 +29,12 @@ public class UserType implements Serializable {
 		this.type = type;
 	}
 	
+	
+	public UserType(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
