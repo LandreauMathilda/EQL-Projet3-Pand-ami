@@ -7,16 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
+
+import fr.eql.ai108.pandami.entity.Demand;
+import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 
 @ManagedBean (name="mbSearch")
 @SessionScoped
 public class SearchManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+    @EJB
+    private DemandIBusiness proxyDemandBu;
+    
+    private List<Demand> demands = new ArrayList<>();
 
 	private List<LocalDateTime> range;
 	private LocalTime beginTime;
@@ -26,6 +35,7 @@ public class SearchManagedBean implements Serializable {
 	private String[] selectedCategories;
 	
 	private String selectedMateriel;
+	private Demand selectedDemand;
 	
 	@PostConstruct
 	public void init() {
@@ -45,8 +55,10 @@ public class SearchManagedBean implements Serializable {
 		
 		categories.add(livraison);
 		categories.add(divertissement);
+		
+		demands = proxyDemandBu.getNotOwnedDemands(1); //User à récupérer en session!!!!!!!!!!
+		
 	}
-	
 	
 	//getter setters
 	public List<LocalDateTime> getRange() {
@@ -73,38 +85,43 @@ public class SearchManagedBean implements Serializable {
 		this.endTime = endTime;
 	}
 
-
 	public List<SelectItem> getCategories() {
 		return categories;
 	}
-
 
 	public void setCategories(List<SelectItem> categories) {
 		this.categories = categories;
 	}
 
-
 	public String[] getSelectedCategories() {
 		return selectedCategories;
 	}
-
 
 	public void setSelectedCategories(String[] selectedCategories) {
 		this.selectedCategories = selectedCategories;
 	}
 
-
 	public String getSelectedMateriel() {
 		return selectedMateriel;
 	}
-
 
 	public void setSelectedMateriel(String selectedMateriel) {
 		this.selectedMateriel = selectedMateriel;
 	}
 
-	
-	
-	
+	public List<Demand> getDemands() {
+		return demands;
+	}
 
+	public void setDemands(List<Demand> demands) {
+		this.demands = demands;
+	}
+
+	public Demand getSelectedDemand() {
+		return selectedDemand;
+	}
+
+	public void setSelectedDemand(Demand selectedDemand) {
+		this.selectedDemand = selectedDemand;
+	}
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -25,13 +24,6 @@ public class UserDao extends GenericDao<User> implements UserIDao {
 	public Boolean exist(User user) {
 		Query query = em.createQuery("SELECT u FROM User u WHERE u.login = :paramLogin");
 		query.setParameter("paramLogin", user.getLogin());
-		List<User> users = query.getResultList();
-		return users.size() > 0 ? true : false;
-	}
-
-	public Boolean exist(String login) {
-		Query query = em.createQuery("SELECT u FROM User u WHERE u.login = :paramLogin");
-		query.setParameter("paramLogin", login);
 		List<User> users = query.getResultList();
 		return users.size() > 0 ? true : false;
 	}
