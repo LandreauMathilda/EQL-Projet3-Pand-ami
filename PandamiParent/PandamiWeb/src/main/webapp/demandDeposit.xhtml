@@ -13,40 +13,42 @@
 			<h:form styleClass="formInfos">
 				<div id="leftPanel">
 					<div id="place">
-						<label>Lieu de réalisation</label>
-						<p:inputText value="#" />
-						<label>Date et heure de début</label>
-						<p:datePicker id="time" value="#{mbConnect.user.birthDate}" showTime="true"/><br/>
-						<label>Durée</label>
-						 <p:datePicker id="timeonly" value="#{mbConnect.user.birthDate}" timeOnly="true" pattern="HH:mm"/>
-						<label>Catégorie de la demande</label>
-					
-						<label>Type de la demande</label>
-					
-
-						<label>Matériel requis</label>
+						<label>Lieu de réalisation :</label>
+						<label>N° et rue : </label>
+						<p:inplace>
+							<p:inputText value="13 rue du commerce" />
+						</p:inplace>
+						<label>Code Postal : </label>
+						<p:inplace>
+							<p:inputText value="78160" />
+						</p:inplace>
+						<label>Ville : </label>
+						<p:inplace>
+							<p:inputText value="Montval" />
+						</p:inplace>
+						
+						 <p:outputLabel for="basic" value="Date"/>
+                <p:datePicker id="basic" value="#{mbDemand.demand.actionDate}" /> 
+						<label>Heure de début :</label>
+						<p:datePicker id="timeonly" value="#{mbDemand.demand.startHour}"
+							timeOnly="true" pattern="HH:mm" />
+							<label>Heure de fin :</label>
+						<p:datePicker id="timeonly2" value="#{mbDemand.demand.endHour}"
+							timeOnly="true" pattern="HH:mm" />
+							
+							
 						
 					</div>
+
 					
-					<div id="contact">
-						<h5>Contact :</h5>
-						<label>email</label>
-						<p:inputText value="#" />
-						<label>N° telephone</label>
-						<p:inputText value="#" />
-					</div>
 				</div>
 				<div id="rightPanel">
-					<p:commandButton action="#"
-					value="Lieu différent du lieu de résidence" />
-					<div id="adress">
-						<h5>Adresse :</h5>
-						<label>N° et rue</label>
-						<p:inputText value="#" />
-						<label>Code postal</label>
-						<p:inputText value="#" />
-						<label>Ville</label>
-						<p:inputText value="#" />
+					<label>Catégorie de la demande</label> 
+					<label>Type de la demande</label>
+					<label>Matériel requis</label>
+					<div id="divButton">
+						<p:commandButton styleClass="ui-formButtons" id="button" action="#{mbDemand.createDemand()}" value="Déposer ma demande"/><br/>
+						  
 					</div>
 				</div>
 			</h:form>
