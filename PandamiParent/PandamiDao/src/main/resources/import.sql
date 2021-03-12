@@ -97,5 +97,20 @@ INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferen
 INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('3', '2017-11-11 00:00:00', '2017-10-01 00:00:00', '3', '2');
 INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('4', '2018-03-12 00:00:00', '2018-02-11 00:00:00', '4', '2');
 INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('5', '2020-05-12 00:00:00', '2020-04-11 00:00:00', '5', '2');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('1', 'Garde d\'enfant', '1', '1');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('2', 'Accompagnement scolaire', '1', '1');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('3', 'Aide administrative', '1', '6');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('4', 'Courses essentielles', '2', '1');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('5', 'Livraison médicaments', '2', '1');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('6', 'Jardinage', '3', '3');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('7', 'Bricolage', '3', '2');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('8', 'Ménage', '3', '4');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('9', 'Compagnie', '4', '1');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('10', 'Promenade', '4', '1');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('11', 'Rendez-vous médical', '5', '5');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('12', 'Rendez-vous administratif', '5', '5');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('13', 'Lieux de culte', '5', '5');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('14', 'Garde animaux', '6', '1');
+INSERT INTO `pandami_db`.`activity` (`id`, `label`, `activityCategory_id`, `equipmentType_id`) VALUES ('15', 'Promenade animal', '6', '1');
 
 
