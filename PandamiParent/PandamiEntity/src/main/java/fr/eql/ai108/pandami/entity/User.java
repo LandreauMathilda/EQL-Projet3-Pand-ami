@@ -1,6 +1,7 @@
 package fr.eql.ai108.pandami.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class User implements Serializable {
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
 	private City city;
-	private LocalDateTime birthDate;
+	private LocalDate birthDate;
 	private String phoneNumber;
 	@Column (unique = true)
 	private String email;
@@ -59,7 +60,7 @@ public class User implements Serializable {
 	}
 
 	public User(Integer id, UserType userType, String name, String surname, Gender gender, String street, City city,
-			LocalDateTime birthDate, String phoneNumber, String email, String emergencyContactName,
+			LocalDate birthDate, String phoneNumber, String email, String emergencyContactName,
 			String emergencyContactSurname, String emergencyContactPhoneNumber, String login, String password,
 			LocalDateTime inscriptionDate, Set<Reply> replies, Set<ActivityPreference> activitiesPreferences,
 			Set<Availability> availabities) {
@@ -219,7 +220,7 @@ public class User implements Serializable {
 		return city;
 	}
 
-	public LocalDateTime getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
@@ -295,7 +296,7 @@ public class User implements Serializable {
 		this.city = city;
 	}
 
-	public void setBirthDate(LocalDateTime birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -342,4 +343,5 @@ public class User implements Serializable {
 	public void setAvailabities(Set<Availability> availabities) {
 		this.availabities = availabities;
 	}
+
 }

@@ -1,7 +1,9 @@
 package fr.eql.ai108.pandami.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,9 +28,9 @@ public class Demand implements Serializable {
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
 	private User user;
-	private LocalDateTime actionDate;
-	private LocalDateTime startHour;
-	private LocalDateTime endHour;
+	private LocalDate actionDate;
+	private LocalTime startHour;
+	private LocalTime endHour;
 	private String street;
 	private LocalDateTime publishDate;
 	private LocalDateTime cancelDate;
@@ -56,10 +58,10 @@ public class Demand implements Serializable {
 		super();
 	}
 
-	public Demand(Integer id, User user, LocalDateTime actionDate, LocalDateTime startHour, LocalDateTime endHour,
-			String street, LocalDateTime publishDate, LocalDateTime cancelDate, LocalDateTime closeDate,
-			LocalDateTime reportDate, CancelReason cancelReason, City city, Activity activity, EndedType endedType,
-			Set<Reply> replies, ReportIssue reportIssue) {
+	public Demand(Integer id, User user, LocalDate actionDate, LocalTime startHour, LocalTime endHour, String street,
+			LocalDateTime publishDate, LocalDateTime cancelDate, LocalDateTime closeDate, LocalDateTime reportDate,
+			CancelReason cancelReason, City city, Activity activity, EndedType endedType, Set<Reply> replies,
+			ReportIssue reportIssue) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -78,13 +80,14 @@ public class Demand implements Serializable {
 		this.replies = replies;
 		this.reportIssue = reportIssue;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((actionDate == null) ? 0 : actionDate.hashCode());
 		result = prime * result + ((cancelDate == null) ? 0 : cancelDate.hashCode());
+		result = prime * result + ((cancelReason == null) ? 0 : cancelReason.hashCode());
 		result = prime * result + ((closeDate == null) ? 0 : closeDate.hashCode());
 		result = prime * result + ((endHour == null) ? 0 : endHour.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -113,6 +116,11 @@ public class Demand implements Serializable {
 			if (other.cancelDate != null)
 				return false;
 		} else if (!cancelDate.equals(other.cancelDate))
+			return false;
+		if (cancelReason == null) {
+			if (other.cancelReason != null)
+				return false;
+		} else if (!cancelReason.equals(other.cancelReason))
 			return false;
 		if (closeDate == null) {
 			if (other.closeDate != null)
@@ -156,7 +164,7 @@ public class Demand implements Serializable {
 	public String toString() {
 		return "Demand [id=" + id + ", actionDate=" + actionDate + ", startHour=" + startHour + ", endHour=" + endHour
 				+ ", street=" + street + ", publishDate=" + publishDate + ", cancelDate=" + cancelDate + ", closeDate="
-				+ closeDate + ", reportDate=" + reportDate + ", city=" + city + "]";
+				+ closeDate + ", reportDate=" + reportDate + "]";
 	}
 
 	public Integer getId() {
@@ -167,15 +175,15 @@ public class Demand implements Serializable {
 		return user;
 	}
 
-	public LocalDateTime getActionDate() {
+	public LocalDate getActionDate() {
 		return actionDate;
 	}
 
-	public LocalDateTime getStartHour() {
+	public LocalTime getStartHour() {
 		return startHour;
 	}
 
-	public LocalDateTime getEndHour() {
+	public LocalTime getEndHour() {
 		return endHour;
 	}
 
@@ -197,6 +205,10 @@ public class Demand implements Serializable {
 
 	public LocalDateTime getReportDate() {
 		return reportDate;
+	}
+
+	public CancelReason getCancelReason() {
+		return cancelReason;
 	}
 
 	public City getCity() {
@@ -227,15 +239,15 @@ public class Demand implements Serializable {
 		this.user = user;
 	}
 
-	public void setActionDate(LocalDateTime actionDate) {
+	public void setActionDate(LocalDate actionDate) {
 		this.actionDate = actionDate;
 	}
 
-	public void setStartHour(LocalDateTime startHour) {
+	public void setStartHour(LocalTime startHour) {
 		this.startHour = startHour;
 	}
 
-	public void setEndHour(LocalDateTime endHour) {
+	public void setEndHour(LocalTime endHour) {
 		this.endHour = endHour;
 	}
 
@@ -259,6 +271,10 @@ public class Demand implements Serializable {
 		this.reportDate = reportDate;
 	}
 
+	public void setCancelReason(CancelReason cancelReason) {
+		this.cancelReason = cancelReason;
+	}
+
 	public void setCity(City city) {
 		this.city = city;
 	}
@@ -277,13 +293,5 @@ public class Demand implements Serializable {
 
 	public void setReportIssue(ReportIssue reportIssue) {
 		this.reportIssue = reportIssue;
-	}
-
-	public CancelReason getCancelReason() {
-		return cancelReason;
-	}
-
-	public void setCancelReason(CancelReason cancelReason) {
-		this.cancelReason = cancelReason;
 	}
 }

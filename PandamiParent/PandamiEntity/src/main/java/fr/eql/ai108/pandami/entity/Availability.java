@@ -1,7 +1,7 @@
 package fr.eql.ai108.pandami.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
@@ -21,8 +21,8 @@ public class Availability implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private LocalDateTime choiceStart;
-	private LocalDateTime choiceEnd;
+	private LocalDate choiceStart;
+	private LocalDate choiceEnd;
 	private String day;
 	private LocalTime startHour;
 	private LocalTime endHour;
@@ -34,7 +34,7 @@ public class Availability implements Serializable{
 		super();
 	}
 
-	public Availability(Integer id, LocalDateTime choiceStart, LocalDateTime choiceEnd, String day, LocalTime startHour,
+	public Availability(Integer id, LocalDate choiceStart, LocalDate choiceEnd, String day, LocalTime startHour,
 			LocalTime endHour, User user) {
 		super();
 		this.id = id;
@@ -46,8 +46,6 @@ public class Availability implements Serializable{
 		this.user = user;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,7 +53,9 @@ public class Availability implements Serializable{
 		result = prime * result + ((choiceEnd == null) ? 0 : choiceEnd.hashCode());
 		result = prime * result + ((choiceStart == null) ? 0 : choiceStart.hashCode());
 		result = prime * result + ((day == null) ? 0 : day.hashCode());
+		result = prime * result + ((endHour == null) ? 0 : endHour.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((startHour == null) ? 0 : startHour.hashCode());
 		return result;
 	}
 
@@ -83,10 +83,20 @@ public class Availability implements Serializable{
 				return false;
 		} else if (!day.equals(other.day))
 			return false;
+		if (endHour == null) {
+			if (other.endHour != null)
+				return false;
+		} else if (!endHour.equals(other.endHour))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (startHour == null) {
+			if (other.startHour != null)
+				return false;
+		} else if (!startHour.equals(other.startHour))
 			return false;
 		return true;
 	}
@@ -101,11 +111,11 @@ public class Availability implements Serializable{
 		return id;
 	}
 
-	public LocalDateTime getChoiceStart() {
+	public LocalDate getChoiceStart() {
 		return choiceStart;
 	}
 
-	public LocalDateTime getChoiceEnd() {
+	public LocalDate getChoiceEnd() {
 		return choiceEnd;
 	}
 
@@ -129,11 +139,11 @@ public class Availability implements Serializable{
 		this.id = id;
 	}
 
-	public void setChoiceStart(LocalDateTime choiceStart) {
+	public void setChoiceStart(LocalDate choiceStart) {
 		this.choiceStart = choiceStart;
 	}
 
-	public void setChoiceEnd(LocalDateTime choiceEnd) {
+	public void setChoiceEnd(LocalDate choiceEnd) {
 		this.choiceEnd = choiceEnd;
 	}
 
