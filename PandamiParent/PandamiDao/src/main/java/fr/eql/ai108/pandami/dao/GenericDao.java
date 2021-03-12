@@ -89,7 +89,7 @@ public abstract class GenericDao<T> implements GenericIDao<T> {
 			String className= ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
 			Class<?> clazz;
 			clazz = Class.forName(className);
-			Query query = em.createQuery("SELECT * FROM " + clazz.getName());
+			Query query = em.createQuery("FROM " + clazz.getName());
 			objects = query.getResultList();
 		}catch (Exception e) {
 			e.printStackTrace();
