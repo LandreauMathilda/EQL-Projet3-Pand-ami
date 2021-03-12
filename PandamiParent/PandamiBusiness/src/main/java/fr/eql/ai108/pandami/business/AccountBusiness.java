@@ -49,5 +49,11 @@ public class AccountBusiness implements AccountIBusiness{
 		
 		return proxyUser.authenticate(login, password);
 	}
+	
+	//a retirer quand yaura la session :
+	@Override
+	public User getUserById() {
+		return proxyUser.findById(1);
+	}
 
 }

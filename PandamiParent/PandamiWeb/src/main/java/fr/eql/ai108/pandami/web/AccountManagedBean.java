@@ -35,10 +35,14 @@ public class AccountManagedBean implements Serializable{
     @EJB
     private AccountIBusiness proxyAccountBu;
     
+    //todo a modifier : avec le vrai user en session //
+    private User sessionUser;
+    
     @PostConstruct
     public void init() {
     	cities = proxyAccountBu.displayCities();
     	genders = proxyAccountBu.displayGenders();
+    	sessionUser = proxyAccountBu.getUserById();
     }
 
     public String createAccount() {
@@ -131,6 +135,14 @@ public class AccountManagedBean implements Serializable{
 
 	public void setGenders(List<Gender> genders) {
 		this.genders = genders;
+	}
+
+	public User getSessionUser() {
+		return sessionUser;
+	}
+
+	public void setSessionUser(User sessionUser) {
+		this.sessionUser = sessionUser;
 	}	
 	
 	
