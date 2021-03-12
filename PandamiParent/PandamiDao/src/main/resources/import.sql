@@ -86,3 +86,16 @@ INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('38', '2021-03-11', '14', '2');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('39', '2021-03-11', '14', '3');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('40', '2021-03-13', '15', '1');
+INSERT INTO `pandami_db`.`activity_category` (`id`, `label`) VALUES ('1', 'Service à Domicile');
+INSERT INTO `pandami_db`.`activity_category` (`id`, `label`) VALUES ('2', 'Livraison de biens');
+INSERT INTO `pandami_db`.`activity_category` (`id`, `label`) VALUES ('3', 'Travaux ménagers');
+INSERT INTO `pandami_db`.`activity_category` (`id`, `label`) VALUES ('4', 'Divertissement');
+INSERT INTO `pandami_db`.`activity_category` (`id`, `label`) VALUES ('5 ', 'Transport de personnes');
+INSERT INTO `pandami_db`.`activity_category` (`id`, `label`) VALUES ('6', 'Animaux');
+INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('1', '2018-01-01 00:00:00', '2017-01-01 00:00:00', '1', '2');
+INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('2', '2019-06-03 00:00:00', '2019-02-01 00:00:00', '2', '2');
+INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('3', '2017-11-11 00:00:00', '2017-10-01 00:00:00', '3', '2');
+INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('4', '2018-03-12 00:00:00', '2018-02-11 00:00:00', '4', '2');
+INSERT INTO `pandami_db`.`activity_preference` (`id`, `preferenceEnd`, `preferenceStart`, `activity_id`, `user_id`) VALUES ('5', '2020-05-12 00:00:00', '2020-04-11 00:00:00', '5', '2');
+
+
