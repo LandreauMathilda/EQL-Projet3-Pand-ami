@@ -1,7 +1,7 @@
 package fr.eql.ai108.pandami.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,8 +20,8 @@ public class ActivityPreference implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private LocalDateTime preferenceStart;
-	private LocalDateTime preferenceEnd;
+	private LocalDate preferenceStart;
+	private LocalDate preferenceEnd;
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
 	private User user;
@@ -33,9 +33,10 @@ public class ActivityPreference implements Serializable{
 		super();
 	}
 
-	public ActivityPreference(LocalDateTime preferenceStart, LocalDateTime preferenceEnd, User user,
+	public ActivityPreference(Integer id, LocalDate preferenceStart, LocalDate preferenceEnd, User user,
 			Activity activity) {
 		super();
+		this.id = id;
 		this.preferenceStart = preferenceStart;
 		this.preferenceEnd = preferenceEnd;
 		this.user = user;
@@ -46,6 +47,7 @@ public class ActivityPreference implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((preferenceEnd == null) ? 0 : preferenceEnd.hashCode());
 		result = prime * result + ((preferenceStart == null) ? 0 : preferenceStart.hashCode());
 		return result;
@@ -60,6 +62,11 @@ public class ActivityPreference implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ActivityPreference other = (ActivityPreference) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (preferenceEnd == null) {
 			if (other.preferenceEnd != null)
 				return false;
@@ -75,14 +82,19 @@ public class ActivityPreference implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ActivityPreference [preferenceStart=" + preferenceStart + ", preferenceEnd=" + preferenceEnd + "]";
+		return "ActivityPreference [id=" + id + ", preferenceStart=" + preferenceStart + ", preferenceEnd="
+				+ preferenceEnd + "]";
 	}
 
-	public LocalDateTime getPreferenceStart() {
+	public Integer getId() {
+		return id;
+	}
+
+	public LocalDate getPreferenceStart() {
 		return preferenceStart;
 	}
 
-	public LocalDateTime getPreferenceEnd() {
+	public LocalDate getPreferenceEnd() {
 		return preferenceEnd;
 	}
 
@@ -94,11 +106,15 @@ public class ActivityPreference implements Serializable{
 		return activity;
 	}
 
-	public void setPreferenceStart(LocalDateTime preferenceStart) {
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPreferenceStart(LocalDate preferenceStart) {
 		this.preferenceStart = preferenceStart;
 	}
 
-	public void setPreferenceEnd(LocalDateTime preferenceEnd) {
+	public void setPreferenceEnd(LocalDate preferenceEnd) {
 		this.preferenceEnd = preferenceEnd;
 	}
 
@@ -109,4 +125,5 @@ public class ActivityPreference implements Serializable{
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
+	
 }

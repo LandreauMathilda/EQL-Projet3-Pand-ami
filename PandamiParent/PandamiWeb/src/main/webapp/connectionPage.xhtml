@@ -14,16 +14,17 @@
 				<div id="leftPanel">
 					<div id="connexion">			
 						<h5>Connexion</h5>
-						<label>Veuillez renseigner votre identifiant</label>
-						<p:inputText value="#{mbConnect.user.login}" /><br/>
-						<label>Veuillez renseigner votre mot de passe</label>
-						<p:inputText value="#{mbConnect.user.password}" /><br/>					
+						<label class="label">Veuillez renseigner votre identifiant</label>
+						<p:inputText class="input" value="#{mbConnect.user.login}" /><br/>
+						<label class="label">Veuillez renseigner votre mot de passe</label>
+						<p:inputText class="input" value="#{mbConnect.user.password}" /><br/>					
 					</div>
-					<div id="button">
-						<p:commandButton action="#{mbConnect.connection()}" value="Se connecter"/><br/>
+					<div id="divButton">
+						<p:commandButton styleClass="ui-formButtons" id="button" action="#{mbConnect.connection()}" value="Se connecter"/><br/>
 						  
 					</div>
-					<div> <p:outputLabel value="#{mbConnect.message}" /></div>
+					<div id="labelMessage"> 
+					<p:outputLabel value="#{mbConnect.message}" /></div>
 				</div>
 			</h:form>
 		</div>

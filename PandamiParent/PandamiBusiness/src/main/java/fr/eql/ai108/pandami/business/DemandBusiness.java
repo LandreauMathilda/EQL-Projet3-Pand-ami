@@ -6,8 +6,10 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
+import fr.eql.ai108.pandami.idao.CityIDao;
 import fr.eql.ai108.pandami.idao.DemandIDao;
 
 @Remote (DemandIBusiness.class)
@@ -17,10 +19,16 @@ public class DemandBusiness implements DemandIBusiness{
 	@EJB
 	private DemandIDao proxyDemand;
 	
+	@EJB
+	private CityIDao proxyCity;
+	
 	@Override
-	public Demand createDemand() {
-		// TODO Auto-generated method stub
-		return null;
+	public Demand createDemand(Demand demand) {
+		Demand returnedDemand = null;
+	
+		returnedDemand = proxyDemand.add(demand);
+		
+		return returnedDemand;
 	}
 
 
@@ -28,6 +36,11 @@ public class DemandBusiness implements DemandIBusiness{
 	public List<Demand> getNotOwnedDemands(Integer id) {
 
 		return proxyDemand.getAllNotOwnedById(id);
+	}
+	
+	@Override
+	public List<City> displayCities() {
+		return proxyCity.findAll();
 	}
 
 }

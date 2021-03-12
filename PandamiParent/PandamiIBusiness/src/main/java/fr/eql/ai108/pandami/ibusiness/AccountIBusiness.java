@@ -11,4 +11,5 @@ public interface AccountIBusiness {
 	User createAccount (User user);
 	List<City> displayCities();
 	List<Gender> displayGenders();
+	User connection(String login, String password);
 }
