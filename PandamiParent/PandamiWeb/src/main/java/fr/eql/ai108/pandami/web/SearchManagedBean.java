@@ -58,7 +58,7 @@ public class SearchManagedBean implements Serializable {
 	 */
 	private void createActivitiesSelectCBox() {
 		
-		activities = proxyDemandBu.displayActivites();
+		activities = proxyDemandBu.displayActivities();
 		categories = proxyDemandBu.displayCategories();
 		
 		for(ActivityCategory cat : categories){
