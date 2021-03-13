@@ -80,7 +80,7 @@ public class Activity implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + id + ", label=" + label + "]";
+		return   label ;
 	}
 
 	public Integer getId() {

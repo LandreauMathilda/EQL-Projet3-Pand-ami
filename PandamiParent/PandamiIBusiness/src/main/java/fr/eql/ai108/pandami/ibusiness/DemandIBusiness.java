@@ -1,6 +1,8 @@
 package fr.eql.ai108.pandami.ibusiness;
 
 import java.util.List;
+
+import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 
@@ -11,4 +13,6 @@ public interface DemandIBusiness {
 	List<City> displayCities();
 
 	List<Demand> getNotOwnedDemands(Integer id);
+	
+	List<Activity> displayActivities();
 }

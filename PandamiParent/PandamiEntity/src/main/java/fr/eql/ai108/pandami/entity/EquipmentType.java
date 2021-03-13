@@ -68,7 +68,7 @@ public class EquipmentType implements Serializable{
 
 	@Override
 	public String toString() {
-		return "EquipmentType [id=" + id + ", label=" + label + "]";
+		return label ;
 	}
 
 	public Integer getId() {

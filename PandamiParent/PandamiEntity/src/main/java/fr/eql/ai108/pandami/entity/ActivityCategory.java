@@ -68,7 +68,7 @@ public class ActivityCategory implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CategoryActivity [id=" + id + ", label=" + label + "]";
+		return  label ;
 	}
 
 	public Integer getId() {

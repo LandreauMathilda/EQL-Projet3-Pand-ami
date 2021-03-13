@@ -8,6 +8,5 @@ public interface DemandIDao extends GenericIDao<Demand>{
 
 	List<Demand> getAllNotOwnedById(Integer id);
 
-	Demand createDemand(Demand demand);
 
 }
