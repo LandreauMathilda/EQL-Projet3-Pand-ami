@@ -22,34 +22,25 @@
 						<p:inputText/>
 					</div>
 					<div>
-						<label>dates :</label>
+						<label>Dates :</label>
              		   	<p:datePicker id="range" selectionMode="range" value="#{mbSearch.range}" readonlyInput="true"/>
 					</div>
                 	<div>
                 		<label>de</label>
                 		<p:datePicker value="#{mbSearch.beginTime}" timeInput="true"/>    
-                		<label>à</label>
+                		<label>à</label><br/>
                 		<p:datePicker value="#{mbSearch.endTime}" timeInput="true"/>
                 	</div>
                 	<div>
-                		<label>Categorie Demande</label>
-               			<p:selectCheckboxMenu value="#{mbSearch.selectedCategories}" label="categories"
-                                 multiple="true" filter="true" filterMatchMode="startsWith">
-            			<f:selectItems value="#{mbSearch.categories}"/>
+               			<p:selectCheckboxMenu value="#{mbSearch.selectedActivities}" label="Activités" multiple="true" filter="false" filterMatchMode="startsWith" converter="omnifaces.SelectItemsConverter" scrollHeight="250">
+            				<f:selectItems value="#{mbSearch.cBoxCategories}" var="activity" itemLabel="#{activity.label}" itemValue="#{activity}"/>
         				</p:selectCheckboxMenu>
                 	</div>
                 	<div>
-                		<label>Materiel</label>
-                        <p:selectOneMenu id="option" value="#{mbSearch.selectedMateriel}">
-                    	<f:selectItem itemLabel="choisissez : " itemValue=""/>
-                    	<f:selectItem itemLabel="voiture" itemValue="voiture"/>
-                    	<f:selectItem itemLabel="laisse" itemValue="laisse"/>
-                    	<f:selectItem itemLabel="tondeuse à gazon" itemValue="tondeuse à gazon"/>
-                    	<f:facet name="footer">
-                        <p:divider styleClass="p-mt-0" />
-                        <h:outputText value="3 options" style="font-weight:bold;"/>
-                    </f:facet>
-                </p:selectOneMenu>
+                		<p:selectOneMenu value="#{mbSearch.selectedEquipment}" converter="omnifaces.SelectItemsConverter">
+    						<f:selectItem itemValue="" itemLabel="Matériel"/>
+    						<f:selectItems value="#{mbSearch.equipments}" var="equipment" itemLabel="#{equipment.label}" itemValue="#{equipment}"/>
+    					</p:selectOneMenu>
                 	</div>
                 	<div>
                 		<p:commandButton action="#" value="Rechercher" />
@@ -57,45 +48,42 @@
 				</h:form>
 				</div>
 				<div id="RightPanel">
-				<h:form>
-					<h5>Les actions</h5>
-					<p:accordionPanel dynamic="true" cache="true" multiple="true"
-						widgetVar="ondemand">
-						<p:tab title="Header I">
-						<p class="p-m-0">Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-								exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate
-								velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-								sint occaecat cupidatat non proident, sunt in culpa qui officia
-								deserunt mollit anim id est laborum.
-						</p>
-						</p:tab>
-						<p:tab title="Header II">
-							<p class="p-m-0">Sed ut perspiciatis unde omnis iste natus
-								error sit voluptatem accusantium doloremque laudantium, totam
-								rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-								quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-								ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-								fugit, sed quia consequuntur magni dolores eos qui ratione
-								voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia
-								non numquam eius modi.
-						</p>
-						</p:tab>
-						<p:tab title="Header III">
-							<p class="p-m-0">At vero eos et accusamus et iusto odio
-								dignissimos ducimus qui blanditiis praesentium voluptatum
-								deleniti atque corrupti quos dolores et quas molestias excepturi
-								sint occaecati cupiditate non provident, similique sunt in culpa
-								qui officia deserunt mollitia animi, id est laborum et dolorum
-								fuga. Et harum quidem rerum facilis est et expedita distinctio.
-								Nam libero tempore, cum soluta nobis est eligendi optio cumque
-								nihil impedit quo minus.
-						</p>
-						</p:tab>
-					</p:accordionPanel>				
-				</h:form>
+					<h:form>
+						<p:dataTable var="demand" value="#{mbSearch.demands}" widgetVar="demandTable" 
+						emptyMessage="Aucune demande ne correspond à vos critères de recherche">
+						
+							<f:facet name="tableHeader">
+								<span>Actions</span>
+							</f:facet>
+							
+							<p:column headerText="Activité" sortBy="#{demand.activity.label}" filterBy="#{demand.activity.label}">
+								<h:outputText value="#{demand.activity.label}"/>
+							</p:column>
+
+							<p:column headerText="Ville" sortBy="#{demand.city.name}" filterBy="#{demand.city.name}">
+								<h:outputText value="#{demand.city.name}"/>
+							</p:column>
+							
+							<p:column field="actionDate" headerText="Date d'action"  filterMatchMode="range">
+								<f:facet name="filter">
+                    				<p:datePicker selectionMode="range" onchange="PF('customersTable').filter()" />
+                				</f:facet>
+								<h:outputText value="#{demand.actionDate}"/>
+							</p:column>
+
+							<p:column headerText="Heure début" sortBy="#{demand.startHour}" filterBy="#{demand.startHour}">
+								<p:datePicker value="#{demand.startHour}" TimeInput="true"/>
+							</p:column>
+
+							<p:column headerText="Heure fin" sortBy="#{demand.endHour}" filterBy="#{demand.endHour}">
+								<p:datePicker value="#{demand.endHour}" TimeInput="true"/>
+							</p:column>
+							
+							<p:column>
+								<p:commandButton id="applyButton" onclick="#" icon="pi pi-check" value="Postuler"/>
+            				</p:column>		
+            			</p:dataTable>		
+					</h:form>
 				</div>
 			</div>
 		</div>

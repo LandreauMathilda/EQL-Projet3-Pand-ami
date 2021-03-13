@@ -26,7 +26,6 @@ public class AccountManagedBean implements Serializable{
 
     private User user = new User();
     private String message;
-
 	private String login;
 	private String password;
     private List<City> cities;
@@ -74,7 +73,6 @@ public class AccountManagedBean implements Serializable{
 		return retour;
 	}
     
-
 	public String disconnect() {
 		HttpSession session = (HttpSession) FacesContext
 				.getCurrentInstance().getExternalContext().getSession(true);
@@ -87,8 +85,6 @@ public class AccountManagedBean implements Serializable{
 		return "/connectionPage.xhtml?faces-redirect=true";
 	}
     
-	
-	
 	public String getLogin() {
 		return login;
 	}
@@ -144,7 +140,4 @@ public class AccountManagedBean implements Serializable{
 	public void setSessionUser(User sessionUser) {
 		this.sessionUser = sessionUser;
 	}	
-	
-	
-
 }

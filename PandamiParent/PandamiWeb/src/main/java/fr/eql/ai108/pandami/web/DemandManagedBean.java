@@ -16,23 +16,19 @@ import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.AccountIBusiness;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 
-/**
- * @author 33684
- *
- */
 @ManagedBean(name="mbDemand")
 @SessionScoped
 public class DemandManagedBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;	
-private Demand demand = new Demand();
+	private Demand demand = new Demand();
     private List<City> cities;
     private List<Activity> activities;
     private List<ActivityCategory> activityCategories;
+    private List<EquipmentType> equipments;
     private List<EquipmentType> equipmentTypes;
     private String message;
     
-	
 	@EJB
 	private DemandIBusiness proxyDemandBu;
 	
@@ -44,6 +40,7 @@ private Demand demand = new Demand();
     @PostConstruct
     public void init() {
     	cities = proxyDemandBu.displayCities();
+    	equipments = proxyDemandBu.displayEquipments();
     	sessionUser = proxyAccountBu.getUserById();
     	activities = proxyDemandBu.displayActivities();
     }
@@ -57,7 +54,6 @@ private Demand demand = new Demand();
         return "/demandDeposit.xhtml?faces-redirect=true";
     }
     
-
 	public String getMessage() {
 		return message;
 	}
@@ -115,6 +111,11 @@ private Demand demand = new Demand();
 		this.equipmentTypes = equipmentTypes;
 	}
     
-    
-	
+	public List<EquipmentType> getEquipments() {
+		return equipments;
+	}
+
+	public void setEquipments(List<EquipmentType> equipments) {
+		this.equipments = equipments;
+	}
 }
