@@ -35,7 +35,7 @@ public class DemandManagedBean implements Serializable{
 	@EJB
 	private AccountIBusiness proxyAccountBu;
 	
-	private User sessionUser;
+	private User sessionUser; //modif, là méthode en dur
 	
     @PostConstruct
     public void init() {
@@ -118,4 +118,5 @@ public class DemandManagedBean implements Serializable{
 	public void setEquipments(List<EquipmentType> equipments) {
 		this.equipments = equipments;
 	}
+	
 }

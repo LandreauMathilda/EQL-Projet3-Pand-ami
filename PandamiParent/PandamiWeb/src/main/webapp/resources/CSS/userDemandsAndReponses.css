@@ -1,0 +1,36 @@
+#main {
+	display:flex;
+	flex-direction:column;
+	align-items:stretch;
+	justify-content:center;
+	text-align:center;
+	background-color:hotpink;
+}
+
+#centerPanel {
+	flex-grow:1;
+	background-color:orange;
+	display:flex;
+	flex-direction:column;
+	align-items:stretch;
+}
+
+.tabView {
+	flex-grow:1;
+	display:flex;
+	flex-direction:column;
+	align-items:stretch;
+	background-color:teal;
+}
+
+.tabView .tab {
+	flex-grow:1;
+}
+.center2Panel {
+	flex-grow:1;
+	display:flex;
+}
+
+.center2Panel .accordion {
+	flex-grow:1;
+}

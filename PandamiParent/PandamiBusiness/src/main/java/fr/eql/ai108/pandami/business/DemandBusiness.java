@@ -64,4 +64,9 @@ public class DemandBusiness implements DemandIBusiness{
 	public List<ActivityCategory> displayCategories() {
 		return proxyActCategory.findAll();
 	}
+
+	@Override
+	public List<Demand> displayOwnedDemands(Integer id) {
+		return proxyDemand.getAllByUser(id);
+	}
 }

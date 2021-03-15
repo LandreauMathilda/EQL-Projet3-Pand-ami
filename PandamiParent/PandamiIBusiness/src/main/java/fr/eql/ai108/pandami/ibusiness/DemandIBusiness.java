@@ -22,4 +22,6 @@ public interface DemandIBusiness {
 	
 	List<ActivityCategory> displayCategories();
 	
+	List<Demand> displayOwnedDemands(Integer id);
+	
 }

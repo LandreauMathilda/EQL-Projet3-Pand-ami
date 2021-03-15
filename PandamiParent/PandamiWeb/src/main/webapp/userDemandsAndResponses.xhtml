@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="title">Demandes et réponses d'un utilisateur</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<div>TITRE</div>
+			<div id="centerPanel">
+				<p:tabView styleClass="tabView">
+            		<p:tab styleClass="tab" title="Mes demandes en cours">
+            			<h:form styleClass="center2Panel">
+            				<p:accordionPanel var="demand" value="#{mbUserDemRep.usersDemands}"  styleClass="accordion" multiple="true" widgetVar="multiple">
+            					<p:tab styleClass="accordionChild" title = "#{demand.actionDate} - #{demand.activity}">
+            						<label>Horaire : de #{demand.startHour} à #{demand.endHour}</label>
+            						<br/>
+            						<label>adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
+            					</p:tab>
+        					</p:accordionPanel>
+                		</h:form>
+            		</p:tab>
+            		<p:tab styleClass="tab" title="Mon bénévolat en cours">
+            			<h:form>
+                		</h:form>
+            		</p:tab>
+            		<p:tab styleClass="tab" title="Historique de mes demandes">
+            			<h:form>
+                		</h:form>
+            		</p:tab>
+            		<p:tab styleClass="tab" title="Historique de mon bénévolat">
+            			<h:form>
+                		</h:form>
+            		</p:tab>
+        </p:tabView>
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/userDemandsAndReponses.css" />
+	</ui:define>
+</ui:composition>
+</html>
