@@ -25,26 +25,12 @@
 }
 
 #leftPanel{
-	width: 300px;
+	display: none;
 }
 
 #leftPanel div {
 	display:column;
 	align-items:stretch;
 	justify-content:space-around;
-}
-
-@media (max-width: 1000px) {
-	
-#leftPanel{
-	position:absolute;
-	left: -300px;
-}
-
-#applyButton{
-	width: 30px;
-	height: 30px;
-}
-	
 }
 

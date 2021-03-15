@@ -3,22 +3,17 @@ package fr.eql.ai108.pandami.web;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
 
 import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
-import fr.eql.ai108.pandami.entity.CancelReason;
 import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.EquipmentType;
@@ -42,12 +37,6 @@ public class DemandManagedBean implements Serializable{
 	private String selectedActivity;
 	private EquipmentType selectedEquipment;
     private String message;
- 
-    
- 
-    
-
-    
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;

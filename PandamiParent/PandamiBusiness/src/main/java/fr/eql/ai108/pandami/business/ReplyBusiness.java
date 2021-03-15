@@ -21,5 +21,9 @@ public class ReplyBusiness implements ReplyIBusiness {
 	public List<Reply> displayOwnedReplies(Integer id) {
 		return proxyReply.getAllByUser(id);
 	}
-
+	
+	@Override
+	public Reply createReply(Reply reply) {
+		return proxyReply.add(reply);
+	}
 }

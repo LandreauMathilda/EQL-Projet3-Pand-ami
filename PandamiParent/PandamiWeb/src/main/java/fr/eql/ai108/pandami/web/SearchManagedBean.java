@@ -2,43 +2,53 @@ package fr.eql.ai108.pandami.web;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
+
 import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
+import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.EquipmentType;
+import fr.eql.ai108.pandami.entity.Reply;
+import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
+import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
 
 @ManagedBean (name="mbSearch")
-@SessionScoped
+@RequestScoped
 public class SearchManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	//@ManagedProperty(value = "#{mbConnect.user}")
+	private User userConnected;
 
 	@EJB
 	private DemandIBusiness proxyDemandBu;
+	@EJB
+	private ReplyIBusiness proxyReplyBU;
 
 	private List<Activity> activities;
 	private List<ActivityCategory> categories;
 	private List<EquipmentType> equipments;
+	private List<City> cities;
 	private List<Demand> demands = new ArrayList<>();
-	private List<LocalDateTime> range;
-	private LocalTime beginTime;
-	private LocalTime endTime;
-	private List<SelectItem> cBoxCategories = new ArrayList<>();;
-	private String[] selectedActivities;
-	private EquipmentType selectedEquipment;
-	private Demand selectedDemand;
-
+	private List<SelectItem> cBoxCategories = new ArrayList<>();
+	private Reply reply;
+	
+	/*
+	 * 	Initialisation standard dans le cas où aucun critère de recherche n'est définis
+	 */
 	@PostConstruct
 	public void init() {
 		standardInit();
@@ -50,11 +60,13 @@ public class SearchManagedBean implements Serializable {
 	private void standardInit() {
 		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
 		equipments = proxyDemandBu.displayEquipments();
+		cities = proxyDemandBu.displayCities();
 		createActivitiesSelectCBox();
 	}
+	
 
 	/*
-	 * 	Méthode permettant de créer l'architecture de la SelectCheckBox des activités
+	 * 	Méthode permettant de créer l'arborescence de la SelectCheckBox des activités
 	 */
 	private void createActivitiesSelectCBox() {
 		
@@ -83,46 +95,23 @@ public class SearchManagedBean implements Serializable {
 			cBoxCategories.add(selectItemGroup);
 		}
 	}
+	
+	public void replyDemand(Demand demand) {
+		userConnected = new User();   //!!!!!!! A retirer
+		userConnected.setId(1);       //!!!!!!! A retirer
+		
+		reply = new Reply(null, LocalDateTime.now(), null, null, null, userConnected, demand);
+		reply = proxyReplyBU.createReply(reply);
+		reply = new Reply();
+	}
 
 	//getter setters
-	public List<LocalDateTime> getRange() {
-		return range;
-	}
-
-	public void setRange(List<LocalDateTime> range) {
-		this.range = range;
-	}
-
-	public LocalTime getBeginTime() {
-		return beginTime;
-	}
-
-	public void setBeginTime(LocalTime beginTime) {
-		this.beginTime = beginTime;
-	}
-
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
-
 	public List<SelectItem> getcBoxCategories() {
 		return cBoxCategories;
 	}
 
-	public String[] getSelectedActivities() {
-		return selectedActivities;
-	}
-
 	public void setcBoxCategories(List<SelectItem> cBoxCategories) {
 		this.cBoxCategories = cBoxCategories;
-	}
-
-	public void setSelectedActivities(String[] selectedActivities) {
-		this.selectedActivities = selectedActivities;
 	}
 
 	public List<Demand> getDemands() {
@@ -131,14 +120,6 @@ public class SearchManagedBean implements Serializable {
 
 	public void setDemands(List<Demand> demands) {
 		this.demands = demands;
-	}
-
-	public Demand getSelectedDemand() {
-		return selectedDemand;
-	}
-
-	public void setSelectedDemand(Demand selectedDemand) {
-		this.selectedDemand = selectedDemand;
 	}
 
 	public List<Activity> getActivities() {
@@ -157,19 +138,35 @@ public class SearchManagedBean implements Serializable {
 		this.equipments = equipments;
 	}
 
-	public EquipmentType getSelectedEquipment() {
-		return selectedEquipment;
-	}
-
-	public void setSelectedEquipment(EquipmentType selectedEquipment) {
-		this.selectedEquipment = selectedEquipment;
-	}
-
 	public List<ActivityCategory> getCategories() {
 		return categories;
 	}
 
 	public void setCategories(List<ActivityCategory> categories) {
 		this.categories = categories;
+	}
+
+	public List<City> getCities() {
+		return cities;
+	}
+
+	public void setCities(List<City> cities) {
+		this.cities = cities;
+	}
+
+	public User getUserConnected() {
+		return userConnected;
+	}
+
+	public void setUserConnected(User userConnected) {
+		this.userConnected = userConnected;
+	}
+
+	public Reply getReply() {
+		return reply;
+	}
+
+	public void setReply(Reply reply) {
+		this.reply = reply;
 	}
 }
