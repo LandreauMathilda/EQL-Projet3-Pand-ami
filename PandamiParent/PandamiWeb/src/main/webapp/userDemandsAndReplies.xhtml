@@ -24,8 +24,15 @@
         					</p:accordionPanel>
                 		</h:form>
             		</p:tab>
-            		<p:tab styleClass="tab" title="Mon bénévolat en cours">
-            			<h:form>
+            		<p:tab styleClass="tab" title="Mon bénévolat en cours" >
+            			<h:form styleClass="center2Panel">
+            				<p:accordionPanel var="reply" value="#{mbUserDemRep.usersReplies}"  styleClass="accordion" multiple="true" widgetVar="multiple">
+            					<p:tab styleClass="accordionChild" title = "#{reply.demand.actionDate} - #{reply.demand.activity}">
+            						<label>Horaire : de #{reply.demand.startHour} à #{reply.demand.endHour}</label>
+            						<br/>
+            						<label>adresse : #{reply.demand.street} #{reply.demand.city.name} - #{reply.demand.city.zipCode}</label>
+            					</p:tab>
+        					</p:accordionPanel>
                 		</h:form>
             		</p:tab>
             		<p:tab styleClass="tab" title="Historique de mes demandes">
@@ -41,7 +48,7 @@
 		</div>
 	</ui:define>
 	<ui:define name="CSS">
-		<h:outputStylesheet name="CSS/userDemandsAndReponses.css" />
+		<h:outputStylesheet name="CSS/userDemandsAndReplies.css" />
 	</ui:define>
 </ui:composition>
 </html>
