@@ -2,13 +2,23 @@ package fr.eql.ai108.pandami.web;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
+
 import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
+import fr.eql.ai108.pandami.entity.CancelReason;
 import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.EquipmentType;
@@ -27,7 +37,17 @@ public class DemandManagedBean implements Serializable{
     private List<ActivityCategory> activityCategories;
     private List<EquipmentType> equipments;
     private List<EquipmentType> equipmentTypes;
+	private List<ActivityCategory> categories;
+	private List<SelectItem> cBoxCategories = new ArrayList<>();
+	private String selectedActivity;
+	private EquipmentType selectedEquipment;
     private String message;
+ 
+    
+ 
+    
+
+    
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -35,7 +55,7 @@ public class DemandManagedBean implements Serializable{
 	@EJB
 	private AccountIBusiness proxyAccountBu;
 	
-	private User sessionUser; //modif, là méthode en dur
+	private User sessionUser;
 	
     @PostConstruct
     public void init() {
@@ -43,8 +63,40 @@ public class DemandManagedBean implements Serializable{
     	equipments = proxyDemandBu.displayEquipments();
     	sessionUser = proxyAccountBu.getUserById();
     	activities = proxyDemandBu.displayActivities();
+    	categories = proxyDemandBu.displayCategories();
+    	createActivitiesSelectCBox();
     }
     
+	private void createActivitiesSelectCBox() {
+		
+		activities = proxyDemandBu.displayActivities();
+		categories = proxyDemandBu.displayCategories();
+		
+		for(ActivityCategory cat : categories){
+
+			SelectItemGroup selectItemGroup = new SelectItemGroup(cat.getLabel());
+			SelectItem[] selectItems = null;
+			List<SelectItem> tempList = new ArrayList<SelectItem>();
+
+			for (Activity act : activities) {
+				if(act.getActivityCategory().getId() == cat.getId()) { //Regroupage par catégorie : Si la catégorie d'activité d'une activité est egale à la categorie en cours alors on rajoute cette activité au menu déroulant 
+					tempList.add(new SelectItem(act, act.getLabel()));
+				}
+			}
+
+			selectItems = new SelectItem[tempList.size()];  //Transférer les données de la liste temporaire à notre tableau d'objet (contrainte de la taille fixe du tableau)
+
+			for (int i = 0; i < tempList.size(); i++) {
+				selectItems[i] = tempList.get(i);
+			}
+
+			selectItemGroup.setSelectItems(selectItems);
+			cBoxCategories.add(selectItemGroup);
+		}
+	}
+    
+
+	
     public String createDemand() {
     	demand.setPublishDate(LocalDateTime.now());
     	demand.setUser(sessionUser);
@@ -53,7 +105,47 @@ public class DemandManagedBean implements Serializable{
         message = "Votre demande a bien été prise en compte";
         return "/demandDeposit.xhtml?faces-redirect=true";
     }
+
     
+    public String upDateDemand(Demand demand) {
+    demand = proxyDemandBu.upDateDemand(demand);
+    
+    	return "/modifDemand.xhtml?faces-redirect=true";
+    }
+
+
+	public EquipmentType getSelectedEquipment() {
+		return selectedEquipment;
+	}
+
+	public void setSelectedEquipment(EquipmentType selectedEquipment) {
+		this.selectedEquipment = selectedEquipment;
+	}
+
+	public String getSelectedActivity() {
+		return selectedActivity;
+	}
+
+	public void setSelectedActivity(String selectedActivity) {
+		this.selectedActivity = selectedActivity;
+	}
+
+	public List<SelectItem> getcBoxCategories() {
+		return cBoxCategories;
+	}
+
+	public void setcBoxCategories(List<SelectItem> cBoxCategories) {
+		this.cBoxCategories = cBoxCategories;
+	}
+
+	public List<ActivityCategory> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<ActivityCategory> categories) {
+		this.categories = categories;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -118,5 +210,4 @@ public class DemandManagedBean implements Serializable{
 	public void setEquipments(List<EquipmentType> equipments) {
 		this.equipments = equipments;
 	}
-	
 }

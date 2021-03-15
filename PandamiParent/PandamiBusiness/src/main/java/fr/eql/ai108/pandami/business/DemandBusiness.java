@@ -69,4 +69,10 @@ public class DemandBusiness implements DemandIBusiness{
 	public List<Demand> displayOwnedDemands(Integer id) {
 		return proxyDemand.getAllByUser(id);
 	}
+
+	@Override
+	public Demand upDateDemand(Demand demand) {
+		Demand returnedDemand = proxyDemand.update(demand);
+		return returnedDemand;
+	}
 }

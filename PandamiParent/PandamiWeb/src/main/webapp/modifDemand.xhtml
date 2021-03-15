@@ -1,0 +1,78 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPage.xhtml">
+	<ui:define name="title">Modification demande</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<div>MODIFIER UNE DEMANDE</div>
+			<h:form styleClass="formInfos">
+				<div id="leftPanel">
+					<div id="place">
+
+						<label>Lieu de réalisation :</label> <label>N° et rue : </label>
+
+						<p:inplace editor="true">
+							<p:inputText value="#{mbDemand.demand.street}" required="true"
+								label="text" />
+						</p:inplace>
+
+						<label>Ville : </label>
+
+						<p:inplace editor="true">
+							<p:selectOneMenu value="#{mbDemand.demand.city}"
+								converter="omnifaces.SelectItemsConverter" dynamic="true">
+								<f:selectItem itemValue="" itemLabel="CP - Ville "
+									noSelectionOption="true" />
+								<f:selectItems value="#{mbDemand.cities}" var="city"
+									itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
+							</p:selectOneMenu>
+						</p:inplace>
+
+
+						<p:outputLabel for="basic" value="Date" />
+						<p:datePicker id="basic" value="#{mbDemand.demand.actionDate}" />
+						<label>Heure de début :</label>
+						<p:datePicker id="timeonly" value="#{mbDemand.demand.startHour}"
+							timeOnly="true" pattern="HH:mm" />
+						<label>Heure de fin :</label>
+						<p:datePicker id="timeonly2" value="#{mbDemand.demand.endHour}"
+							timeOnly="true" pattern="HH:mm" />
+
+					</div>
+				</div>
+				<div id="rightPanel">
+					<label>Catégorie de la demande</label>
+					<p:selectOneMenu value="#{mbDemand.demand.activity}"
+						converter="omnifaces.SelectItemsConverter" dynamic="true">
+						<f:selectItem itemValue="" itemLabel="Catégories d'activité"
+							noSelectionOption="true" />
+						<f:selectItems value="#{mbDemand.activities}" var="activity"
+							itemLabel="#{activity.activityCategory} - #{activity} - #{activity.equipmentType}"
+							itemValue="#{activity}"></f:selectItems>
+					</p:selectOneMenu>
+
+
+
+
+					<label>Type de la demande</label> <label>Matériel requis</label>
+					<div id="divButton">
+						<p:commandButton styleClass="ui-formButtons" id="button"
+							action="#{mbDemand.upDateDemand(demand)}" value="Modifier ma demande" />
+						<br />
+
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/demandDeposit.css" />
+	</ui:define>
+</ui:composition>
+</html>
