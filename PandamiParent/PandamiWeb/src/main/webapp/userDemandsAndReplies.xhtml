@@ -12,21 +12,32 @@
 		<div id="main">
 			<div>TITRE</div>
 			<div id="centerPanel">
-				<p:tabView styleClass="tabView">
+				<p:tabView styleClass="tabView" dynamic="true" cache="true" widgetVar="ondemand">
             		<p:tab styleClass="tab" title="Mes demandes en cours">
             			<h:form styleClass="center2Panel">
-            				<p:accordionPanel var="demand" value="#{mbUserDemRep.usersDemands}"  styleClass="accordion" multiple="true" widgetVar="multiple">
+            				<p:accordionPanel dynamic="true" cache="true" var="demand" value="#{mbUserDemRep.usersDemands}"  styleClass="accordion" multiple="true" widgetVar="multiple">
             					<p:tab styleClass="accordionChild" title = "#{demand.actionDate} - #{demand.activity}">
             						<label>Horaire : de #{demand.startHour} à #{demand.endHour}</label>
             						<br/>
             						<label>adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
+            						<br/>
+            						<p:commandButton action="#{mbUserDemRep.cancelDemand(demand)}" value="Annuler" />
+            					    <br/>
+            							<p:selectOneMenu value="#{mbUserDemRep.selectedReply}" converter="omnifaces.SelectItemsConverter" dynamic="true">
+    										<f:selectItem itemValue="" itemLabel="Choisir un bénévole" noSelectionOption="true"/>
+    										<f:selectItems value="#{demand.replies}" var = "reply" 
+    										itemLabel="#{reply.volunteer.name} + #{reply.replyDate}" itemValue="#{reply}">
+    										</f:selectItems>
+    									</p:selectOneMenu>
+            							<br/>
+            							<p:commandButton action="#{mbUserDemRep.chooseVolunteer(selectedReply)}" value="valider bénévole" />
             					</p:tab>
         					</p:accordionPanel>
                 		</h:form>
             		</p:tab>
             		<p:tab styleClass="tab" title="Mon bénévolat en cours" >
-            			<h:form styleClass="center2Panel">
-            				<p:accordionPanel var="reply" value="#{mbUserDemRep.usersReplies}"  styleClass="accordion" multiple="true" widgetVar="multiple">
+            			<h:form styleClass="center2Panel">  
+            				<p:accordionPanel dynamic="true" cache="true" var="reply" value="#{mbUserDemRep.usersReplies}"  styleClass="accordion" multiple="true" widgetVar="multiple">
             					<p:tab styleClass="accordionChild" title = "#{reply.demand.actionDate} - #{reply.demand.activity}">
             						<label>Horaire : de #{reply.demand.startHour} à #{reply.demand.endHour}</label>
             						<br/>

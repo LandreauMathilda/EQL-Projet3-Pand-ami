@@ -26,6 +26,7 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	
     private List<Demand> usersDemands;
     private List<Reply> usersReplies;
+    private Reply selectedReply;
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -34,22 +35,35 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	@EJB
 	private ReplyIBusiness proxyReplyBu;
 	
-	private Demand demand = new Demand();
-	private CancelReason cancelReason;
 	private User sessionUser; //modif, là méthode en dur
 	
-
     @PostConstruct
     public void init() {
     	sessionUser = proxyAccountBu.getUserById();
     	usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
+    	for (Demand demand : usersDemands) {
+			System.out.println(demand.toString());
+			System.out.println("nombre réponses : " + demand.getReplies().size());
+		}
+    	selectedReply = new Reply();
     }
     
-    public String cancelDemand() {
+    public String cancelDemand(Demand demand) {
         demand.setCancelDate(LocalDateTime.now());
-        demand.setCancelReason(cancelReason);
-        return "/userDemandsAndReponses.xhtml?faces-redirect=true";
+        //demand.setCancelReason(cancelReason);
+        proxyDemandBu.upDateDemand(demand);
+        usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
+        return "/userDemandsAndReplies.xhtml?faces-redirect=true";
+    }
+    
+
+    public String chooseVolunteer(Reply reply) {
+    	System.out.println(reply.toString());
+    	//selectedReply.setSelectionDate(LocalDateTime.now());
+    	//proxyReplyBu.updateReply(selectedReply);
+    	//usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
+    	return "/userDemandsAndReplies.xhtml?faces-redirect=true";
     }
 
 
@@ -82,5 +96,13 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 		this.usersReplies = usersReplies;
 	}
 
+	public Reply getSelectedReply() {
+		return selectedReply;
+	}
+
+	public void setSelectedReply(Reply selectedReply) {
+		this.selectedReply = selectedReply;
+	}
     
+	
 }

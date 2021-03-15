@@ -22,4 +22,9 @@ public class ReplyBusiness implements ReplyIBusiness {
 		return proxyReply.getAllByUser(id);
 	}
 
+	@Override
+	public Reply updateReply(Reply reply) {
+		return proxyReply.update(reply);
+	}
+
 }
