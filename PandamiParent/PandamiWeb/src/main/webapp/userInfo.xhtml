@@ -5,58 +5,59 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/masterPage.xhtml">
+<ui:composition template="/masterPageBis.xhtml">
 	<ui:define name="title">Profil</ui:define>
 	<ui:define name="content">
 		<div id="main">
 			<div>TITRE</div>
 			<h:form styleClass="formInfos">
 				<div id="leftPanel">
-					<div id="connexion">			
+					<div id="connexion">	
+						<h:messages globalOnly="true" />	
 						<h5>Connexion</h5>
-						<label>identifiant</label>
-						<p:inputText value="#{mbConnect.user.login}" />
-						<label>Mot de passe</label>
-						<p:password value="#{mbConnect.user.password}" feedback="true"/>					
+						<label>identifiant*</label><h:message style="color:red" for="login" />
+						<p:inputText value="#{mbConnect.user.login}" required="true" requiredMessage="Le login est obligatoire" id="login"/>
+						<label>Mot de passe*</label><h:message style="color:red" for="password" />	
+						<p:password value="#{mbConnect.user.password}" feedback="true" required="true" requiredMessage="Le password est obligatoire" id="password"/>			
 					</div>
 					<div id="civilState">
 					<h5>Etat-civil :</h5>
-						<label>Nom</label>
-						<p:inputText value="#{mbConnect.user.surname}" />
-						<label>Prenom</label>
-						<p:inputText value="#{mbConnect.user.name}" />
-    					<label>Date de naissance : </label>
-        				<p:datePicker id="navigator" value="#{mbConnect.user.birthDate}"
+						<label>Nom*</label>
+						<p:inputText value="#{mbConnect.user.surname}" required="true" id="surname"/>
+						<label>Prenom*</label>
+						<p:inputText value="#{mbConnect.user.name}" required="true" id="name"/>
+    					<label>Date de naissance* : </label>
+        				<p:datePicker id="navigator" value="#{mbConnect.user.birthDate}" required="true"
                                 monthNavigator="true"
                                 yearNavigator="true"
                                 showWeek="true"/>
 						<label>Genre</label>
-						<p:selectOneRadio value="#{mbConnect.user.gender}" converter="omnifaces.SelectItemsConverter" unselectable="true">
+						<p:selectOneRadio value="#{mbConnect.user.gender}" converter="omnifaces.SelectItemsConverter" unselectable="true" required="true">
 							<f:selectItems value="#{mbConnect.genders}" var="gender" itemLabel="#{gender.name}" itemValue="#{gender}"></f:selectItems>
         				</p:selectOneRadio>		
 					</div>
 					<div id="contact">			
-						<h5>Contact :</h5>
-						<label>email</label>
-						<p:inputText value="#{mbConnect.user.email}" />
-						<label>N° telephone</label>
-						<p:inputText value="#{mbConnect.user.phoneNumber}" />					
+						<h5>Contact* :</h5>
+						<label>email*</label>
+						<p:inputText value="#{mbConnect.user.email}" required="true"/>
+						<label>N° telephone*</label>
+						<p:inputText value="#{mbConnect.user.phoneNumber}" required="true"/>					
 					</div>
 				</div>
 				<div id="rightPanel">
 					<div id="adress">
-						<h5>Adresse :</h5>
-						<label>N° et rue</label>
-						<p:inputText value="#{mbConnect.user.street}" />
-						<label>Ville</label>
-    					<p:selectOneMenu value="#{mbConnect.user.city}" converter="omnifaces.SelectItemsConverter" dynamic="true">
+						<h5>Adresse* :</h5>
+						<label>N° et rue*</label>
+						<p:inputText value="#{mbConnect.user.street}"  required="true"/>
+						<label>Ville*</label>
+    					<p:selectOneMenu value="#{mbConnect.user.city}" converter="omnifaces.SelectItemsConverter" dynamic="true" required="true">
     						<f:selectItem itemValue="" itemLabel="CP - Ville " noSelectionOption="true"/>
     						<f:selectItems value="#{mbConnect.cities}" var = "city"
     						itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
     					</p:selectOneMenu>
 					</div>
 					<div id="emergencyContact">
-						<h5>Contact d'Urgence:</h5>
+						<h5>Contact d'Urgence*:</h5>
 						<label>Nom</label>
 						<p:inputText value="#{mbConnect.user.emergencyContactSurname}" />
 						<label>Prenom</label>

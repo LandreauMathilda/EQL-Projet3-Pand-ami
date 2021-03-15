@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -43,25 +44,19 @@ public class DemandManagedBean implements Serializable{
 	private EquipmentType selectedEquipment;
     private String message;
  
-    
- 
-    
-
-    
-    
 	@EJB
 	private DemandIBusiness proxyDemandBu;
 	
 	@EJB
 	private AccountIBusiness proxyAccountBu;
 	
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
 	private User sessionUser;
 	
     @PostConstruct
     public void init() {
     	cities = proxyDemandBu.displayCities();
     	equipments = proxyDemandBu.displayEquipments();
-    	sessionUser = proxyAccountBu.getUserById();
     	activities = proxyDemandBu.displayActivities();
     	categories = proxyDemandBu.displayCategories();
     	createActivitiesSelectCBox();
