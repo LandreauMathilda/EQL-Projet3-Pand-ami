@@ -10,12 +10,14 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
 import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.EquipmentType;
+import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 
 @ManagedBean (name="mbSearch")
@@ -39,6 +41,13 @@ public class SearchManagedBean implements Serializable {
 	private EquipmentType selectedEquipment;
 	private Demand selectedDemand;
 
+	
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
+	User sessionUser;
+	
+	
+	
+	
 	@PostConstruct
 	public void init() {
 		standardInit();
@@ -48,7 +57,7 @@ public class SearchManagedBean implements Serializable {
 	 * 	Méthode permettant de lancer une initialisation standard des champs de recherches et des demandes sans critères définis
 	 */
 	private void standardInit() {
-		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
+		demands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId()); 
 		equipments = proxyDemandBu.displayEquipments();
 		createActivitiesSelectCBox();
 	}

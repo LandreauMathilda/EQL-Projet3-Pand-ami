@@ -14,22 +14,15 @@
 	<div id="header">
 		<div>
 			<h:form>
-				<h:commandLink value="Accueil" action="#{mbRedirect.redirectConnectedHome()}" />
-				|
-				<h:commandLink value="Mon profil" action="#{mbRedirect.redirectProfil()}" />
-				|
-				<h:commandLink value="Mes demandes" />
-				|
-				<h:commandLink value="Mon bénévolat" />
-				|
-				<h:commandLink value="Rechercher une demande" action="#{mbRedirect.redirectSearchDemand()}"/> 
-				|
-				<h:commandLink value="Déposer une demande" action="#{mbRedirect.redirectDemandDeposit()}" />
+				<h:commandLink value="Accueil" action="#{mbRedirect.redirectNotConnectedHome()}" />
+		
 			</h:form>
 		</div>
 		<div>
 			<h:form>
-				<h:commandLink value="se deconnecter" action="#{mbConnect.disconnect()}"/>
+				<h:commandLink value="s'inscrire" action="#{mbRedirect.redirectCreateAccount()}"/>
+				|
+				<h:commandLink value="se connecter" action="#{mbRedirect.redirectConnect()}"/>
 			</h:form>
 		</div>
 	</div>

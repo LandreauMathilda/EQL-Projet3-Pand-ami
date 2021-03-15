@@ -27,4 +27,8 @@ public class ReplyBusiness implements ReplyIBusiness {
 		return proxyReply.update(reply);
 	}
 
+	@Override
+	public Reply createReply(Reply reply) {
+		return proxyReply.add(reply);
+	}
 }
