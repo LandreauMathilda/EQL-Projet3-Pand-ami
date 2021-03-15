@@ -34,6 +34,10 @@
 	justify-content:space-around;
 }
 
+body .ui-datatable thead th{
+	text-align: center;
+}
+
 @media (max-width: 1000px) {
 	
 #leftPanel{
@@ -44,7 +48,5 @@
 #applyButton{
 	width: 30px;
 	height: 30px;
-}
-	
 }
 

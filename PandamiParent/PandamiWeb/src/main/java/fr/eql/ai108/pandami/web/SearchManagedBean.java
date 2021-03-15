@@ -57,7 +57,7 @@ public class SearchManagedBean implements Serializable {
 	 * 	Méthode permettant de lancer une initialisation standard des champs de recherches et des demandes sans critères définis
 	 */
 	private void standardInit() {
-		demands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId()); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
+		demands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId()); 
 		equipments = proxyDemandBu.displayEquipments();
 		createActivitiesSelectCBox();
 	}
