@@ -11,6 +11,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.context.PartialViewContext;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
 
@@ -20,6 +22,7 @@ import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.EquipmentType;
 import fr.eql.ai108.pandami.entity.Reply;
+import fr.eql.ai108.pandami.entity.Research;
 import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
@@ -29,7 +32,7 @@ import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
 public class SearchManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	//@ManagedProperty(value = "#{mbConnect.user}")
 	private User userConnected;
 
@@ -45,13 +48,16 @@ public class SearchManagedBean implements Serializable {
 	private List<Demand> demands = new ArrayList<>();
 	private List<SelectItem> cBoxCategories = new ArrayList<>();
 	private Reply reply;
-	
+	private Research research;
+
 	/*
 	 * 	Initialisation standard dans le cas où aucun critère de recherche n'est définis
 	 */
 	@PostConstruct
 	public void init() {
-		standardInit();
+		if(research == null) {
+			standardInit();
+		}
 	}
 
 	/*
@@ -61,18 +67,19 @@ public class SearchManagedBean implements Serializable {
 		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
 		equipments = proxyDemandBu.displayEquipments();
 		cities = proxyDemandBu.displayCities();
+		research = new Research();
 		createActivitiesSelectCBox();
 	}
-	
+
 
 	/*
 	 * 	Méthode permettant de créer l'arborescence de la SelectCheckBox des activités
 	 */
 	private void createActivitiesSelectCBox() {
-		
+
 		activities = proxyDemandBu.displayActivities();
 		categories = proxyDemandBu.displayCategories();
-		
+
 		for(ActivityCategory cat : categories){
 
 			SelectItemGroup selectItemGroup = new SelectItemGroup(cat.getLabel());
@@ -95,14 +102,57 @@ public class SearchManagedBean implements Serializable {
 			cBoxCategories.add(selectItemGroup);
 		}
 	}
-	
+
 	public void replyDemand(Demand demand) {
 		userConnected = new User();   //!!!!!!! A retirer
 		userConnected.setId(1);       //!!!!!!! A retirer
-		
+
 		reply = new Reply(null, LocalDateTime.now(), null, null, null, userConnected, demand);
 		reply = proxyReplyBU.createReply(reply);
 		reply = new Reply();
+	}
+
+	/*
+	 * 	Méthode actualisant la liste de demande en fonction des critères de recherches et l'affichant ensuite à l'utilisateur
+	 */
+	public void sendResearch() {
+		System.out.println(research);
+		//demands = proxyDemandBu.getDemandsByResearch(research, demands);
+		updateDemandsDisplay();
+	}
+
+	/*
+	 * 	Méthode annulant l'ensemble des critères de recherche et actualisant la liste de demandes à l'écran
+	 */
+	public void cancelResearch(){
+		research = null;
+		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
+		updateDemandsDisplay();
+		updateResearchFields();
+	}
+
+	/*
+	 * 	Mets à jour la DataTable des demandes de manière asynchrone
+	 */
+	private void updateDemandsDisplay() {
+		FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("demandsForm:demandsDataTable");
+	}
+
+	/*
+	 * 	Mets à jour la barre de recherche de manière asynchrone
+	 */
+	@SuppressWarnings("serial")
+	private void updateResearchFields() {
+		PartialViewContext partialViewContext = FacesContext.getCurrentInstance().getPartialViewContext();
+		partialViewContext.getRenderIds().addAll(new ArrayList<String>() {{
+			add("researchForm:equipResearchCBox");
+			add("researchForm:citiesResearchCBox");
+			add("researchForm:dateResearchPicker");
+			add("researchForm:startTimeResearchPicker");
+			add("researchForm:endTimeResearchPicker");
+			add("researchForm:activityResearchCBox");
+			add("researchForm:equipResearchCBox");
+		}});
 	}
 
 	//getter setters
@@ -168,5 +218,13 @@ public class SearchManagedBean implements Serializable {
 
 	public void setReply(Reply reply) {
 		this.reply = reply;
+	}
+
+	public Research getResearch() {
+		return research;
+	}
+
+	public void setResearch(Research research) {
+		this.research = research;
 	}
 }
