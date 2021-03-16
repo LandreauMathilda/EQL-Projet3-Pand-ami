@@ -11,6 +11,7 @@ import fr.eql.ai108.pandami.entity.ActivityCategory;
 import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.EquipmentType;
+import fr.eql.ai108.pandami.entity.Reply;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 import fr.eql.ai108.pandami.idao.ActivityCategoryIDao;
 import fr.eql.ai108.pandami.idao.ActivityIDao;
@@ -74,5 +75,19 @@ public class DemandBusiness implements DemandIBusiness{
 	public Demand upDateDemand(Demand demand) {
 		Demand returnedDemand = proxyDemand.update(demand);
 		return returnedDemand;
+	}
+
+	@Override
+	public List<Demand> displayFilteredByRepliesOwnedDemands(Integer id) {
+		List<Demand> filteredDemands = displayOwnedDemands(id); //récupère toutes les demandes
+		for (Demand demand : filteredDemands) {
+			for (Reply reply : demand.getReplies()) {
+				//si la demande est rejetée -> je l'enlève de la liste des replies de chaque demand
+				if (reply.getSelectionDate() == null && reply.getRejectDate() != null) {
+					demand.getReplies().remove(reply);
+				}
+			}
+		}
+		return filteredDemands;
 	}
 }

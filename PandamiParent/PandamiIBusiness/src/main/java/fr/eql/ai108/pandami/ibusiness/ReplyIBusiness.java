@@ -10,5 +10,5 @@ public interface ReplyIBusiness {
 	Reply updateReply (Reply reply);
 	Reply createReply(Reply reply);
 	List<Reply> displayRepliesByDemandId(Integer id);
-
+	List<Reply> getNotSelectedRepliesByDemandId(Integer id);
 }

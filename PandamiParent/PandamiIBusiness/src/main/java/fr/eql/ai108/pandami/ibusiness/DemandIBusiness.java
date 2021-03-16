@@ -26,4 +26,6 @@ public interface DemandIBusiness {
 	
 	List<Demand> displayOwnedDemands(Integer id);
 	
+	List<Demand> displayFilteredByRepliesOwnedDemands(Integer id);
+	
 }
