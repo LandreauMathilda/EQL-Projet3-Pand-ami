@@ -7,16 +7,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
-
 import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
 import fr.eql.ai108.pandami.entity.City;
@@ -29,7 +26,7 @@ import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
 
 @ManagedBean (name="mbSearch")
-@ViewScoped
+@SessionScoped
 public class SearchManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -51,6 +48,9 @@ public class SearchManagedBean implements Serializable {
 	private Reply reply;
 	private Research research;
 
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
+	User sessionUser;
+	
 	/*
 	 * 	Initialisation standard dans le cas où aucun critère de recherche n'est définis
 	 */
