@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPageAdmin.xhtml">
+	<ui:define name="title">Admin - référentiels</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<div>Mettre à jour les référentiels</div>
+			<h:form styleClass="formInfos">
+				<div id="leftPanel">
+
+
+					<h:panelGrid columns="2" cellpadding="3" id="mainGrid">
+						<h:form id="consultForm">
+							<p:dataTable id="displayCities" var="city"
+								value="#{mbAdmin.cities}" emptyMessage="Aucune ville à afficher">
+
+								<p:column headerText="Code Postal">
+									<p:inplace editor="true">
+										<p:inputText value="#{city.zipCode}" required="true"
+											label="text" />
+									</p:inplace>
+								</p:column>
+
+								<p:column headerText="Libellé de la ville">
+									<p:inplace editor="true">
+										<p:inputText value="#{city.name}" required="true" label="text" />
+									</p:inplace>
+								</p:column>
+
+
+								<p:column>
+									<h:commandButton value="Valider les modifications"
+										action="#{mbAdmin.upDateCities()}" >
+										<f:setPropertyActionListener value="#{city}"
+										target="#{mbAdmin.selectedCity}" />
+										</h:commandButton>
+										<h:commandButton value="Supprimer cette ville"
+										action="#{mbAdmin.deleteCity()}" >
+										<f:setPropertyActionListener value="#{city}"
+										target="#{mbAdmin.selectedCity}" />
+										</h:commandButton>
+										
+
+
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</h:panelGrid>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+	<!-- <p:outputLabel value="Villes" />
+					<p:selectOneMenu id="city" value="#{mbAdmin.selectedCity}"
+						effect="fold" editable="true"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{mbAdmin.cities}" itemValue="#{city}"
+							var="city" />
+					</p:selectOneMenu>
+
+
+
+				</div>
+				<div id="rightPanel">
+
+					<h:commandButton value="Valider les modifications"
+						action="#{mbAdmin.upDateCities()}"></h:commandButton>
+
+				</div> 
+					</ui:define>-->
+
+
+
+
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/demandDeposit.css" />
+
+	</ui:define>
+</ui:composition>
+</html>

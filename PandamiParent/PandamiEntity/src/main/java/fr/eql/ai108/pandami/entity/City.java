@@ -68,9 +68,23 @@ public class City implements Serializable {
 		return true;
 	}
 
+	
+	public City(String name, String zipCode) {
+		super();
+		this.name = name;
+		this.zipCode = zipCode;
+	}
+
 	@Override
 	public String toString() {
 		return zipCode + " - " + name;
+	}
+	
+	public String toStringName() {
+		return name;
+	}
+	public String toStringZipCode() {
+		return zipCode;
 	}
 
 	public Integer getId() {

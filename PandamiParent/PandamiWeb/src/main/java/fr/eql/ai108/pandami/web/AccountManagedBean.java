@@ -73,10 +73,13 @@ public class AccountManagedBean implements Serializable{
     public String connection(){
 		user = proxyAccountBu.connection(user.getLogin(), user.getPassword());
 		String retour = "";
-		if(user != null) {
+		if(user != null && user.getUserType().getId() == 2) {
 			sessionUser = user;
 			retour = "/connectedHome.xhtml?faces-redirect=true";
-		} else {
+		} else if(user != null && user.getUserType().getId() == 1) {
+			sessionUser = user;
+			retour = "/adminRef.xhtml?faces-redirect=true";
+		}else {
 			user = new User();
 			message = "Login/Password incorrectes";
 			retour = "/connectionPage.xhtml?faces-redirect=true";
