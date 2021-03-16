@@ -15,6 +15,8 @@ public interface DemandIBusiness {
 	
 	Demand upDateDemand(Demand demand);
 	
+	List<Demand> displayAllDemands();
+	
 	List<City> displayCities();
 
 	List<Demand> getNotOwnedDemands(Integer id);

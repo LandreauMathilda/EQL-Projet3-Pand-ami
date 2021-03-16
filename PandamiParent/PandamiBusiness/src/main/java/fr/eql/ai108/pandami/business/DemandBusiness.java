@@ -48,6 +48,11 @@ public class DemandBusiness implements DemandIBusiness{
 		returnedDemand = proxyDemand.add(demand);
 		return returnedDemand;
 	}
+	
+	@Override
+	public List<Demand> displayAllDemands(){
+		return proxyDemand.findAll();
+	}
 
 	@Override
 	public List<Demand> getNotOwnedDemands(Integer id) {
