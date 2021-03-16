@@ -9,5 +9,6 @@ public interface ReplyIBusiness {
 	List<Reply> displayOwnedReplies(Integer id);
 	Reply updateReply (Reply reply);
 	Reply createReply(Reply reply);
+	List<Reply> displayRepliesByDemandId(Integer id);
 
 }

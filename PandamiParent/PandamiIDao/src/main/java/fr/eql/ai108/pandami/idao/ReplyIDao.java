@@ -8,4 +8,6 @@ public interface ReplyIDao extends GenericIDao<Reply> {
 	
 	List<Reply> getAllByUser(Integer id);
 
+	List<Reply> getAllByDemandId(Integer id);
+
 }

@@ -7,9 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
-import fr.eql.ai108.pandami.entity.CancelReason;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.Reply;
 import fr.eql.ai108.pandami.entity.User;
@@ -19,14 +18,15 @@ import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
 
 
 @ManagedBean(name="mbUserDemRep")
-@SessionScoped
+@ViewScoped
 public class UserDemandsRepliesManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
     private List<Demand> usersDemands;
     private List<Reply> usersReplies;
-    private Reply selectedReply;
+    
+    private Demand selectedDemand;
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -37,16 +37,11 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	
 	private User sessionUser; //modif, là méthode en dur
 	
-    @PostConstruct
+	@PostConstruct
     public void init() {
     	sessionUser = proxyAccountBu.getUserById();
     	usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
-    	for (Demand demand : usersDemands) {
-			System.out.println(demand.toString());
-			System.out.println("nombre réponses : " + demand.getReplies().size());
-		}
-    	selectedReply = new Reply();
     }
     
     public String cancelDemand(Demand demand) {
@@ -56,17 +51,30 @@ public class UserDemandsRepliesManagedBean implements Serializable {
         usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
         return "/userDemandsAndReplies.xhtml?faces-redirect=true";
     }
-    
 
-    public String chooseVolunteer(Reply reply) {
-    	System.out.println(reply.toString());
-    	//selectedReply.setSelectionDate(LocalDateTime.now());
-    	//proxyReplyBu.updateReply(selectedReply);
-    	//usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
+    //TODO : set une rejectDate pour les autres réponses. et changer ce qui s'affiche dans la tabView.
+    //1- méthode (business/dao) qui récupérère la liste de replies depuis la demand. si liste.size >0 
+    	// --> on recupere toutes les replies qui ont une selectDate à null, et on modifie leur rejectDate avec date.now();
+    // 2- changer le bouton pour afficher un label une fois selectionné.
+   
+    public String chooseVolunteer (Reply reply) { //méthode avec la reply recupérée en fetch.eager demand.replies, directement :
+    	reply.setSelectionDate(LocalDateTime.now());
+    	proxyReplyBu.updateReply(reply);
+    	usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
     	return "/userDemandsAndReplies.xhtml?faces-redirect=true";
     }
-
-
+    //pour l'onglet "mon bénévolat" : afficher pour chaque réponse l'action, le nom du bénéficiaire, la date de l'action, la date du post, la date ou on a postulé.
+    //statut : choisi / en attente (rejeté ?)
+    	//bouton pour annuler : reply.desistDate = date.now()
+    
+    /*
+    //autre technique sans passer par le fetch.Eager
+    public String displayReplies(Demand demand) {
+    	demandsReplies = proxyReplyBu.displayRepliesByDemandId(demand.getId());
+    	return "/userDemandsAndReplies.xhtml?faces-redirect=true";
+    }
+    */
+    
 	public List<Demand> getUsersDemands() {
 		return usersDemands;
 	}
@@ -96,13 +104,14 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 		this.usersReplies = usersReplies;
 	}
 
-	public Reply getSelectedReply() {
-		return selectedReply;
+	public Demand getSelectedDemand() {
+		return selectedDemand;
 	}
 
-	public void setSelectedReply(Reply selectedReply) {
-		this.selectedReply = selectedReply;
+	public void setSelectedDemand(Demand selectedDemand) {
+		this.selectedDemand = selectedDemand;
 	}
     
+	
 	
 }

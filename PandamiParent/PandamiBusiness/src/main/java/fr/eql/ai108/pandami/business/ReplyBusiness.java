@@ -31,4 +31,9 @@ public class ReplyBusiness implements ReplyIBusiness {
 	public Reply createReply(Reply reply) {
 		return proxyReply.add(reply);
 	}
+
+	@Override
+	public List<Reply> displayRepliesByDemandId(Integer id) {
+		return proxyReply.getAllByDemandId(id);
+	}
 }
