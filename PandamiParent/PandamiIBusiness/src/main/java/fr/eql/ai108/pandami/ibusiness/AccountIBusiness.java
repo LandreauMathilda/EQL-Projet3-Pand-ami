@@ -15,4 +15,5 @@ public interface AccountIBusiness {
 	List<User> displayAllUsers();
 	//a retirer quand yaura la session
 	User getUserById();
+	User modifyUserInfo(User user);
 }

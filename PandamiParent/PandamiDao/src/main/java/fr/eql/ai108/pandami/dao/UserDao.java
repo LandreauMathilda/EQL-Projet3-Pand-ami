@@ -27,7 +27,7 @@ public class UserDao extends GenericDao<User> implements UserIDao {
 		List<User> users = query.getResultList();
 		return users.size() > 0 ? true : false;
 	}
-	
+
 	@Override
 	public User authenticate(String login, String password) {
 		Query query = em.createQuery("SELECT u FROM User u WHERE "
@@ -41,6 +41,5 @@ public class UserDao extends GenericDao<User> implements UserIDao {
 		}
 		return returnedUser;
 	}
-
 }
 
