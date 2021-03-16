@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,7 +49,7 @@ public class Demand implements Serializable {
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")
 	private EndedType endedType;
-	@OneToMany (mappedBy = "demand", cascade = CascadeType.ALL)
+	@OneToMany (mappedBy = "demand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Reply> replies;
 	@ManyToOne
 	@JoinColumn (referencedColumnName = "id")

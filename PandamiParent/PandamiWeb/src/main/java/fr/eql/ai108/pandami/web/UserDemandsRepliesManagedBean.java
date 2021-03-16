@@ -7,9 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
-import fr.eql.ai108.pandami.entity.CancelReason;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.Reply;
 import fr.eql.ai108.pandami.entity.User;
@@ -19,13 +18,14 @@ import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
 
 
 @ManagedBean(name="mbUserDemRep")
-@SessionScoped
+@ViewScoped
 public class UserDemandsRepliesManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
     private List<Demand> usersDemands;
     private List<Reply> usersReplies;
+    private List<Reply> rejectedReplies;
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -34,25 +34,42 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	@EJB
 	private ReplyIBusiness proxyReplyBu;
 	
-	private Demand demand = new Demand();
-	private CancelReason cancelReason;
 	private User sessionUser; //modif, là méthode en dur
 	
-
-    @PostConstruct
+	@PostConstruct
     public void init() {
     	sessionUser = proxyAccountBu.getUserById();
-    	usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
+    	usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
     }
     
-    public String cancelDemand() {
+	//TODO floriane : implémenter le bouton d'annulation
+    public String cancelDemand(Demand demand) {
         demand.setCancelDate(LocalDateTime.now());
-        demand.setCancelReason(cancelReason);
-        return "/userDemandsAndReponses.xhtml?faces-redirect=true";
+        //demand.setCancelReason(cancelReason);
+        proxyDemandBu.upDateDemand(demand);
+        usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
+        return "/userDemandsAndReplies.xhtml?faces-redirect=true";
     }
-
-
+   
+    public String chooseVolunteer (Reply reply) { 
+    	reply.setSelectionDate(LocalDateTime.now());
+    	proxyReplyBu.updateReply(reply); //ecris en bdd dateDuJour ds reply choisie
+    	rejectedReplies = proxyReplyBu.getNotSelectedRepliesByDemandId(reply.getDemand().getId()); //récupérer les autres replies
+    	for (Reply rejectedReply : rejectedReplies) {
+    		System.out.println("rejetée " + rejectedReply);
+    		rejectedReply.setRejectDate(LocalDateTime.now());
+    		proxyReplyBu.updateReply(rejectedReply); //update avec dateDuJour dans rejectedDate
+		}
+    	//reinitialiser les listes de demandes du User, filtrée :
+    	usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
+    	return "/userDemandsAndReplies.xhtml?faces-redirect=true";
+    }
+    //TODO Floriane : 
+    //pour l'onglet "mon bénévolat" : afficher pour chaque réponse l'action, le nom du bénéficiaire, la date de l'action, la date du post, la date ou on a postulé.
+    //statut : choisi / en attente (rejeté ?)
+    //bouton pour annuler dans un second temps : reply.desistDate = date.now()
+    
 	public List<Demand> getUsersDemands() {
 		return usersDemands;
 	}
@@ -82,5 +99,12 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 		this.usersReplies = usersReplies;
 	}
 
-    
+	public List<Reply> getRejectedReplies() {
+		return rejectedReplies;
+	}
+
+	public void setRejectedReplies(List<Reply> rejectedReplies) {
+		this.rejectedReplies = rejectedReplies;
+	}
+	
 }

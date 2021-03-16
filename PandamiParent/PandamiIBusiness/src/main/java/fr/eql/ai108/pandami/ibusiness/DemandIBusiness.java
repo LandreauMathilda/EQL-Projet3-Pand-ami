@@ -7,6 +7,7 @@ import fr.eql.ai108.pandami.entity.ActivityCategory;
 import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.EquipmentType;
+import fr.eql.ai108.pandami.entity.Research;
 
 public interface DemandIBusiness {
 	
@@ -25,5 +26,11 @@ public interface DemandIBusiness {
 	List<ActivityCategory> displayCategories();
 	
 	List<Demand> displayOwnedDemands(Integer id);
+
+	String displayDemandStatus(Integer demandId, Integer userId);
+	
+	List<Demand> getDemandsByResearch(Research research, List<Demand> demands);
+	
+	List<Demand> displayFilteredByRepliesOwnedDemands(Integer id);
 	
 }
