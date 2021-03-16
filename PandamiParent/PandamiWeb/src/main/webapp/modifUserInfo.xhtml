@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/masterPage.xhtml">
 	<ui:define name="title">Profil</ui:define>
@@ -12,17 +12,18 @@
 			<div>TITRE</div>
 			<h:form styleClass="formInfos">
 				<div id="leftPanel">
-					<div id="connexion">			
+					<div id="connexion">
 						<h5>Connexion</h5>
 						<label>identifiant</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.login}" />
 						</p:inplace>
 						<label>Mot de passe</label>
-						<p:password value="#{mbConnect.sessionUser.password}" feedback="true"/>				
+						<p:password value="#{mbConnect.sessionUser.password}"
+							feedback="true" />
 					</div>
 					<div id="civilState">
-					<h5>Etat-civil :</h5>
+						<h5>Etat-civil :</h5>
 						<label>Nom</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.surname}" />
@@ -31,21 +32,22 @@
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.name}" />
 						</p:inplace>
-    					<label>Date de naissance : </label>
-    					<p:inplace editor="true">
-        					<p:datePicker id="navigator" value="#{mbConnect.sessionUser.birthDate}"
-                                monthNavigator="true"
-                                yearNavigator="true"
-                                showWeek="true"/>
-                        </p:inplace>
+						<label>Date de naissance : </label>
+						<p:inplace editor="true">
+							<p:datePicker id="navigator"
+								value="#{mbConnect.sessionUser.birthDate}" monthNavigator="true"
+								yearNavigator="true" showWeek="true" />
+						</p:inplace>
 						<label>Genre</label>
 						<p:inplace editor="true">
-							<p:selectOneRadio value="#{mbConnect.sessionUser.gender}" converter="omnifaces.SelectItemsConverter" unselectable="true">
-							<f:selectItems value="#{mbConnect.genders}" var="gender" itemLabel="#{gender.name}" itemValue="#{gender}"></f:selectItems>
-        					</p:selectOneRadio>	
-        				</p:inplace>	
+							<p:selectOneRadio value="#{mbConnect.sessionUser.gender}"
+								converter="omnifaces.SelectItemsConverter" unselectable="true">
+								<f:selectItems value="#{mbConnect.genders}" var="gender"
+									itemLabel="#{gender.name}" itemValue="#{gender}"></f:selectItems>
+							</p:selectOneRadio>
+						</p:inplace>
 					</div>
-					<div id="contact">			
+					<div id="contact">
 						<h5>Contact :</h5>
 						<label>email</label>
 						<p:inplace editor="true">
@@ -53,8 +55,8 @@
 						</p:inplace>
 						<label>N° telephone</label>
 						<p:inplace editor="true">
-							<p:inputText value="#{mbConnect.sessionUser.phoneNumber}" />	
-						</p:inplace>				
+							<p:inputText value="#{mbConnect.sessionUser.phoneNumber}" />
+						</p:inplace>
 					</div>
 				</div>
 				<div id="rightPanel">
@@ -66,31 +68,38 @@
 						</p:inplace>
 						<label>Ville</label>
 						<p:inplace editor="true">
-    						<p:selectOneMenu value="#{mbConnect.sessionUser.city}" converter="omnifaces.SelectItemsConverter" dynamic="true">
-    						<f:selectItem itemValue="" itemLabel="CP - Ville " noSelectionOption="true"/>
-    						<f:selectItems value="#{mbConnect.cities}" var = "city"
-    						itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
-    						</p:selectOneMenu>
-    					</p:inplace>
+							<p:selectOneMenu value="#{mbConnect.sessionUser.city}"
+								converter="omnifaces.SelectItemsConverter" dynamic="true">
+								<f:selectItem itemValue="" itemLabel="CP - Ville "
+									noSelectionOption="true" />
+								<f:selectItems value="#{mbConnect.cities}" var="city"
+									itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
+							</p:selectOneMenu>
+						</p:inplace>
 					</div>
 					<div id="emergencyContact">
 						<h5>Contact d'Urgence:</h5>
 						<label>Nom</label>
 						<p:inplace editor="true">
-							<p:inputText value="#{mbConnect.sessionUser.emergencyContactSurname}" />
+							<p:inputText
+								value="#{mbConnect.sessionUser.emergencyContactSurname}" />
 						</p:inplace>
 						<label>Prenom</label>
 						<p:inplace editor="true">
-							<p:inputText value="#{mbConnect.sessionUser.emergencyContactName}" />
+							<p:inputText
+								value="#{mbConnect.sessionUser.emergencyContactName}" />
 						</p:inplace>
 						<label>N° telephone</label>
 						<p:inplace editor="true">
-							<p:inputText value="#{mbConnect.sessionUser.emergencyContactPhoneNumber}" />
+							<p:inputText
+								value="#{mbConnect.sessionUser.emergencyContactPhoneNumber}" />
 						</p:inplace>
-					</div>		
+					</div>
 					<div id="bouton">
-					<!-- !! pas la bonne méthode pour l'instant !! aller chercher la méthode de modif -->
-						<p:commandButton action="#{mbConnect.createAccount()}" value="valider les modifications" />
+						<!-- !! pas la bonne méthode pour l'instant !! aller chercher la méthode de modif -->
+						<p:commandButton process="@this"
+							action="#{mbConnect.modifyUserInfo()}"
+							value="valider les modifications" />
 					</div>
 				</div>
 			</h:form>

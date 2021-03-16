@@ -14,4 +14,5 @@ public interface AccountIBusiness {
 	User connection(String login, String password);
 	//a retirer quand yaura la session
 	User getUserById();
+	User modifyUserInfo(User user);
 }

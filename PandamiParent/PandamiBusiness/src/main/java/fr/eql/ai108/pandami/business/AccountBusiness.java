@@ -56,4 +56,9 @@ public class AccountBusiness implements AccountIBusiness{
 		return proxyUser.findById(1);
 	}
 
+	@Override
+	public User modifyUserInfo(User user) {
+		return proxyUser.update(user);
+	}
+
 }
