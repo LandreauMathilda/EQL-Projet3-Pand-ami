@@ -33,4 +33,6 @@ public interface DemandIBusiness {
 	
 	List<Demand> getDemandsByResearch(Research research, List<Demand> demands);
 	
+	List<Demand> displayFilteredByRepliesOwnedDemands(Integer id);
+	
 }

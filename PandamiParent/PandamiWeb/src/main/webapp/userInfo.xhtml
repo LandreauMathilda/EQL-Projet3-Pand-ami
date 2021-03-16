@@ -10,54 +10,64 @@
 	<ui:define name="content">
 		<div id="main">
 			<div>TITRE</div>
-			<h:form styleClass="formInfos">
+			<h:form styleClass="formInfos" id="formUser">
 				<div id="leftPanel">
 					<div id="connexion">	
 						<h:messages globalOnly="true" />	
 						<h5>Connexion</h5>
-						<label>identifiant*</label><h:message style="color:red" for="login" />
+						<label>identifiant*</label>
 						<p:inputText value="#{mbConnect.user.login}" required="true" requiredMessage="Le login est obligatoire" id="login"/>
-						<label>Mot de passe*</label><h:message style="color:red" for="password" />	
-						<p:password value="#{mbConnect.user.password}" feedback="true" required="true" requiredMessage="Le password est obligatoire" id="password"/>			
+						<p:message style="color:red" for="login" />
+						<label>Mot de passe*</label>
+						<p:password value="#{mbConnect.user.password}" feedback="true" required="true" requiredMessage="Le password est obligatoire" id="password"/>	
+						<p:message style="color:red" for="password" />			
 					</div>
 					<div id="civilState">
 					<h5>Etat-civil :</h5>
 						<label>Nom*</label>
-						<p:inputText value="#{mbConnect.user.surname}" required="true" id="surname"/>
+						<p:inputText value="#{mbConnect.user.surname}" required="true" id="surname" requiredMessage="Le nom doit être renseigné" />
+						<p:message style="color:red" for="surname" />		
 						<label>Prenom*</label>
-						<p:inputText value="#{mbConnect.user.name}" required="true" id="name"/>
+						<p:inputText value="#{mbConnect.user.name}" required="true" id="name" requiredMessage="Le prénom doit être renseigné" />
+						<p:message style="color:red" for="name" />	
     					<label>Date de naissance* : </label>
-        				<p:datePicker id="navigator" value="#{mbConnect.user.birthDate}" required="true"
+        				<p:datePicker id="navigator" value="#{mbConnect.user.birthDate}" required="true" requiredMessage="La date de naissance doit être renseignée" 
                                 monthNavigator="true"
                                 yearNavigator="true"
                                 showWeek="true"/>
+                                <p:message style="color:red" for="navigator" />	
 						<label>Genre</label>
-						<p:selectOneRadio value="#{mbConnect.user.gender}" converter="omnifaces.SelectItemsConverter" unselectable="true" required="true">
+						<p:selectOneRadio id="gender" value="#{mbConnect.user.gender}" converter="omnifaces.SelectItemsConverter" unselectable="true" required="true" requiredMessage="Le genre doit être renseigné" >
 							<f:selectItems value="#{mbConnect.genders}" var="gender" itemLabel="#{gender.name}" itemValue="#{gender}"></f:selectItems>
         				</p:selectOneRadio>		
+        				 <p:message style="color:red" for="gender" />	
 					</div>
 					<div id="contact">			
 						<h5>Contact* :</h5>
 						<label>email*</label>
-						<p:inputText value="#{mbConnect.user.email}" required="true"/>
+						<p:inputText id="email" value="#{mbConnect.user.email}" required="true" requiredMessage="Le mail doit être renseigné"/>
+						 <p:message style="color:red" for="email" />	
 						<label>N° telephone*</label>
-						<p:inputText value="#{mbConnect.user.phoneNumber}" required="true"/>					
+						<p:inputText id="phone" value="#{mbConnect.user.phoneNumber}" required="true" requiredMessage="Le numéro doit être renseigné"/>			
+						 <p:message style="color:red" for="phone" />		
 					</div>
 				</div>
 				<div id="rightPanel">
 					<div id="adress">
 						<h5>Adresse* :</h5>
 						<label>N° et rue*</label>
-						<p:inputText value="#{mbConnect.user.street}"  required="true"/>
+						<p:inputText id="street" value="#{mbConnect.user.street}"  required="true" requiredMessage="Le genre doit être renseigné"/>
+						<p:message style="color:red" for="street" />
 						<label>Ville*</label>
-    					<p:selectOneMenu value="#{mbConnect.user.city}" converter="omnifaces.SelectItemsConverter" dynamic="true" required="true">
+    					<p:selectOneMenu id="city" value="#{mbConnect.user.city}" converter="omnifaces.SelectItemsConverter" dynamic="true" required="true" requiredMessage="Le numéro doit être renseigné">
     						<f:selectItem itemValue="" itemLabel="CP - Ville " noSelectionOption="true"/>
     						<f:selectItems value="#{mbConnect.cities}" var = "city"
     						itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
     					</p:selectOneMenu>
+    					<p:message style="color:red" for="city" />
 					</div>
 					<div id="emergencyContact">
-						<h5>Contact d'Urgence*:</h5>
+						<h5>Contact d'Urgence :</h5>
 						<label>Nom</label>
 						<p:inputText value="#{mbConnect.user.emergencyContactSurname}" />
 						<label>Prenom</label>
@@ -66,7 +76,7 @@
 						<p:inputText value="#{mbConnect.user.emergencyContactPhoneNumber}" />
 					</div>		
 					<div id="bouton">
-						<p:commandButton action="#{mbConnect.createAccount()}"
+						<p:commandButton update="@form" action="#{mbConnect.createAccount()}"
 					value="Créer un compte" />
 						<p:outputLabel value="#{mbConnect.message}" />	
 					</div>

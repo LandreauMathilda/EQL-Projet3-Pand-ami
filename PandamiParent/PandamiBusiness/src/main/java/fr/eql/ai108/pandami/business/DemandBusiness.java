@@ -41,7 +41,7 @@ public class DemandBusiness implements DemandIBusiness{
 	private EquipmentTypeIDao proxyEquipment;
 	@EJB
 	private ReplyIDao proxyReply;
-
+	
 	@Override
 	public Demand createDemand(Demand demand) {
 		Demand returnedDemand = null;
@@ -58,7 +58,7 @@ public class DemandBusiness implements DemandIBusiness{
 	public List<Demand> getNotOwnedDemands(Integer id) {
 		return proxyDemand.getAllNotOwnedById(id);
 	}
-
+	
 	@Override
 	public List<City> displayCities() {
 		return proxyCity.findAll();
@@ -68,12 +68,12 @@ public class DemandBusiness implements DemandIBusiness{
 	public List<Activity> displayActivities() {
 		return proxyActivity.findAll();
 	}
-
+	
 	@Override
 	public List<EquipmentType> displayEquipments() {
 		return proxyEquipment.findAll();
 	}
-
+	
 	@Override
 	public List<ActivityCategory> displayCategories() {
 		return proxyActCategory.findAll();
@@ -90,6 +90,20 @@ public class DemandBusiness implements DemandIBusiness{
 		return returnedDemand;
 	}
 
+	@Override
+	public List<Demand> displayFilteredByRepliesOwnedDemands(Integer id) {
+		List<Demand> filteredDemands = displayOwnedDemands(id); //récupère toutes les demandes
+		for (Demand demand : filteredDemands) {
+			for (Reply reply : demand.getReplies()) {
+				//si la demande est rejetée -> je l'enlève de la liste des replies de chaque demand
+				if (reply.getSelectionDate() == null && reply.getRejectDate() != null) {
+					demand.getReplies().remove(reply);
+				}
+			}
+		}
+		return filteredDemands;
+	}
+	
 	@Override
 	public String displayDemandStatus(Integer demandId, Integer userId) {
 
@@ -228,5 +242,4 @@ public class DemandBusiness implements DemandIBusiness{
 		}
 		return demands;
 	}
-
 }

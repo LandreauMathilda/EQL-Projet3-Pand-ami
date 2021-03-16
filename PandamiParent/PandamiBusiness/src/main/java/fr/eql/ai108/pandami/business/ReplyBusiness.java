@@ -36,4 +36,9 @@ public class ReplyBusiness implements ReplyIBusiness {
 	public List<Reply> displayRepliesByDemandId(Integer id) {
 		return proxyReply.getAllByDemandId(id);
 	}
+
+	@Override
+	public List<Reply> getNotSelectedRepliesByDemandId(Integer id) {
+		return proxyReply.getAllExceptSelectedByDemandId(id);
+	}
 }

@@ -25,8 +25,7 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	
     private List<Demand> usersDemands;
     private List<Reply> usersReplies;
-    
-    private Demand selectedDemand;
+    private List<Reply> rejectedReplies;
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -40,40 +39,36 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	@PostConstruct
     public void init() {
     	sessionUser = proxyAccountBu.getUserById();
-    	usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
+    	usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
     }
     
+	//TODO floriane : implémenter le bouton d'annulation
     public String cancelDemand(Demand demand) {
         demand.setCancelDate(LocalDateTime.now());
         //demand.setCancelReason(cancelReason);
         proxyDemandBu.upDateDemand(demand);
-        usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
+        usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
         return "/userDemandsAndReplies.xhtml?faces-redirect=true";
     }
-
-    //TODO : set une rejectDate pour les autres réponses. et changer ce qui s'affiche dans la tabView.
-    //1- méthode (business/dao) qui récupérère la liste de replies depuis la demand. si liste.size >0 
-    	// --> on recupere toutes les replies qui ont une selectDate à null, et on modifie leur rejectDate avec date.now();
-    // 2- changer le bouton pour afficher un label une fois selectionné.
    
-    public String chooseVolunteer (Reply reply) { //méthode avec la reply recupérée en fetch.eager demand.replies, directement :
+    public String chooseVolunteer (Reply reply) { 
     	reply.setSelectionDate(LocalDateTime.now());
-    	proxyReplyBu.updateReply(reply);
-    	usersDemands = proxyDemandBu.displayOwnedDemands(sessionUser.getId());
+    	proxyReplyBu.updateReply(reply); //ecris en bdd dateDuJour ds reply choisie
+    	rejectedReplies = proxyReplyBu.getNotSelectedRepliesByDemandId(reply.getDemand().getId()); //récupérer les autres replies
+    	for (Reply rejectedReply : rejectedReplies) {
+    		System.out.println("rejetée " + rejectedReply);
+    		rejectedReply.setRejectDate(LocalDateTime.now());
+    		proxyReplyBu.updateReply(rejectedReply); //update avec dateDuJour dans rejectedDate
+		}
+    	//reinitialiser les listes de demandes du User, filtrée :
+    	usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
     	return "/userDemandsAndReplies.xhtml?faces-redirect=true";
     }
+    //TODO Floriane : 
     //pour l'onglet "mon bénévolat" : afficher pour chaque réponse l'action, le nom du bénéficiaire, la date de l'action, la date du post, la date ou on a postulé.
     //statut : choisi / en attente (rejeté ?)
-    	//bouton pour annuler : reply.desistDate = date.now()
-    
-    /*
-    //autre technique sans passer par le fetch.Eager
-    public String displayReplies(Demand demand) {
-    	demandsReplies = proxyReplyBu.displayRepliesByDemandId(demand.getId());
-    	return "/userDemandsAndReplies.xhtml?faces-redirect=true";
-    }
-    */
+    //bouton pour annuler dans un second temps : reply.desistDate = date.now()
     
 	public List<Demand> getUsersDemands() {
 		return usersDemands;
@@ -104,14 +99,12 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 		this.usersReplies = usersReplies;
 	}
 
-	public Demand getSelectedDemand() {
-		return selectedDemand;
+	public List<Reply> getRejectedReplies() {
+		return rejectedReplies;
 	}
 
-	public void setSelectedDemand(Demand selectedDemand) {
-		this.selectedDemand = selectedDemand;
+	public void setRejectedReplies(List<Reply> rejectedReplies) {
+		this.rejectedReplies = rejectedReplies;
 	}
-    
-	
 	
 }
