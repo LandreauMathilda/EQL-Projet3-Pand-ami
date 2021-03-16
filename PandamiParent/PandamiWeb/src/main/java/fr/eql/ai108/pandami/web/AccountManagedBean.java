@@ -6,10 +6,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Pattern;
 
 import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Gender;
@@ -27,21 +30,23 @@ public class AccountManagedBean implements Serializable{
     private User user = new User();
     private String message;
 	private String login;
+	@Pattern (regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})", 
+			message = "Le password soit comprendre un digit, une minuscule, une majuscule, "
+					+ "un caractère spécial et sa taille doit être comprise entre et 20 caractères")
 	private String password;
     private List<City> cities;
     private List<Gender> genders;
+  
 
     @EJB
     private AccountIBusiness proxyAccountBu;
     
-    //todo a modifier : avec le vrai user en session //
-    private User sessionUser;
+    User sessionUser = new User();
     
     @PostConstruct
     public void init() {
     	cities = proxyAccountBu.displayCities();
     	genders = proxyAccountBu.displayGenders();
-    	sessionUser = proxyAccountBu.getUserById();
     }
 
     public String createAccount() {
@@ -49,27 +54,34 @@ public class AccountManagedBean implements Serializable{
 		user.setInscriptionDate(LocalDateTime.now());
 		user.setUserType(new UserType(2));
         user = proxyAccountBu.createAccount(user);
-
         //verification que le user n'existe pas deja en base, basé sur login unique
         if(user == null) {
+        	
             message = "Ce login n'est pas disponible. Choisissez en un autre";
-        } else {
+        } else if (user != null){
             message = "Merci " + user.getLogin() + ". Votre compte a bien été créé";
+            user = new User();
+        } else {
+    
+        message="tous les champs suivis de '*' doivent être renseignés";
         }
-        user = new User();
+    	
         return "/userInfo.xhtml?faces-redirect=true";
+        
     }
     
     public String connection(){
 		user = proxyAccountBu.connection(user.getLogin(), user.getPassword());
 		String retour = "";
 		if(user != null) {
+			sessionUser = user;
 			retour = "/connectedHome.xhtml?faces-redirect=true";
 		} else {
 			user = new User();
 			message = "Login/Password incorrectes";
 			retour = "/connectionPage.xhtml?faces-redirect=true";
 		}
+		
 		return retour;
 	}
     
@@ -82,9 +94,11 @@ public class AccountManagedBean implements Serializable{
 		password = "";
 		user = new User();
 		
-		return "/connectionPage.xhtml?faces-redirect=true";
+		return "/notConnectedHome.xhtml?faces-redirect=true";
 	}
-    
+	
+	
+
 	public String getLogin() {
 		return login;
 	}

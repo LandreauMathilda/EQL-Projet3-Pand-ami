@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
@@ -37,13 +38,14 @@ public class DemandManagedBean implements Serializable{
 	private String selectedActivity;
 	private EquipmentType selectedEquipment;
     private String message;
-    
+ 
 	@EJB
 	private DemandIBusiness proxyDemandBu;
 	
 	@EJB
 	private AccountIBusiness proxyAccountBu;
 	
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
 	private User sessionUser;
 	
     @PostConstruct
