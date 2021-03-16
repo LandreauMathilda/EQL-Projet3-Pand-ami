@@ -31,8 +31,8 @@ public class SearchManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//@ManagedProperty(value = "#{mbConnect.user}")
-	private User userConnected;
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
+	private User sessionUser;
 
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -48,9 +48,6 @@ public class SearchManagedBean implements Serializable {
 	private Reply reply;
 	private Research research;
 
-	@ManagedProperty (value="#{mbConnect.sessionUser}")
-	User sessionUser;
-	
 	/*
 	 * 	Initialisation standard dans le cas où aucun critère de recherche n'est définis
 	 */
@@ -65,7 +62,7 @@ public class SearchManagedBean implements Serializable {
 	 * 	Méthode permettant de lancer une initialisation standard des champs de recherches et des demandes sans critères définis
 	 */
 	private void standardInit() {
-		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
+		demands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId());
 		equipments = proxyDemandBu.displayEquipments();
 		cities = proxyDemandBu.displayCities();
 		research = new Research();
@@ -73,7 +70,7 @@ public class SearchManagedBean implements Serializable {
 	}
 
 	public String getDemandStatus(Demand demand) {
-		return proxyDemandBu.displayDemandStatus(demand.getId(), 1);  //!!!!!!User à récupérer en session!!!!!!!!!!
+		return proxyDemandBu.displayDemandStatus(demand.getId(), sessionUser.getId());
 	}
 	
 	/*
@@ -108,10 +105,7 @@ public class SearchManagedBean implements Serializable {
 	}
 
 	public void replyDemand(Demand demand) {
-		userConnected = new User();   //!!!!!!! A retirer
-		userConnected.setId(1);       //!!!!!!! A retirer
-
-		reply = new Reply(null, LocalDateTime.now(), null, null, null, userConnected, demand);
+		reply = new Reply(null, LocalDateTime.now(), null, null, null, sessionUser, demand);
 		reply = proxyReplyBU.createReply(reply);
 		reply = new Reply();
 	}
@@ -129,7 +123,7 @@ public class SearchManagedBean implements Serializable {
 	public void cancelResearch(){
 		research = new Research();
 		updateResearchFields();
-		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
+		demands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId());
 	}
 
 	/*
@@ -194,16 +188,16 @@ public class SearchManagedBean implements Serializable {
 		return cities;
 	}
 
+	public User getSessionUser() {
+		return sessionUser;
+	}
+
+	public void setSessionUser(User sessionUser) {
+		this.sessionUser = sessionUser;
+	}
+
 	public void setCities(List<City> cities) {
 		this.cities = cities;
-	}
-
-	public User getUserConnected() {
-		return userConnected;
-	}
-
-	public void setUserConnected(User userConnected) {
-		this.userConnected = userConnected;
 	}
 
 	public Reply getReply() {

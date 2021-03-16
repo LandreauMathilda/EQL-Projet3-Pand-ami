@@ -90,24 +90,14 @@ public class DemandBusiness implements DemandIBusiness{
 
 		List<Reply> replies = proxyReply.getAllByDemand(demandId);
 		String status = "";
-
-		System.out.println(replies.size());
 		
 		if (replies.size() == 0) {
 			status = "En recherche de volontaire";
 		}else {
 
 			for (Reply reply : replies) {
-
-				System.out.println("Volotaire id : "+ reply.getVolunteer().getId());
-				System.out.println("User id : "+ userId);
 				
 				if(reply.getVolunteer().getId() != userId ) {
-					System.out.println("Egalité");
-					
-					System.out.println("Date de selection : "+ reply.getSelectionDate());
-					System.out.println("Date de desist : "+ reply.getDesistDate());
-					System.out.println("Date de rejet : "+ reply.getRejectDate());
 
 					if((reply.getSelectionDate() != null) && (reply.getDesistDate() == null) && (reply.getRejectDate() == null)) {
 						status = "Attribué à un autre utilisateur";
@@ -118,8 +108,6 @@ public class DemandBusiness implements DemandIBusiness{
 				}
 
 				if(reply.getVolunteer().getId() == userId) {
-					
-					System.out.println("Non égalité");
 
 					if((reply.getSelectionDate() != null) && (reply.getDesistDate() == null) && (reply.getRejectDate() == null)) {
 						status = "Vous a été attribué";
