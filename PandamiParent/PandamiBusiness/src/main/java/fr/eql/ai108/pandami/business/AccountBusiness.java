@@ -35,6 +35,11 @@ public class AccountBusiness implements AccountIBusiness{
 	}
 
 	@Override
+	public List<User> displayAllUsers() {
+		return proxyUser.findAll();
+	}
+	
+	@Override
 	public List<City> displayCities() {
 		return proxyCity.findAll();
 	}

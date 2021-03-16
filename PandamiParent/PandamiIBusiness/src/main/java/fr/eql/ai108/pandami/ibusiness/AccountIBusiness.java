@@ -12,6 +12,7 @@ public interface AccountIBusiness {
 	List<City> displayCities();
 	List<Gender> displayGenders();
 	User connection(String login, String password);
+	List<User> displayAllUsers();
 	//a retirer quand yaura la session
 	User getUserById();
 }

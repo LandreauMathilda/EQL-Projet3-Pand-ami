@@ -56,10 +56,13 @@ public class AdminManagedBean implements Serializable{
 	private UserType userType;
 	private List<UserType> userTypes;
 	private String message;
+	private List<Demand> demands;
 	
 	@EJB
 	private AdminIBusiness proxyAdminBu;
 	
+	@EJB
+	private DemandIBusiness proxyDemandBU;
 	
 	@PostConstruct
     public void init() {
@@ -73,7 +76,7 @@ public class AdminManagedBean implements Serializable{
     	genders = proxyAdminBu.displayGenders();
     	reportIssues = proxyAdminBu.displayReportIssues();
     	userTypes = proxyAdminBu.displayUserTypes();
-    	
+    	demands = proxyDemandBU.displayAllDemands();
     }
 
 	public String upDateCities() {
@@ -245,6 +248,14 @@ public class AdminManagedBean implements Serializable{
 	}
 	public void setUserTypes(List<UserType> userTypes) {
 		this.userTypes = userTypes;
+	}
+
+	public List<Demand> getDemands() {
+		return demands;
+	}
+
+	public void setDemands(List<Demand> demands) {
+		this.demands = demands;
 	}
 	
 	
