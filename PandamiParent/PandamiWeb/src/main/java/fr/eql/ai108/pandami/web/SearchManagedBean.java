@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 import javax.faces.model.SelectItem;
@@ -28,7 +29,7 @@ import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
 
 @ManagedBean (name="mbSearch")
-@RequestScoped
+@ViewScoped
 public class SearchManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -71,7 +72,10 @@ public class SearchManagedBean implements Serializable {
 		createActivitiesSelectCBox();
 	}
 
-
+	public String getDemandStatus(Demand demand) {
+		return proxyDemandBu.displayDemandStatus(demand.getId(), 1);  //!!!!!!User à récupérer en session!!!!!!!!!!
+	}
+	
 	/*
 	 * 	Méthode permettant de créer l'arborescence de la SelectCheckBox des activités
 	 */
@@ -116,26 +120,16 @@ public class SearchManagedBean implements Serializable {
 	 * 	Méthode actualisant la liste de demande en fonction des critères de recherches et l'affichant ensuite à l'utilisateur
 	 */
 	public void sendResearch() {
-		System.out.println(research);
-		//demands = proxyDemandBu.getDemandsByResearch(research, demands);
-		updateDemandsDisplay();
+		demands = proxyDemandBu.getDemandsByResearch(research, demands);
 	}
 
 	/*
 	 * 	Méthode annulant l'ensemble des critères de recherche et actualisant la liste de demandes à l'écran
 	 */
 	public void cancelResearch(){
-		research = null;
-		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
-		updateDemandsDisplay();
+		research = new Research();
 		updateResearchFields();
-	}
-
-	/*
-	 * 	Mets à jour la DataTable des demandes de manière asynchrone
-	 */
-	private void updateDemandsDisplay() {
-		FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("demandsForm:demandsDataTable");
+		demands = proxyDemandBu.getNotOwnedDemands(1); //!!!!!!!!!!User à récupérer en session!!!!!!!!!!
 	}
 
 	/*

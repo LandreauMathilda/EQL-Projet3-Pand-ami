@@ -31,4 +31,15 @@ public class ReplyDao extends GenericDao<Reply> implements ReplyIDao {
 		List<Reply> results = query.getResultList();
 		return results.size() > 0 ? results : null;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reply> getAllByDemand(Integer demandId) {
+		
+		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.demand.id = :paramDemandId");
+		query.setParameter("paramDemandId", demandId);
+		List<Reply> results = query.getResultList();
+		return results.size() > 0 ? results : null;
+
+	}
 }
