@@ -8,210 +8,147 @@
 <ui:composition template="/masterPageAdmin.xhtml">
 	<ui:define name="title">Admin - Référentiels</ui:define>
 	<ui:define name="content">
-	<div>Mise à jour des référentiels</div>
-
-
-		<p:tabView style="height: 84vh" id="tabContainer" widgetVar="tab">
+		<h4>Mise à jour des référentiels</h4>
+		<p:tabView style="height: 84vh" widgetVar="tab" id="tabview"
+			activeIndex="#{mbAdmin.activeIndex}">
 			<p:tab title="Villes">
-			
 				<h:form styleClass="formInfos">
-				<div>
-					<h:panelGrid columns="2" cellpadding="3" id="mainGrid">
-
-						<p:dataTable id="displayCities" var="city"
-							value="#{mbAdmin.cities}" emptyMessage="Aucune ville à afficher">
-							<p:column headerText="Code Postal">
-								<p:inplace editor="true">
-									<p:inputText value="#{city.zipCode}" required="true"
-										label="text" />
-								</p:inplace>
-							</p:column>
-							<p:column headerText="Libellé de la ville">
-								<p:inplace editor="true">
-									<p:inputText value="#{city.name}" required="true" label="text" />
-								</p:inplace>
-							</p:column>
-							<p:column>
-								<h:commandButton value="Valider les modifications"
-									action="#{mbAdmin.upDateCities()}">
-									<f:setPropertyActionListener value="#{city}"
-										target="#{mbAdmin.selectedCity}" />
-								</h:commandButton>
-							</p:column>
-						</p:dataTable>
-
-					</h:panelGrid>
-
-					<h5>Ajouter une ville</h5>
-					<label>Code Postal : </label>
-					<p:inputText value="#{mbAdmin.newCity.zipCode}"></p:inputText>
-					<br /> <label>Libellé : </label>
-					<p:inputText value="#{mbAdmin.newCity.name}"></p:inputText>
-					<br />
-
-					<h:commandButton value="Valider les modifications"
-						action="#{mbAdmin.addCity()}">
-					</h:commandButton>
-				</div>
-			</h:form>
-
-
+					<div>
+						<h:panelGrid columns="2" cellpadding="3" id="mainGrid">
+							<p:dataTable id="displayCities" var="city"
+								value="#{mbAdmin.cities}" emptyMessage="Aucune ville à afficher">
+								<p:column headerText="Code Postal">
+									<p:inplace editor="true">
+										<p:inputText value="#{city.zipCode}" required="true"
+											label="text" />
+									</p:inplace>
+								</p:column>
+								<p:column headerText="Libellé de la ville">
+									<p:inplace editor="true">
+										<p:inputText value="#{city.name}" required="true" label="text" />
+									</p:inplace>
+								</p:column>
+								<p:column>
+									<p:commandButton value="Valider les modifications"
+										action="#{mbAdmin.upDateCities()}" update=":tabview">
+										<f:setPropertyActionListener value="#{city}"
+											target="#{mbAdmin.selectedCity}" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+						<h5>Ajouter une ville</h5>
+						<label>Code Postal : </label>
+						<p:inputText value="#{mbAdmin.newCity.zipCode}"></p:inputText>
+						<br /> <label>Libellé : </label>
+						<p:inputText value="#{mbAdmin.newCity.name}"></p:inputText>
+						<br />
+						<p:commandButton value="Valider les modifications"
+							action="#{mbAdmin.addCity()}" update=":tabview">
+						</p:commandButton>
+					</div>
+				</h:form>
 			</p:tab>
 			<p:tab title="Catégories">
-			
-						<h:form styleClass="formInfos" id="categories">
-				<div>
-					<h:panelGrid columns="2" cellpadding="3" id="mainGrid2">
-
-						<p:dataTable id="displayCategories" var="category"
-							value="#{mbAdmin.categories}"
-							emptyMessage="Aucune catégorie à afficher" >
-							<p:column headerText="Catégories">
-								<p:inplace editor="true">
-									<p:inputText value="#{category.label}" required="true"
-										label="text" />
-								</p:inplace>
-							</p:column>
-
-
-							<p:column>
-								<h:commandButton value="Valider les modifications"
-									action="#{mbAdmin.upDateCategory()}">
-									<f:setPropertyActionListener value="#{category}"
-										target="#{mbAdmin.selectedCategory}" />
-								</h:commandButton>
-							</p:column>
-						</p:dataTable>
-
-
-					</h:panelGrid>
-
-					<h5>Ajouter une catégorie</h5>
-					<br /> <label>Libellé : </label>
-					<p:inputText value="#{mbAdmin.newCategory.label}"></p:inputText>
-					<br />
-
-					<h:commandButton value="Ajouter une catégorie"
-						action="#{mbAdmin.addCategory()}" update="@this">
-					</h:commandButton>
-				</div>
-			</h:form>
-
-
+				<h:form styleClass="formInfos" id="categories">
+					<div >
+						<h:panelGrid columns="2" cellpadding="3" id="mainGrid2">
+							<p:dataTable id="displayCategories" var="category"
+								value="#{mbAdmin.categories}"
+								emptyMessage="Aucune catégorie à afficher" >
+								<p:column headerText="Catégories">
+									<p:inplace editor="true">
+										<p:inputText value="#{category.label}" required="true"
+											label="text" />
+									</p:inplace>
+								</p:column>
+								<p:column>
+									<p:commandButton value="Valider les modifications"
+										action="#{mbAdmin.upDateCategory()}" update=":tabview">
+										<f:setPropertyActionListener value="#{category}"
+											target="#{mbAdmin.selectedCategory}" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+						<h5>Ajouter une catégorie</h5>
+						<br /> <label>Libellé : </label>
+						<p:inputText value="#{mbAdmin.newCategory.label}"></p:inputText>
+						<br/>
+						<p:commandButton value="Ajouter une catégorie"
+							action="#{mbAdmin.addCategory()}" update=":tabview">
+						</p:commandButton>
+					</div>
+				</h:form>
 			</p:tab>
 			<p:tab title="Raisons d'annulation">
-
-
 			</p:tab>
-			<p:tab title="Activités">
-			
-			<h:form styleClass="formInfos">
-				<div>
-
-					<h:panelGrid columns="2" cellpadding="3" id="mainGrid3">
-
-						<p:dataTable id="displayActivities" var="activity"
-							value="#{mbAdmin.activities}"
-							emptyMessage="Aucune activité à afficher" >
-							<p:column headerText="Activités">
-								<p:inplace editor="true">
-									<p:inputText value="#{activity.label}" required="true"
-										label="text" />
-								</p:inplace>
-							</p:column>
-
-
-							<p:column>
-								<h:commandButton value="Valider les modifications"
-									action="#{mbAdmin.upDateActivity()}">
-									<f:setPropertyActionListener value="#{activity}"
-										target="#{mbAdmin.selectedActivity}" />
-
-								</h:commandButton>
-							</p:column>
-						</p:dataTable>
-
-
-					</h:panelGrid>
-				</div>
-			</h:form>
-			<h:form>
-				<div>
-
-					<h5>Ajouter une activité</h5>
-					<br /> <label>Libellé : </label>
-					<p:inputText value="#{mbAdmin.activityLabel}"></p:inputText>
-					<br />
-					<p:outputLabel value="Catégorie de l'activité" />
-
-
-
-					<p:selectOneMenu id="activityEquipment"
-						value="#{mbAdmin.equipmentForActivity}"
-						converter="omnifaces.SelectItemsConverter" dynamic="true">
-						<f:selectItem itemValue="" itemLabel="Choisir un équipement "
-							noSelectionOption="true" />
-						<f:selectItems value="#{mbAdmin.equipmentTypes}"
-							var="equipmentType" itemLabel="#{equipmentType.label}"
-							itemValue="#{equipmentType}"></f:selectItems>
-					</p:selectOneMenu>
-
-					<p:selectOneMenu id="activityCategory"
-						value="#{mbAdmin.categoryForActivity}"
-						converter="omnifaces.SelectItemsConverter" dynamic="true">
-						<f:selectItem itemValue="" itemLabel="Choisir une catégorie "
-							noSelectionOption="true" />
-						<f:selectItems value="#{mbAdmin.categories}" var="category"
-							itemLabel="#{category.label}" itemValue="#{category}"></f:selectItems>
-					</p:selectOneMenu>
-					<p:outputLabel value="Equipement pour l'activité" />
-
-
-					<h:commandButton value="Ajouter une activité"
-						action="#{mbAdmin.addActivity()}">
-					</h:commandButton>
-
-
-
-				</div>
-			</h:form>
-
-			
-
-
+			<p:tab title="Activités" id="tab">
+				<h:form styleClass="formInfos" id="formcat">
+					<div>
+						<h:panelGrid columns="2" cellpadding="3" id="mainGrid3">
+							
+								<p:dataTable id="displayActivities" var="activity"
+									value="#{mbAdmin.activities}"
+									emptyMessage="Aucune activité à afficher">
+									<p:column headerText="Activités">
+										<p:inplace editor="true">
+											<p:inputText value="#{activity.label}" required="true"
+												label="text" />
+										</p:inplace>
+									</p:column>
+									<p:column>
+										<p:commandButton value="Valider les modifications"
+											action="#{mbAdmin.upDateActivity()}" update=":tabview">
+											<f:setPropertyActionListener value="#{activity}"
+												target="#{mbAdmin.selectedActivity}" />
+										</p:commandButton>
+									</p:column>
+								</p:dataTable>
+							
+						</h:panelGrid>
+						<h5>Ajouter une activité</h5>
+						<br /> <label>Libellé : </label>
+						<p:inputText value="#{mbAdmin.activityLabel}"></p:inputText>
+						<p:outputLabel value="Catégorie de l'activité" />
+						<p:selectOneMenu id="activityCategory"
+							value="#{mbAdmin.categoryForActivity}"
+							converter="omnifaces.SelectItemsConverter" dynamic="true">
+							<f:selectItem itemValue="" itemLabel="Choisir une catégorie "
+								noSelectionOption="true" />
+							<f:selectItems value="#{mbAdmin.categories}" var="category"
+								itemLabel="#{category.label}" itemValue="#{category}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel value="Equipement pour l'activité" />
+						<p:selectOneMenu id="activityEquipment"
+							value="#{mbAdmin.equipmentForActivity}"
+							converter="omnifaces.SelectItemsConverter" dynamic="true">
+							<f:selectItem itemValue="" itemLabel="Choisir un équipement "
+								noSelectionOption="true" />
+							<f:selectItems value="#{mbAdmin.equipmentTypes}"
+								var="equipmentType" itemLabel="#{equipmentType.label}"
+								itemValue="#{equipmentType}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:commandButton id="button" value="Ajouter une activité"
+							action="#{mbAdmin.addActivity()}" update=":tabview">
+						</p:commandButton>
+					</div>
+				</h:form>
 			</p:tab>
 			<p:tab title="Types de finalisation">
-
-
 			</p:tab>
 			<p:tab title="Types d'équipement">
-
-
 			</p:tab>
 			<p:tab title="Genres">
-
-
 			</p:tab>
 			<p:tab title="Type de problème">
-
-
 			</p:tab>
 			<p:tab title="Types d'utilisateur">
-
-
 			</p:tab>
-
 		</p:tabView>
-
-
-
 	</ui:define>
-		<ui:define name="CSS">
-			<h:outputStylesheet name="CSS/demandDeposit.css" />
-
-		</ui:define>
-
-	
-	
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/adminRef.css" />
+	</ui:define>
 </ui:composition>
 </html>

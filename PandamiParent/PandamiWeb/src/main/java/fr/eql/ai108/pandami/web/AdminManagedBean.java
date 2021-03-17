@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
@@ -24,7 +25,7 @@ import fr.eql.ai108.pandami.ibusiness.AdminIBusiness;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 
 @ManagedBean (name="mbAdmin")
-@SessionScoped
+@ViewScoped
 public class AdminManagedBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -68,6 +69,9 @@ public class AdminManagedBean implements Serializable{
 	private List<UserType> userTypes;
 	private List<Demand> demands;
 	
+	private Integer activeIndex;
+	
+	
 	@EJB
 	private AdminIBusiness proxyAdminBu;
 	
@@ -89,45 +93,48 @@ public class AdminManagedBean implements Serializable{
     	userTypes = proxyAdminBu.displayUserTypes();
     }
 
-	public String upDateCities() {
+	public void upDateCities() {
 		proxyAdminBu.upDateCity(selectedCity);
 		cities = proxyAdminBu.displayCities();
-		return "/adminRef.xhtml?faces-redirect=true";
+		activeIndex = 0;
 	}
-	public String addCity() {
+	public void addCity() {
 		proxyAdminBu.addCity(newCity);
 		newCity = new City();
 		cities = proxyAdminBu.displayCities();
-		return "/adminRef.xhtml?faces-redirect=true";
+		activeIndex = 0;
 	}
 	
-	public String upDateActivity() {
+	public void upDateActivity() {
 		proxyAdminBu.upDateActivity(selectedActivity);
 		activities = proxyAdminBu.displayActivities();
-		return "/adminRef.xhtml?faces-redirect=true";
+		activeIndex = 3;
 	}
 	
-	public String addActivity() {
+	public void addActivity() {
 		newActivity = new Activity(null, activityLabel, categoryForActivity, equipmentForActivity);
 		
 		proxyAdminBu.addActivity(newActivity);
 		newActivity = new Activity();
+		activityLabel = null;
+		categoryForActivity = null;
+		equipmentForActivity = null;
 		activities = proxyAdminBu.displayActivities();
-		return "/adminRef.xhtml?faces-redirect=true";
+		activeIndex = 3;
 	}
 	
-	public String upDateCategory() {
+	public void upDateCategory() {
 		proxyAdminBu.upDateCategory(selectedCategory);
 		System.out.println(selectedCategory.toString());
 		categories = proxyAdminBu.displayCategories();
-		return null;
+		activeIndex = 1;
 	}
 
-	public String addCategory() {
+	public void addCategory() {
 		proxyAdminBu.addCategory(newCategory);
 		newCategory = new ActivityCategory();
 		categories = proxyAdminBu.displayCategories();
-		return null;
+		activeIndex = 1;
 	}
 
 	public String upDateEquipment() {
@@ -140,6 +147,16 @@ public class AdminManagedBean implements Serializable{
 		newEquipment = new EquipmentType();
 		equipmentTypes = proxyAdminBu.displayEquipmentTypes();
 		return "/adminRef.xhtml?faces-redirect=true";
+	}
+	
+	
+
+	public Integer getActiveIndex() {
+		return activeIndex;
+	}
+
+	public void setActiveIndex(Integer activeIndex) {
+		this.activeIndex = activeIndex;
 	}
 
 	public User getUser() {

@@ -43,6 +43,15 @@ public class RedirectManagedBean implements Serializable{
 	public String redirectDemandDeposit() {
 		return "/demandDeposit.xhtml?faces-redirect=true";
 	}
+	public String redirectAdminRef() {
+		return "/adminRef.xhtml?faced-redirect=true";
+	}
+	public String redirectAdminDemands() {
+		return "/adminDemands.xhtml?faces-redirect=true";
+	}
+	public String redirectAdminUsers() {
+		return "/adminUsers.xhtml?faces-redirect=true";
+	}
 	
 	
 }
