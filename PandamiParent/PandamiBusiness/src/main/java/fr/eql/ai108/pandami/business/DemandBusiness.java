@@ -1,9 +1,8 @@
 package fr.eql.ai108.pandami.business;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,6 +13,7 @@ import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
 import fr.eql.ai108.pandami.entity.City;
 import fr.eql.ai108.pandami.entity.Demand;
+import fr.eql.ai108.pandami.entity.EndedType;
 import fr.eql.ai108.pandami.entity.EquipmentType;
 import fr.eql.ai108.pandami.entity.Reply;
 import fr.eql.ai108.pandami.entity.Research;
@@ -22,6 +22,7 @@ import fr.eql.ai108.pandami.idao.ActivityCategoryIDao;
 import fr.eql.ai108.pandami.idao.ActivityIDao;
 import fr.eql.ai108.pandami.idao.CityIDao;
 import fr.eql.ai108.pandami.idao.DemandIDao;
+import fr.eql.ai108.pandami.idao.EndedTypeIDao;
 import fr.eql.ai108.pandami.idao.EquipmentTypeIDao;
 import fr.eql.ai108.pandami.idao.ReplyIDao;
 
@@ -41,12 +42,19 @@ public class DemandBusiness implements DemandIBusiness{
 	private EquipmentTypeIDao proxyEquipment;
 	@EJB
 	private ReplyIDao proxyReply;
+	@EJB
+	private EndedTypeIDao proxyEndedType;
 	
 	@Override
 	public Demand createDemand(Demand demand) {
 		Demand returnedDemand = null;
 		returnedDemand = proxyDemand.add(demand);
 		return returnedDemand;
+	}
+	
+	@Override
+	public List<Demand> displayAllDemands(){
+		return proxyDemand.findAll();
 	}
 
 	@Override
@@ -236,5 +244,19 @@ public class DemandBusiness implements DemandIBusiness{
 			}	
 		}
 		return demands;
+	}
+
+	@Override
+	public List<Demand> displayAllPastOwnedDemandsByUser(Integer id) {
+		return proxyDemand.getAllPastDemandsByUser(id);
+	}
+
+	@Override
+	public Demand updateDemandWhenReplyIsSelected(Demand demand) {
+		LocalDateTime today = LocalDateTime.now();
+		demand.setCloseDate(today);
+		EndedType endedType1 = proxyEndedType.findById(1);
+		demand.setEndedType(endedType1);
+		return upDateDemand(demand);
 	}
 }

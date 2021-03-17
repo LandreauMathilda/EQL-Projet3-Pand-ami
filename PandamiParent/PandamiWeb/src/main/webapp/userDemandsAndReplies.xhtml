@@ -12,8 +12,7 @@
 		<div id="main">
 			<div>TITRE</div>
 			<div id="centerPanel">
-				<p:tabView styleClass="tabView" dynamic="true" cache="true"
-					widgetVar="ondemand">
+				<p:tabView styleClass="tabView" dynamic="true" cache="true" widgetVar="ondemand">
 					<p:tab styleClass="tab" title="Mes demandes en cours">
 						<h:form styleClass="center2Panel">
 							<p:accordionPanel dynamic="true" cache="true" var="demand"
@@ -24,7 +23,7 @@
 									<label>Horaire : de #{demand.startHour} à #{demand.endHour}</label>
 									<br />
 									<label>adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
-									<p:dataTable value="#{demand.replies}" var="reply"
+									<p:dataTable id="repliesDataTable" value="#{demand.replies}" var="reply"
 										widgetVar="demandTable"
 										emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
 										<p:column headerText="Volontaire">
@@ -40,7 +39,7 @@
 										<p:column>
 											<p:commandButton
 												action="#{mbUserDemRep.chooseVolunteer(reply)}"
-												value="choisir" />
+												value="choisir"/>
 										</p:column>
 									</p:dataTable>
 								</p:tab>
@@ -53,7 +52,8 @@
 								value="#{mbUserDemRep.usersReplies}" styleClass="accordion"
 								multiple="true" widgetVar="accReplies">
 								<p:tab styleClass="accordionChild"
-									title="#{reply.demand.actionDate} - #{reply.demand.activity}">
+									title="#{reply.demand.actionDate} - #{reply.demand.activity} 
+									pour #{reply.demand.user.surname} #{reply.demand.user.name}">
 									<label>Horaire : de #{reply.demand.startHour} à
 										#{reply.demand.endHour}</label>
 									<br />
@@ -65,10 +65,35 @@
 					</p:tab>
 					<p:tab styleClass="tab" title="Historique de mes demandes">
 						<h:form>
+							<p:accordionPanel dynamic="true" cache="true" var="pastDemand"
+								value="#{mbUserDemRep.usersPastDemands}" styleClass="accordion"
+								multiple="true" widgetVar="accPastDemands">
+								<p:tab styleClass="accordionChild"
+									title="#{pastDemand.actionDate} - #{pastDemand.activity}">
+									<label>Horaire : de #{pastDemand.startHour} à
+										#{pastDemand.endHour}</label>
+									<br />
+									<label>adresse : #{pastDemand.street}
+										#{pastDemand.city.name} - #{pastDemand.city.zipCode}</label>
+								</p:tab>
+							</p:accordionPanel>
 						</h:form>
 					</p:tab>
 					<p:tab styleClass="tab" title="Historique de mon bénévolat">
 						<h:form>
+							<p:accordionPanel dynamic="true" cache="true" var="pastReply"
+								value="#{mbUserDemRep.usersPastReplies}" styleClass="accordion"
+								multiple="true" widgetVar="accpastReplies">
+								<p:tab styleClass="accordionChild"
+									title="#{pastReply.demand.actionDate} - #{pastReply.demand.activity} 
+									pour #{pastReply.demand.user.surname} #{pastReply.demand.user.name}">
+									<label>Horaire : de #{pastReply.demand.startHour} à
+										#{pastReply.demand.endHour}</label>
+									<br />
+									<label>adresse : #{pastReply.demand.street}
+										#{pastReply.demand.city.name} - #{pastReply.demand.city.zipCode}</label>
+								</p:tab>
+							</p:accordionPanel>
 						</h:form>
 					</p:tab>
 				</p:tabView>

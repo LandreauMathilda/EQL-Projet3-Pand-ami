@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/masterPageAdmin.xhtml">
+	<ui:define name="title">Admin - demandes</ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<div>Visualisation de l'ensemble des demandes</div>
+			<h:form id="adminDemandsForm">
+				<p:dataTable id="adminDemandsDataTable" var="demand"
+					value="#{mbAdmin.demands}" reflow="true" rows="30" size="small"
+					widgetVar="adminDemandTable" editable="true"
+					emptyMessage="Aucune demande ne correspond à vos critères de recherche"
+					rowIndexVar="rowIndex">
+
+					<p:column headerText="Demande n°" sortBy="#{demand.id}">
+						<h:outputText value="#{demand.id}" />
+					</p:column>
+
+					<p:column headerText="Date publication"	sortBy="#{demand.publishDate}">
+						<h:outputText value="#{demand.publishDate}"/>
+					</p:column>
+
+					<p:column headerText="Type Service"
+						sortBy="#{demand.activity.label}">
+						<h:outputText value="#{demand.activity.label}" />
+					</p:column>
+
+					<p:column headerText="Date action" sortBy="#{demand.actionDate}">
+						<h:outputText value="#{demand.actionDate}"/>
+					</p:column>
+
+					<p:column headerText="Horaires" sortBy="#{demand.startHour}">
+						<h:outputText value="#{demand.startHour} à #{demand.endHour}" />
+					</p:column>
+
+					<p:column headerText="Adresses (Tri par CP)" sortBy="#{demand.city.zipCode}">
+						<h:outputText value="#{demand.street} #{demand.city.zipCode} #{demand.city.name}" />
+					</p:column>
+
+					<p:column headerText="Finalisation" sortBy="#{demand.endedType.label}">
+						<h:outputText value="#{demand.endedType.label}" />
+					</p:column>
+
+					<p:column>
+						<!--<p:commandButton type="button" icon="pi pi-pencil" styleClass="rounded-button ui-button-secondary" />  -->
+						<p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</div>
+	</ui:define>
+
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/demandDeposit.css" />
+	</ui:define>
+</ui:composition>
+</html>

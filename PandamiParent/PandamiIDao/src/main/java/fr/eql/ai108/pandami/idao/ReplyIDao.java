@@ -13,5 +13,7 @@ public interface ReplyIDao extends GenericIDao<Reply> {
 	List<Reply> getAllByDemandId(Integer id);
 	
 	List<Reply> getAllExceptSelectedByDemandId(Integer id);
+	
+	List<Reply> getAllPastDemandsByUser(Integer id);
 
 }

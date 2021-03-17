@@ -15,6 +15,8 @@ public interface DemandIBusiness {
 	
 	Demand upDateDemand(Demand demand);
 	
+	List<Demand> displayAllDemands();
+	
 	List<City> displayCities();
 
 	List<Demand> getNotOwnedDemands(Integer id);
@@ -33,4 +35,7 @@ public interface DemandIBusiness {
 	
 	List<Demand> displayFilteredByRepliesOwnedDemands(Integer id);
 	
+	List<Demand> displayAllPastOwnedDemandsByUser(Integer id);
+	
+	Demand updateDemandWhenReplyIsSelected(Demand demand);
 }
