@@ -33,4 +33,7 @@ public interface DemandIBusiness {
 	
 	List<Demand> displayFilteredByRepliesOwnedDemands(Integer id);
 	
+	List<Demand> displayAllPastOwnedDemandsByUser(Integer id);
+	
+	Demand updateDemandWhenReplyIsSelected(Demand demand);
 }

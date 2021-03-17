@@ -47,4 +47,16 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 		return results.size() > 0 ? results : null;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Demand> getAllPastDemandsByUser(Integer id) {
+		LocalDate today = LocalDate.now();
+		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND d.actionDate <= :paramTodayDate ORDER BY d.publishDate DESC");
+		query.setParameter("paramIdUser", id);
+		query.setParameter("paramTodayDate", today);
+		List<Demand> results = query.getResultList();
+		return results.size() > 0 ? results : null;
+	}
+
 }

@@ -11,4 +11,7 @@ public interface ReplyIBusiness {
 	Reply createReply(Reply reply);
 	List<Reply> displayRepliesByDemandId(Integer id);
 	List<Reply> getNotSelectedRepliesByDemandId(Integer id);
+	List<Reply> displayPastOwnedReplies(Integer id);
+	List<Reply> updateRejectedReplies(List<Reply> replies);
+	Reply updateSelectedReply(Reply reply);
 }
