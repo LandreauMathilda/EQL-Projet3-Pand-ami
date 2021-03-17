@@ -34,6 +34,11 @@ public class ActivityCategory implements Serializable{
 		this.label = label;
 		this.activities = activities;
 	}
+	public ActivityCategory(Integer id, String label) {
+		super();
+		this.id = id;
+		this.label = label;
+	}
 
 	@Override
 	public int hashCode() {

@@ -15,10 +15,4 @@ public class ActivityDao extends GenericDao<Activity> implements ActivityIDao {
 	@PersistenceContext(unitName = "PandamiPU")
 	private EntityManager em;
 	
-	@Override
-	public Activity add(Activity t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

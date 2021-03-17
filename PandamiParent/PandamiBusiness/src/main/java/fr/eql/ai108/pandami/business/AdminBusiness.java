@@ -39,144 +39,30 @@ public class AdminBusiness implements AdminIBusiness{
 	@EJB
 	private ActivityCategoryIDao proxyActivityCategory;
 	@EJB
-	private CancelReasonIDao proxyCancelReason;
-	@EJB
 	private CityIDao proxyCity;
 	@EJB
-	private DesistReasonIDao proxyDesistReason;
-	@EJB 
-	private EndedTypeIDao proxyEndedType;
-	@EJB
 	private EquipmentTypeIDao proxyEquipmentType;
-	@EJB
-	private GenderIDao proxyGender;
-	@EJB 
-	private ReportIssueIDao proxyReportIssue;
-	@EJB 
-	private UserTypeIDao proxyUserType;
+
 
 
 	@Override
 	public List<Activity> displayActivities() {
 		return proxyActivity.findAll();
 	}
-
 	@Override
 	public List<ActivityCategory> displayCategories() {
 		return proxyActivityCategory.findAll();
 	}
 
 	@Override
-	public List<CancelReason> displayCancelReasons() {
-		return proxyCancelReason.findAll();
-	}
-
-	@Override
 	public List<City> displayCities() {
 		return proxyCity.findAll();
 	}
-
-	@Override
-	public List<DesistReason> displayDesistReasons() {
-		return proxyDesistReason.findAll();
-	}
-
-	@Override
-	public List<EndedType> displayEndedTypes() {
-		return proxyEndedType.findAll();
-	}
-
 	@Override
 	public List<EquipmentType> displayEquipmentTypes() {
 		return proxyEquipmentType.findAll();
 	}
 
-	@Override
-	public List<Gender> displayGenders() {
-		return proxyGender.findAll();
-	}
-
-	@Override
-	public List<ReportIssue> displayReportIssues() {
-		return proxyReportIssue.findAll();
-	}
-
-	@Override
-	public List<UserType> displayUserTypes() {
-		return proxyUserType.findAll();
-	}
-
-	@Override
-	public List<Activity> upDateActivities(List<Activity> activities) {
-	List<Activity> returnedActivities = new ArrayList<Activity>();
-	returnedActivities = activities;
-	for (Activity activity : returnedActivities) {
-		  proxyActivity.add(activity);
-	}
-		 // 	Demand returnedDemand = proxyDemand.update(demand);
-		
-		return null;
-	}
-
-	@Override
-	public List<ActivityCategory> upDateDisplayCategories(List<ActivityCategory> activityCategiries) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<CancelReason> upDateDisplayCancelReasons(List<CancelReason> cancelReasons) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<City> upDateDisplayCities(List<City> cities) {
-		List<City> returnedCities = new ArrayList<City>();
-		
-		for (City city : cities) {
-			proxyCity.update(city);
-			returnedCities.add(city);
-		}
-			
-			return returnedCities;
-	}
-
-	@Override
-	public List<DesistReason> upDateDisplayDesistReasons(List<DesistReason> desistReasons) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EndedType> upDateDisplayEndedTypes(List<EndedType> endedTypes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EquipmentType> upDateDisplayEquipmentTypes(List<EquipmentType> equipmentTypes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Gender> upDateDisplayGenders(List<Gender> genders) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ReportIssue> upDateDisplayReportIssues(List<ReportIssue> reportIssues) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<UserType> upDateDisplayUserTypes(List<UserType> userTypes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public City upDateCity(City selectedCity) {
@@ -185,11 +71,46 @@ public class AdminBusiness implements AdminIBusiness{
 	}
 
 	@Override
-	public City deleteCity(City selectedCity) {
-		City returnedCity = new City(selectedCity.getName(), selectedCity.getZipCode());
-		proxyCity.delete(selectedCity);
+	public City addCity(City selectedCity) {
+		City returnedCity = null;
+		returnedCity = proxyCity.add(selectedCity);
 		return returnedCity;
 	}
+	@Override
+	public Activity upDateActivity(Activity selectedActivity) {
+		Activity returnedActivity = proxyActivity.update(selectedActivity);
+		return returnedActivity;
+	}
+	@Override
+	public Activity addActivity(Activity selectedActivity) {
+		Activity returnedActivity = null;
+		returnedActivity = proxyActivity.add(selectedActivity);
+		return returnedActivity;
+	}
+	@Override
+	public ActivityCategory upDateCategory(ActivityCategory selectedActivityCategory) {
+		ActivityCategory returnedCategory = proxyActivityCategory.update(selectedActivityCategory);
+		return returnedCategory;
+	}
+	@Override
+	public ActivityCategory addCategory(ActivityCategory selectedActivityCategory) {
+		ActivityCategory returnedCategory = null;
+		returnedCategory = proxyActivityCategory.add(selectedActivityCategory);
+		return returnedCategory;
+	}
+	@Override
+	public EquipmentType upDateEquipment(EquipmentType selectedEquipmentType) {
+		EquipmentType returnedEquipment = proxyEquipmentType.update(selectedEquipmentType);
+		return returnedEquipment;
+	}
+	@Override
+	public EquipmentType addEquipment(EquipmentType selectedEquipmentType) {
+		EquipmentType returnedEquipment = null;
+		returnedEquipment = proxyEquipmentType.add(selectedEquipmentType);
+		return returnedEquipment;
+	}
+
+
 
 	
 }

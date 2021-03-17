@@ -37,14 +37,20 @@ public class Activity implements Serializable{
 
 	}
 
-	public Activity(Integer id, String label, ActivityCategory activityCategory, EquipmentType equipmentType,
-			Set<ActivityPreference> activitiesPreferences) {
+	
+	public Activity(Integer id, String label, ActivityCategory activityCategory, EquipmentType equipmentType) {
 		super();
 		this.id = id;
 		this.label = label;
 		this.activityCategory = activityCategory;
 		this.equipmentType = equipmentType;
-		this.activitiesPreferences = activitiesPreferences;
+	}
+	
+	public Activity(Integer id, String label,  EquipmentType equipmentType) {
+		super();
+		this.id = id;
+		this.label = label;
+		this.equipmentType = equipmentType;
 	}
 
 	@Override

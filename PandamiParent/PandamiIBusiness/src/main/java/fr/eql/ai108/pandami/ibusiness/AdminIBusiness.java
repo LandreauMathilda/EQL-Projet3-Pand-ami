@@ -18,26 +18,16 @@ public interface AdminIBusiness {
 
 	List<Activity> displayActivities();
 	List<ActivityCategory> displayCategories();
-	List<CancelReason> displayCancelReasons();
 	List<City> displayCities();
-	List<DesistReason> displayDesistReasons();
-	List<EndedType> displayEndedTypes();
 	List<EquipmentType> displayEquipmentTypes();
-	List<Gender> displayGenders();
-	List<ReportIssue> displayReportIssues();
-	List<UserType> displayUserTypes();
 	
-	List<Activity> upDateActivities(List<Activity> activities);
-	List<ActivityCategory> upDateDisplayCategories(List<ActivityCategory> activityCategiries);
-	List<CancelReason> upDateDisplayCancelReasons(List<CancelReason> cancelReasons);
-	List<City> upDateDisplayCities(List<City> cities);
-	List<DesistReason> upDateDisplayDesistReasons(List<DesistReason> desistReasons);
-	List<EndedType> upDateDisplayEndedTypes(List<EndedType> endedTypes);
-	List<EquipmentType> upDateDisplayEquipmentTypes(List<EquipmentType> equipmentTypes);
-	List<Gender> upDateDisplayGenders(List<Gender> genders);
-	List<ReportIssue> upDateDisplayReportIssues(List<ReportIssue> reportIssues);
-	List<UserType> upDateDisplayUserTypes(List<UserType> userTypes);
 	City upDateCity(City selectedCity);
-	City deleteCity(City selectedCity);
+	City addCity(City selectedCity);
+	Activity upDateActivity(Activity selectedActivity);
+	Activity addActivity(Activity selectedActivity);
+	ActivityCategory upDateCategory(ActivityCategory selectedActivityCategory);
+	ActivityCategory addCategory(ActivityCategory selectedActivityCategory);
+	EquipmentType upDateEquipment(EquipmentType selectedEquipmentType);
+	EquipmentType addEquipment(EquipmentType selectedEquipmentType);
 }
 	

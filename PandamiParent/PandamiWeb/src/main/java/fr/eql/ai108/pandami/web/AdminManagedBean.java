@@ -33,28 +33,27 @@ public class AdminManagedBean implements Serializable{
 	
 	private Activity activity;
 	private List<Activity> activities;
+	private Activity selectedActivity;
+	private Activity newActivity = new Activity();
+	
 	private ActivityCategory activityCategory;
 	private List<ActivityCategory> categories;
-	private CancelReason cancelReason;
-	private List<CancelReason> cancelReasons;
+	private ActivityCategory selectedCategory;
+	private ActivityCategory newCategory = new ActivityCategory();
+	
 	private City selectedCity;
 	private List<City> cities;
+	private City newCity = new City();
 	
-	private String cityName;
-	private String cityZipCode;
-	
-	private DesistReason desistReason;
-	private List<DesistReason> desistReasons;
-	private EndedType endedType;
-	private List<EndedType> endedTypes;
-	private EquipmentType equipmentType;
+	private EquipmentType equipmentType; 
 	private List<EquipmentType> equipmentTypes;
-	private Gender gender;
-	private List<Gender> genders;
-	private ReportIssue reportIssue;
-	private List<ReportIssue> reportIssues;
-	private UserType userType;
-	private List<UserType> userTypes;
+	private EquipmentType selectedEquipment;
+	private EquipmentType newEquipment = new EquipmentType();
+	
+	private String activityLabel;
+	private ActivityCategory categoryForActivity;
+	private EquipmentType equipmentForActivity;
+	
 	private String message;
 	
 	@EJB
@@ -65,49 +64,154 @@ public class AdminManagedBean implements Serializable{
     public void init() {
 		activities = proxyAdminBu.displayActivities();
 		categories = proxyAdminBu.displayCategories();
-		cancelReasons = proxyAdminBu.displayCancelReasons();
     	cities = proxyAdminBu.displayCities();
-    	desistReasons = proxyAdminBu.displayDesistReasons();
-    	endedTypes = proxyAdminBu.displayEndedTypes();
     	equipmentTypes = proxyAdminBu.displayEquipmentTypes();
-    	genders = proxyAdminBu.displayGenders();
-    	reportIssues = proxyAdminBu.displayReportIssues();
-    	userTypes = proxyAdminBu.displayUserTypes();
     	
     }
 
 	public String upDateCities() {
-		System.out.println(selectedCity.toString());
-		City returnedCity = proxyAdminBu.upDateCity(selectedCity);
-		
-		//cities = proxyAdminBu.displayCities();
-		System.out.println(returnedCity.toString());
-		message = "Villes bien mises à jour";
-		System.out.println(message);
+		proxyAdminBu.upDateCity(selectedCity);
+		cities = proxyAdminBu.displayCities();
+		return "/adminRef.xhtml?faces-redirect=true";
+	}
+	public String addCity() {
+		proxyAdminBu.addCity(newCity);
+		newCity = new City();
+		cities = proxyAdminBu.displayCities();
 		return "/adminRef.xhtml?faces-redirect=true";
 	}
 	
-	public String deleteCity() {
-		City returnedCity = proxyAdminBu.deleteCity(selectedCity);
-		message = returnedCity.toString() + " a bien été supprimée";
-		System.out.println(message);
-		return "/adminRef.xhtml?faces=redirect=true";
+	public String upDateActivity() {
+		proxyAdminBu.upDateActivity(selectedActivity);
+		activities = proxyAdminBu.displayActivities();
+		return "/adminRef.xhtml?faces-redirect=true";
 	}
 	
-	public String getCityName() {
-		return cityName;
+	public String addActivity() {
+		newActivity = new Activity(null, activityLabel, categoryForActivity, equipmentForActivity);
+		
+		proxyAdminBu.addActivity(newActivity);
+		newActivity = new Activity();
+		activities = proxyAdminBu.displayActivities();
+		return "/adminRef.xhtml?faces-redirect=true";
+	}
+	
+	public String upDateCategory() {
+		proxyAdminBu.upDateCategory(selectedCategory);
+		System.out.println(selectedCategory.toString());
+		categories = proxyAdminBu.displayCategories();
+		return null;
 	}
 
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
+	public String addCategory() {
+		proxyAdminBu.addCategory(newCategory);
+		newCategory = new ActivityCategory();
+		categories = proxyAdminBu.displayCategories();
+		return null;
 	}
 
-	public String getCityZipCode() {
-		return cityZipCode;
+	public String upDateEquipment() {
+		proxyAdminBu.upDateEquipment(selectedEquipment);
+		equipmentTypes = proxyAdminBu.displayEquipmentTypes();
+		return "/adminRef.xhtml?faces-redirect=true";
+	}
+	public String addEquipment() {
+		proxyAdminBu.addEquipment(newEquipment);
+		newEquipment = new EquipmentType();
+		equipmentTypes = proxyAdminBu.displayEquipmentTypes();
+		return "/adminRef.xhtml?faces-redirect=true";
 	}
 
-	public void setCityZipCode(String cityZipCode) {
-		this.cityZipCode = cityZipCode;
+	
+
+
+	public String getActivityLabel() {
+		return activityLabel;
+	}
+
+	public void setActivityLabel(String activityLabel) {
+		this.activityLabel = activityLabel;
+	}
+
+	public ActivityCategory getCategoryForActivity() {
+		return categoryForActivity;
+	}
+
+	public void setCategoryForActivity(ActivityCategory categoryForActivity) {
+		this.categoryForActivity = categoryForActivity;
+	}
+
+	public EquipmentType getEquipmentForActivity() {
+		return equipmentForActivity;
+	}
+
+	public void setEquipmentForActivity(EquipmentType equipmentForActivity) {
+		this.equipmentForActivity = equipmentForActivity;
+	}
+
+	public Activity getNewActivity() {
+		return newActivity;
+	}
+
+	public void setNewActivity(Activity newActivity) {
+		this.newActivity = newActivity;
+	}
+
+	public AdminIBusiness getProxyAdminBu() {
+		return proxyAdminBu;
+	}
+
+	public void setProxyAdminBu(AdminIBusiness proxyAdminBu) {
+		this.proxyAdminBu = proxyAdminBu;
+	}
+
+	public Activity getSelectedActivity() {
+		return selectedActivity;
+	}
+
+	public void setSelectedActivity(Activity selectedActivity) {
+		this.selectedActivity = selectedActivity;
+	}
+
+
+	public ActivityCategory getSelectedCategory() {
+		return selectedCategory;
+	}
+
+	public void setSelectedCategory(ActivityCategory selectedCategory) {
+		this.selectedCategory = selectedCategory;
+	}
+
+	public ActivityCategory getNewCategory() {
+		return newCategory;
+	}
+
+	public void setNewCategory(ActivityCategory newCategory) {
+		this.newCategory = newCategory;
+	}
+
+	public EquipmentType getSelectedEquipment() {
+		return selectedEquipment;
+	}
+
+	public void setSelectedEquipment(EquipmentType selectedEquipment) {
+		this.selectedEquipment = selectedEquipment;
+	}
+
+	public EquipmentType getNewEquipment() {
+		return newEquipment;
+	}
+
+	public void setNewEquipment(EquipmentType newEquipment) {
+		this.newEquipment = newEquipment;
+	}
+
+	public City getNewCity() {
+		return newCity;
+	}
+
+	public void setNewCity(City newCity) {
+		this.newCity = newCity;
 	}
 
 	public String getMessage() {
@@ -146,19 +250,6 @@ public class AdminManagedBean implements Serializable{
 	public void setCategories(List<ActivityCategory> categories) {
 		this.categories = categories;
 	}
-	public CancelReason getCancelReason() {
-		return cancelReason;
-	}
-	public void setCancelReason(CancelReason cancelReason) {
-		this.cancelReason = cancelReason;
-	}
-	
-	public List<CancelReason> getCancelReasons() {
-		return cancelReasons;
-	}
-	public void setCancelReasons(List<CancelReason> cancelReasons) {
-		this.cancelReasons = cancelReasons;
-	}
 
 	public City getSelectedCity() {
 		return selectedCity;
@@ -174,30 +265,6 @@ public class AdminManagedBean implements Serializable{
 	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
-	public DesistReason getDesistReason() {
-		return desistReason;
-	}
-	public void setDesistReason(DesistReason desistReason) {
-		this.desistReason = desistReason;
-	}
-	public List<DesistReason> getDesistReasons() {
-		return desistReasons;
-	}
-	public void setDesistReasons(List<DesistReason> desistReasons) {
-		this.desistReasons = desistReasons;
-	}
-	public EndedType getEndedType() {
-		return endedType;
-	}
-	public void setEndedType(EndedType endedType) {
-		this.endedType = endedType;
-	}
-	public List<EndedType> getEndedTypes() {
-		return endedTypes;
-	}
-	public void setEndedTypes(List<EndedType> endedTypes) {
-		this.endedTypes = endedTypes;
-	}
 	public EquipmentType getEquipmentType() {
 		return equipmentType;
 	}
@@ -210,43 +277,6 @@ public class AdminManagedBean implements Serializable{
 	public void setEquipmentTypes(List<EquipmentType> equipmentTypes) {
 		this.equipmentTypes = equipmentTypes;
 	}
-	public Gender getGender() {
-		return gender;
-	}
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-	public List<Gender> getGenders() {
-		return genders;
-	}
-	public void setGenders(List<Gender> genders) {
-		this.genders = genders;
-	}
-	public ReportIssue getReportIssue() {
-		return reportIssue;
-	}
-	public void setReportIssue(ReportIssue reportIssue) {
-		this.reportIssue = reportIssue;
-	}
-	public List<ReportIssue> getReportIssues() {
-		return reportIssues;
-	}
-	public void setReportIssues(List<ReportIssue> reportIssues) {
-		this.reportIssues = reportIssues;
-	}
-	public UserType getUserType() {
-		return userType;
-	}
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-	public List<UserType> getUserTypes() {
-		return userTypes;
-	}
-	public void setUserTypes(List<UserType> userTypes) {
-		this.userTypes = userTypes;
-	}
-	
 	
 	
 	
