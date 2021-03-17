@@ -69,4 +69,16 @@ public class ReplyDao extends GenericDao<Reply> implements ReplyIDao {
 		List<Reply> results = query.getResultList();
 		return results.size() > 0 ? results : null;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reply> getAllPastDemandsByUser(Integer id) {
+		LocalDate today = LocalDate.now();
+		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.volunteer.id = :paramIdUser"
+				+ " AND r.demand.actionDate <= :paramTodayDate ORDER BY r.replyDate DESC"); 
+		query.setParameter("paramIdUser", id); 
+		query.setParameter("paramTodayDate", today);
+		List<Reply> results = query.getResultList();
+		return results.size() > 0 ? results : null;
+	}
 }

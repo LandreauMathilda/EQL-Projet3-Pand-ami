@@ -1,5 +1,7 @@
 package fr.eql.ai108.pandami.business;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -41,4 +43,40 @@ public class ReplyBusiness implements ReplyIBusiness {
 	public List<Reply> getNotSelectedRepliesByDemandId(Integer id) {
 		return proxyReply.getAllExceptSelectedByDemandId(id);
 	}
+
+	@Override
+	public List<Reply> displayPastOwnedReplies(Integer id) {
+		return proxyReply.getAllPastDemandsByUser(id);
+	}
+
+	@Override
+	public List<Reply> updateRejectedReplies(List<Reply> replies) {
+		LocalDateTime today = LocalDateTime.now();
+		List<Reply> updatedList = new ArrayList<Reply>();
+		for (Reply reply : replies) {
+			reply.setRejectDate(today);
+			updateReply(reply);
+			updatedList.add(reply);
+		}
+		return updatedList;
+	}
+
+	@Override
+	public Reply updateSelectedReply(Reply reply) {
+		LocalDateTime today = LocalDateTime.now();
+		reply.setSelectionDate(today);
+		return updateReply(reply);
+	}
+
+	/*
+	@Override
+	public String displayReplyStatusByReply(Reply reply) {
+		String status="";
+		if (reply.getSelectionDate() != null && reply.getDesistDate() == null) {
+			status = "volontaire selectionné";
+		} 
+		return status;
+	}
+	*/
+
 }
