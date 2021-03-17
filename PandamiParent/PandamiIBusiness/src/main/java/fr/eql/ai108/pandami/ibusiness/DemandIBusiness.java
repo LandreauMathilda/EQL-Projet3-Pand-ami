@@ -29,7 +29,7 @@ public interface DemandIBusiness {
 	
 	List<Demand> displayOwnedDemands(Integer id);
 
-	String displayDemandStatus(Integer demandId, Integer userId);
+	String displayDemandStatus(Demand demand, Integer userId);
 	
 	List<Demand> getDemandsByResearch(Research research, List<Demand> demands);
 	

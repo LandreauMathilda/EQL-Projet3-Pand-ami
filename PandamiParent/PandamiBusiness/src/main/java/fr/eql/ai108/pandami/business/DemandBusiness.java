@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -108,9 +109,9 @@ public class DemandBusiness implements DemandIBusiness{
 	}
 	
 	@Override
-	public String displayDemandStatus(Integer demandId, Integer userId) {
+	public String displayDemandStatus(Demand demand, Integer userId) {
 
-		List<Reply> replies = proxyReply.getAllByDemand(demandId);
+		Set<Reply> replies = demand.getReplies();
 		String status = "";
 		
 		if (replies.size() == 0) {

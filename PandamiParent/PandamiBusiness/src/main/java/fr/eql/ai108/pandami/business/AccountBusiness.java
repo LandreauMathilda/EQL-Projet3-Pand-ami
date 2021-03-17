@@ -51,7 +51,6 @@ public class AccountBusiness implements AccountIBusiness{
 	
 	@Override
 	public User connection(String login, String password) {
-		
 		return proxyUser.authenticate(login, password);
 	}
 	
@@ -65,5 +64,4 @@ public class AccountBusiness implements AccountIBusiness{
 	public User modifyUserInfo(User user) {
 		return proxyUser.update(user);
 	}
-
 }

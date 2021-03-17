@@ -70,7 +70,7 @@ public class SearchManagedBean implements Serializable {
 	}
 
 	public String getDemandStatus(Demand demand) {
-		return proxyDemandBu.displayDemandStatus(demand.getId(), sessionUser.getId());
+		return proxyDemandBu.displayDemandStatus(demand, sessionUser.getId());
 	}
 	
 	/*
