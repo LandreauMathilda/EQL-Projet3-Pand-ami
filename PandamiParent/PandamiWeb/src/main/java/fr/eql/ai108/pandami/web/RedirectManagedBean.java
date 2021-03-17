@@ -13,11 +13,13 @@ import fr.eql.ai108.pandami.entity.User;
 public class RedirectManagedBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
+	private User sessionUser;
+	private String message;
 	
 	public String redirectConnect() {
-		
-		return "/connectionPage.xhtml?faces-redirect=true";
+	return "connectionPage.xhtml?faces-redirect=true";
 	}
 	
 	public String redirectCreateAccount() {
@@ -43,15 +45,51 @@ public class RedirectManagedBean implements Serializable{
 	public String redirectDemandDeposit() {
 		return "/demandDeposit.xhtml?faces-redirect=true";
 	}
+	
 	public String redirectAdminRef() {
+		if (sessionUser.getId() == 1) {
 		return "/adminRef.xhtml?faced-redirect=true";
+		}else {
+			message = "Vous n'avez pas l'autorisation administrateur";
+			return "/connectionPage.xhtml?faces-redirect=true";
+		}
+		
 	}
+	
 	public String redirectAdminDemands() {
-		return "/adminDemands.xhtml?faces-redirect=true";
+		if (sessionUser.getId() == 1) {
+			return "/adminDemands.xhtml?faces-redirect=true";
+			}else {
+				message = "Vous n'avez pas l'autorisation administrateur";
+				return "/connectionPage.xhtml?faces-redirect=true";
+			}
+	
 	}
+	
 	public String redirectAdminUsers() {
 		return "/adminUsers.xhtml?faces-redirect=true";
 	}
+	
+	public String redirectAdminHome() {
+		return "/adminHome.xhtml?faces-redirect=true";
+	}
+
+	public User getSessionUser() {
+		return sessionUser;
+	}
+
+	public void setSessionUser(User sessionUser) {
+		this.sessionUser = sessionUser;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	
 	
 }

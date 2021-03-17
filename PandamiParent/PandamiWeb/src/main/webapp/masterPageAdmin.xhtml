@@ -14,7 +14,13 @@
 	<div id="header">
 		<div>
 			<h:form>
-				<h:commandLink value="Accueil" action="#{mbRedirect.redirectNotConnectedHome()}" />
+				<h:commandLink value="Accueil" action="#{mbRedirect.redirectAdminHome()}" />
+				|
+				<h:commandLink value="Référentiels" action="#{mbRedirect.redirectAdminRef()}"/>
+				|
+				<h:commandLink value="Demandes" action="#{mbRedirect.redirectAdminDemands()}"/>
+				|
+				<h:commandLink value="Utilisateurs" action="#{mbRedirect.redirectAdminUsers()}"/>
 		
 			</h:form>
 		</div>
