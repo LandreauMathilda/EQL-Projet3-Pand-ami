@@ -69,14 +69,8 @@ public class AdminManagedBean implements Serializable{
 		categories = proxyAdminBu.displayCategories();
     	cities = proxyAdminBu.displayCities();
     	equipmentTypes = proxyAdminBu.displayEquipmentTypes();
-<<<<<<< HEAD
-    	
-=======
-    	genders = proxyAdminBu.displayGenders();
-    	reportIssues = proxyAdminBu.displayReportIssues();
-    	userTypes = proxyAdminBu.displayUserTypes();
+
     	demands = proxyDemandBU.displayAllDemands();
->>>>>>> branch 'master' of https://github.com/mathildalandreau/PandamiProjet3.git
     }
 
 	public String upDateCities() {
@@ -287,55 +281,7 @@ public class AdminManagedBean implements Serializable{
 	public void setEquipmentTypes(List<EquipmentType> equipmentTypes) {
 		this.equipmentTypes = equipmentTypes;
 	}
-<<<<<<< HEAD
-=======
-	public Gender getGender() {
-		return gender;
-	}
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-	public List<Gender> getGenders() {
-		return genders;
-	}
-	public void setGenders(List<Gender> genders) {
-		this.genders = genders;
-	}
-	public ReportIssue getReportIssue() {
-		return reportIssue;
-	}
-	public void setReportIssue(ReportIssue reportIssue) {
-		this.reportIssue = reportIssue;
-	}
-	public List<ReportIssue> getReportIssues() {
-		return reportIssues;
-	}
-	public void setReportIssues(List<ReportIssue> reportIssues) {
-		this.reportIssues = reportIssues;
-	}
-	public UserType getUserType() {
-		return userType;
-	}
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-	public List<UserType> getUserTypes() {
-		return userTypes;
-	}
-	public void setUserTypes(List<UserType> userTypes) {
-		this.userTypes = userTypes;
-	}
 
-	public List<Demand> getDemands() {
-		return demands;
-	}
-
-	public void setDemands(List<Demand> demands) {
-		this.demands = demands;
-	}
-	
->>>>>>> branch 'master' of https://github.com/mathildalandreau/PandamiProjet3.git
-	
 	
 	
 	
