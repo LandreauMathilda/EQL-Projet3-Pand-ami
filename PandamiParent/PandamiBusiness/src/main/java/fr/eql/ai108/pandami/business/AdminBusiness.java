@@ -42,6 +42,18 @@ public class AdminBusiness implements AdminIBusiness{
 	private CityIDao proxyCity;
 	@EJB
 	private EquipmentTypeIDao proxyEquipmentType;
+	@EJB
+	private CancelReasonIDao proxyCancelReason;
+	@EJB
+	private GenderIDao proxyGender;
+	@EJB 
+	private EndedTypeIDao proxyEndedType;
+	@EJB 
+	private UserTypeIDao proxyUserType;
+	@EJB 
+	private ReportIssueIDao proxyReportIssue;
+	@EJB
+	private DesistReasonIDao proxyDesistReason;
 
 
 
@@ -109,8 +121,28 @@ public class AdminBusiness implements AdminIBusiness{
 		returnedEquipment = proxyEquipmentType.add(selectedEquipmentType);
 		return returnedEquipment;
 	}
-
-
-
-	
+	@Override
+	public List<CancelReason> displayCancelReasons() {
+		return proxyCancelReason.findAll();
+	}
+	@Override
+	public List<DesistReason> displayDesistReasons() {
+		return proxyDesistReason.findAll();
+	}
+	@Override
+	public List<EndedType> displayEndedTypes() {
+		return proxyEndedType.findAll();
+	}
+	@Override
+	public List<Gender> displayGenders() {
+		return proxyGender.findAll();
+	}
+	@Override
+	public List<ReportIssue> displayReportIssues() {
+		return proxyReportIssue.findAll();
+	}
+	@Override
+	public List<UserType> displayUserTypes() {
+		return proxyUserType.findAll();
+	}
 }

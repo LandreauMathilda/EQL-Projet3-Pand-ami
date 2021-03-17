@@ -20,6 +20,12 @@ public interface AdminIBusiness {
 	List<ActivityCategory> displayCategories();
 	List<City> displayCities();
 	List<EquipmentType> displayEquipmentTypes();
+	List<CancelReason> displayCancelReasons();
+	List<DesistReason> displayDesistReasons();
+	List<EndedType> displayEndedTypes();
+	List<Gender> displayGenders();
+	List<ReportIssue> displayReportIssues();
+	List<UserType> displayUserTypes();
 	
 	City upDateCity(City selectedCity);
 	City addCity(City selectedCity);
@@ -29,5 +35,6 @@ public interface AdminIBusiness {
 	ActivityCategory addCategory(ActivityCategory selectedActivityCategory);
 	EquipmentType upDateEquipment(EquipmentType selectedEquipmentType);
 	EquipmentType addEquipment(EquipmentType selectedEquipmentType);
+
 }
 	
