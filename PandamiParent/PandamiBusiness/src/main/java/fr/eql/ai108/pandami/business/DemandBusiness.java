@@ -93,20 +93,6 @@ public class DemandBusiness implements DemandIBusiness{
 		Demand returnedDemand = proxyDemand.update(demand);
 		return returnedDemand;
 	}
-
-	@Override
-	public List<Demand> displayFilteredByRepliesOwnedDemands(Integer id) {
-		List<Demand> filteredDemands = displayOwnedDemands(id); //récupère toutes les demandes
-		for (Demand demand : filteredDemands) {
-			for (Reply reply : demand.getReplies()) {
-				//si la demande est rejetée -> je l'enlève de la liste des replies de chaque demand
-				if (reply.getSelectionDate() == null && reply.getRejectDate() != null) {
-					demand.getReplies().remove(reply);
-				}
-			}
-		}
-		return filteredDemands;
-	}
 	
 	@Override
 	public String displayDemandStatus(Demand demand, Integer userId) {
@@ -259,5 +245,15 @@ public class DemandBusiness implements DemandIBusiness{
 		EndedType endedType1 = proxyEndedType.findById(1);
 		demand.setEndedType(endedType1);
 		return upDateDemand(demand);
+	}
+
+	@Override
+	public List<Demand> displayOwnedValidatedByUser(Integer id) {
+		return proxyDemand.getAllValidatedByUser(id);
+	}
+
+	@Override
+	public List<Demand> displayOwnedPendingValidationByUser(Integer id) {
+		return proxyDemand.getAllPendingValidationByUser(id);
 	}
 }

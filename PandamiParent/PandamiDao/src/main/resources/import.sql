@@ -143,5 +143,6 @@ INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id`, `volunteer_id`) VALUES ('53', '2021-03-23 16:00:00', '2021-03-24 11:52:42', '15', '5');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('54', '2021-03-19 10:32:41', '23', '1');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('55', '2021-03-23 14:57:19', '23', '4');
-
-
+UPDATE pandami_db.demand SET closeDate = '2021-03-24 11:52:42' WHERE (id = '15');
+UPDATE pandami_db.reply SET rejectDate = '2021-03-24 11:52:42' WHERE (id = '40');
+UPDATE pandami_db.demand SET endedType_id = '1' WHERE (id = '15');

@@ -59,4 +59,35 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 		return results.size() > 0 ? results : null;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Demand> getAllValidatedByUser(Integer id) {
+		LocalDate today = LocalDate.now();
+		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND"
+				+ " d.actionDate >= :paramTodayDate AND"
+				+ " d.closeDate IS NOT NULL AND"
+				+ " d.cancelDate IS NULL"
+				+ " ORDER BY d.publishDate DESC");
+		query.setParameter("paramIdUser", id);
+		query.setParameter("paramTodayDate", today);
+		List<Demand> results = query.getResultList();
+		return results.size() > 0 ? results : null;
+	}
+
+
+	@Override
+	public List<Demand> getAllPendingValidationByUser(Integer id) {
+		LocalDate today = LocalDate.now();
+		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND"
+				+ " d.actionDate >= :paramTodayDate AND"
+				+ " d.closeDate IS NULL AND"
+				+ " d.cancelDate IS NULL"
+				+ " ORDER BY d.publishDate DESC");
+		query.setParameter("paramIdUser", id);
+		query.setParameter("paramTodayDate", today);
+		List<Demand> results = query.getResultList();
+		return results.size() > 0 ? results : null;
+	}
+
 }
