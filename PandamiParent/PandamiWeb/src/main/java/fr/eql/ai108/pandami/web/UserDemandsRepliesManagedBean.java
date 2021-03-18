@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 //import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
@@ -24,12 +25,13 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-    private List<Demand> usersDemands;
     private List<Demand> usersPastDemands;
     private List<Reply> usersReplies;
     private List<Reply> rejectedReplies;
     private List<Reply> usersPastReplies;
     private String selectionMessage;
+    private List<Demand> usersValidatedDemands;
+    private List<Demand> usersPendingValidationDemands;
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -38,22 +40,20 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	@EJB
 	private ReplyIBusiness proxyReplyBu;
 	
-	private User sessionUser; //modif, là méthode en dur
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
+	private User sessionUser;
 	
 	@PostConstruct
     public void init() {
-    	sessionUser = proxyAccountBu.getUserById(); //a retirer qd user session sera annoté
-    	usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
+    	usersValidatedDemands = proxyDemandBu.displayOwnedValidatedByUser(sessionUser.getId());
+    	usersPendingValidationDemands = proxyDemandBu.displayOwnedPendingValidationByUser(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
     	usersPastDemands = proxyDemandBu.displayAllPastOwnedDemandsByUser(sessionUser.getId());
     	usersPastReplies = proxyReplyBu.displayPastOwnedReplies(sessionUser.getId());
     }
     
-	//TODO floriane : implémenter le bouton d'annulation
     public String cancelDemand(Demand demand) {
-        demand.setCancelDate(LocalDateTime.now());
-        //demand.setCancelReason(cancelReason);
-        proxyDemandBu.upDateDemand(demand);
+    	demand = proxyDemandBu.cancelDemand(demand);
         return refresh();
     }
    
@@ -72,7 +72,8 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     
     private String refresh() {
     	//reinitialiser les listes de demandes du User, filtrée :
-    	usersDemands = proxyDemandBu.displayFilteredByRepliesOwnedDemands(sessionUser.getId());
+    	usersValidatedDemands = proxyDemandBu.displayOwnedValidatedByUser(sessionUser.getId());
+    	usersPendingValidationDemands = proxyDemandBu.displayOwnedPendingValidationByUser(sessionUser.getId());
     	return "/userDemandsAndReplies.xhtml?faces-redirect=true";	
     }
     
@@ -81,18 +82,17 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     //statut : choisi / en attente (rejeté ?)
     //bouton pour annuler dans un second temps : reply.desistDate = date.now()
     
-	public List<Demand> getUsersDemands() {
-		return usersDemands;
-	}
-
-	public void setUsersDemands(List<Demand> usersDemands) {
-		this.usersDemands = usersDemands;
-	}
+    public String getStatusByReply(Reply reply) {
+    	return proxyReplyBu.displayStatusByReply(reply);
+    }
+    
+    public String getStatusByDemand(Demand demand) {
+    	return proxyDemandBu.displayDemandStatusForUser(demand);
+    }
 
 	public User getSessionUser() {
 		return sessionUser;
 	}
-
 
 	public void setSessionUser(User sessionUser) {
 		this.sessionUser = sessionUser;
@@ -137,5 +137,23 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	public void setSelectionMessage(String selectionMessage) {
 		this.selectionMessage = selectionMessage;
 	}
+
+	public List<Demand> getUsersValidatedDemands() {
+		return usersValidatedDemands;
+	}
+
+	public void setUsersValidatedDemands(List<Demand> usersValidatedDemands) {
+		this.usersValidatedDemands = usersValidatedDemands;
+	}
+
+	public List<Demand> getUsersPendingValidationDemands() {
+		return usersPendingValidationDemands;
+	}
+
+	public void setUsersPendingValidationDemands(List<Demand> usersPendingValidationDemands) {
+		this.usersPendingValidationDemands = usersPendingValidationDemands;
+	}
+	
+	
 
 }

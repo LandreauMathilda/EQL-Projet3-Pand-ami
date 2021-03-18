@@ -9,5 +9,7 @@ public interface DemandIDao extends GenericIDao<Demand>{
 	List<Demand> getAllNotOwnedById(Integer id);
 	List<Demand> getAllByUser(Integer id);
 	List<Demand> getAllPastDemandsByUser(Integer id);
+	List<Demand> getAllValidatedByUser(Integer id);
+	List<Demand> getAllPendingValidationByUser(Integer id);
 
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -92,25 +93,11 @@ public class DemandBusiness implements DemandIBusiness{
 		Demand returnedDemand = proxyDemand.update(demand);
 		return returnedDemand;
 	}
-
-	@Override
-	public List<Demand> displayFilteredByRepliesOwnedDemands(Integer id) {
-		List<Demand> filteredDemands = displayOwnedDemands(id); //récupère toutes les demandes
-		for (Demand demand : filteredDemands) {
-			for (Reply reply : demand.getReplies()) {
-				//si la demande est rejetée -> je l'enlève de la liste des replies de chaque demand
-				if (reply.getSelectionDate() == null && reply.getRejectDate() != null) {
-					demand.getReplies().remove(reply);
-				}
-			}
-		}
-		return filteredDemands;
-	}
 	
 	@Override
-	public String displayDemandStatus(Integer demandId, Integer userId) {
+	public String displayDemandStatus(Demand demand, Integer userId) {
 
-		List<Reply> replies = proxyReply.getAllByDemand(demandId);
+		Set<Reply> replies = demand.getReplies();
 		String status = "";
 		
 		if (replies.size() == 0) {
@@ -258,5 +245,60 @@ public class DemandBusiness implements DemandIBusiness{
 		EndedType endedType1 = proxyEndedType.findById(1);
 		demand.setEndedType(endedType1);
 		return upDateDemand(demand);
+	}
+
+	@Override
+	public List<Demand> displayOwnedValidatedByUser(Integer id) {
+		return proxyDemand.getAllValidatedByUser(id);
+	}
+
+	@Override
+	public List<Demand> displayOwnedPendingValidationByUser(Integer id) {
+		return proxyDemand.getAllPendingValidationByUser(id);
+	}
+	
+	@Override
+	public Demand cancelDemand(Demand demand) {
+		demand.setCancelDate(LocalDateTime.now());
+		return proxyDemand.update(demand);
+	}
+
+	@Override
+	public String displayDemandStatusForUser(Demand demand) {
+		String status="";
+		LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+		LocalDateTime demandDate = LocalDateTime.of(demand.getActionDate(), demand.getEndHour());
+		
+		if(demandDate.isBefore(now)) { //historique anciennes demandes :
+			if(demand.getCancelDate() != null) {
+				status = "Vous avez annulé cette demande";
+			} else if (demand.getCloseDate() != null && demand.getEndedType().getId() == 1) {
+				status = "L'action a été réalisée, vous n'avez pas reporté de problèmes (finalisation automatique)";
+			} else if (demand.getCloseDate() != null && demand.getEndedType().getId() ==2) {
+				if (demand.getReportDate() != null) {
+					status = "L'action a été réalisée, vous avez rencontré un soucis avec le bénévole";
+				} else if (demand.getReportDate() == null){
+					status = "L'action a été réalisée, vous n'avez pas reporté de problèmes (finalisation automatique)";
+				}
+			}
+			else if (demand.getCloseDate() == null && demand.getReplies().size() > 0) {
+				status = "Vous n'avez jamais selectionné de bénévoles pour cette demande";
+			} else if (demand.getCloseDate() == null && demand.getReplies().size() == 0) {
+				status = "Aucun bénévole n'a postulé sur cette demande";
+			}
+		} 
+		
+		else if (demandDate.isAfter(now)) { //futures demandes, postées mais pas encore réalisées : 
+			if (demand.getCancelDate() != null ) {
+				status = "Demande annulée";
+			} else if (demand.getCloseDate() != null) {
+				status = "Volontaire selectionné";
+			} else if (demand.getCloseDate() ==null && demand.getReplies().size() == 0) {
+				status = "Aucun volontaire n'a postulé";
+			} else if (demand.getCloseDate() == null && demand.getReplies().size() >0) {
+				status = "En attente de selection";
+			}
+		}
+		return status;
 	}
 }

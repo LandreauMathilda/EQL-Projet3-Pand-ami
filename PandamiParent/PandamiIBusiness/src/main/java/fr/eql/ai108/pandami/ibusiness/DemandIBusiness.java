@@ -29,13 +29,19 @@ public interface DemandIBusiness {
 	
 	List<Demand> displayOwnedDemands(Integer id);
 
-	String displayDemandStatus(Integer demandId, Integer userId);
+	String displayDemandStatus(Demand demand, Integer userId);
 	
 	List<Demand> getDemandsByResearch(Research research, List<Demand> demands);
-	
-	List<Demand> displayFilteredByRepliesOwnedDemands(Integer id);
 	
 	List<Demand> displayAllPastOwnedDemandsByUser(Integer id);
 	
 	Demand updateDemandWhenReplyIsSelected(Demand demand);
+	
+	List<Demand> displayOwnedValidatedByUser(Integer id);
+	
+	List<Demand>displayOwnedPendingValidationByUser(Integer id);
+
+	Demand cancelDemand(Demand demand);
+	
+	String displayDemandStatusForUser(Demand demand);
 }
