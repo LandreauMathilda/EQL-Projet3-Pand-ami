@@ -40,4 +40,6 @@ public interface DemandIBusiness {
 	List<Demand> displayOwnedValidatedByUser(Integer id);
 	
 	List<Demand>displayOwnedPendingValidationByUser(Integer id);
+
+	Demand cancelDemand(Demand demand);
 }

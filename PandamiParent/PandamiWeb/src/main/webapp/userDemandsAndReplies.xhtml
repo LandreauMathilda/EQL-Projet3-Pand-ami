@@ -23,6 +23,11 @@
 									<label>Horaire : de #{demand.startHour} à #{demand.endHour}</label>
 									<br />
 									<label>adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
+									<br/>
+									<br/>
+									<p:commandButton
+												action="#{mbUserDemRep.cancelDemand(demand)}"
+												value="annuler"/>
 									<p:dataTable id="repliesDataTable" value="#{demand.replies}" var="reply"
 										widgetVar="demandTable"
 										emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
@@ -51,6 +56,9 @@
 									<label>Horaire : de #{demand.startHour} à #{demand.endHour}</label>
 									<br />
 									<label>adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
+									<p:commandButton
+												action="#{mbUserDemRep.cancelDemand(demand)}"
+												value="annuler"/>
 									<p:dataTable id="repliesDataTable" value="#{demand.replies}" var="reply"
 										widgetVar="demandTable"
 										emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">

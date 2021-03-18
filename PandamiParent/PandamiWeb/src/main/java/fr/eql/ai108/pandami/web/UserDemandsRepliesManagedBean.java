@@ -52,11 +52,8 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     	usersPastReplies = proxyReplyBu.displayPastOwnedReplies(sessionUser.getId());
     }
     
-	//TODO floriane : implémenter le bouton d'annulation
     public String cancelDemand(Demand demand) {
-        demand.setCancelDate(LocalDateTime.now());
-        //demand.setCancelReason(cancelReason);
-        proxyDemandBu.upDateDemand(demand);
+    	demand = proxyDemandBu.cancelDemand(demand);
         return refresh();
     }
    

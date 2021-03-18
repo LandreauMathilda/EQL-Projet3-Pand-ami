@@ -256,4 +256,10 @@ public class DemandBusiness implements DemandIBusiness{
 	public List<Demand> displayOwnedPendingValidationByUser(Integer id) {
 		return proxyDemand.getAllPendingValidationByUser(id);
 	}
+	
+	@Override
+	public Demand cancelDemand(Demand demand) {
+		demand.setCancelDate(LocalDateTime.now());
+		return proxyDemand.update(demand);
+	}
 }
