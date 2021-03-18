@@ -36,7 +36,7 @@
 				<div id="rightPanel">
 					<label>Catégorie de la demande</label>
     					<p:selectOneMenu value="#{mbDemand.demand.activity}" converter="omnifaces.SelectItemsConverter" dynamic="true">
-    						<f:selectItem itemValue="" itemLabel="Catégories d'activité" noSelectionOption="true"/>
+    						<f:selectItem itemValue="" itemLabel="Activité - Catégorie - Equipement" noSelectionOption="true"/>
     						<f:selectItems value="#{mbDemand.activities}" var = "activity"
     						itemLabel="#{activity.activityCategory} - #{activity} - #{activity.equipmentType}" itemValue="#{activity}"></f:selectItems>
     					</p:selectOneMenu>
@@ -54,6 +54,11 @@
 					</div>
 				</div>
 			</h:form>
+			<h:form>
+			<div>
+			<p:commandButton styleClass="ui-formButtons" id="button"
+							action="#{mbDemand.createDemand()}" value="Démonstration" />
+			</div></h:form>
 		</div>
 	</ui:define>
 	<ui:define name="CSS">

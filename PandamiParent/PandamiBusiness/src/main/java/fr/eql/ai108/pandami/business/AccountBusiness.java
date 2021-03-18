@@ -26,21 +26,7 @@ public class AccountBusiness implements AccountIBusiness{
 	private CityIDao proxyCity;
 	@EJB
 	private GenderIDao proxyGender;
-	
-	private String nameKaradoc = "Karadoc";
-	private String surnameKaradoc = "De Vannes";
-	private Gender genderKaradoc = new Gender(2, "Femme");
-	private String streetKaradoc = "34 rue de Vannes";
-	private City cityKaradoc = new City(3, "Vincennes", "94300");
-	private LocalDate birthDateKaradoc = LocalDate.of(438, 04, 10);
-	private String phoneNumberKaradoc = "0297648315";
-	private String emailKaradoc = "karadocDeVannes@Kaamelott.fr";
-	private String emergencyContactNameKaradoc = "Mevanwi";
-	private String emergencyContactSurnameKaradoc = "De Vannes";
-	private String emergencyContactPhoneNumberKaradoc = "0264975836";
-	private String loginKaradoc = "Karadoc";
-	private String passwordKaradoc = "karadoc";
-	private LocalDateTime inscriptionDateKaradoc;
+
 
 	@Override
 	public User createAccount(User user) {
@@ -83,125 +69,6 @@ public class AccountBusiness implements AccountIBusiness{
 		return proxyUser.update(user);
 	}
 
-	//@Override
-	//public User demoUser() {
-		//User karadoc = new User(null, null, nameKaradoc, surnameKaradoc,  genderKaradoc, streetKaradoc, cityKaradoc, birthDateKaradoc, phoneNumberKaradoc, emailKaradoc, emergencyContactNameKaradoc, emergencyContactSurnameKaradoc, emergencyContactPhoneNumberKaradoc, loginKaradoc, passwordKaradoc, inscriptionDateKaradoc, null, null, null);
-		
-		//return karadoc;
-	//}
 
-	public String getNameKaradoc() {
-		return nameKaradoc;
-	}
-
-	public void setNameKaradoc(String nameKaradoc) {
-		this.nameKaradoc = nameKaradoc;
-	}
-
-	public String getSurnameKaradoc() {
-		return surnameKaradoc;
-	}
-
-	public void setSurnameKaradoc(String surnameKaradoc) {
-		this.surnameKaradoc = surnameKaradoc;
-	}
-
-	public Gender getGenderKaradoc() {
-		return genderKaradoc;
-	}
-
-	public void setGenderKaradoc(Gender genderKaradoc) {
-		this.genderKaradoc = genderKaradoc;
-	}
-
-	public String getStreetKaradoc() {
-		return streetKaradoc;
-	}
-
-	public void setStreetKaradoc(String streetKaradoc) {
-		this.streetKaradoc = streetKaradoc;
-	}
-
-	public City getCityKaradoc() {
-		return cityKaradoc;
-	}
-
-	public void setCityKaradoc(City cityKaradoc) {
-		this.cityKaradoc = cityKaradoc;
-	}
-
-	public LocalDate getBirthDateKaradoc() {
-		return birthDateKaradoc;
-	}
-
-	public void setBirthDateKaradoc(LocalDate birthDateKaradoc) {
-		this.birthDateKaradoc = birthDateKaradoc;
-	}
-
-	public String getPhoneNumberKaradoc() {
-		return phoneNumberKaradoc;
-	}
-
-	public void setPhoneNumberKaradoc(String phoneNumberKaradoc) {
-		this.phoneNumberKaradoc = phoneNumberKaradoc;
-	}
-
-	public String getEmailKaradoc() {
-		return emailKaradoc;
-	}
-
-	public void setEmailKaradoc(String emailKaradoc) {
-		this.emailKaradoc = emailKaradoc;
-	}
-
-	public String getEmergencyContactNameKaradoc() {
-		return emergencyContactNameKaradoc;
-	}
-
-	public void setEmergencyContactNameKaradoc(String emergencyContactNameKaradoc) {
-		this.emergencyContactNameKaradoc = emergencyContactNameKaradoc;
-	}
-
-	public String getEmergencyContactSurnameKaradoc() {
-		return emergencyContactSurnameKaradoc;
-	}
-
-	public void setEmergencyContactSurnameKaradoc(String emergencyContactSurnameKaradoc) {
-		this.emergencyContactSurnameKaradoc = emergencyContactSurnameKaradoc;
-	}
-
-	public String getEmergencyContactPhoneNumberKaradoc() {
-		return emergencyContactPhoneNumberKaradoc;
-	}
-
-	public void setEmergencyContactPhoneNumberKaradoc(String emergencyContactPhoneNumberKaradoc) {
-		this.emergencyContactPhoneNumberKaradoc = emergencyContactPhoneNumberKaradoc;
-	}
-
-	public String getLoginKaradoc() {
-		return loginKaradoc;
-	}
-
-	public void setLoginKaradoc(String loginKaradoc) {
-		this.loginKaradoc = loginKaradoc;
-	}
-
-	public String getPasswordKaradoc() {
-		return passwordKaradoc;
-	}
-
-	public void setPasswordKaradoc(String passwordKaradoc) {
-		this.passwordKaradoc = passwordKaradoc;
-	}
-
-	public LocalDateTime getInscriptionDateKaradoc() {
-		return inscriptionDateKaradoc;
-	}
-
-	public void setInscriptionDateKaradoc(LocalDateTime inscriptionDateKaradoc) {
-		this.inscriptionDateKaradoc = inscriptionDateKaradoc;
-	}
-	
-	
 
 }
