@@ -96,7 +96,11 @@ public class DemandManagedBean implements Serializable{
         message = "Votre demande a bien été prise en compte";
         return "/demandDeposit.xhtml?faces-redirect=true";
     }
-
+    
+    public String redirect(Demand demand) {
+    	this.demand = demand;
+    	return "/modifDemand.xhtml?faces-redirect=true";
+    }
     
     public String upDateDemand(Demand demand) {
     demand = proxyDemandBu.upDateDemand(demand);

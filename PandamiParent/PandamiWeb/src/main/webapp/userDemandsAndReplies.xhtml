@@ -59,6 +59,10 @@
 									<p:commandButton
 												action="#{mbUserDemRep.cancelDemand(demand)}"
 												value="annuler"/>
+									<label>    </label>
+									<p:commandButton
+										action="#{mbDemand.redirect(demand)}"
+										value="modifier"/>
 									<p:dataTable id="repliesDataTable" value="#{demand.replies}" var="reply"
 										widgetVar="demandTable"
 										emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
