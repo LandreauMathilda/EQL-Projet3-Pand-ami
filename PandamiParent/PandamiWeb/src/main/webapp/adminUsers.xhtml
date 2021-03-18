@@ -11,180 +11,116 @@
 		<div id="main">
 			<div>Visualisation de l'ensemble des utilisateurs</div>
 			<h:form id="adminUsersForm">
-				
-				<p:growl id="msgs" showDetail="true"/>
 			
 				<p:dataTable id="adminUsersDataTable" var="user" value="#{mbAdmin.users}" reflow="true" rows="30" size="large"
-					widgetVar="adminUserTable" editable="true" editMode="cell"
-                    editInitEvent="dblclick" emptyMessage="Aucun utilisateur à afficher"
-					rowIndexVar="rowIndex" stripedRows="false" selection="#{mbAdmin.selectedUser}">
-
-		            <p:ajax event="cellEdit" listener="#{mbAdmin.onUserCellEdit}" update=":adminUsersForm:msgs"/>
+					widgetVar="adminUserTable" emptyMessage="Aucun utilisateur à afficher"
+					rowIndexVar="rowIndex" selection="#{mbAdmin.selectedUser}">
 
 					<p:column headerText="Utilisateur n°" sortBy="#{user.id}">
-						<h:outputText value="#{user.id}" />
+						<h:outputText value="#{user.id}"/>
 					</p:column>
 					
 					<p:column headerText="Type d'utilisateur"	sortBy="#{user.userType.type}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.userType.type}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:selectOneMenu value="#{mbAdmin.selectedUser.userType}" converter="omnifaces.SelectItemsConverter">
-                            		<f:selectItems value="#{mbAdmin.userTypes}" var="userType" itemLabel="#{userType.type}" itemValue="#{userType}"/>
-                        		</h:selectOneMenu>
-                    		</f:facet>
-                		</p:cellEditor>
+						<p:inplace label="#{user.userType.type}" effectSpeed="fast" event="dblclick">
+                           	<h:selectOneMenu value="#{user.userType}" converter="omnifaces.SelectItemsConverter">
+                           		<f:selectItems value="#{mbAdmin.userTypes}" var="userType" itemLabel="#{userType.type}" itemValue="#{userType}"/>
+                       		</h:selectOneMenu>
+				        </p:inplace>
 					</p:column>
 					
-					<p:column headerText="Civilité"	sortBy="#{user.gender.name}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                    			<h:graphicImage value="/resources/IMG/male.svg" rendered="#{user.gender.name.equals('Homme')}" alt="Homme" style="width: 30px"/>
-                    			<h:graphicImage value="/resources/IMG/female.svg" rendered="#{user.gender.name.equals('Femme')}" alt="Femme" style="width: 30px"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                        		<h:selectOneMenu value="#{mbAdmin.selectedUser.gender}" converter="omnifaces.SelectItemsConverter">
-                            		<f:selectItems value="#{mbAdmin.genders}" var="gender" itemLabel="#{gender.name}" itemValue="#{gender}"/>
-                        		</h:selectOneMenu>
-                    		</f:facet>
-                		</p:cellEditor>
+					<p:column headerText="Date d'inscription" sortBy="#{user.inscriptionDate}">
+						<p:inplace editor="true">
+                            <p:datePicker id="inscriptionDatePicker"	value="#{user.inscriptionDate}" converter="localDateTimeConverter"/>
+				        </p:inplace>
+					</p:column>
+
+					<p:column headerText="Genre"	sortBy="#{user.gender.name}">
+						<p:inplace label="#{user.gender.name}" effectSpeed="fast" event="dblclick">
+                           	<h:selectOneMenu value="#{user.gender}" converter="omnifaces.SelectItemsConverter">
+                            	<f:selectItems value="#{mbAdmin.genders}" var="gender" itemLabel="#{gender.name}" itemValue="#{gender}"/>
+                        	</h:selectOneMenu>
+				        </p:inplace>
+					</p:column>
+
+					<p:column headerText="Nom" sortBy="#{user.surname}">
+						<p:inplace editor="true">
+                            <h:inputText value="#{user.surname}" />
+				        </p:inplace>
 					</p:column>
 					
-					<p:column headerText="Nom"	sortBy="#{user.surname}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.surname.toUpperCase()}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.surname}"/>
-                    		</f:facet>
-                		</p:cellEditor>
+					<p:column headerText="Prénom" sortBy="#{user.name}">
+						<p:inplace editor="true">
+                            <h:inputText value="#{user.name}" />
+				        </p:inplace>
 					</p:column>
 					
-					<p:column headerText="Prénom"	sortBy="#{user.name}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.name}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.name}"/>
-                    		</f:facet>
-                		</p:cellEditor>
+					<p:column headerText="Date de naissance" sortBy="#{user.birthDate}">
+						<p:inplace editor="true">
+                            <p:datePicker id="birthDatePicker"	value="#{user.birthDate}" converter="localDateConverter"/>
+				        </p:inplace>
 					</p:column>
-					
-					<p:column headerText="Date de naissance"	sortBy="#{user.birthDate}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.birthDate}" converter="localDateConverter"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                        		<p:datePicker id="actionDatePicker"	value="#{user.birthDate}"/>
-                    		</f:facet>
-                		</p:cellEditor>
-					</p:column>
-							
+						
 					<p:column headerText="Login" sortBy="#{user.login}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.login}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.login}"/>
-                    		</f:facet>
-                		</p:cellEditor>
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.login}" />
+				        </p:inplace>
 					</p:column>
-										
-					<p:column headerText="Mot de passe"	sortBy="#{user.password}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.password}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.password}"/>
-                    		</f:facet>
-                		</p:cellEditor>
+									
+					<p:column headerText="Mot de passe" sortBy="#{user.password}">
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.password}" />
+				        </p:inplace>
 					</p:column>
-															
-					<p:column headerText="Téléphone"	sortBy="#{user.phoneNumber}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.phoneNumber}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.phoneNumber}"/>
-                    		</f:facet>
-                		</p:cellEditor>
+											
+					<p:column headerText="Téléphone" sortBy="#{user.phoneNumber}">
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.phoneNumber}" />
+				        </p:inplace>
 					</p:column>
-													
-					<p:column headerText="Voie"	sortBy="#{user.street}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.street}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.street}"/>
-                    		</f:facet>
-                		</p:cellEditor>
+																
+					<p:column headerText="voie" sortBy="#{user.street}">
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.street}" />
+				        </p:inplace>
+					</p:column>
+
+					<p:column headerText="CP - Ville"	sortBy="#{user.city.zipCode}">
+						<p:inplace label="#{user.city.zipCode} - #{user.city.name}" effectSpeed="fast" event="dblclick">
+                           	<h:selectOneMenu value="#{user.city}" converter="omnifaces.SelectItemsConverter">
+                           		<f:selectItems value="#{mbAdmin.cities}" var="city" itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"/>
+                       		</h:selectOneMenu>
+				        </p:inplace>
+					</p:column>
+									
+					<p:column headerText="E-mail" sortBy="#{user.email}">
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.email}" />
+				        </p:inplace>
+					</p:column>
+														
+					<p:column headerText="Nom contact d'urgence" sortBy="#{user.emergencyContactSurname}">
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.emergencyContactSurname}" />
+				        </p:inplace>
+					</p:column>
+																			
+					<p:column headerText="Prénom contact d'urgence" sortBy="#{user.emergencyContactName}">
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.emergencyContactName}" />
+				        </p:inplace>
+					</p:column>
+																			
+					<p:column headerText="Téléphone contact d'urgence" sortBy="#{user.emergencyContactPhoneNumber}">
+						<p:inplace editor="true">
+                        	<h:inputText value="#{user.emergencyContactPhoneNumber}" />
+				        </p:inplace>
 					</p:column>
 					
-					<p:column headerText="CP - Ville"	sortBy="#{user.city.zipCode}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.city.zipCode} - #{user.city.name}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:selectOneMenu value="#{mbAdmin.selectedUser.city}" converter="omnifaces.SelectItemsConverter">
-                            		<f:selectItems value="#{mbAdmin.cities}" var="city" itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"/>
-                        		</h:selectOneMenu>
-                    		</f:facet>
-                		</p:cellEditor>
-					</p:column>
-																		
-					<p:column headerText="E-mail"	sortBy="#{user.email}" >
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.email}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.email}"/>
-                    		</f:facet>
-                		</p:cellEditor>
-					</p:column>
-																							
-					<p:column headerText="Nom contact d'urgence" sortBy="#{user.emergencyContactSurname}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.emergencyContactSurname.toUpperCase()}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.emergencyContactSurname}"/>
-                    		</f:facet>
-                		</p:cellEditor>
-					</p:column>
-																							
-					<p:column headerText="Prénom contact d'urgence"	sortBy="#{user.emergencyContactName}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.emergencyContactName}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.emergencyContactName}"/>
-                    		</f:facet>
-                		</p:cellEditor>
-					</p:column>
-																							
-					<p:column headerText="Téléphone contact d'urgence"	sortBy="#{user.emergencyContactPhoneNumber}">
-						<p:cellEditor>
-                    		<f:facet name="output">
-                        		<h:outputText value="#{user.emergencyContactPhoneNumber}"/>
-                    		</f:facet>
-                    		<f:facet name="input">
-                            	<h:inputText value="#{user.emergencyContactPhoneNumber}"/>
-                    		</f:facet>
-                		</p:cellEditor>
-					</p:column>
+					<p:column>
+						<p:commandButton alt="Valider modifications" action="#{mbAdmin.updateUser()}" icon="pi pi-check" styleClass="rounded-button" update=":adminUsersForm:adminUsersDataTable:@row(#{rowIndex})">
+							<f:setPropertyActionListener value="#{user}" target="#{mbAdmin.selectedUser}" />
+						</p:commandButton>
+					</p:column>															
 				</p:dataTable>
 			</h:form>
 		</div>

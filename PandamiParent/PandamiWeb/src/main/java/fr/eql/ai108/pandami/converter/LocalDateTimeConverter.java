@@ -13,7 +13,7 @@ public class LocalDateTimeConverter implements Converter {
  
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-          return LocalDateTime.parse(value);
+          return LocalDateTime.parse(value, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
  
     @Override

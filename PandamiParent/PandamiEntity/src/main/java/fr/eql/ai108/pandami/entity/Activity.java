@@ -34,7 +34,6 @@ public class Activity implements Serializable{
 	
 	public Activity() {
 		super();
-
 	}
 
 	
