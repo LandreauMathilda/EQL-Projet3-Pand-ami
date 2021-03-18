@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 //import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
@@ -39,11 +40,11 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	@EJB
 	private ReplyIBusiness proxyReplyBu;
 	
-	private User sessionUser; //modif, là méthode en dur
+	@ManagedProperty (value="#{mbConnect.sessionUser}")
+	private User sessionUser;
 	
 	@PostConstruct
     public void init() {
-    	sessionUser = proxyAccountBu.getUserById(); //a retirer qd user session sera annoté
     	usersValidatedDemands = proxyDemandBu.displayOwnedValidatedByUser(sessionUser.getId());
     	usersPendingValidationDemands = proxyDemandBu.displayOwnedPendingValidationByUser(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
