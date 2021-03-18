@@ -262,4 +262,43 @@ public class DemandBusiness implements DemandIBusiness{
 		demand.setCancelDate(LocalDateTime.now());
 		return proxyDemand.update(demand);
 	}
+
+	@Override
+	public String displayDemandStatusForUser(Demand demand) {
+		String status="";
+		LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+		LocalDateTime demandDate = LocalDateTime.of(demand.getActionDate(), demand.getEndHour());
+		
+		if(demandDate.isBefore(now)) { //historique anciennes demandes :
+			if(demand.getCancelDate() != null) {
+				status = "Vous avez annulé cette demande";
+			} else if (demand.getCloseDate() != null && demand.getEndedType().getId() == 1) {
+				status = "L'action a été réalisée, vous n'avez pas reporté de problèmes (finalisation automatique)";
+			} else if (demand.getCloseDate() != null && demand.getEndedType().getId() ==2) {
+				if (demand.getReportDate() != null) {
+					status = "L'action a été réalisée, vous avez rencontré un soucis avec le bénévole";
+				} else if (demand.getReportDate() == null){
+					status = "L'action a été réalisée, vous n'avez pas reporté de problèmes (finalisation automatique)";
+				}
+			}
+			else if (demand.getCloseDate() == null && demand.getReplies().size() > 0) {
+				status = "Vous n'avez jamais selectionné de bénévoles pour cette demande";
+			} else if (demand.getCloseDate() == null && demand.getReplies().size() == 0) {
+				status = "Aucun bénévole n'a postulé sur cette demande";
+			}
+		} 
+		
+		else if (demandDate.isAfter(now)) { //futures demandes, postées mais pas encore réalisées : 
+			if (demand.getCancelDate() != null ) {
+				status = "Demande annulée";
+			} else if (demand.getCloseDate() != null) {
+				status = "Volontaire selectionné";
+			} else if (demand.getCloseDate() ==null && demand.getReplies().size() == 0) {
+				status = "Aucun volontaire n'a postulé";
+			} else if (demand.getCloseDate() == null && demand.getReplies().size() >0) {
+				status = "En attente de selection";
+			}
+		}
+		return status;
+	}
 }

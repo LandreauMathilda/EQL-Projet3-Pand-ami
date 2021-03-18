@@ -82,11 +82,17 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     //statut : choisi / en attente (rejeté ?)
     //bouton pour annuler dans un second temps : reply.desistDate = date.now()
     
+    public String getStatusByReply(Reply reply) {
+    	return proxyReplyBu.displayStatusByReply(reply);
+    }
+    
+    public String getStatusByDemand(Demand demand) {
+    	return proxyDemandBu.displayDemandStatusForUser(demand);
+    }
 
 	public User getSessionUser() {
 		return sessionUser;
 	}
-
 
 	public void setSessionUser(User sessionUser) {
 		this.sessionUser = sessionUser;

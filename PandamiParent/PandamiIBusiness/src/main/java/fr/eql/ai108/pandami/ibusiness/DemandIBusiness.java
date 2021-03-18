@@ -42,4 +42,6 @@ public interface DemandIBusiness {
 	List<Demand>displayOwnedPendingValidationByUser(Integer id);
 
 	Demand cancelDemand(Demand demand);
+	
+	String displayDemandStatusForUser(Demand demand);
 }

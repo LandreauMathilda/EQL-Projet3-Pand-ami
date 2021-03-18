@@ -68,6 +68,19 @@ public class ReplyBusiness implements ReplyIBusiness {
 		return updateReply(reply);
 	}
 
+	@Override
+	public String displayStatusByReply(Reply reply) {
+		String status="";
+		if (reply.getDesistDate() != null) {
+			status = "Le volontaire s'est desisté";
+		} else if (reply.getSelectionDate() != null) {
+			status = "Vous avez selectionné ce volontaire";
+		} else if (reply.getRejectDate() != null) {
+			status = "Vous n'avez pas selectionné ce volontaire";
+		}
+		return status;
+	}
+
 	/*
 	@Override
 	public String displayReplyStatusByReply(Reply reply) {
