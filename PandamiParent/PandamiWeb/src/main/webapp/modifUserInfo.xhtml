@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/masterPage.xhtml">
-	<ui:define name="title">Profil</ui:define>
+	<ui:define name="title">Profil - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
 			<div>TITRE</div>
@@ -14,14 +14,17 @@
 				<div id="leftPanel">
 					<div id="connexion">
 						<h5>Connexion</h5>
-						<label>identifiant</label>
+						<label>Identifiant</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.login}" />
 						</p:inplace>
-						<label>Mot de passe</label>
-						<p:password value="#{mbConnect.sessionUser.password}"
-							feedback="true" />
+
+						<p:commandButton value="Changer de mot de passe"
+							oncomplete="PF('passwordDialog').show()" />
+						<p:outputLabel value="#{mbConnect.passwordMessage}" />
+
 					</div>
+
 					<div id="civilState">
 						<h5>Etat-civil :</h5>
 						<label>Nom</label>
@@ -34,9 +37,10 @@
 						</p:inplace>
 						<label>Date de naissance : </label>
 						<p:inplace editor="true">
-							<p:datePicker id="navigator"
-								value="#{mbConnect.sessionUser.birthDate}" monthNavigator="true"
-								yearNavigator="true" showWeek="true" />
+							<p:calendar id="navigator"
+								value="#{mbConnect.sessionUser.birthDate}" yearRange="c-100:c"
+								navigator="true" />
+
 						</p:inplace>
 						<label>Genre</label>
 						<p:inplace editor="true">
@@ -96,14 +100,32 @@
 						</p:inplace>
 					</div>
 					<div id="bouton">
-						<!-- !! pas la bonne méthode pour l'instant !! aller chercher la méthode de modif -->
 						<p:commandButton process="@this"
 							action="#{mbConnect.modifyUserInfo()}"
 							value="valider les modifications" />
+						<p:outputLabel value="#{mbConnect.message}" />
 					</div>
 				</div>
 			</h:form>
 		</div>
+
+		<p:dialog header="Modifier le mot de passe" widgetVar="passwordDialog">
+			<h:form id="modifForm">
+				<label>Veuillez renseigner votre ancien mot de passe</label>
+				<p:password value="#{mbConnect.verifPassword}"></p:password>
+				<label>Veuillez renseigner votre nouveau mot de passe</label>
+				<p:password value="#{mbConnect.newPassword}"></p:password>
+				<p:commandButton value="Mettre à jour"
+					action="#{mbConnect.setNewPassword()}"
+					oncomplete="PF('passwordDialog').hide()"
+					style="display: float; float:right; margin-right: 2vh" />
+				<p:commandButton value="Annuler"
+					oncomplete="PF('passwordDialog').hide()"
+					style="display: float; float:right ; margin-right: 2vh" />
+			</h:form>
+		</p:dialog>
+
+
 	</ui:define>
 	<ui:define name="CSS">
 		<h:outputStylesheet name="CSS/userInfo.css" />

@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/masterPageBis.xhtml">
-	<ui:define name="title">Connexion utilisateur</ui:define>
+	<ui:define name="title">Connexion utilisateur - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
 			<div>Connexion au compte utilisateur</div>
@@ -15,9 +15,10 @@
 					<div id="connexion">			
 						<h5>Connexion</h5>
 						<label class="label">Veuillez renseigner votre identifiant</label>
-						<p:inputText class="input" value="#{mbConnect.user.login}" /><br/>
+						<p:inputText value="#{mbConnect.user.login}" required="true" requiredMessage="Le login est incorrect" id="login"/>
 						<label class="label">Veuillez renseigner votre mot de passe</label>
-						<p:inputText class="input" value="#{mbConnect.user.password}" /><br/>					
+						<p:password value="#{mbConnect.user.password}" required="true" requiredMessage="Le mot de passe est incorrect" id="password"/>	
+						<br/>					
 					</div>
 					<div id="divButton">
 						<p:commandButton styleClass="ui-formButtons" id="button" action="#{mbConnect.connection()}" value="Se connecter"/><br/>

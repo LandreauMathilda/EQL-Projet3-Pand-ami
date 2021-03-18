@@ -1,6 +1,7 @@
 package fr.eql.ai108.pandami.web;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,7 +37,12 @@ public class AccountManagedBean implements Serializable{
 	private String password;
 	private List<City> cities;
 	private List<Gender> genders;
+	private String verifPassword;
+	private String newPassword;
+	private String passwordMessage;
 
+
+	
 
 	@EJB
 	private AccountIBusiness proxyAccountBu;
@@ -47,8 +53,11 @@ public class AccountManagedBean implements Serializable{
 	public void init() {
 		cities = proxyAccountBu.displayCities();
 		genders = proxyAccountBu.displayGenders();
+		
 	}
 
+	
+	
 	public String createAccount() {
 		//ajout automatique date du jour et usertype=2 (utilisateur)
 		user.setInscriptionDate(LocalDateTime.now());
@@ -100,11 +109,25 @@ public class AccountManagedBean implements Serializable{
 		return "/notConnectedHome.xhtml?faces-redirect=true";
 	}
 
-	public void modifyUserInfo() {
-		System.out.println(sessionUser);
+	public String modifyUserInfo() {
 		proxyAccountBu.modifyUserInfo(sessionUser);
-		System.out.println(sessionUser);
+		message = "Vos informations ont bien été mises à jour";
+		return "/modifUserInfo.xhtml?faces-redirect=true";
 	}
+
+	public String setNewPassword() {
+		if(verifPassword.equals(sessionUser.getPassword())) {
+			sessionUser.setPassword(newPassword);
+			System.out.println(sessionUser.getPassword());
+			passwordMessage = "Votre mot de passe a bien été modifié";
+		}else {
+			passwordMessage = "Veuillez réessayer";
+		}
+		return "/modifUserInfo.xhtml?faces-redirect=true";
+	}
+
+
+
 
 
 	public String getLogin() {
@@ -161,5 +184,40 @@ public class AccountManagedBean implements Serializable{
 
 	public void setSessionUser(User sessionUser) {
 		this.sessionUser = sessionUser;
+	}
+
+	public String getVerifPassword() {
+		return verifPassword;
+	}
+
+	public void setVerifPassword(String verifPassword) {
+		this.verifPassword = verifPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public String getPasswordMessage() {
+		return passwordMessage;
+	}
+
+	public void setPasswordMessage(String passwordMessage) {
+		this.passwordMessage = passwordMessage;
+	}
+
+
+	public AccountIBusiness getProxyAccountBu() {
+		return proxyAccountBu;
+	}
+
+	public void setProxyAccountBu(AccountIBusiness proxyAccountBu) {
+		this.proxyAccountBu = proxyAccountBu;
 	}	
+
+
 }

@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/masterPageAdmin.xhtml">
-	<ui:define name="title">Admin - Référentiels</ui:define>
+	<ui:define name="title">Référentiels(Admin) - Pand'ami</ui:define>
 	<ui:define name="content">
 		<p:tabView style="height: 84vh" widgetVar="tab" id="tabview"
 			activeIndex="#{mbAdmin.activeIndex}">
@@ -50,11 +50,11 @@
 			</p:tab>
 			<p:tab title="Catégories">
 				<h:form styleClass="formInfos" id="categories">
-					<div >
+					<div>
 						<h:panelGrid columns="2" cellpadding="3" id="mainGrid2">
 							<p:dataTable id="displayCategories" var="category"
 								value="#{mbAdmin.categories}"
-								emptyMessage="Aucune catégorie à afficher" >
+								emptyMessage="Aucune catégorie à afficher">
 								<p:column headerText="Catégories">
 									<p:inplace editor="true">
 										<p:inputText value="#{category.label}" required="true"
@@ -73,7 +73,7 @@
 						<h5>Ajouter une catégorie</h5>
 						<br /> <label>Libellé : </label>
 						<p:inputText value="#{mbAdmin.newCategory.label}"></p:inputText>
-						<br/>
+						<br />
 						<p:commandButton value="Ajouter une catégorie"
 							action="#{mbAdmin.addCategory()}" update=":tabview">
 						</p:commandButton>
@@ -86,25 +86,32 @@
 				<h:form styleClass="formInfos" id="formcat">
 					<div>
 						<h:panelGrid columns="2" cellpadding="3" id="mainGrid3">
-							
-								<p:dataTable id="displayActivities" var="activity"
-									value="#{mbAdmin.activities}"
-									emptyMessage="Aucune activité à afficher">
-									<p:column headerText="Activités">
-										<p:inplace editor="true">
-											<p:inputText value="#{activity.label}" required="true"
-												label="text" />
-										</p:inplace>
-									</p:column>
-									<p:column>
-										<p:commandButton value="Valider les modifications"
-											action="#{mbAdmin.upDateActivity()}" update=":tabview">
-											<f:setPropertyActionListener value="#{activity}"
-												target="#{mbAdmin.selectedActivity}" />
-										</p:commandButton>
-									</p:column>
-								</p:dataTable>
-							
+
+							<p:dataTable id="displayActivities" var="activity"
+								value="#{mbAdmin.activities}"
+								emptyMessage="Aucune activité à afficher">
+								<p:column headerText="Activités">
+									<p:inplace editor="true">
+										<p:inputText value="#{activity.label}" required="true"
+											label="text" />
+									</p:inplace>
+								</p:column>
+
+								<p:column headerText="Catégorie">
+									<h:outputText value="#{activity.activityCategory}"></h:outputText>
+								</p:column>
+								<p:column headerText="Equipement">
+									<h:outputText value="#{activity.equipmentType}"></h:outputText>
+								</p:column>
+								<p:column>
+									<p:commandButton value="Valider les modifications"
+										action="#{mbAdmin.upDateActivity()}" update=":tabview">
+										<f:setPropertyActionListener value="#{activity}"
+											target="#{mbAdmin.selectedActivity}" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+
 						</h:panelGrid>
 						<h5>Ajouter une activité</h5>
 						<br /> <label>Libellé : </label>

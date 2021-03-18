@@ -47,23 +47,11 @@ public class RedirectManagedBean implements Serializable{
 	}
 	
 	public String redirectAdminRef() {
-		if (sessionUser.getId() == 1) {
-		return "/adminRef.xhtml?faced-redirect=true";
-		}else {
-			message = "Vous n'avez pas l'autorisation administrateur";
-			return "/connectionPage.xhtml?faces-redirect=true";
-		}
-		
+		return "/adminRef.xhtml?faces-redirect=true";
 	}
 	
 	public String redirectAdminDemands() {
-		if (sessionUser.getId() == 1) {
-			return "/adminDemands.xhtml?faces-redirect=true";
-			}else {
-				message = "Vous n'avez pas l'autorisation administrateur";
-				return "/connectionPage.xhtml?faces-redirect=true";
-			}
-	
+		return "/adminDemands.xhtml?faces-redirect=true";
 	}
 	
 	public String redirectAdminUsers() {
@@ -72,6 +60,10 @@ public class RedirectManagedBean implements Serializable{
 	
 	public String redirectAdminHome() {
 		return "/adminHome.xhtml?faces-redirect=true";
+	}
+	
+	public String redirectDemandsAndReplies() {
+		return "userDemandsAndReplies.xhtml?faces-redirect=true";
 	}
 
 	public User getSessionUser() {

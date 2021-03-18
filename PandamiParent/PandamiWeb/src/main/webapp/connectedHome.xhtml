@@ -6,13 +6,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/masterPage.xhtml">
-	<ui:define name="title">Home</ui:define>
+	<ui:define name="title">Accueil - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
 			<h:form styleClass="ui-formButtons">
-				<p:commandButton class="buttons" action="#"
+				<p:commandButton class="buttons" action="#{mbRedirect.redirectDemandDeposit()}"
 					value="Déposer une demande" />
-				<p:commandButton class="buttons" action="#"
+				<p:commandButton class="buttons" action="#{mbRedirect.redirectSearchDemand()}"
 					value="Rechercher une demande" />
 			</h:form>
 		</div>

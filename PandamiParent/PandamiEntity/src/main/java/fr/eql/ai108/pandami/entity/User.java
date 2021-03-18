@@ -88,6 +88,22 @@ public class User implements Serializable {
 		this.activitiesPreferences = activitiesPreferences;
 		this.availabities = availabities;
 	}
+	public User(  String name, String surname,  String street, 
+			 String phoneNumber, String email, String emergencyContactName,
+			String emergencyContactSurname, String emergencyContactPhoneNumber, String login, String password,
+			LocalDateTime inscriptionDate) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.street = street;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.emergencyContactName = emergencyContactName;
+		this.emergencyContactSurname = emergencyContactSurname;
+		this.emergencyContactPhoneNumber = emergencyContactPhoneNumber;
+		this.login = login;
+		this.password = password;
+	}
 
 	@Override
 	public int hashCode() {

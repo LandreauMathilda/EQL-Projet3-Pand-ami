@@ -16,4 +16,5 @@ public interface AccountIBusiness {
 	//a retirer quand yaura la session
 	User getUserById();
 	User modifyUserInfo(User user);
+	//User demoUser(User user);
 }
