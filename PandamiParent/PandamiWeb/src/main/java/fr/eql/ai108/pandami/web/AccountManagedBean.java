@@ -86,7 +86,6 @@ public class AccountManagedBean implements Serializable{
 		emergencyContactPhoneNumberKaradoc = "0264975836";
 		loginKaradoc = "Karadoc";
 		passwordKaradoc = "karadoc";
-		System.out.println("coucou demo");
 
 		user = new User(null, null, nameKaradoc, surnameKaradoc,  genderKaradoc, streetKaradoc, cityKaradoc, birthDateKaradoc, phoneNumberKaradoc, emailKaradoc, emergencyContactNameKaradoc, emergencyContactSurnameKaradoc, emergencyContactPhoneNumberKaradoc, loginKaradoc, passwordKaradoc, inscriptionDateKaradoc, null, null, null);
 	  return "userInfo.xhtml?faces-redirect=true";
@@ -244,14 +243,6 @@ public class AccountManagedBean implements Serializable{
 		this.passwordMessage = passwordMessage;
 	}
 
-
-	public AccountIBusiness getProxyAccountBu() {
-		return proxyAccountBu;
-	}
-
-	public void setProxyAccountBu(AccountIBusiness proxyAccountBu) {
-		this.proxyAccountBu = proxyAccountBu;
-	}
 	public String getNameKaradoc() {
 		return nameKaradoc;
 	}

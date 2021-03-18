@@ -40,12 +40,7 @@
     						<f:selectItems value="#{mbDemand.activities}" var = "activity"
     						itemLabel="#{activity.activityCategory} - #{activity} - #{activity.equipmentType}" itemValue="#{activity}"></f:selectItems>
     					</p:selectOneMenu>
-					
-					
-					
-					
-					 <label>Type de la
-						demande</label> <label>Matériel requis</label>
+				
 					<div id="divButton">
 						<p:commandButton styleClass="ui-formButtons" id="button"
 							action="#{mbDemand.createDemand()}" value="Déposer ma demande" />
@@ -57,7 +52,7 @@
 			<h:form>
 			<div>
 			<p:commandButton styleClass="ui-formButtons" id="button"
-							action="#{mbDemand.createDemand()}" value="Démonstration" />
+							action="#{mbDemand.setDemo()}" value="Démonstration" />
 			</div></h:form>
 		</div>
 	</ui:define>
