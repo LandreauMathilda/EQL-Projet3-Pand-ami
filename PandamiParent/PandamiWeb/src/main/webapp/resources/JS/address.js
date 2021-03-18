@@ -1,7 +1,7 @@
 
-const inputStreet = document.querySelector("#street");
-const inputPostCode = document.querySelector("#postCode");
-const inputCity = document.querySelector("#city");
+const inputStreet = document.getElementById("formUser:street");
+const inputPostCode = document.getElementById("formUser:postCode");
+const inputCity = document.getElementById("formUser:city");
 const streetResults = document.querySelector(".streetResults");
 const cityResults = document.querySelector(".cityResults");
 const xhttp = new XMLHttpRequest();

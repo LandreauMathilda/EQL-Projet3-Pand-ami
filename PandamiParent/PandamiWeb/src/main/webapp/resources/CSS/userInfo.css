@@ -1,3 +1,47 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	box-sizing: border-box;
+}
+
+input {
+	height: 40px;
+	padding: 0 10px;
+	border: 2px solid blue;
+	border-radius: 5px;
+}
+
+.streetResults, .cityResults {
+	box-shadow: 0px 0px 5px 0px rgba(0, 26, 255, 0.3);
+	background-color: white;
+	border-radius: 0px 0px 5px 5px;
+	position: absolute;
+	z-index: 10;
+	top: 40px;
+}
+
+.streetResults div, .cityResults div {
+	padding: 10px;
+}
+
+.streetResults div:hover, .cityResults div:hover {
+	background-color: blue;
+	color: white;
+	cursor: pointer;
+}
+
+#wrapperStreet {
+	position: relative;
+}
+
+#wrapperCity {
+	position: relative;
+}
+
 #main {
 	background-color: hotpink;
 	display: flex;
@@ -18,9 +62,9 @@
 	flex-direction: column;
 	background-color: orange;
 	padding: 2vw;
-	flex-grow:1;
-	margin:2vw;
-	align-items:space-between;
+	flex-grow: 1;
+	margin: 2vw;
+	align-items: space-between;
 }
 
 #leftPanel div, #rightPanel div {
@@ -30,11 +74,11 @@
 
 #rightPanel {
 	background-color: teal;
-	position :relative;
+	position: relative;
 }
 
 #rightPanel #bouton {
 	align-self: flex-end;
 	position: absolute;
-	bottom:1vw;
+	bottom: 1vw;
 }

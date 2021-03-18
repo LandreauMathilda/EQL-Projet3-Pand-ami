@@ -53,15 +53,21 @@
 					<div id="adress">
 						<h5>Adresse* :</h5>
 						<label>N° et rue*</label>
-						<p:inputText id="street" value="#{mbConnect.user.street}"  required="true" requiredMessage="Le N° et la rue doivent être renseignés"/>
-						<p:message style="color:red" for="street" />
+						<div id="wrapperStreet">
+                        	<h:inputText id="street" value="#{mbConnect.user.street}"  required="true" requiredMessage="Le N° et la rue doivent être renseignés"/>
+                        	<p:message style="color:red" for="street" />
+                        	<div class="streetResults"></div>
+                    	</div>
+						
+						<label>Code Postal*</label>
+						<p:inputText id="postCode" value="#{mbConnect.user.city.zipCode}"  required="true"/>
+						
 						<label>Ville*</label>
-    					<p:selectOneMenu id="city" value="#{mbConnect.user.city}" converter="omnifaces.SelectItemsConverter" dynamic="true" required="true" requiredMessage="La ville doit être renseignée">
-    						<f:selectItem itemValue="" itemLabel="CP - Ville " noSelectionOption="true"/>
-    						<f:selectItems value="#{mbConnect.cities}" var = "city"
-    						itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
-    					</p:selectOneMenu>
-    					<p:message style="color:red" for="city" />
+						<div id="wrapperCity">
+							<p:inputText id="city" value="#{mbConnect.user.city.name}"  disabled="true" />
+							<p:message style="color:red" for="city" />
+                        	<div class="cityResults"></div>
+                    	</div>
 					</div>
 					<div id="emergencyContact">
 						<h5>Contact d'Urgence :</h5>
@@ -89,6 +95,7 @@
 					</div>
 			</h:form>
 		</div>
+		<script src="resources/JS/address.js"></script>
 	</ui:define>
 	<ui:define name="CSS">
 		<h:outputStylesheet name="CSS/userInfo.css" />
