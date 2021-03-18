@@ -46,6 +46,7 @@ public class AdminManagedBean implements Serializable{
 	private UserType userType;
 	private String message;
 	private String activityLabel;
+	private Integer activeIndex;
 	private ActivityCategory categoryForActivity;
 	private EquipmentType equipmentForActivity;
 	private EquipmentType selectedEquipment;
@@ -71,8 +72,6 @@ public class AdminManagedBean implements Serializable{
 	private List<Demand> demands;
 	private List<User> users;
 
-	private Integer activeIndex;
-
 	@EJB
 	private AdminIBusiness proxyAdminBu;
 	@EJB
@@ -89,6 +88,7 @@ public class AdminManagedBean implements Serializable{
 		demands = proxyDemandBU.displayAllDemands();
 		cancelReasons = proxyAdminBu.displayCancelReasons();
 		desistReasons = proxyAdminBu.displayDesistReasons();
+		endedTypes = proxyAdminBu.displayEndedTypes();
 		endedTypes = proxyAdminBu.displayEndedTypes();
 		genders = proxyAdminBu.displayGenders();
 		reportIssues = proxyAdminBu.displayReportIssues();
@@ -152,6 +152,10 @@ public class AdminManagedBean implements Serializable{
 		return "/adminRef.xhtml?faces-redirect=true";
 	}
 
+	public void updateDemand() {
+		proxyDemandBU.upDateDemand(selectedDemand);
+	}
+	
 	public void updateUser() {
 		proxyAccountBU.modifyUserInfo(selectedUser);
 	}

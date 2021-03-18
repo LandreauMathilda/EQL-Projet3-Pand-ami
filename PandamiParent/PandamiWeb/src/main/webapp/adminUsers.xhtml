@@ -23,6 +23,7 @@
 					<p:column headerText="Type d'utilisateur"	sortBy="#{user.userType.type}">
 						<p:inplace label="#{user.userType.type}" effectSpeed="fast" event="dblclick">
                            	<h:selectOneMenu value="#{user.userType}" converter="omnifaces.SelectItemsConverter">
+                           		<f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true"/>
                            		<f:selectItems value="#{mbAdmin.userTypes}" var="userType" itemLabel="#{userType.type}" itemValue="#{userType}"/>
                        		</h:selectOneMenu>
 				        </p:inplace>
@@ -37,6 +38,7 @@
 					<p:column headerText="Genre"	sortBy="#{user.gender.name}">
 						<p:inplace label="#{user.gender.name}" effectSpeed="fast" event="dblclick">
                            	<h:selectOneMenu value="#{user.gender}" converter="omnifaces.SelectItemsConverter">
+                           		<f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true"/>
                             	<f:selectItems value="#{mbAdmin.genders}" var="gender" itemLabel="#{gender.name}" itemValue="#{gender}"/>
                         	</h:selectOneMenu>
 				        </p:inplace>
@@ -87,6 +89,7 @@
 					<p:column headerText="CP - Ville"	sortBy="#{user.city.zipCode}">
 						<p:inplace label="#{user.city.zipCode} - #{user.city.name}" effectSpeed="fast" event="dblclick">
                            	<h:selectOneMenu value="#{user.city}" converter="omnifaces.SelectItemsConverter">
+                           		<f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true"/>
                            		<f:selectItems value="#{mbAdmin.cities}" var="city" itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"/>
                        		</h:selectOneMenu>
 				        </p:inplace>
@@ -117,7 +120,8 @@
 					</p:column>
 					
 					<p:column>
-						<p:commandButton alt="Valider modifications" action="#{mbAdmin.updateUser()}" icon="pi pi-check" styleClass="rounded-button" update=":adminUsersForm:adminUsersDataTable:@row(#{rowIndex})">
+						<p:commandButton action="#{mbAdmin.updateUser()}" icon="pi pi-check" styleClass="rounded-button" 
+										 update=":adminUsersForm:adminUsersDataTable:@row(#{rowIndex})">
 							<f:setPropertyActionListener value="#{user}" target="#{mbAdmin.selectedUser}" />
 						</p:commandButton>
 					</p:column>															

@@ -90,8 +90,7 @@ public class DemandBusiness implements DemandIBusiness{
 
 	@Override
 	public Demand upDateDemand(Demand demand) {
-		Demand returnedDemand = proxyDemand.update(demand);
-		return returnedDemand;
+		return proxyDemand.update(demand);
 	}
 	
 	@Override
