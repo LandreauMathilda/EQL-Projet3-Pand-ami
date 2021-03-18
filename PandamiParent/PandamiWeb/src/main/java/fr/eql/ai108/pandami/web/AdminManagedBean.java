@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai108.pandami.entity.Activity;
@@ -21,6 +20,7 @@ import fr.eql.ai108.pandami.entity.Gender;
 import fr.eql.ai108.pandami.entity.ReportIssue;
 import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.entity.UserType;
+import fr.eql.ai108.pandami.ibusiness.AccountIBusiness;
 import fr.eql.ai108.pandami.ibusiness.AdminIBusiness;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 
@@ -31,7 +31,7 @@ public class AdminManagedBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private User user = new User();
-	
+
 	private Activity activity;
 	private ActivityCategory activityCategory;
 	private CancelReason cancelReason;
@@ -51,12 +51,13 @@ public class AdminManagedBean implements Serializable{
 	private EquipmentType selectedEquipment;
 	private Activity selectedActivity;
 	private ActivityCategory selectedCategory;
+	private User selectedUser = new User();
 	private ActivityCategory newCategory = new ActivityCategory();
 	private City newCity = new City();
 	private Demand selectedDemand = new Demand();
 	private Activity newActivity = new Activity();
 	private EquipmentType newEquipment = new EquipmentType();
-	
+
 	private List<Activity> activities;
 	private List<ActivityCategory> categories;
 	private List<CancelReason> cancelReasons;
@@ -68,30 +69,32 @@ public class AdminManagedBean implements Serializable{
 	private List<ReportIssue> reportIssues;
 	private List<UserType> userTypes;
 	private List<Demand> demands;
-	
+	private List<User> users;
+
 	private Integer activeIndex;
-	
-	
+
 	@EJB
 	private AdminIBusiness proxyAdminBu;
-	
 	@EJB
 	private DemandIBusiness proxyDemandBU;
-	
+	@EJB
+	private AccountIBusiness proxyAccountBU;
+
 	@PostConstruct
-    public void init() {
+	public void init() {
 		activities = proxyAdminBu.displayActivities();
 		categories = proxyAdminBu.displayCategories();
-    	cities = proxyAdminBu.displayCities();
-    	equipmentTypes = proxyAdminBu.displayEquipmentTypes();
-    	demands = proxyDemandBU.displayAllDemands();
+		cities = proxyAdminBu.displayCities();
+		equipmentTypes = proxyAdminBu.displayEquipmentTypes();
+		demands = proxyDemandBU.displayAllDemands();
 		cancelReasons = proxyAdminBu.displayCancelReasons();
-    	desistReasons = proxyAdminBu.displayDesistReasons();
-    	endedTypes = proxyAdminBu.displayEndedTypes();
-    	genders = proxyAdminBu.displayGenders();
-    	reportIssues = proxyAdminBu.displayReportIssues();
-    	userTypes = proxyAdminBu.displayUserTypes();
-    }
+		desistReasons = proxyAdminBu.displayDesistReasons();
+		endedTypes = proxyAdminBu.displayEndedTypes();
+		genders = proxyAdminBu.displayGenders();
+		reportIssues = proxyAdminBu.displayReportIssues();
+		userTypes = proxyAdminBu.displayUserTypes();
+		users = proxyAccountBU.displayAllUsers();
+	}
 
 	public void upDateCities() {
 		proxyAdminBu.upDateCity(selectedCity);
@@ -104,16 +107,16 @@ public class AdminManagedBean implements Serializable{
 		cities = proxyAdminBu.displayCities();
 		activeIndex = 0;
 	}
-	
+
 	public void upDateActivity() {
 		proxyAdminBu.upDateActivity(selectedActivity);
 		activities = proxyAdminBu.displayActivities();
 		activeIndex = 3;
 	}
-	
+
 	public void addActivity() {
 		newActivity = new Activity(null, activityLabel, categoryForActivity, equipmentForActivity);
-		
+
 		proxyAdminBu.addActivity(newActivity);
 		newActivity = new Activity();
 		activityLabel = null;
@@ -122,7 +125,7 @@ public class AdminManagedBean implements Serializable{
 		activities = proxyAdminBu.displayActivities();
 		activeIndex = 3;
 	}
-	
+
 	public void upDateCategory() {
 		proxyAdminBu.upDateCategory(selectedCategory);
 		System.out.println(selectedCategory.toString());
@@ -148,8 +151,10 @@ public class AdminManagedBean implements Serializable{
 		equipmentTypes = proxyAdminBu.displayEquipmentTypes();
 		return "/adminRef.xhtml?faces-redirect=true";
 	}
-	
-	
+
+	public void updateUser() {
+		proxyAccountBU.modifyUserInfo(selectedUser);
+	}
 
 	public Integer getActiveIndex() {
 		return activeIndex;
@@ -435,6 +440,14 @@ public class AdminManagedBean implements Serializable{
 		this.genders = genders;
 	}
 
+	public User getSelectedUser() {
+		return selectedUser;
+	}
+
+	public void setSelectedUser(User selectedUser) {
+		this.selectedUser = selectedUser;
+	}
+
 	public void setReportIssues(List<ReportIssue> reportIssues) {
 		this.reportIssues = reportIssues;
 	}
@@ -461,5 +474,13 @@ public class AdminManagedBean implements Serializable{
 
 	public void setSelectedActivity(Activity selectedActivity) {
 		this.selectedActivity = selectedActivity;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 }
