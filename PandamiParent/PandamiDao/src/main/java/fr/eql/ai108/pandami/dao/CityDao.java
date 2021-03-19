@@ -28,4 +28,13 @@ public class CityDao extends GenericDao<City> implements CityIDao {
 		List<City> cities = query.getResultList();
 		return cities.size() > 0 ? cities.get(0) : null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<City> findAll(){
+		Query query = em.createQuery("SELECT c FROM City c ORDER BY c.zipCode");
+		List<City> cities = query.getResultList();
+		return cities.size() > 0 ? cities : null;
+	}
+	
 }

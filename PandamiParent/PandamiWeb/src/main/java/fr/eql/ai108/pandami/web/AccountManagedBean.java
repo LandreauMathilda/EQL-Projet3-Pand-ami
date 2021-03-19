@@ -40,7 +40,6 @@ public class AccountManagedBean implements Serializable{
 	private String newPassword;
 	private String passwordMessage;
 
-
 	private String nameKaradoc;
 	private String surnameKaradoc;
 	private Gender genderKaradoc;
@@ -56,7 +55,6 @@ public class AccountManagedBean implements Serializable{
 	private String passwordKaradoc;
 	private LocalDateTime inscriptionDateKaradoc;
 
-
 	@EJB
 	private AccountIBusiness proxyAccountBu;
 
@@ -66,6 +64,7 @@ public class AccountManagedBean implements Serializable{
 	public void init() {
 		cities = proxyAccountBu.displayCities();
 		genders = proxyAccountBu.displayGenders();
+		message = "";
 	}
 
 	public String setDemoKaradoc() {
@@ -74,7 +73,7 @@ public class AccountManagedBean implements Serializable{
 		genderKaradoc = new Gender(2, "Femme");
 		streetKaradoc = "";
 		cityKaradoc = new City();
-		birthDateKaradoc = LocalDate.of(438, 04, 10);
+		birthDateKaradoc = LocalDate.of(1438, 04, 10);
 		phoneNumberKaradoc = "0297648315";
 		emailKaradoc = "karadocDeVannes@Kaamelott.fr";
 		emergencyContactNameKaradoc = "Mevanwi";
@@ -99,7 +98,7 @@ public class AccountManagedBean implements Serializable{
 			message = "Ce login n'est pas disponible. Choisissez en un autre";
 			return "/userInfo.xhtml?faces-redirect=true";
 		} else if (user != null){
-			message = "Merci " + user.getLogin() + ", votre compte a bien été créé";
+			message = "";
 			selectedCity = new City();
 			sessionUser = user;
 			user = new User();
