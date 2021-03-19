@@ -14,20 +14,20 @@
 	<div id="header">
 		<div>
 			<h:form>
-				<h:commandLink value="Accueil" action="#{mbRedirect.redirectConnectedHome()}" />
+				<h:commandLink class="cmdLk" value="Accueil" action="#{mbRedirect.redirectConnectedHome()}" />
 				|
-				<h:commandLink value="Mon profil" action="#{mbRedirect.redirectProfil()}" />
+				<h:commandLink class="cmdLk" value="Mon profil" action="#{mbRedirect.redirectProfil()}" />
 				|
-				<h:commandLink value="Mes demandes / Mon bénévolat" action="#{mbRedirect.redirectDemandsAndReplies()}"/>
+				<h:commandLink class="cmdLk" value="Mes demandes / Mon bénévolat" action="#{mbRedirect.redirectDemandsAndReplies()}"/>
 				|
-				<h:commandLink value="Rechercher une demande" action="#{mbRedirect.redirectSearchDemand()}"/> 
+				<h:commandLink class="cmdLk" value="Rechercher une demande" action="#{mbRedirect.redirectSearchDemand()}"/> 
 				|
-				<h:commandLink value="Déposer une demande" action="#{mbRedirect.redirectDemandDeposit()}" />
+				<h:commandLink class="cmdLk" value="Déposer une demande" action="#{mbRedirect.redirectDemandDeposit()}" />
 			</h:form>
 		</div>
 		<div>
 			<h:form>
-				<h:commandLink value="se deconnecter" action="#{mbConnect.disconnect()}"/>
+				<h:commandLink class="cmdLk" value="se deconnecter" action="#{mbConnect.disconnect()}"/>
 			</h:form>
 		</div>
 	</div>

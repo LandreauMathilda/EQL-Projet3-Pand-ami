@@ -1,30 +1,37 @@
+*{
+	font-family:Tahoma;
+}
+
 body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	box-sizing: border-box;
+	box-sizing: border-box; 
+	background: url("#{resource['IMG/fondPandAmi_Gimp4.jpg']}");
 }
 
 #header {
-	border: 1px solid black;
+	_border: 1px solid black;
+	border-bottom:2px solid #ac1482;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	margin: 1vw;
-	padding: 1vw;
+	padding: 2vh 1vw;
 }
 
 #center {
-	border: 1px solid hotpink;
+	_border: 1px solid hotpink;
 	flex-grow: 1;
 	margin: 1vw;
 	_padding: 1vw;
 	display:flex;
-	box-sizing:border-box;
+	box-sizing:border-box;	
 }
 
 #footer {
-	border: 1px solid orange;
+	_border: 1px solid orange;
+	border-top: 2px solid #ac1482;
 	text-align: center;
 	margin: 1vw;
 	padding: 1vw;
@@ -36,4 +43,16 @@ body {
 	margin:1vh;
 	flex-grow:1;
 	display:flex;
+}
+
+.cmdLk {
+	color:#1482ac;
+	font-size: large;
+	text-decoration : none;
+}
+
+.cmdLk:hover {
+	color : #ac1482;
+	letter-spacing:2px;
+	transition: all 0.3s ease 0s;
 }

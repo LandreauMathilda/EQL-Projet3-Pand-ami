@@ -1,0 +1,68 @@
+#formButtons {
+	flex-grow:1;
+	display:flex;
+	_background-color:orange;
+	align-items:stretch;
+	_align-content:stretch;
+	_justify-content:center;
+	box-sizing: border-box;
+}
+
+#leftPanel, #rightPanel{
+	display:flex;
+	flex-grow:1;
+	flex-direction:column;
+	_background-color:hotpink;
+	_border:1px solid black;
+	align-items: center;
+	justify-content: center;
+	text-align:center;
+	margin:1vw;
+	padding:2vh;
+	box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+p{
+	_border : 1px solid black;
+	padding:1vw;
+	flex-grow:1;
+	font-size: large;
+}
+
+label {
+	font-size:x-large;
+	font-weight:500;
+	color: #82ac14;
+}
+
+body .ui-button {
+	text-transform: uppercase;
+    text-align: center;
+    font-size: x-large;
+    color: white;
+    border: none;
+    font-weight: 500;
+    _border-radius: 6px;
+    _display: inline-block;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+    background-color:#1482ac;
+    _background-color: rgba(20,130,172,0.7);
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    padding:1vh 3vw;
+}
+
+body .ui-button:hover{
+	text-transform: uppercase;
+	text-decoration: none;
+    color: white;
+    background-color: #ac1482;
+    _background-color: rgba(170,20,130, 0.7);
+    font-weight: 700;
+    letter-spacing: 3px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+}
