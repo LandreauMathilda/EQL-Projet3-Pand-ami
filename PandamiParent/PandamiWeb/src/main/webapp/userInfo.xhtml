@@ -47,6 +47,7 @@
 				</div>
 				<div id="rightPanel">
 					<div id="adress">
+						<h5>Adresse* :</h5>
 						<label>N° et rue*</label>
 						<div id="wrapperStreet">
                         	<h:inputText id="street" value="#{mbConnect.user.street}"  required="true" requiredMessage="Le N° et la rue doivent être renseignés"/>
@@ -54,10 +55,10 @@
                         	<div class="streetResults"></div>
                     	</div>
 						<label>Code Postal*</label>
-						<p:inputText id="postCode" value="#{mbConnect.user.city.zipCode}"  required="true"/>
+						<h:inputText id="postCode" value="#{mbConnect.selectedCity.zipCode}"  required="true"/>
 						<label>Ville*</label>
 						<div id="wrapperCity">
-							<p:inputText id="city" value="#{mbConnect.user.city.name}"  disabled="true" />
+							<h:inputText id="city" value="#{mbConnect.selectedCity.name}" />
 							<p:message style="color:red" for="city" />
                         	<div class="cityResults"></div>
                     	</div>
