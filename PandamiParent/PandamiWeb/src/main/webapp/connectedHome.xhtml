@@ -10,10 +10,14 @@
 	<ui:define name="content">
 		<div id="main">
 			<h:form styleClass="ui-formButtons">
-				<p:commandButton class="buttons" action="#{mbRedirect.redirectDemandDeposit()}"
-					value="Déposer une demande" />
+				<p:commandButton class="buttons" action="#{mbRedirect.redirectProfil()}"
+					value="Gérer mon profil" />
+				<p:commandButton class="buttons" action="#{mbRedirect.redirectDemandsAndReplies()}"
+					value="Gérer mes demandes / mon bénévolat" />
 				<p:commandButton class="buttons" action="#{mbRedirect.redirectSearchDemand()}"
 					value="Rechercher une demande" />
+				<p:commandButton class="buttons" action="#{mbRedirect.redirectDemandDeposit()}"
+					value="Déposer une demande" />
 			</h:form>
 		</div>
 	</ui:define>
