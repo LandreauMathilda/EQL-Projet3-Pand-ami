@@ -11,52 +11,122 @@
 		<div id="main">
 			<div>Visualisation de l'ensemble des demandes</div>
 			<h:form id="adminDemandsForm">
-				<p:dataTable id="adminDemandsDataTable" var="demand"
-					value="#{mbAdmin.demands}" reflow="true" rows="30" size="small"
-					widgetVar="adminDemandTable" editable="true"
-					emptyMessage="Aucune demande ne correspond à vos critères de recherche"
+                
+				<p:dataTable id="adminDemandsDataTable" var="demand" value="#{mbAdmin.demands}" reflow="true" rows="30" size="large"
+					widgetVar="adminDemandTable" emptyMessage="Aucune demande ne correspond à vos critères de recherche"
 					rowIndexVar="rowIndex">
 
 					<p:column headerText="Demande n°" sortBy="#{demand.id}">
 						<h:outputText value="#{demand.id}" />
 					</p:column>
+					
+					<p:column headerText="Utilisateur" sortBy="#{demand.user.surname}">
+						<h:outputText value="#{demand.user.surname.toUpperCase()} #{demand.user.name}"/>
+					</p:column>
 
 					<p:column headerText="Date publication"	sortBy="#{demand.publishDate}">
-						<h:outputText value="#{demand.publishDate}"/>
+						<h:outputText value="#{demand.publishDate}" converter="localDateTimeConverter"/>
+					</p:column>
+					
+					<p:column headerText="Type Service"	sortBy="#{demand.activity.label}">
+						<p:inplace label="#{demand.activity.label}" effectSpeed="fast" event="dblclick">
+                            <h:selectOneMenu value="#{demand.activity}"  converter="omnifaces.SelectItemsConverter">
+                           		<f:selectItems value="#{mbAdmin.activities}" var="activity" itemLabel="#{activity.label}" itemValue="#{activity}"/>
+                       		</h:selectOneMenu>
+				        </p:inplace>
 					</p:column>
 
-					<p:column headerText="Type Service"
-						sortBy="#{demand.activity.label}">
-						<h:outputText value="#{demand.activity.label}" />
+					<p:column headerText="Date action"	sortBy="#{demand.actionDate}">
+						<p:inplace editor="true">
+                        	<p:datePicker id="actionDatePicker"	value="#{demand.actionDate}" />
+				        </p:inplace>
+					</p:column>
+					
+					<p:column headerText="Heure début"	sortBy="#{demand.startHour}">
+						<p:inplace editor="true">
+                        	<p:datePicker value="#{demand.startHour}" timeOnly="true"/>
+				        </p:inplace>
+					</p:column>
+					
+					<p:column headerText="Heure fin"	sortBy="#{demand.endHour}">
+						<p:inplace editor="true">
+                        	<p:datePicker value="#{demand.endHour}" timeOnly="true"/>
+				        </p:inplace>
+					</p:column>
+					
+					<p:column headerText="Adresse"	sortBy="#{demand.street}">
+						<p:inplace editor="true">
+                        	<h:outputText value="#{demand.street}"/>
+				        </p:inplace>
+					</p:column>
+					
+					<p:column headerText="CP - Ville"	sortBy="#{demand.city.zipCode}">
+						<p:inplace label="#{demand.city.zipCode} - #{demand.city.name}" effectSpeed="fast" event="dblclick">
+                           	<h:selectOneMenu value="#{demand.city}" converter="omnifaces.SelectItemsConverter">
+                           	    <f:selectItem  itemValue="#{null}" itemLabel="" noSelectionOption="true" />
+                           		<f:selectItems value="#{mbAdmin.cities}" var="city" itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"/>
+                       		</h:selectOneMenu>
+				        </p:inplace>
 					</p:column>
 
-					<p:column headerText="Date action" sortBy="#{demand.actionDate}">
-						<h:outputText value="#{demand.actionDate}"/>
+					<p:column headerText="Finalisation"	sortBy="#{demand.endedType.label}">
+						<p:inplace label="#{demand.endedType.label}" effectSpeed="fast" event="dblclick">
+                           	<h:selectOneMenu value="#{demand.endedType}" converter="omnifaces.SelectItemsConverter">
+                           	   <f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true"  />
+                           		<f:selectItems value="#{mbAdmin.endedTypes}" var="endType" itemLabel="#{endType.label}" itemValue="#{endType}"/>
+                       		</h:selectOneMenu>
+				        </p:inplace>
 					</p:column>
-
-					<p:column headerText="Horaires" sortBy="#{demand.startHour}">
-						<h:outputText value="#{demand.startHour} à #{demand.endHour}" />
+					
+					<p:column headerText="Date d'annulation" sortBy="#{demand.cancelDate}">
+						<p:inplace editor="true">
+                        	<p:datePicker value="#{demand.cancelDate}" converter="localDateTimeConverter"/>
+				        </p:inplace>
 					</p:column>
-
-					<p:column headerText="Adresses (Tri par CP)" sortBy="#{demand.city.zipCode}">
-						<h:outputText value="#{demand.street} #{demand.city.zipCode} #{demand.city.name}" />
+					
+					<p:column headerText="Motif d'annulation" sortBy="#{demand.cancelReason.label}">
+						<p:inplace label="#{demand.cancelReason.label}" effectSpeed="fast" event="dblclick">
+                       	    <h:selectOneMenu value="#{demand.cancelReason}" converter="omnifaces.SelectItemsConverter">
+                       	    	<f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true" />
+                           		<f:selectItems value="#{mbAdmin.cancelReasons}" var="cancelReason" itemLabel="#{cancelReason.label}" itemValue="#{cancelReason}"/>
+                       		</h:selectOneMenu>
+				        </p:inplace>
 					</p:column>
-
-					<p:column headerText="Finalisation" sortBy="#{demand.endedType.label}">
-						<h:outputText value="#{demand.endedType.label}" />
+					
+					<p:column headerText="Date de plainte"	sortBy="#{demand.reportDate}">
+						<p:inplace editor="true">
+                        	<p:datePicker value="#{demand.reportDate}" converter="localDateTimeConverter"/>
+				        </p:inplace>
 					</p:column>
-
+					
+					<p:column headerText="Motif de plainte"	sortBy="#{demand.reportIssue.label}">
+						<p:inplace label="#{demand.reportIssue.label}" effectSpeed="fast" event="dblclick">
+                       	    <h:selectOneMenu value="#{demand.reportIssue}" converter="omnifaces.SelectItemsConverter">
+                       	        <f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true"/>
+                           		<f:selectItems value="#{mbAdmin.reportIssues}" var="reportIssue" itemLabel="#{reportIssue.label}" itemValue="#{reportIssue}"/>
+                       		</h:selectOneMenu>
+				        </p:inplace>
+					</p:column>
+					
+					<p:column headerText="Date de cloture"	sortBy="#{demand.closeDate}">
+						<p:inplace editor="true">
+                        	<p:datePicker value="#{demand.closeDate}" converter="localDateTimeConverter"/>
+				        </p:inplace>
+					</p:column>
+					
 					<p:column>
-						<!--<p:commandButton type="button" icon="pi pi-pencil" styleClass="rounded-button ui-button-secondary" />  -->
-						<p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
-					</p:column>
+						<p:commandButton action="#{mbAdmin.updateDemand()}" icon="pi pi-check"
+										 styleClass="rounded-button" update=":adminDemandsForm:adminDemandsDataTable:@row(#{rowIndex})">
+							<f:setPropertyActionListener value="#{demand}" target="#{mbAdmin.selectedDemand}" />
+						</p:commandButton>
+					</p:column>	
 				</p:dataTable>
 			</h:form>
 		</div>
 	</ui:define>
 
 	<ui:define name="CSS">
-		<h:outputStylesheet name="CSS/demandDeposit.css" />
+		<h:outputStylesheet name="CSS/adminDemands.css" />
 	</ui:define>
 </ui:composition>
 </html>

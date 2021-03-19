@@ -42,7 +42,21 @@ public class AccountManagedBean implements Serializable{
 	private String passwordMessage;
 
 
-	
+	private String nameKaradoc;
+	private String surnameKaradoc;
+	private Gender genderKaradoc;
+	private String streetKaradoc;
+	private City cityKaradoc ;
+	private LocalDate birthDateKaradoc ;
+	private String phoneNumberKaradoc;
+	private String emailKaradoc ;
+	private String emergencyContactNameKaradoc;
+	private String emergencyContactSurnameKaradoc;
+	private String emergencyContactPhoneNumberKaradoc;
+	private String loginKaradoc;
+	private String passwordKaradoc;
+	private LocalDateTime inscriptionDateKaradoc;
+
 
 	@EJB
 	private AccountIBusiness proxyAccountBu;
@@ -56,8 +70,27 @@ public class AccountManagedBean implements Serializable{
 		
 	}
 
-	
-	
+
+
+	public String setDemoKaradoc() {
+		nameKaradoc = "Karadoc";
+		surnameKaradoc = "De Vannes";
+		genderKaradoc = new Gender(2, "Femme");
+		streetKaradoc = "34 rue de Vannes";
+		cityKaradoc = new City(3, "Vincennes", "94300");
+		birthDateKaradoc = LocalDate.of(438, 04, 10);
+		phoneNumberKaradoc = "0297648315";
+		emailKaradoc = "karadocDeVannes@Kaamelott.fr";
+		emergencyContactNameKaradoc = "Mevanwi";
+		emergencyContactSurnameKaradoc = "De Vannes";
+		emergencyContactPhoneNumberKaradoc = "0264975836";
+		loginKaradoc = "Karadoc";
+		passwordKaradoc = "karadoc";
+
+		user = new User(null, null, nameKaradoc, surnameKaradoc,  genderKaradoc, streetKaradoc, cityKaradoc, birthDateKaradoc, phoneNumberKaradoc, emailKaradoc, emergencyContactNameKaradoc, emergencyContactSurnameKaradoc, emergencyContactPhoneNumberKaradoc, loginKaradoc, passwordKaradoc, inscriptionDateKaradoc, null, null, null);
+	  return "userInfo.xhtml?faces-redirect=true";
+	}
+
 	public String createAccount() {
 		//ajout automatique date du jour et usertype=2 (utilisateur)
 		user.setInscriptionDate(LocalDateTime.now());
@@ -210,13 +243,89 @@ public class AccountManagedBean implements Serializable{
 		this.passwordMessage = passwordMessage;
 	}
 
-
-	public AccountIBusiness getProxyAccountBu() {
-		return proxyAccountBu;
+	public String getNameKaradoc() {
+		return nameKaradoc;
 	}
-
-	public void setProxyAccountBu(AccountIBusiness proxyAccountBu) {
-		this.proxyAccountBu = proxyAccountBu;
+	public void setNameKaradoc(String nameKaradoc) {
+		this.nameKaradoc = nameKaradoc;
+	}
+	public String getSurnameKaradoc() {
+		return surnameKaradoc;
+	}
+	public void setSurnameKaradoc(String surnameKaradoc) {
+		this.surnameKaradoc = surnameKaradoc;
+	}
+	public Gender getGenderKaradoc() {
+		return genderKaradoc;
+	}
+	public void setGenderKaradoc(Gender genderKaradoc) {
+		this.genderKaradoc = genderKaradoc;
+	}
+	public String getStreetKaradoc() {
+		return streetKaradoc;
+	}
+	public void setStreetKaradoc(String streetKaradoc) {
+		this.streetKaradoc = streetKaradoc;
+	}
+	public City getCityKaradoc() {
+		return cityKaradoc;
+	}
+	public void setCityKaradoc(City cityKaradoc) {
+		this.cityKaradoc = cityKaradoc;
+	}
+	public LocalDate getBirthDateKaradoc() {
+		return birthDateKaradoc;
+	}
+	public void setBirthDateKaradoc(LocalDate birthDateKaradoc) {
+		this.birthDateKaradoc = birthDateKaradoc;
+	}
+	public String getPhoneNumberKaradoc() {
+		return phoneNumberKaradoc;
+	}
+	public void setPhoneNumberKaradoc(String phoneNumberKaradoc) {
+		this.phoneNumberKaradoc = phoneNumberKaradoc;
+	}
+	public String getEmailKaradoc() {
+		return emailKaradoc;
+	}
+	public void setEmailKaradoc(String emailKaradoc) {
+		this.emailKaradoc = emailKaradoc;
+	}
+	public String getEmergencyContactNameKaradoc() {
+		return emergencyContactNameKaradoc;
+	}
+	public void setEmergencyContactNameKaradoc(String emergencyContactNameKaradoc) {
+		this.emergencyContactNameKaradoc = emergencyContactNameKaradoc;
+	}
+	public String getEmergencyContactSurnameKaradoc() {
+		return emergencyContactSurnameKaradoc;
+	}
+	public void setEmergencyContactSurnameKaradoc(String emergencyContactSurnameKaradoc) {
+		this.emergencyContactSurnameKaradoc = emergencyContactSurnameKaradoc;
+	}
+	public String getEmergencyContactPhoneNumberKaradoc() {
+		return emergencyContactPhoneNumberKaradoc;
+	}
+	public void setEmergencyContactPhoneNumberKaradoc(String emergencyContactPhoneNumberKaradoc) {
+		this.emergencyContactPhoneNumberKaradoc = emergencyContactPhoneNumberKaradoc;
+	}
+	public String getLoginKaradoc() {
+		return loginKaradoc;
+	}
+	public void setLoginKaradoc(String loginKaradoc) {
+		this.loginKaradoc = loginKaradoc;
+	}
+	public String getPasswordKaradoc() {
+		return passwordKaradoc;
+	}
+	public void setPasswordKaradoc(String passwordKaradoc) {
+		this.passwordKaradoc = passwordKaradoc;
+	}
+	public LocalDateTime getInscriptionDateKaradoc() {
+		return inscriptionDateKaradoc;
+	}
+	public void setInscriptionDateKaradoc(LocalDateTime inscriptionDateKaradoc) {
+		this.inscriptionDateKaradoc = inscriptionDateKaradoc;
 	}	
 
 

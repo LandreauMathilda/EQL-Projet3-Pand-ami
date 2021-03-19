@@ -88,7 +88,6 @@ public class Demand implements Serializable {
 		int result = 1;
 		result = prime * result + ((actionDate == null) ? 0 : actionDate.hashCode());
 		result = prime * result + ((cancelDate == null) ? 0 : cancelDate.hashCode());
-		result = prime * result + ((cancelReason == null) ? 0 : cancelReason.hashCode());
 		result = prime * result + ((closeDate == null) ? 0 : closeDate.hashCode());
 		result = prime * result + ((endHour == null) ? 0 : endHour.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -96,6 +95,7 @@ public class Demand implements Serializable {
 		result = prime * result + ((reportDate == null) ? 0 : reportDate.hashCode());
 		result = prime * result + ((startHour == null) ? 0 : startHour.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -117,11 +117,6 @@ public class Demand implements Serializable {
 			if (other.cancelDate != null)
 				return false;
 		} else if (!cancelDate.equals(other.cancelDate))
-			return false;
-		if (cancelReason == null) {
-			if (other.cancelReason != null)
-				return false;
-		} else if (!cancelReason.equals(other.cancelReason))
 			return false;
 		if (closeDate == null) {
 			if (other.closeDate != null)
@@ -158,14 +153,19 @@ public class Demand implements Serializable {
 				return false;
 		} else if (!street.equals(other.street))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Demand [id=" + id + ", actionDate=" + actionDate + ", startHour=" + startHour + ", endHour=" + endHour
-				+ ", street=" + street + ", publishDate=" + publishDate + ", cancelDate=" + cancelDate + ", closeDate="
-				+ closeDate + ", reportDate=" + reportDate + "]";
+		return "Demand [id=" + id + ", user=" + user + ", actionDate=" + actionDate + ", startHour=" + startHour
+				+ ", endHour=" + endHour + ", street=" + street + ", publishDate=" + publishDate + ", cancelDate="
+				+ cancelDate + ", closeDate=" + closeDate + ", reportDate=" + reportDate + "]";
 	}
 
 	public Integer getId() {
