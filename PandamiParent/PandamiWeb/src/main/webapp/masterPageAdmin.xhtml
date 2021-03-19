@@ -10,30 +10,33 @@
 	<ui:insert name="CSS" />
 	<title><ui:insert name="title"></ui:insert></title>
 </h:head>
-<h:body>
-	<div id="header">
-		<div>
-			<h:form>
-				<h:commandLink value="Accueil" action="#{mbRedirect.redirectAdminHome()}" />
-				|
-				<h:commandLink value="Référentiels" action="#{mbRedirect.redirectAdminRef()}"/>
-				|
-				<h:commandLink value="Demandes" action="#{mbRedirect.redirectAdminDemands()}"/>
-				|
-				<h:commandLink value="Utilisateurs" action="#{mbRedirect.redirectAdminUsers()}"/>
-		
-			</h:form>
-		</div>
-		<div>
-			<h:form>
-
-				<h:commandLink value="se déconnecter" action="#{mbConnect.disconnect()}"/>
-			</h:form>
+<h:body style="background-image: none !important">
+	<div id="header" style="border-bottom :1px solid black">
+		<div id="liens">
+			<div>
+				<h:form>
+					<h:commandLink class="cmdLk" value="Accueil" action="#{mbRedirect.redirectAdminHome()}" />
+					|
+					<h:commandLink class="cmdLk" value="Référentiels" action="#{mbRedirect.redirectAdminRef()}"/>
+					|
+					<h:commandLink class="cmdLk" value="Demandes" action="#{mbRedirect.redirectAdminDemands()}"/>
+					|
+					<h:commandLink class="cmdLk" value="Utilisateurs" action="#{mbRedirect.redirectAdminUsers()}"/>
+				</h:form>
+			</div>
+			<div>
+				<h:form>
+					<h:commandLink class="cmdLk" value="se déconnecter" action="#{mbConnect.disconnect()}"/>
+				</h:form>
+			</div>
 		</div>
 	</div>
 	<div id="center" style="overflow: scroll">
 		<ui:insert name="content"></ui:insert>
 	</div>
-	<div id="footer">Copyright Pandami - 2021</div>
+	<div id="footer" style="border-top:1px solid black" >
+		<div id="img" style="background-image:none !important"></div>
+		Copyright Pandami - 2021
+	</div>
 </h:body>
 </html>

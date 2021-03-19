@@ -7,17 +7,28 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	box-sizing: border-box; 
-	background: url("#{resource['IMG/fondPandAmi_Gimp4.jpg']}");
+	background: url("#{resource['IMG/bambouFond2.jpg']}");
+	background-repeat:no-repeat;
 }
 
 #header {
-	_border: 1px solid black;
-	border-bottom:2px solid #ac1482;
+	display: flex;
+	flex-direction: column;
+}
+
+#liens {
+	_border-bottom:2px solid #ac1482;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin: 1vw;
 	padding: 2vh 1vw;
+}
+
+#img {
+	background: url("#{resource['IMG/bambouFooter2.jpg']}");
+	background-size:100%;
+	background-repeat:no-repeat;
+	min-height:4vh;
 }
 
 #center {
@@ -30,11 +41,9 @@ body {
 }
 
 #footer {
-	_border: 1px solid orange;
-	border-top: 2px solid #ac1482;
+	_border-top: 2px solid #ac1482;
 	text-align: center;
 	margin: 1vw;
-	padding: 1vw;
 }
 
 #main {

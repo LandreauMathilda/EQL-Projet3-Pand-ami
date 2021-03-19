@@ -12,28 +12,34 @@
 </h:head>
 <h:body>
 	<div id="header">
-		<div>
-			<h:form>
-				<h:commandLink class="cmdLk" value="Accueil" action="#{mbRedirect.redirectConnectedHome()}" />
-				|
-				<h:commandLink class="cmdLk" value="Mon profil" action="#{mbRedirect.redirectProfil()}" />
-				|
-				<h:commandLink class="cmdLk" value="Mes demandes / Mon bénévolat" action="#{mbRedirect.redirectDemandsAndReplies()}"/>
-				|
-				<h:commandLink class="cmdLk" value="Rechercher une demande" action="#{mbRedirect.redirectSearchDemand()}"/> 
-				|
-				<h:commandLink class="cmdLk" value="Déposer une demande" action="#{mbRedirect.redirectDemandDeposit()}" />
-			</h:form>
+		<div id="liens">
+			<div>
+				<h:form>
+					<h:commandLink class="cmdLk" value="Accueil" action="#{mbRedirect.redirectConnectedHome()}" />
+					|
+					<h:commandLink class="cmdLk" value="Mon profil" action="#{mbRedirect.redirectProfil()}" />
+					|
+					<h:commandLink class="cmdLk" value="Mes demandes / Mon bénévolat" action="#{mbRedirect.redirectDemandsAndReplies()}"/>
+					|
+					<h:commandLink class="cmdLk" value="Rechercher une demande" action="#{mbRedirect.redirectSearchDemand()}"/> 
+					|
+					<h:commandLink class="cmdLk" value="Déposer une demande" action="#{mbRedirect.redirectDemandDeposit()}" />
+				</h:form>
+			</div>
+			<div>
+				<h:form>
+					<h:commandLink class="cmdLk" value="se deconnecter" action="#{mbConnect.disconnect()}"/>
+				</h:form>
+			</div>
 		</div>
-		<div>
-			<h:form>
-				<h:commandLink class="cmdLk" value="se deconnecter" action="#{mbConnect.disconnect()}"/>
-			</h:form>
-		</div>
+		<div id="img"></div>
 	</div>
 	<div id="center">
 		<ui:insert name="content"></ui:insert>
 	</div>
-	<div id="footer">Copyright Pandami - 2021</div>
+	<div id="footer">
+		<div id="img"></div>
+		Copyright Pandami - 2021
+	</div>
 </h:body>
 </html>
