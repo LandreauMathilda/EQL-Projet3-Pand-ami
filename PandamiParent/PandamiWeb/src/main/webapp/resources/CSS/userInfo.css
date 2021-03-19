@@ -74,13 +74,8 @@ input {
 }
 
 #rightPanel {
-<<<<<<< HEAD
 	_background-color: teal;
 	position :relative;
-=======
-	background-color: teal;
-	position: relative;
->>>>>>> branch 'master' of https://github.com/mathildalandreau/PandamiProjet3.git
 }
 
 #rightPanel #bouton {

@@ -12,23 +12,28 @@
 </h:head>
 <h:body>
 	<div id="header">
-		<div>
-			<h:form>
-				<h:commandLink class="cmdLk" value="Accueil" action="#{mbRedirect.redirectNotConnectedHome()}" />
-		
-			</h:form>
+		<div id="liens">
+			<div>
+				<h:form>
+					<h:commandLink class="cmdLk" value="Accueil" action="#{mbRedirect.redirectNotConnectedHome()}" />
+				</h:form>
+			</div>
+			<div>
+				<h:form>
+					<h:commandLink class="cmdLk" value="s'inscrire" action="#{mbRedirect.redirectCreateAccount()}"/>
+					|
+					<h:commandLink class="cmdLk" value="se connecter" action="#{mbRedirect.redirectConnect()}"/>
+				</h:form>
+			</div>
 		</div>
-		<div>
-			<h:form>
-				<h:commandLink class="cmdLk" value="s'inscrire" action="#{mbRedirect.redirectCreateAccount()}"/>
-				|
-				<h:commandLink class="cmdLk" value="se connecter" action="#{mbRedirect.redirectConnect()}"/>
-			</h:form>
-		</div>
+		<div id="img"></div>
 	</div>
 	<div id="center">
 		<ui:insert name="content"></ui:insert>
 	</div>
-	<div id="footer">Copyright Pandami - 2021</div>
+	<div id="footer">
+		<div id="img"></div>
+		Copyright Pandami - 2021
+	</div>
 </h:body>
 </html>
