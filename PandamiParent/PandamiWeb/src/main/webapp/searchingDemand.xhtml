@@ -10,12 +10,12 @@
 	<ui:define name="title">Recherche demandes - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<div>TITRE</div>
+			<div id="titrePage">Pour effectuer une recherche, veuillez remplir le formulaire : </div>
 			<div id="centerPanel">
 				<div id="leftPanel">
 					<h:form id="researchForm">
 						<div>
-							<h3>Recherche :</h3>
+							<h5>Recherche :</h5>
 						</div>
 						<div>
 							<p:selectCheckboxMenu id="citiesResearchCBox"
@@ -31,7 +31,7 @@
 							<p:datePicker id="dateResearchPicker" selectionMode="range"
 								value="#{mbSearch.research.rangeDate}" readonlyInput="false" />
 						</div>
-						<div>
+						<div class="StretchChildren">
 							<label>de</label>
 							<p:datePicker id="startTimeResearchPicker"
 								value="#{mbSearch.research.startHour}" timeInput="true" />
@@ -57,10 +57,10 @@
 									itemLabel="#{equipment.label}" itemValue="#{equipment}" />
 							</p:selectOneMenu>
 						</div>
-						<div>
+						<div class="StretchChildren">
 							<p:commandButton action="#{mbSearch.sendResearch()}" value="Rechercher" update="demandsForm:demandsDataTable"/>
 						</div>
-						<div>
+						<div class="StretchChildren">
 							<p:commandButton action="#{mbSearch.cancelResearch()}" value="Annuler" update="demandsForm:demandsDataTable" />
 						</div>
 					</h:form>

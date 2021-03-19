@@ -1,52 +1,100 @@
 #main {
-	display:flex;
-	flex-direction:column;
-	align-items:stretch;
-	justify-content:center;
-	text-align:center;
-	background-color:hotpink;
-}
-
-#centerPanel {
-	display:flex;
-	flex-grow:1;
-	background-color:orange;
-	align-items:stretch;
-}
-
-#leftPanel form, #rightPanel form {
-	display:flex;
-	flex-direction:column;
-	background-color:teal;
-	padding:1vw;
-	_align-items:space-between;
-	height:70vh;
-	justify-content:space-between;
-}
-
-#leftPanel{
-	width: 300px;
-}
-
-#leftPanel div {
-	display:column;
-	align-items:stretch;
-	justify-content:space-around;
-}
-
-body .ui-datatable thead th{
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
 	text-align: center;
 }
 
-@media (max-width: 1000px) {
-	
-#leftPanel{
-	position:absolute;
-	left: -300px;
+#centerPanel {
+	display: flex;
+	flex-grow: 1;
+	box-shadow: 1px 1px 5px rgb(126, 126, 126);
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 1vh 1vw;
+	margin: 2vh 0;
+	align-items: stretch;
 }
 
-#applyButton{
-	width: 30px;
-	height: 30px;
+#titrePage {
+	font-size: x-large;
+	_padding: 1vh 1vw;
 }
 
+h5 {
+	font-size: large;
+	font-weight: bold;
+	_display:inline;
+	margin-bottom:0.2vh;
+}
+
+#leftPanel form, #rightPanel form {
+	display: flex;
+	flex-direction: column;
+	padding: 1vw;
+	_align-items: space-between;
+	height: 70vh;
+	justify-content: space-between;
+}
+
+#leftPanel {
+	margin: 0 1vw;
+	border-right:1px solid black;
+}
+
+#leftPanel div {
+	display: column;
+	align-items: stretch;
+	justify-content: space-around;
+}
+
+body .ui-datatable thead th {
+	text-align: center;
+}
+
+body .ui-button {
+    text-align: center;
+    color: white;
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+    background-color:#1482ac;
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+}
+
+#researchForm {
+	display:flex;
+	flex-direction:column;
+	justify-content:stretch;
+}
+
+#researchForm .StretchChildren {
+	display:flex;
+	flex-direction:column;
+	align-items:stretch;
+}
+
+
+body .ui-button:hover {
+	text-decoration: none;
+    color: white;
+    background-color: #ac1482;
+    font-weight: 500;
+    letter-spacing: 2px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+}
+
+
+@media ( max-width : 1000px) {
+	#leftPanel {
+		position: absolute;
+		left: -300px;
+	}
+	#applyButton {
+		width: 30px;
+		height: 30px;
+	}
+}
