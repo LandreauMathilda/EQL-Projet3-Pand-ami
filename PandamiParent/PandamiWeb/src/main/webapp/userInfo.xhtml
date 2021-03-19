@@ -9,11 +9,11 @@
 	<ui:define name="title">Profil - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<div>TITRE</div>
+			<div id="titrePage">Veuillez compléter le formulaire ci-dessous : </div>
+			<div id="required">* : champ obligatoire</div>
 			<h:form styleClass="formInfos" id="formUser">
 				<div id="leftPanel">
 					<div id="connexion">		
-						<h5>Connexion</h5>
 						<label>Identifiant*</label>
 						<p:inputText value="#{mbConnect.user.login}" required="true" requiredMessage="Le login est obligatoire" id="login"/>
 						<p:message style="color:red" for="login" />
@@ -22,7 +22,6 @@
 						<p:message style="color:red" for="password" />			
 					</div>
 					<div id="civilState">
-					<h5>Etat-civil :</h5>
 						<label>Nom*</label>
 						<p:inputText value="#{mbConnect.user.surname}" required="true" id="surname" requiredMessage="Le nom doit être renseigné" />
 						<p:message style="color:red" for="surname" />		
@@ -31,16 +30,13 @@
 						<p:message style="color:red" for="name" />	
     					<label>Date de naissance* : </label>
     					<p:calendar id="navigator" value="#{mbConnect.user.birthDate}" yearRange="c-100:c" navigator="true"  required="true" requiredMessage="La date de naissance doit être renseignée" />
-        				
-                                <p:message style="color:red" for="navigator" />	
-						<label>Genre</label>
+                        <p:message style="color:red" for="navigator" />	
 						<p:selectOneRadio id="gender" value="#{mbConnect.user.gender}" converter="omnifaces.SelectItemsConverter" unselectable="true" required="true" requiredMessage="Le genre doit être renseigné" >
 							<f:selectItems value="#{mbConnect.genders}" var="gender" itemLabel="#{gender.name}" itemValue="#{gender}"></f:selectItems>
         				</p:selectOneRadio>		
         				 <p:message style="color:red" for="gender" />	
 					</div>
 					<div id="contact">			
-						<h5>Contact* :</h5>
 						<label>email*</label>
 						<p:inputText id="email" value="#{mbConnect.user.email}" required="true" requiredMessage="Le mail doit être renseigné"/>
 						 <p:message style="color:red" for="email" />	
@@ -51,17 +47,14 @@
 				</div>
 				<div id="rightPanel">
 					<div id="adress">
-						<h5>Adresse* :</h5>
 						<label>N° et rue*</label>
 						<div id="wrapperStreet">
                         	<h:inputText id="street" value="#{mbConnect.user.street}"  required="true" requiredMessage="Le N° et la rue doivent être renseignés"/>
                         	<p:message style="color:red" for="street" />
                         	<div class="streetResults"></div>
                     	</div>
-						
 						<label>Code Postal*</label>
 						<p:inputText id="postCode" value="#{mbConnect.user.city.zipCode}"  required="true"/>
-						
 						<label>Ville*</label>
 						<div id="wrapperCity">
 							<p:inputText id="city" value="#{mbConnect.user.city.name}"  disabled="true" />
@@ -70,7 +63,7 @@
                     	</div>
 					</div>
 					<div id="emergencyContact">
-						<h5>Contact d'Urgence :</h5>
+						<label id="labelEmergency">Contact d'Urgence :</label>
 						<label>Nom</label>
 						<p:inputText value="#{mbConnect.user.emergencyContactSurname}" />
 						<label>Prenom</label>
@@ -83,16 +76,12 @@
 					value="Créer un compte" />
 						<p:outputLabel value="#{mbConnect.message}" />	
 					</div>
-				
 				</div>
 			</h:form>
 			<h:form>
-			
 				<div id="boutonDemo">
-						<p:commandButton action="#{mbConnect.setDemoKaradoc()}"
-					value="Démonstration" />
-							
-					</div>
+					<p:commandButton action="#{mbConnect.setDemoKaradoc()}" value="Démonstration" />		
+				</div>
 			</h:form>
 		</div>
 		<script src="resources/JS/address.js"></script>

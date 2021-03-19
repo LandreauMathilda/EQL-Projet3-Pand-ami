@@ -1,11 +1,60 @@
-* {
-	margin: 0;
-	padding: 0;
-	font-family: Arial, Helvetica, sans-serif;
+#main {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	text-align: center;
 }
 
-body {
-	box-sizing: border-box;
+#titrePage {
+	font-size:x-large;
+	_padding:1vh 1vw;
+}
+
+.formInfos {
+	display: flex;
+	justify-content: center;
+	box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding:1vh 1vw;
+}
+
+.formInfos #leftPanel, #rightPanel {
+	display: flex;
+	flex-grow:1;
+	flex-direction: column;
+	_background-color: orange;
+	_padding: 2vw;
+	flex-grow: 1;
+	_margin: 2vh 2vw;
+	_align-items: space-between;
+}
+
+#leftPanel div, #rightPanel div {
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+}
+
+#rightPanel {
+	_background-color: teal;
+	position :relative;
+}
+
+#labelEmergency{
+	font-size: large;
+	font-weight: bold;
+	margin-bottom: 0.3vh;
+}
+
+#rightPanel #bouton {
+	align-self: flex-end;
+	position: absolute;
+	bottom: 1vw;
+}
+
+#required {
+	color:red;
 }
 
 input {
@@ -40,46 +89,4 @@ input {
 
 #wrapperCity {
 	position: relative;
-}
-
-#main {
-	_background-color: hotpink;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	justify-content: center;
-	text-align: center;
-}
-
-.formInfos {
-	_background-color: aqua;
-	display: flex;
-	justify-content: center;
-}
-
-.formInfos #leftPanel, #rightPanel {
-	display: flex;
-	flex-grow:1;
-	flex-direction: column;
-	_background-color: orange;
-	padding: 2vw;
-	flex-grow: 1;
-	margin: 2vw;
-	align-items: space-between;
-}
-
-#leftPanel div, #rightPanel div {
-	display: flex;
-	flex-direction: column;
-}
-
-#rightPanel {
-	_background-color: teal;
-	position :relative;
-}
-
-#rightPanel #bouton {
-	align-self: flex-end;
-	position: absolute;
-	bottom: 1vw;
 }
