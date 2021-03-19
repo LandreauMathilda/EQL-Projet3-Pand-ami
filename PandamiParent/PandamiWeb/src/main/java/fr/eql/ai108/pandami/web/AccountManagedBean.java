@@ -7,9 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -29,6 +27,7 @@ public class AccountManagedBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private User user = new User();
+	private City selectedCity = new City();
 	private String message;
 	private String login;
 	@Pattern (regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})", 
@@ -67,7 +66,6 @@ public class AccountManagedBean implements Serializable{
 	public void init() {
 		cities = proxyAccountBu.displayCities();
 		genders = proxyAccountBu.displayGenders();
-		
 	}
 
 
@@ -92,9 +90,11 @@ public class AccountManagedBean implements Serializable{
 	}
 
 	public String createAccount() {
-		//ajout automatique date du jour et usertype=2 (utilisateur)
+
+		user.setUserType(new UserType(2));		//ajout automatique date du jour et usertype=2 (utilisateur)
 		user.setInscriptionDate(LocalDateTime.now());
-		user.setUserType(new UserType(2));
+
+		user.setCity(proxyAccountBu.createCity(selectedCity)); //Vérification si la ville existe en base, si non elle est ajoutée puis donnée à l'objet user courant
 		user = proxyAccountBu.createAccount(user);
 		//verification que le user n'existe pas deja en base, basé sur login unique
 		if(user == null) {
@@ -103,6 +103,7 @@ public class AccountManagedBean implements Serializable{
 		} else if (user != null){
 			message = "Merci " + user.getLogin() + ". Votre compte a bien été créé";
 			user = new User();
+			selectedCity = new City();
 		} else {
 
 			message="tous les champs suivis de '*' doivent être renseignés";
@@ -158,10 +159,6 @@ public class AccountManagedBean implements Serializable{
 		}
 		return "/modifUserInfo.xhtml?faces-redirect=true";
 	}
-
-
-
-
 
 	public String getLogin() {
 		return login;
@@ -326,7 +323,11 @@ public class AccountManagedBean implements Serializable{
 	}
 	public void setInscriptionDateKaradoc(LocalDateTime inscriptionDateKaradoc) {
 		this.inscriptionDateKaradoc = inscriptionDateKaradoc;
+	}
+	public City getSelectedCity() {
+		return selectedCity;
+	}
+	public void setSelectedCity(City selectedCity) {
+		this.selectedCity = selectedCity;
 	}	
-
-
 }

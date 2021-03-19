@@ -60,11 +60,11 @@
                     	</div>
 						
 						<label>Code Postal*</label>
-						<p:inputText id="postCode" value="#{mbConnect.user.city.zipCode}"  required="true"/>
+						<h:inputText id="postCode" value="#{mbConnect.selectedCity.zipCode}"  required="true"/>
 						
 						<label>Ville*</label>
 						<div id="wrapperCity">
-							<p:inputText id="city" value="#{mbConnect.user.city.name}"  disabled="true" />
+							<h:inputText id="city" value="#{mbConnect.selectedCity.name}" />
 							<p:message style="color:red" for="city" />
                         	<div class="cityResults"></div>
                     	</div>

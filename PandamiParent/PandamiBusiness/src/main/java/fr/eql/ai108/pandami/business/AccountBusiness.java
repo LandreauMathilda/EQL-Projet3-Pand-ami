@@ -1,7 +1,5 @@
 package fr.eql.ai108.pandami.business;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -69,6 +67,14 @@ public class AccountBusiness implements AccountIBusiness{
 		return proxyUser.update(user);
 	}
 
-
+	public City createCity(City city) {
+		
+		City returnedCity = proxyCity.getCity(city);
+		
+		if(returnedCity == null) {
+			returnedCity = proxyCity.add(city);
+		}
+		return returnedCity;
+	}
 
 }
