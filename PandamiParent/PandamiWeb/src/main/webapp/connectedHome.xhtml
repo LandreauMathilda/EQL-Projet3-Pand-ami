@@ -9,6 +9,7 @@
 	<ui:define name="title">Accueil - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
+			<h1>Bienvenue #{mbConnect.sessionUser.name}</h1>
 			<h:form styleClass="ui-formButtons">
 				<p:commandButton class="buttons" action="#{mbRedirect.redirectDemandDeposit()}"
 					value="Déposer une demande" />

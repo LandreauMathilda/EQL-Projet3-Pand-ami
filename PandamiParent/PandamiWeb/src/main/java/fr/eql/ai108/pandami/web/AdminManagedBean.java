@@ -94,6 +94,7 @@ public class AdminManagedBean implements Serializable{
 		reportIssues = proxyAdminBu.displayReportIssues();
 		userTypes = proxyAdminBu.displayUserTypes();
 		users = proxyAccountBU.displayAllUsers();
+		message = "";
 	}
 
 	public void upDateCities() {
@@ -154,10 +155,12 @@ public class AdminManagedBean implements Serializable{
 
 	public void updateDemand() {
 		proxyDemandBU.upDateDemand(selectedDemand);
+		selectedDemand = new Demand();
 	}
 	
 	public void updateUser() {
 		proxyAccountBU.modifyUserInfo(selectedUser);
+		selectedUser = new User();
 	}
 
 	public Integer getActiveIndex() {

@@ -68,14 +68,12 @@ public class AccountManagedBean implements Serializable{
 		genders = proxyAccountBu.displayGenders();
 	}
 
-
-
 	public String setDemoKaradoc() {
 		nameKaradoc = "Karadoc";
 		surnameKaradoc = "De Vannes";
 		genderKaradoc = new Gender(2, "Femme");
-		streetKaradoc = "34 rue de Vannes";
-		cityKaradoc = new City(3, "Vincennes", "94300");
+		streetKaradoc = "";
+		cityKaradoc = new City();
 		birthDateKaradoc = LocalDate.of(438, 04, 10);
 		phoneNumberKaradoc = "0297648315";
 		emailKaradoc = "karadocDeVannes@Kaamelott.fr";
@@ -89,7 +87,7 @@ public class AccountManagedBean implements Serializable{
 	  return "userInfo.xhtml?faces-redirect=true";
 	}
 
-	public String createAccount() {
+	public String createAccount() throws InterruptedException {
 
 		user.setUserType(new UserType(2));		//ajout automatique date du jour et usertype=2 (utilisateur)
 		user.setInscriptionDate(LocalDateTime.now());
@@ -98,19 +96,18 @@ public class AccountManagedBean implements Serializable{
 		user = proxyAccountBu.createAccount(user);
 		//verification que le user n'existe pas deja en base, basé sur login unique
 		if(user == null) {
-
 			message = "Ce login n'est pas disponible. Choisissez en un autre";
+			return "/userInfo.xhtml?faces-redirect=true";
 		} else if (user != null){
-			message = "Merci " + user.getLogin() + ". Votre compte a bien été créé";
-			user = new User();
+			message = "Merci " + user.getLogin() + ", votre compte a bien été créé";
 			selectedCity = new City();
+			sessionUser = user;
+			user = new User();
+			return "/connectedHome.xhtml?faces-redirect=true";
 		} else {
-
 			message="tous les champs suivis de '*' doivent être renseignés";
+			return "/userInfo.xhtml?faces-redirect=true";
 		}
-
-		return "/userInfo.xhtml?faces-redirect=true";
-
 	}
 
 	public String connection(){

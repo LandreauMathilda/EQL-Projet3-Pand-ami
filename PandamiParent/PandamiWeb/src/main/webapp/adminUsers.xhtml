@@ -14,7 +14,7 @@
 			
 				<p:dataTable id="adminUsersDataTable" var="user" value="#{mbAdmin.users}" reflow="true" rows="30" size="large"
 					widgetVar="adminUserTable" emptyMessage="Aucun utilisateur à afficher"
-					rowIndexVar="rowIndex" selection="#{mbAdmin.selectedUser}">
+					rowIndexVar="rowIndex">
 
 					<p:column headerText="Utilisateur n°" sortBy="#{user.id}">
 						<h:outputText value="#{user.id}"/>
@@ -121,7 +121,8 @@
 					
 					<p:column>
 						<p:commandButton action="#{mbAdmin.updateUser()}" icon="pi pi-check" styleClass="rounded-button" 
-										 update=":adminUsersForm:adminUsersDataTable:@row(#{rowIndex})">
+										 update="@form :adminUsersForm:adminUsersDataTable:@row(#{rowIndex})"
+										 onclick="alert('L\'utilisateur a été actualisé')">
 							<f:setPropertyActionListener value="#{user}" target="#{mbAdmin.selectedUser}" />
 						</p:commandButton>
 					</p:column>															

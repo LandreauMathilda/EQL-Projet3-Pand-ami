@@ -38,7 +38,7 @@
 
 					<p:column headerText="Date action"	sortBy="#{demand.actionDate}">
 						<p:inplace editor="true">
-                        	<p:datePicker id="actionDatePicker"	value="#{demand.actionDate}" />
+                        	<p:datePicker id="actionDatePicker"	value="#{demand.actionDate}" converter="localDateConverter"/>
 				        </p:inplace>
 					</p:column>
 					
@@ -116,7 +116,8 @@
 					
 					<p:column>
 						<p:commandButton action="#{mbAdmin.updateDemand()}" icon="pi pi-check"
-										 styleClass="rounded-button" update=":adminDemandsForm:adminDemandsDataTable:@row(#{rowIndex})">
+										 styleClass="rounded-button" update="@form :adminDemandsForm:adminDemandsDataTable:@row(#{rowIndex})" 
+										 onclick="alert('La demande a été actualisée')">
 							<f:setPropertyActionListener value="#{demand}" target="#{mbAdmin.selectedDemand}" />
 						</p:commandButton>
 					</p:column>	
