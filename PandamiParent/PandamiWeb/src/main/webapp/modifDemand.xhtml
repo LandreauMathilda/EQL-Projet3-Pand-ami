@@ -10,20 +10,17 @@
 	<ui:define name="title">Modification demande - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<div>MODIFIER UNE DEMANDE</div>
+			<div id="titrePage">Veuillez double-cliquer sur chaque champ pour le modifier : </div>
+			<div id="required">* : champ obligatoire</div>
 			<h:form styleClass="formInfos">
 				<div id="leftPanel">
 					<div id="place">
-
 						<label>Lieu de réalisation :</label> <label>N° et rue : </label>
-
 						<p:inplace editor="true">
 							<p:inputText value="#{mbDemand.demand.street}" required="true"
 								label="text" />
 						</p:inplace>
-
 						<label>Ville : </label>
-
 						<p:inplace editor="true">
 							<p:selectOneMenu value="#{mbDemand.demand.city}"
 								converter="omnifaces.SelectItemsConverter" dynamic="true">
@@ -33,9 +30,10 @@
 									itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
 							</p:selectOneMenu>
 						</p:inplace>
-
-
-						<p:outputLabel for="basic" value="Date" />
+					</div>
+				</div>
+				<div id="rightPanelbis">
+					<p:outputLabel for="basic" value="Date" />
 						<p:datePicker id="basic" value="#{mbDemand.demand.actionDate}" />
 						<label>Heure de début :</label>
 						<p:datePicker id="timeonly" value="#{mbDemand.demand.startHour}"
@@ -43,8 +41,6 @@
 						<label>Heure de fin :</label>
 						<p:datePicker id="timeonly2" value="#{mbDemand.demand.endHour}"
 							timeOnly="true" pattern="HH:mm" />
-
-					</div>
 				</div>
 				<div id="rightPanel">
 					<label>Catégorie de la demande</label>
@@ -56,16 +52,11 @@
 							itemLabel="#{activity.activityCategory} - #{activity} - #{activity.equipmentType}"
 							itemValue="#{activity}"></f:selectItems>
 					</p:selectOneMenu>
-
-
-
-
-					<label>Type de la demande</label> <label>Matériel requis</label>
 					<div id="divButton">
 						<p:commandButton styleClass="ui-formButtons" id="button"
 							action="#{mbDemand.upDateDemand(demand)}" value="Modifier ma demande" />
 						<br />
-
+						<p:outputLabel value="#{mbDemand.message}" />
 					</div>
 				</div>
 			</h:form>

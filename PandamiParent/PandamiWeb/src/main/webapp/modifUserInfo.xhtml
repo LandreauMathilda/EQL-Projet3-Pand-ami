@@ -9,40 +9,38 @@
 	<ui:define name="title">Profil - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<div>TITRE</div>
+			<div id="titrePage">Veuillez double-cliquer sur chaque champ pour le modifier : </div>
+			<div id="required">* : champ obligatoire</div>
 			<h:form styleClass="formInfos">
 				<div id="leftPanel">
 					<div id="connexion">
 						<h5>Connexion</h5>
-						<label>Identifiant</label>
+						<label>Identifiant*</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.login}" />
 						</p:inplace>
-
 						<p:commandButton value="Changer de mot de passe"
 							oncomplete="PF('passwordDialog').show()" />
 						<p:outputLabel value="#{mbConnect.passwordMessage}" />
-
 					</div>
-
 					<div id="civilState">
 						<h5>Etat-civil :</h5>
-						<label>Nom</label>
+						<label>Nom*</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.surname}" />
 						</p:inplace>
-						<label>Prenom</label>
+						<label>Prenom*</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.name}" />
 						</p:inplace>
-						<label>Date de naissance : </label>
+						<label>Date de naissance*</label>
 						<p:inplace editor="true">
 							<p:calendar id="navigator"
 								value="#{mbConnect.sessionUser.birthDate}" yearRange="c-100:c"
 								navigator="true" />
 
 						</p:inplace>
-						<label>Genre</label>
+						<label>Genre*</label>
 						<p:inplace editor="true">
 							<p:selectOneRadio value="#{mbConnect.sessionUser.gender}"
 								converter="omnifaces.SelectItemsConverter" unselectable="true">
@@ -53,11 +51,11 @@
 					</div>
 					<div id="contact">
 						<h5>Contact :</h5>
-						<label>email</label>
+						<label>email*</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.email}" />
 						</p:inplace>
-						<label>N° telephone</label>
+						<label>N° telephone*</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.phoneNumber}" />
 						</p:inplace>
@@ -66,11 +64,11 @@
 				<div id="rightPanel">
 					<div id="adress">
 						<h5>Adresse :</h5>
-						<label>N° et rue</label>
+						<label>N° et rue*</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.street}" />
 						</p:inplace>
-						<label>Ville</label>
+						<label>Ville*</label>
 						<p:inplace editor="true">
 							<p:selectOneMenu value="#{mbConnect.sessionUser.city}"
 								converter="omnifaces.SelectItemsConverter" dynamic="true">
@@ -80,20 +78,22 @@
 									itemLabel="#{city.zipCode} - #{city.name}" itemValue="#{city}"></f:selectItems>
 							</p:selectOneMenu>
 						</p:inplace>
+						<br/>
+						<br/>
 					</div>
 					<div id="emergencyContact">
-						<h5>Contact d'Urgence:</h5>
-						<label>Nom</label>
+						<label id="labelEmergency">Contact d'Urgence:</label>
+						<label>Nom*</label>
 						<p:inplace editor="true">
 							<p:inputText
 								value="#{mbConnect.sessionUser.emergencyContactSurname}" />
 						</p:inplace>
-						<label>Prenom</label>
+						<label>Prenom*</label>
 						<p:inplace editor="true">
 							<p:inputText
 								value="#{mbConnect.sessionUser.emergencyContactName}" />
 						</p:inplace>
-						<label>N° telephone</label>
+						<label>N° telephone*</label>
 						<p:inplace editor="true">
 							<p:inputText
 								value="#{mbConnect.sessionUser.emergencyContactPhoneNumber}" />
@@ -107,13 +107,16 @@
 					</div>
 				</div>
 			</h:form>
+			<h:form>
+				<div id="boutonDemo" style="min-height: 5vh">		
+				</div>
+			</h:form>
 		</div>
-
 		<p:dialog header="Modifier le mot de passe" widgetVar="passwordDialog">
 			<h:form id="modifForm">
-				<label>Veuillez renseigner votre ancien mot de passe</label>
+				<label>Veuillez renseigner votre ancien mot de passe   </label>
 				<p:password value="#{mbConnect.verifPassword}"></p:password>
-				<label>Veuillez renseigner votre nouveau mot de passe</label>
+				<label>Veuillez renseigner votre nouveau mot de passe   </label>
 				<p:password value="#{mbConnect.newPassword}"></p:password>
 				<p:commandButton value="Mettre à jour"
 					action="#{mbConnect.setNewPassword()}"
@@ -124,8 +127,6 @@
 					style="display: float; float:right ; margin-right: 2vh" />
 			</h:form>
 		</p:dialog>
-
-
 	</ui:define>
 	<ui:define name="CSS">
 		<h:outputStylesheet name="CSS/userInfo.css" />

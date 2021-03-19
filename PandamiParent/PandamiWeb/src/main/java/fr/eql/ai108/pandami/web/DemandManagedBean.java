@@ -70,10 +70,11 @@ public class DemandManagedBean implements Serializable{
 	public void init() {
 		cities = proxyDemandBu.displayCities();
 		equipments = proxyDemandBu.displayEquipments();
-		sessionUser = proxyAccountBu.getUserById();
 		activities = proxyDemandBu.displayActivities();
 		categories = proxyDemandBu.displayCategories();
 		createActivitiesSelectCBox();
+		demand.setCity(sessionUser.getCity());
+		demand.setStreet(sessionUser.getStreet());
 	}
 
 	private void createActivitiesSelectCBox() {
@@ -122,7 +123,8 @@ public class DemandManagedBean implements Serializable{
 
 	public String upDateDemand(Demand demand) {
 		demand = proxyDemandBu.upDateDemand(demand);
-
+		this.demand.setCity(sessionUser.getCity());
+		message="Votre demande à bien été modifiée";
 		return "/modifDemand.xhtml?faces-redirect=true";
 	}
 

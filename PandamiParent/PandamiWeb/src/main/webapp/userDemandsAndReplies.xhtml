@@ -10,7 +10,7 @@
 	<ui:define name="title">Demandes / Réponses - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<div>TITRE</div>
+			<div id="titrePage">Veuillez cliquer sur chaque onglet pour afficher les détails et actions disponibles : </div>
 			<div id="centerPanel">
 				<p:tabView styleClass="tabView" dynamic="true" cache="true" widgetVar="ondemand">
 					<p:tab styleClass="tab" title="Mes demandes validées">
@@ -18,32 +18,23 @@
 							<p:accordionPanel dynamic="true" cache="true" var="demand"
 								value="#{mbUserDemRep.usersValidatedDemands}" styleClass="accordion"
 								multiple="true" widgetVar="accValidatedDemand">
-								<p:tab styleClass="accordionChild"
-									title="#{demand.actionDate} - #{demand.activity} - #{mbUserDemRep.getStatusByDemand(demand)}">
-									<label>Horaire : de #{demand.startHour} à #{demand.endHour}</label>
-									<br />
-									<label>adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
-									<br/>
-									<br/>
-									<p:commandButton
-												action="#{mbUserDemRep.cancelDemand(demand)}"
-												value="annuler"/>
-									<p:dataTable id="repliesDataTable" value="#{demand.replies}" var="reply"
-										widgetVar="demandTable"
-										emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
+								<p:tab styleClass="accordionChild" title="#{demand.actionDate} - #{demand.activity} - #{mbUserDemRep.getStatusByDemand(demand)}">
+									<label class="contentAcc">Horaire : de #{demand.startHour} à #{demand.endHour}</label>
+									<label class="contentAcc">adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
+									<p:commandButton class="contentAcc" action="#{mbUserDemRep.cancelDemand(demand)}" value="annuler"/>
+									<p:dataTable class="repliesDataTable" value="#{demand.replies}" var="reply" widgetVar="demandTable"
+												emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
 										<p:column headerText="Volontaire">
-											<h:outputText
-												value="#{reply.volunteer.surname} #{reply.volunteer.name}" />
+											<h:outputText value="#{reply.volunteer.name} #{reply.volunteer.surname}" />
 										</p:column>
-										<p:column headerText="Date de réponse">
-											<h:outputText value="#{reply.replyDate}" />
+										<p:column headerText="Date de réponse" >
+											<h:outputText converter="localDateTimeConverter" value="#{reply.replyDate}" />
 										</p:column>
-										<p:column headerText="Date de selection (pour test)">
-											<h:outputText value="#{reply.selectionDate}" />
+										<p:column headerText="Date de selection">
+											<h:outputText converter="localDateTimeConverter" value="#{reply.selectionDate}" />
 										</p:column>
 										<p:column headerText="Statut">
-											<h:outputText
-												value="#{mbUserDemRep.getStatusByReply(reply)}" />
+											<h:outputText value="#{mbUserDemRep.getStatusByReply(reply)}" />
 										</p:column>
 									</p:dataTable>
 								</p:tab>
@@ -57,25 +48,24 @@
 								multiple="true" widgetVar="accPendingDemand">
 								<p:tab styleClass="accordionChild"
 									title="#{demand.actionDate} - #{demand.activity} - #{mbUserDemRep.getStatusByDemand(demand)}">
-									<label>Horaire : de #{demand.startHour} à #{demand.endHour}</label>
-									<br />
-									<label>adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
-									<p:commandButton
+									<label class="contentAcc">Horaire : de #{demand.startHour} à #{demand.endHour}</label>
+									<label class="contentAcc">adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
+									<p:commandButton class="contentAcc"
 												action="#{mbUserDemRep.cancelDemand(demand)}"
 												value="annuler"/>
 									<label>    </label>
-									<p:commandButton
+									<p:commandButton class="contentAcc"
 										action="#{mbDemand.redirect(demand)}"
 										value="modifier"/>
-									<p:dataTable id="repliesDataTable" value="#{demand.replies}" var="reply"
+									<p:dataTable class="repliesDataTable" value="#{demand.replies}" var="reply"
 										widgetVar="demandTable"
 										emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
 										<p:column headerText="Volontaire">
 											<h:outputText
-												value="#{reply.volunteer.surname} #{reply.volunteer.name}" />
+												value="#{reply.volunteer.name} #{reply.volunteer.surname}" />
 										</p:column>
 										<p:column headerText="Date de réponse">
-											<h:outputText value="#{reply.replyDate}" />
+											<h:outputText converter="localDateTimeConverter" value="#{reply.replyDate}" />
 										</p:column>
 										<p:column>
 											<p:commandButton
@@ -94,11 +84,10 @@
 								multiple="true" widgetVar="accReplies">
 								<p:tab styleClass="accordionChild"
 									title="#{reply.demand.actionDate} - #{reply.demand.activity} 
-									pour #{reply.demand.user.surname} #{reply.demand.user.name}">
-									<label>Horaire : de #{reply.demand.startHour} à
+									pour #{reply.demand.user.name} #{reply.demand.user.surname}">
+									<label class="contentAcc">Horaire : de #{reply.demand.startHour} à
 										#{reply.demand.endHour}</label>
-									<br />
-									<label>adresse : #{reply.demand.street}
+									<label class="contentAcc">adresse : #{reply.demand.street}
 										#{reply.demand.city.name} - #{reply.demand.city.zipCode}</label>
 								</p:tab>
 							</p:accordionPanel>
@@ -110,12 +99,12 @@
 								value="#{mbUserDemRep.usersPastDemands}" styleClass="accordion"
 								multiple="true" widgetVar="accPastDemands">
 								<p:tab styleClass="accordionChild"
-									title="#{demand.actionDate} - #{demand.activity} - #{mbUserDemRep.getStatusByDemand(demand)}">
-									<label>Horaire : de #{pastDemand.startHour} à
+									title="#{pastDemand.actionDate} - #{pastDemand.activity}">
+									<label class="contentAcc">Horaire : de #{pastDemand.startHour} à
 										#{pastDemand.endHour}</label>
-									<br />
-									<label>adresse : #{pastDemand.street}
+									<label class="contentAcc">adresse : #{pastDemand.street}
 										#{pastDemand.city.name} - #{pastDemand.city.zipCode}</label>
+									<label class="contentAcc">Statut : #{mbUserDemRep.getStatusByDemand(pastDemand)}</label>
 								</p:tab>
 							</p:accordionPanel>
 						</h:form>
@@ -127,11 +116,10 @@
 								multiple="true" widgetVar="accpastReplies">
 								<p:tab styleClass="accordionChild"
 									title="#{pastReply.demand.actionDate} - #{pastReply.demand.activity} 
-									pour #{pastReply.demand.user.surname} #{pastReply.demand.user.name}">
-									<label>Horaire : de #{pastReply.demand.startHour} à
+									pour #{pastReply.demand.user.name} #{pastReply.demand.user.surname}">
+									<label class="contentAcc">Horaire : de #{pastReply.demand.startHour} à
 										#{pastReply.demand.endHour}</label>
-									<br />
-									<label>adresse : #{pastReply.demand.street}
+									<label class="contentAcc">adresse : #{pastReply.demand.street}
 										#{pastReply.demand.city.name} - #{pastReply.demand.city.zipCode}</label>
 								</p:tab>
 							</p:accordionPanel>

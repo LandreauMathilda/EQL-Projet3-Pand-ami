@@ -3,16 +3,115 @@
 	flex-direction:column;
 	align-items:stretch;
 	justify-content:center;
-	text-align:center;
-	background-color:hotpink;
+	_text-align:center;
 }
 
 #centerPanel {
 	flex-grow:1;
-	background-color:orange;
 	display:flex;
 	flex-direction:column;
 	align-items:stretch;
+	margin:2vh 0;
+	padding:2vh 2vw;
+	_box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    _background-color: rgba(255, 255, 255, 0.8);
+    _border-radius: 10px;
+}
+
+#titrePage {
+	font-size:x-large;
+	text-align:center;
+}
+
+body .ui-button {
+    text-align: center;
+    color: white;
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+    background-color:#1482ac;
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+    margin:1vh 0;
+}
+
+body .ui-button:hover {
+	text-decoration: none;
+    color: white;
+    background-color: #ac1482;
+    font-weight: 500;
+    letter-spacing: 2px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+}
+
+body .ui-accordion .ui-accordion-content {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+
+.contentAcc {
+	margin: 1vh 1vw;
+}
+
+.repliesDataTable {
+	margin:2vh 2vw;
+}
+
+body .ui-accordion .ui-accordion-header {
+	_text-align: center;
+    color: white;
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+    background-color:#1482ac;
+    box-shadow: 1px 1px 5px rgb(126, 126, 126);
+}
+
+body .ui-accordion .ui-accordion-header:hover {
+	text-decoration: none;
+    color: white;
+    background-color: #ac1482;
+    font-weight: 500;
+    letter-spacing: 2px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+}
+
+body .ui-accordion .ui-accordion-header.ui-state-active {
+	text-decoration: none;
+    color: #ac1482;
+    background-color: white;
+    font-weight: 500;
+    letter-spacing: 2px;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+}
+
+body .ui-tabs .ui-tabs-nav li.ui-tabs-header {
+	background-color:white;
+}
+
+body .ui-tabs .ui-tabs-nav li.ui-tabs-header:hover {
+	text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+body .ui-tabs.ui-tabs-top > .ui-tabs-nav li.ui-tabs-header.ui-state-active {
+	border-size:2px;
+	border-color: #ac1482;
+}
+
+body .ui-tabs .ui-tabs-nav li.ui-tabs-header a {
+	color: black;
+}
+
+body .ui-tabs .ui-tabs-nav li.ui-tabs-header.ui-state-active a {
+	color: #ac1482;
 }
 
 .tabView {
@@ -20,7 +119,6 @@
 	display:flex;
 	flex-direction:column;
 	align-items:stretch;
-	background-color:teal;
 }
 
 .tabView .tab {
