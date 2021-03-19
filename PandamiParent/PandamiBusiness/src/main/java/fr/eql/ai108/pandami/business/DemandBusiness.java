@@ -3,6 +3,7 @@ package fr.eql.ai108.pandami.business;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -253,7 +254,16 @@ public class DemandBusiness implements DemandIBusiness{
 
 	@Override
 	public List<Demand> displayOwnedPendingValidationByUser(Integer id) {
-		return proxyDemand.getAllPendingValidationByUser(id);
+		List<Demand> allDemands = proxyDemand.getAllPendingValidationByUser(id);
+		List<Demand> futuresDemands = new ArrayList<Demand>();
+		LocalDateTime today = LocalDateTime.now();
+		for (Demand demand : allDemands) {
+			LocalDateTime actionStart = LocalDateTime.of(demand.getActionDate(), demand.getStartHour());
+			if(today.isBefore(actionStart)) {
+				futuresDemands.add(demand);
+			}
+		}
+		return futuresDemands;
 	}
 	
 	@Override

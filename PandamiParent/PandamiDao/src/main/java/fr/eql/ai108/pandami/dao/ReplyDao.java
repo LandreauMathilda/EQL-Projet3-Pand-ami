@@ -72,10 +72,10 @@ public class ReplyDao extends GenericDao<Reply> implements ReplyIDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Reply> getAllPastDemandsByUser(Integer id) {
+	public List<Reply> getAllPastRepliesByUser(Integer id) {
 		LocalDate today = LocalDate.now();
 		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.volunteer.id = :paramIdUser"
-				+ " AND r.demand.actionDate <= :paramTodayDate ORDER BY r.replyDate DESC"); 
+				+ " AND r.demand.actionDate <= :paramTodayDate ORDER BY r.demand.actionDate DESC"); 
 		query.setParameter("paramIdUser", id); 
 		query.setParameter("paramTodayDate", today);
 		List<Reply> results = query.getResultList();

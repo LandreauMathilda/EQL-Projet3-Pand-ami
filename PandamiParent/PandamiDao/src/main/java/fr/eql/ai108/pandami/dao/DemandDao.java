@@ -1,6 +1,7 @@
 package fr.eql.ai108.pandami.dao;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.ejb.Remote;
