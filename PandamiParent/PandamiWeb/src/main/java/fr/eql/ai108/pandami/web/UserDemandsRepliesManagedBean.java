@@ -32,6 +32,7 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     private String selectionMessage;
     private List<Demand> usersValidatedDemands;
     private List<Demand> usersPendingValidationDemands;
+    private Integer activeIndex;
     
 	@EJB
 	private DemandIBusiness proxyDemandBu;
@@ -67,6 +68,7 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     	reply = proxyReplyBu.updateSelectedReply(reply);
     	rejectedReplies = proxyReplyBu.getNotSelectedRepliesByDemandId(reply.getDemand().getId()); 
     	rejectedReplies = proxyReplyBu.updateRejectedReplies(rejectedReplies);
+    	activeIndex = 1;
     	return refresh();
     }
     
@@ -152,6 +154,13 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 
 	public void setUsersPendingValidationDemands(List<Demand> usersPendingValidationDemands) {
 		this.usersPendingValidationDemands = usersPendingValidationDemands;
+	}
+
+	public Integer getActiveIndex() {
+		return activeIndex;
+	}
+	public void setActiveIndex(Integer activeIndex) {
+		this.activeIndex = activeIndex;
 	}
 	
 	

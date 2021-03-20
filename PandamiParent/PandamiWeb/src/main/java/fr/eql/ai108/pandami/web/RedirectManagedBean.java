@@ -16,7 +16,6 @@ public class RedirectManagedBean implements Serializable{
 
 	@ManagedProperty (value="#{mbConnect.sessionUser}")
 	private User sessionUser;
-	private String message;
 	
 	public String redirectConnect() {
 	return "connectionPage.xhtml?faces-redirect=true";
@@ -74,14 +73,5 @@ public class RedirectManagedBean implements Serializable{
 		this.sessionUser = sessionUser;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	
 	
 }

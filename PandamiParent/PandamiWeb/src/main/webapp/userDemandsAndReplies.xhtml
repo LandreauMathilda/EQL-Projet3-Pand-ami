@@ -12,7 +12,7 @@
 		<div id="main">
 			<div id="titrePage">Veuillez cliquer sur chaque onglet pour afficher les détails et actions disponibles : </div>
 			<div id="centerPanel">
-				<p:tabView styleClass="tabView" dynamic="true" cache="true" widgetVar="ondemand">
+				<p:tabView styleClass="tabView" dynamic="true" cache="true" widgetVar="ondemand" activeIndex="#{mbUserDemRep.activeIndex}">
 					<p:tab styleClass="tab" title="Mes demandes validées">
 						<h:form styleClass="center2Panel">
 							<p:accordionPanel dynamic="true" cache="true" var="demand"
@@ -21,7 +21,7 @@
 								<p:tab styleClass="accordionChild" title="#{demand.actionDate} - #{demand.activity} - #{mbUserDemRep.getStatusByDemand(demand)}">
 									<label class="contentAcc">Horaire : de #{demand.startHour} à #{demand.endHour}</label>
 									<label class="contentAcc">adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
-									<p:commandButton class="contentAcc" action="#{mbUserDemRep.cancelDemand(demand)}" value="annuler"/>
+									<p:commandButton class="contentAcc" action="#{mbUserDemRep.cancelDemand(demand)}" value="Annuler"/>
 									<p:dataTable class="repliesDataTable" value="#{demand.replies}" var="reply" widgetVar="demandTable"
 												emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
 										<p:column headerText="Volontaire">
@@ -52,11 +52,11 @@
 									<label class="contentAcc">adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
 									<p:commandButton class="contentAcc"
 												action="#{mbUserDemRep.cancelDemand(demand)}"
-												value="annuler"/>
+												value="Annuler"/>
 									<label>    </label>
 									<p:commandButton class="contentAcc"
 										action="#{mbDemand.redirect(demand)}"
-										value="modifier"/>
+										value="Modifier"/>
 									<p:dataTable class="repliesDataTable" value="#{demand.replies}" var="reply"
 										widgetVar="demandTable"
 										emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
@@ -70,7 +70,7 @@
 										<p:column>
 											<p:commandButton
 												action="#{mbUserDemRep.chooseVolunteer(reply)}"
-												value="choisir"/>
+												value="Choisir"/>
 										</p:column>
 									</p:dataTable>
 								</p:tab>

@@ -51,7 +51,7 @@
 					</div>
 					<div id="contact">
 						<h5>Contact :</h5>
-						<label>email*</label>
+						<label>Email*</label>
 						<p:inplace editor="true">
 							<p:inputText value="#{mbConnect.sessionUser.email}" />
 						</p:inplace>
@@ -83,17 +83,17 @@
 					</div>
 					<div id="emergencyContact">
 						<label id="labelEmergency">Contact d'Urgence:</label>
-						<label>Nom*</label>
+						<label>Nom</label>
 						<p:inplace editor="true">
 							<p:inputText
 								value="#{mbConnect.sessionUser.emergencyContactSurname}" />
 						</p:inplace>
-						<label>Prenom*</label>
+						<label>Prenom</label>
 						<p:inplace editor="true">
 							<p:inputText
 								value="#{mbConnect.sessionUser.emergencyContactName}" />
 						</p:inplace>
-						<label>N° telephone*</label>
+						<label>N° telephone</label>
 						<p:inplace editor="true">
 							<p:inputText
 								value="#{mbConnect.sessionUser.emergencyContactPhoneNumber}" />
@@ -102,8 +102,8 @@
 					<div id="bouton">
 						<p:commandButton process="@this"
 							action="#{mbConnect.modifyUserInfo()}"
-							value="valider les modifications" />
-						<p:outputLabel value="#{mbConnect.message}" />
+							value="Valider les modifications" />
+						<p:outputLabel value="#{mbConnect.messageModifUser}" />
 					</div>
 				</div>
 			</h:form>
@@ -117,7 +117,7 @@
 				<label>Veuillez renseigner votre ancien mot de passe   </label>
 				<p:password value="#{mbConnect.verifPassword}"></p:password>
 				<label>Veuillez renseigner votre nouveau mot de passe   </label>
-				<p:password value="#{mbConnect.newPassword}"></p:password>
+				<p:password value="#{mbConnect.newPassword}" feedback="true"></p:password>
 				<p:commandButton value="Mettre à jour"
 					action="#{mbConnect.setNewPassword()}"
 					oncomplete="PF('passwordDialog').hide()"

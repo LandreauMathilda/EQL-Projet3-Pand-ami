@@ -28,7 +28,9 @@ public class AccountManagedBean implements Serializable{
 
 	private User user = new User();
 	private City selectedCity = new City();
-	private String message;
+	private String messagecreateAccount;
+	private String messageConnection;
+	private String messageModifUser;
 	private String login;
 	@Pattern (regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})", 
 			message = "Le password soit comprendre un digit, une minuscule, une majuscule, "
@@ -64,7 +66,6 @@ public class AccountManagedBean implements Serializable{
 	public void init() {
 		cities = proxyAccountBu.displayCities();
 		genders = proxyAccountBu.displayGenders();
-		message = "";
 	}
 
 	public String setDemoKaradoc() {
@@ -95,16 +96,16 @@ public class AccountManagedBean implements Serializable{
 		user = proxyAccountBu.createAccount(user);
 		//verification que le user n'existe pas deja en base, basé sur login unique
 		if(user == null) {
-			message = "Ce login n'est pas disponible. Choisissez en un autre";
+			messagecreateAccount = "Ce login n'est pas disponible. Choisissez en un autre";
 			return "/userInfo.xhtml?faces-redirect=true";
 		} else if (user != null){
-			message = "";
+			messagecreateAccount = "";
 			selectedCity = new City();
 			sessionUser = user;
 			user = new User();
 			return "/connectedHome.xhtml?faces-redirect=true";
 		} else {
-			message="tous les champs suivis de '*' doivent être renseignés";
+			messagecreateAccount="Tous les champs suivis de '*' doivent être renseignés";
 			return "/userInfo.xhtml?faces-redirect=true";
 		}
 	}
@@ -120,7 +121,7 @@ public class AccountManagedBean implements Serializable{
 			retour = "/adminHome.xhtml?faces-redirect=true";
 		}else {
 			user = new User();
-			message = "Login/Password incorrectes";
+			messageConnection = "Login/Password incorrectes";
 			retour = "/connectionPage.xhtml?faces-redirect=true";
 		}
 
@@ -141,7 +142,7 @@ public class AccountManagedBean implements Serializable{
 
 	public String modifyUserInfo() {
 		proxyAccountBu.modifyUserInfo(sessionUser);
-		message = "Vos informations ont bien été mises à jour";
+		messageModifUser = "Vos informations ont bien été mises à jour";
 		return "/modifUserInfo.xhtml?faces-redirect=true";
 	}
 
@@ -178,14 +179,6 @@ public class AccountManagedBean implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public List<City> getCities() {
@@ -325,5 +318,27 @@ public class AccountManagedBean implements Serializable{
 	}
 	public void setSelectedCity(City selectedCity) {
 		this.selectedCity = selectedCity;
+	}
+
+	public String getMessagecreateAccount() {
+		return messagecreateAccount;
+	}
+
+	public void setMessagecreateAccount(String messagecreateAccount) {
+		this.messagecreateAccount = messagecreateAccount;
+	}
+
+	public String getMessageConnection() {
+		return messageConnection;
+	}
+	public void setMessageConnection(String messageConnection) {
+		this.messageConnection = messageConnection;
+	}
+	public String getMessageModifUser() {
+		return messageModifUser;
+	}
+	public void setMessageModifUser(String messageModifUser) {
+		this.messageModifUser = messageModifUser;
 	}	
+	
 }

@@ -38,7 +38,7 @@
         				 <p:message style="color:red" for="gender" />	
 					</div>
 					<div id="contact">			
-						<label>email*</label>
+						<label>Email*</label>
 						<p:inputText id="email" value="#{mbConnect.user.email}" required="true" requiredMessage="Le mail doit être renseigné"/>
 						 <p:message style="color:red" for="email" />	
 						<label>N° telephone*</label>
@@ -76,7 +76,7 @@
 					<div id="bouton">
 						<p:commandButton update="@form" action="#{mbConnect.createAccount()}"
 					value="Créer un compte" />
-						<p:outputLabel value="#{mbConnect.message}" />	
+						<p:outputLabel value="#{mbConnect.messagecreateAccount}" />	
 					</div>
 				</div>
 			</h:form>

@@ -75,6 +75,7 @@ public class DemandManagedBean implements Serializable{
 		createActivitiesSelectCBox();
 		demand.setCity(sessionUser.getCity());
 		demand.setStreet(sessionUser.getStreet());
+		message = "";
 	}
 
 	private void createActivitiesSelectCBox() {
