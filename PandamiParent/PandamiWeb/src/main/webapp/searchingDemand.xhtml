@@ -106,11 +106,11 @@
 							</p:column>
 
 							<p:column>
-								<p:commandButton id="applyButton" rendered="#{mbSearch.getDemandStatus(demand).equals('En recherche de volontaire')}"
-									action="#{mbSearch.replyDemand(demand)}"
-									onclick="alert('Votre candidature a été envoyée')"
-									icon="pi pi-check" value="Postuler" 
-									update="demandsForm:demandsDataTable"/>
+								<p:commandButton action="#{mbSearch.replyDemand(demand)}"   
+									update="@form :demandsForm:demandsDataTable:@row(#{rowIndex})" 
+									rendered="#{mbSearch.getDemandStatus(demand).equals('En recherche de volontaire')}"
+									value="Postuler"
+									icon="pi pi-check"/>
 							</p:column>
 						</p:dataTable>
 					</h:form>

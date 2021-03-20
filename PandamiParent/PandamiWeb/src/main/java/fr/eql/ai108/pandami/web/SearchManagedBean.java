@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 import javax.faces.model.SelectItem;
@@ -26,7 +27,7 @@ import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 import fr.eql.ai108.pandami.ibusiness.ReplyIBusiness;
 
 @ManagedBean (name="mbSearch")
-@SessionScoped
+@ViewScoped
 public class SearchManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +44,8 @@ public class SearchManagedBean implements Serializable {
 	private List<ActivityCategory> categories;
 	private List<EquipmentType> equipments;
 	private List<City> cities;
-	private List<Demand> demands = new ArrayList<>();
+	private List<Demand> initDemands  = new ArrayList<>();
+	private List<Demand> demands; //Liste tampon permettant de récupérer le résultat des recherches faites à partir de la liste initDemands
 	private List<SelectItem> cBoxCategories = new ArrayList<>();
 	private Reply reply;
 	private Research research;
@@ -62,7 +64,8 @@ public class SearchManagedBean implements Serializable {
 	 * 	Méthode permettant de lancer une initialisation standard des champs de recherches et des demandes sans critères définis
 	 */
 	private void standardInit() {
-		demands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId());
+		initDemands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId());
+		demands = initDemands;
 		equipments = proxyDemandBu.displayEquipments();
 		cities = proxyDemandBu.displayCities();
 		research = new Research();
@@ -108,13 +111,23 @@ public class SearchManagedBean implements Serializable {
 		reply = new Reply(null, LocalDateTime.now(), null, null, null, sessionUser, demand);
 		reply = proxyReplyBU.createReply(reply);
 		reply = new Reply();
+		
+		initDemands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId()); //Actualisation des données en base afin de récupérer les statuts à jours
+		
+		Research emptyResearch = new Research(); //Déclaration d'une recherche vide afin de pouvoir l'utiliser en comparaison avec l'objet research provenant de notre vue (objet avec attributs null)
+		
+		if(research.equals(emptyResearch)) {
+			demands = initDemands;
+		}else {
+			demands = proxyDemandBu.getDemandsByResearch(research, initDemands);
+		}
 	}
 
 	/*
 	 * 	Méthode actualisant la liste de demande en fonction des critères de recherches et l'affichant ensuite à l'utilisateur
 	 */
 	public void sendResearch() {
-		demands = proxyDemandBu.getDemandsByResearch(research, demands);
+		demands = proxyDemandBu.getDemandsByResearch(research, initDemands); //Recherche effectuée sur la liste initiale des demandes : important
 	}
 
 	/*
@@ -123,7 +136,7 @@ public class SearchManagedBean implements Serializable {
 	public void cancelResearch(){
 		research = new Research();
 		updateResearchFields();
-		demands = proxyDemandBu.getNotOwnedDemands(sessionUser.getId());
+		demands = initDemands;
 	}
 
 	/*
@@ -214,5 +227,13 @@ public class SearchManagedBean implements Serializable {
 
 	public void setResearch(Research research) {
 		this.research = research;
+	}
+
+	public List<Demand> getInitDemands() {
+		return initDemands;
+	}
+
+	public void setInitDemands(List<Demand> initDemands) {
+		this.initDemands = initDemands;
 	}
 }

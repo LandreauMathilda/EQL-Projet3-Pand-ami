@@ -137,12 +137,6 @@ public class DemandBusiness implements DemandIBusiness{
 	@Override
 	public List<Demand> getDemandsByResearch(Research research, List<Demand> demands) {
 		
-		System.out.println(research);
-		
-		for (Demand demand : demands) {
-			System.out.println(demand);
-		}
-		
 		//Si au moins 1 critère de ville est sélectionné
 		if(research.getCities().size() > 0 && demands.size() > 0) {
 			
