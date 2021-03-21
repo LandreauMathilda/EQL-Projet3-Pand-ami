@@ -87,7 +87,7 @@ public class AccountManagedBean implements Serializable{
 	  return "userInfo.xhtml?faces-redirect=true";
 	}
 
-	public String createAccount() throws InterruptedException {
+	public String createAccount(){
 
 		user.setUserType(new UserType(2));		//ajout automatique date du jour et usertype=2 (utilisateur)
 		user.setInscriptionDate(LocalDateTime.now());
@@ -126,8 +126,7 @@ public class AccountManagedBean implements Serializable{
 	}
 
 	public String disconnect() {
-		HttpSession session = (HttpSession) FacesContext
-				.getCurrentInstance().getExternalContext().getSession(true);
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.invalidate();
 		//Réinitialisation des champs:
 		login = "";
@@ -146,7 +145,6 @@ public class AccountManagedBean implements Serializable{
 	public String setNewPassword() {
 		if(verifPassword.equals(sessionUser.getPassword())) {
 			sessionUser.setPassword(newPassword);
-			System.out.println(sessionUser.getPassword());
 			passwordMessage = "Votre mot de passe a bien été modifié";
 		}else {
 			passwordMessage = "Veuillez réessayer";

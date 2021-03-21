@@ -1,6 +1,5 @@
 package fr.eql.ai108.pandami.dao;
 
-
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -25,21 +24,17 @@ public class UserDao extends GenericDao<User> implements UserIDao {
 		Query query = em.createQuery("SELECT u FROM User u WHERE u.login = :paramLogin");
 		query.setParameter("paramLogin", user.getLogin());
 		List<User> users = query.getResultList();
-		return users.size() > 0 ? true : false;
+		return !users.isEmpty();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public User authenticate(String login, String password) {
-		Query query = em.createQuery("SELECT u FROM User u WHERE "
-				+ "u.login = :paramLogin AND u.password = :paramPassword");
-		User returnedUser = null;
+		Query query = em.createQuery("SELECT u FROM User u WHERE u.login = :paramLogin"
+													   + " AND u.password = :paramPassword");
 		query.setParameter("paramLogin", login);
 		query.setParameter("paramPassword", password);
 		List<User> users = query.getResultList();
-		if(users.size() > 0) {
-			returnedUser = users.get(0);
-		}
-		return returnedUser;
+		return !users.isEmpty() ? users.get(0) : null;
 	}
 }
-

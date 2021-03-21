@@ -6,7 +6,6 @@ import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
 import fr.eql.ai108.pandami.entity.CancelReason;
 import fr.eql.ai108.pandami.entity.City;
-import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.DesistReason;
 import fr.eql.ai108.pandami.entity.EndedType;
 import fr.eql.ai108.pandami.entity.EquipmentType;

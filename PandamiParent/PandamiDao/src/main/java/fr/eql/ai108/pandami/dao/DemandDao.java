@@ -1,13 +1,11 @@
 package fr.eql.ai108.pandami.dao;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.idao.DemandIDao;
@@ -19,73 +17,52 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 	@PersistenceContext(unitName = "PandamiPU")
 	private EntityManager em;
 
-	private final String PARAM_ID_USER = "paramIdUser";
-	private final String PARAM_TODAY_DATE = "paramTodayDate";
+	private static final String PARAM_ID_USER = "paramIdUser";
 
-	@SuppressWarnings("unchecked")
+	private static final String QUERY_ONGOING_DEMANDS = " AND d.actionDate >= :paramTodayDate"
+													  + " AND d.cancelDate IS NULL"
+													  + " ORDER BY d.publishDate DESC";
+	
+	private static final String QUERY_GET_ALL_NOT_OWNED_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id != :" + PARAM_ID_USER
+																						   + QUERY_ONGOING_DEMANDS;
+	
+	private static final String QUERY_GET_ALL_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :" + PARAM_ID_USER
+																				 + QUERY_ONGOING_DEMANDS;
+	
+	private static final String QUERY_GET_ALL_PAST_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :" + PARAM_ID_USER
+																			   		+ " AND d.actionDate <= :paramTodayDate"
+																			   		+ " ORDER BY d.publishDate DESC";
+
+	private static final String QUERY_GET_ALL_VALIDATED_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :paramIdUser"
+																						 + " AND d.closeDate IS NOT NULL"
+																						   + QUERY_ONGOING_DEMANDS;
+	
+	private static final String QUERY_GET_ALL_PENDING_VALIDATION_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :paramIdUser"
+																								  + " AND d.closeDate IS NULL"
+			   																						+ QUERY_ONGOING_DEMANDS;
+
 	@Override
 	public List<Demand> getAllNotOwnedById(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id != :paramIdUser AND d.actionDate >= :paramTodayDate AND d.cancelDate IS NULL");
-		query.setParameter(PARAM_ID_USER, id);
-		query.setParameter(PARAM_TODAY_DATE, today);
-		List<Demand> results = query.getResultList();
-		return !results.isEmpty() ? results : null;
+		return genericQueryById(QUERY_GET_ALL_NOT_OWNED_BY_USER_ID, id, PARAM_ID_USER);
 	}
 
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Demand> getAllByUser(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND d.actionDate >= :paramTodayDate AND d.cancelDate IS NULL ORDER BY d.publishDate DESC");
-		query.setParameter(PARAM_ID_USER, id);
-		query.setParameter(PARAM_TODAY_DATE, today);
-		List<Demand> results = query.getResultList();
-		return !results.isEmpty() ? results : null;
+		return genericQueryById(QUERY_GET_ALL_BY_USER_ID, id, PARAM_ID_USER);
 	}
 
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Demand> getAllPastDemandsByUser(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND d.actionDate <= :paramTodayDate ORDER BY d.publishDate DESC");
-		query.setParameter(PARAM_ID_USER, id);
-		query.setParameter(PARAM_TODAY_DATE, today);
-		List<Demand> results = query.getResultList();
-		return !results.isEmpty() ? results : null;
+		return genericQueryById(QUERY_GET_ALL_PAST_BY_USER_ID, id, PARAM_ID_USER);
 	}
 
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Demand> getAllValidatedByUser(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND"
-															   + " d.actionDate >= :paramTodayDate AND"
-															   + " d.closeDate IS NOT NULL AND"
-															   + " d.cancelDate IS NULL"
-															   + " ORDER BY d.publishDate DESC");
-		query.setParameter(PARAM_ID_USER, id);
-		query.setParameter(PARAM_TODAY_DATE, today);
-		List<Demand> results = query.getResultList();
-		return !results.isEmpty() ? results : null;
+		return genericQueryById(QUERY_GET_ALL_VALIDATED_BY_USER_ID, id, PARAM_ID_USER);
 	}
 
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Demand> getAllPendingValidationByUser(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND"
-															   + " d.actionDate >= :paramTodayDate AND"
-															   + " d.closeDate IS NULL AND"
-															   + " d.cancelDate IS NULL"
-															   + " ORDER BY d.publishDate DESC");
-		query.setParameter(PARAM_ID_USER, id);
-		query.setParameter(PARAM_TODAY_DATE, today);
-		List<Demand> results = query.getResultList();
-		return !results.isEmpty() ? results : null;
+		return genericQueryById(QUERY_GET_ALL_PENDING_VALIDATION_BY_USER_ID, id, PARAM_ID_USER);
 	}
 }

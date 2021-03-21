@@ -1,6 +1,7 @@
 package fr.eql.ai108.pandami.dao;
 
 import java.lang.reflect.ParameterizedType;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -96,6 +97,18 @@ public abstract class GenericDao<T> implements GenericIDao<T> {
 		}
 		
 		return objects;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> genericQueryById (String jpqlQuery, Integer id, String paramId) {
+		LocalDate today = LocalDate.now();
+		Query query = em.createQuery(jpqlQuery); 
+		query.setParameter(paramId, id); 
+		query.setParameter("paramTodayDate", today);
+		List<T> results = query.getResultList();
+		System.out.println(jpqlQuery);
+		System.out.println(paramId);
+		return !results.isEmpty() ? results : null;
 	}
 
 }

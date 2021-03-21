@@ -14,4 +14,6 @@ public interface GenericIDao<T> {
 
 	List<T> findAll();
 	
+	List<T> genericQueryById(String jpqlQuery, Integer id, String paramId);
+	
 }

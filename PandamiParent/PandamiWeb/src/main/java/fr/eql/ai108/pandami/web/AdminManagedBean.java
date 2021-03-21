@@ -129,7 +129,6 @@ public class AdminManagedBean implements Serializable{
 
 	public void upDateCategory() {
 		proxyAdminBu.upDateCategory(selectedCategory);
-		System.out.println(selectedCategory.toString());
 		categories = proxyAdminBu.displayCategories();
 		activeIndex = 1;
 	}

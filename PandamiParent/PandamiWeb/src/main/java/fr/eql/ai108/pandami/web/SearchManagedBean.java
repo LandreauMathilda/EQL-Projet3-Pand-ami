@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -88,7 +87,7 @@ public class SearchManagedBean implements Serializable {
 
 			SelectItemGroup selectItemGroup = new SelectItemGroup(cat.getLabel());
 			SelectItem[] selectItems = null;
-			List<SelectItem> tempList = new ArrayList<SelectItem>();
+			List<SelectItem> tempList = new ArrayList<>();
 
 			for (Activity act : activities) {
 				if(act.getActivityCategory().getId().equals(cat.getId())) { //Regroupage par catégorie : Si la catégorie d'activité d'une activité est egale à la categorie en cours alors on rajoute cette activité au menu déroulant 

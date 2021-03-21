@@ -106,8 +106,7 @@ public class AdminBusiness implements AdminIBusiness{
 	
 	@Override
 	public EquipmentType upDateEquipment(EquipmentType selectedEquipmentType) {
-		EquipmentType returnedEquipment = proxyEquipmentType.update(selectedEquipmentType);
-		return returnedEquipment;
+		return proxyEquipmentType.update(selectedEquipmentType);
 	}
 	
 	@Override

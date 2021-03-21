@@ -102,6 +102,7 @@ public class User implements Serializable {
 		this.emergencyContactPhoneNumber = emergencyContactPhoneNumber;
 		this.login = login;
 		this.password = password;
+		this.inscriptionDate = inscriptionDate;
 	}
 
 	@Override

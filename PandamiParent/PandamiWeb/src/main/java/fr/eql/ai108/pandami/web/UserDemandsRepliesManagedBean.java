@@ -1,14 +1,12 @@
 package fr.eql.ai108.pandami.web;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-//import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai108.pandami.entity.Demand;
@@ -48,6 +46,7 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     public void init() {
     	usersValidatedDemands = proxyDemandBu.displayOwnedValidatedByUser(sessionUser.getId());
     	usersPendingValidationDemands = proxyDemandBu.displayOwnedPendingValidationByUser(sessionUser.getId());
+    	System.out.println(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
     	usersPastDemands = proxyDemandBu.displayAllPastOwnedDemandsByUser(sessionUser.getId());
     	usersPastReplies = proxyReplyBu.displayPastOwnedReplies(sessionUser.getId());
@@ -78,11 +77,6 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     	usersPendingValidationDemands = proxyDemandBu.displayOwnedPendingValidationByUser(sessionUser.getId());
     	return "/userDemandsAndReplies.xhtml?faces-redirect=true";	
     }
-    
-    //TODO Floriane : 
-    //pour l'onglet "mon bénévolat" : afficher pour chaque réponse l'action, le nom du bénéficiaire, la date de l'action, la date du post, la date ou on a postulé.
-    //statut : choisi / en attente (rejeté ?)
-    //bouton pour annuler dans un second temps : reply.desistDate = date.now()
     
     public String getStatusByReply(Reply reply) {
     	return proxyReplyBu.displayStatusByReply(reply);
@@ -162,7 +156,4 @@ public class UserDemandsRepliesManagedBean implements Serializable {
 	public void setActiveIndex(Integer activeIndex) {
 		this.activeIndex = activeIndex;
 	}
-	
-	
-
 }
