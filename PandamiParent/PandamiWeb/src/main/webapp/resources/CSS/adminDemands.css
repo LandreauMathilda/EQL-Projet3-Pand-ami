@@ -1,5 +1,5 @@
 #main {
-	background-color: hotpink;
+	_background-color: hotpink;
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -16,7 +16,7 @@
 .formInfos #leftPanel, #rightPanel {
 	display: flex;
 	flex-direction: column;
-	background-color: orange;
+	_background-color: orange;
 	padding: 2vw;
 	flex-grow:1;
 	margin:2vw;
@@ -46,4 +46,9 @@
 
 body .ui-datatable thead th{
 	text-align: center;
+}
+
+#titrePage {
+	font-size:x-large;
+	margin :1vh 1vw;
 }

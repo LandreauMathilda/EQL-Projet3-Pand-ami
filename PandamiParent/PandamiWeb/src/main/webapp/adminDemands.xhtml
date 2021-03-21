@@ -9,7 +9,8 @@
 	<ui:define name="title">Demandes(Admin) - Pand'ami</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<div>Visualisation de l'ensemble des demandes</div>
+			<div id="titrePage">Visualisation de l'ensemble des demandes</div>
+			<div style="margin:1vh 1vw">Veuillez cliquer sur chaque champ afin de le modifier, attention à valider ensuite les modifications de chaque demande</div>
 			<h:form id="adminDemandsForm">
                 
 				<p:dataTable id="adminDemandsDataTable" var="demand" value="#{mbAdmin.demands}" reflow="true" rows="30" size="large"
