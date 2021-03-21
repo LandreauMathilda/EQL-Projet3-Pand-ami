@@ -60,8 +60,23 @@ public class DemandBusiness implements DemandIBusiness{
 	}
 
 	@Override
-	public List<Demand> getNotOwnedDemands(Integer id) {
-		return proxyDemand.getAllNotOwnedById(id);
+	public List<Demand> getNotOwnedDemands(Integer id) {  //Méthode qui renvoie une liste de demande n'ayant pas déja été attriuée à un autre utilisateur
+		List<Demand> allDemands = proxyDemand.getAllNotOwnedById(id);
+
+		for (int i = allDemands.size() - 1; i > -1; i--) {
+			
+			Demand actualDemand = allDemands.get(i);
+
+			for (Reply reply : actualDemand.getReplies()) {
+
+				if((reply.getSelectionDate() != null) && (!reply.getVolunteer().getId().equals(id)) 
+				 && (reply.getDesistDate() == null) && (reply.getRejectDate() == null)) {
+					allDemands.remove(actualDemand);
+					break;
+				}
+			}
+		}
+		return allDemands;
 	}
 	
 	@Override
