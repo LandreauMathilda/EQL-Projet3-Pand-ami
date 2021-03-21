@@ -8,14 +8,14 @@
 <ui:composition template="/masterPageAdmin.xhtml">
 	<ui:define name="title">Accueil(Admin) - Pand'ami</ui:define>
 	<ui:define name="content">
-
-		<p:commandButton value="Accéder aux référentiels"
-			action="#{mbRedirect.redirectAdminRef()}" />
-		<p:commandButton value="Accéder aux demandes"
-			action="#{mbRedirect.redirectAdminDemands()}" />
-		<p:commandButton value="Accéder aux utilisateurs"
-			action="#{mbRedirect.redirectAdminUsers()}" />
-
+		<div id="main">
+			<p:commandButton value="Accéder aux référentiels" action="#{mbRedirect.redirectAdminRef()}" />
+			<p:commandButton value="Accéder aux demandes" action="#{mbRedirect.redirectAdminDemands()}" />
+			<p:commandButton value="Accéder aux utilisateurs" action="#{mbRedirect.redirectAdminUsers()}" />
+		</div>
+	</ui:define>
+	<ui:define name="CSS">
+		<h:outputStylesheet name="CSS/admin.css" />
 	</ui:define>
 </ui:composition>
 </html>

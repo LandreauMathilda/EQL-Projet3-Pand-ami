@@ -39,7 +39,7 @@
 						<h5>Ajouter une ville</h5>
 						<label>Code Postal : </label>
 						<p:inputText value="#{mbAdmin.newCity.zipCode}"></p:inputText>
-						<br /> <label>Libellé : </label>
+						<br /> <label>Libellé :</label>
 						<p:inputText value="#{mbAdmin.newCity.name}"></p:inputText>
 						<br />
 						<p:commandButton value="Valider les modifications"
@@ -71,7 +71,7 @@
 							</p:dataTable>
 						</h:panelGrid>
 						<h5>Ajouter une catégorie</h5>
-						<br /> <label>Libellé : </label>
+						<br /> <label>Libellé :</label>
 						<p:inputText value="#{mbAdmin.newCategory.label}"></p:inputText>
 						<br />
 						<p:commandButton value="Ajouter une catégorie"
@@ -116,7 +116,8 @@
 						<h5>Ajouter une activité</h5>
 						<br /> <label>Libellé : </label>
 						<p:inputText value="#{mbAdmin.activityLabel}"></p:inputText>
-						<p:outputLabel value="Catégorie de l'activité" />
+						<br/>
+						<p:outputLabel value="Catégorie de l'activité :" />
 						<p:selectOneMenu id="activityCategory"
 							value="#{mbAdmin.categoryForActivity}"
 							converter="omnifaces.SelectItemsConverter" dynamic="true">
@@ -125,7 +126,8 @@
 							<f:selectItems value="#{mbAdmin.categories}" var="category"
 								itemLabel="#{category.label}" itemValue="#{category}"></f:selectItems>
 						</p:selectOneMenu>
-						<p:outputLabel value="Equipement pour l'activité" />
+						<br/>
+						<p:outputLabel value="Equipement pour l'activité :" />
 						<p:selectOneMenu id="activityEquipment"
 							value="#{mbAdmin.equipmentForActivity}"
 							converter="omnifaces.SelectItemsConverter" dynamic="true">
@@ -135,7 +137,8 @@
 								var="equipmentType" itemLabel="#{equipmentType.label}"
 								itemValue="#{equipmentType}"></f:selectItems>
 						</p:selectOneMenu>
-						<p:commandButton id="button" value="Ajouter une activité"
+						<br/>
+						<p:commandButton id="button" style="margin:2vh 2vw" value="Ajouter une activité"
 							action="#{mbAdmin.addActivity()}" update=":tabview">
 						</p:commandButton>
 					</div>

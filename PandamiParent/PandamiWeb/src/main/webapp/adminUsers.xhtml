@@ -9,7 +9,8 @@
 	<ui:define name="title">Admin - utilisateurs</ui:define>
 	<ui:define name="content">
 		<div id="main">
-			<div>Visualisation de l'ensemble des utilisateurs</div>
+			<div id="titrePage">Visualisation de l'ensemble des demandes</div>
+			<div style="margin:1vh 1vw">Veuillez cliquer sur chaque champ afin de le modifier, attention à valider ensuite les modifications de chaque demande</div>
 			<h:form id="adminUsersForm">
 			
 				<p:dataTable id="adminUsersDataTable" var="user" value="#{mbAdmin.users}" reflow="true" rows="30" size="large"
@@ -132,7 +133,7 @@
 	</ui:define>
 
 	<ui:define name="CSS">
-		<h:outputStylesheet name="CSS/adminUsers.css" />
+		<h:outputStylesheet name="CSS/adminDemands.css" />
 	</ui:define>
 </ui:composition>
 </html>
