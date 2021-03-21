@@ -106,8 +106,6 @@ public abstract class GenericDao<T> implements GenericIDao<T> {
 		query.setParameter(paramId, id); 
 		query.setParameter("paramTodayDate", today);
 		List<T> results = query.getResultList();
-		System.out.println(jpqlQuery);
-		System.out.println(paramId);
 		return !results.isEmpty() ? results : null;
 	}
 
