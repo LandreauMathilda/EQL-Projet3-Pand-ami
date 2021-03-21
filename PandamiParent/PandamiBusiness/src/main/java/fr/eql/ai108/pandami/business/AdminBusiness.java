@@ -1,6 +1,5 @@
 package fr.eql.ai108.pandami.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,7 +10,6 @@ import fr.eql.ai108.pandami.entity.Activity;
 import fr.eql.ai108.pandami.entity.ActivityCategory;
 import fr.eql.ai108.pandami.entity.CancelReason;
 import fr.eql.ai108.pandami.entity.City;
-import fr.eql.ai108.pandami.entity.Demand;
 import fr.eql.ai108.pandami.entity.DesistReason;
 import fr.eql.ai108.pandami.entity.EndedType;
 import fr.eql.ai108.pandami.entity.EquipmentType;
@@ -78,69 +76,70 @@ public class AdminBusiness implements AdminIBusiness{
 
 	@Override
 	public City upDateCity(City selectedCity) {
-		City returnedCity = proxyCity.update(selectedCity);
-		return returnedCity;
+		return proxyCity.update(selectedCity);
 	}
 
 	@Override
 	public City addCity(City selectedCity) {
-		City returnedCity = null;
-		returnedCity = proxyCity.add(selectedCity);
-		return returnedCity;
+		return proxyCity.add(selectedCity);
 	}
+	
 	@Override
 	public Activity upDateActivity(Activity selectedActivity) {
-		Activity returnedActivity = proxyActivity.update(selectedActivity);
-		return returnedActivity;
+		return proxyActivity.update(selectedActivity);
 	}
+	
 	@Override
 	public Activity addActivity(Activity selectedActivity) {
-		Activity returnedActivity = null;
-		returnedActivity = proxyActivity.add(selectedActivity);
-		return returnedActivity;
+		return proxyActivity.add(selectedActivity);
 	}
+	
 	@Override
 	public ActivityCategory upDateCategory(ActivityCategory selectedActivityCategory) {
-		ActivityCategory returnedCategory = proxyActivityCategory.update(selectedActivityCategory);
-		return returnedCategory;
+		return proxyActivityCategory.update(selectedActivityCategory);
 	}
+	
 	@Override
 	public ActivityCategory addCategory(ActivityCategory selectedActivityCategory) {
-		ActivityCategory returnedCategory = null;
-		returnedCategory = proxyActivityCategory.add(selectedActivityCategory);
-		return returnedCategory;
+		return proxyActivityCategory.add(selectedActivityCategory);
 	}
+	
 	@Override
 	public EquipmentType upDateEquipment(EquipmentType selectedEquipmentType) {
 		EquipmentType returnedEquipment = proxyEquipmentType.update(selectedEquipmentType);
 		return returnedEquipment;
 	}
+	
 	@Override
 	public EquipmentType addEquipment(EquipmentType selectedEquipmentType) {
-		EquipmentType returnedEquipment = null;
-		returnedEquipment = proxyEquipmentType.add(selectedEquipmentType);
-		return returnedEquipment;
+		return proxyEquipmentType.add(selectedEquipmentType);
 	}
+	
 	@Override
 	public List<CancelReason> displayCancelReasons() {
 		return proxyCancelReason.findAll();
 	}
+	
 	@Override
 	public List<DesistReason> displayDesistReasons() {
 		return proxyDesistReason.findAll();
 	}
+	
 	@Override
 	public List<EndedType> displayEndedTypes() {
 		return proxyEndedType.findAll();
 	}
+	
 	@Override
 	public List<Gender> displayGenders() {
 		return proxyGender.findAll();
 	}
+	
 	@Override
 	public List<ReportIssue> displayReportIssues() {
 		return proxyReportIssue.findAll();
 	}
+	
 	@Override
 	public List<UserType> displayUserTypes() {
 		return proxyUserType.findAll();

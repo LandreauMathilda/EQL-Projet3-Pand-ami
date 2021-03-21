@@ -18,67 +18,59 @@ public class ReplyDao extends GenericDao<Reply> implements ReplyIDao {
 
 	@PersistenceContext(unitName = "PandamiPU")
 	private EntityManager em;
+	
+	private final String PARAM_ID_USER = "paramIdUser";
+	private final String PARAM_ID_DEMAND = "paramIdDemand";
+	private final String PARAM_TODAY_DATE = "paramTodayDate";
+	private final String GET_ALL_BY_USER_ID_QUERY = "SELECT r FROM Reply r WHERE r.volunteer.id = :" + PARAM_ID_USER
+			  														   + " AND r.demand.actionDate >= :" + PARAM_TODAY_DATE
+			  														   + " AND r.rejectDate IS NULL"
+			  														   + " AND r.desistDate IS NULL"
+			  														   + " ORDER BY r.replyDate DESC"; 
 
+	private final String GET_ALL_BY_DEMAND_ID_QUERY = "SELECT r FROM Reply r WHERE r.demand.id = :" + PARAM_ID_DEMAND
+			  															 + " AND r.demand.actionDate >= :" + PARAM_TODAY_DATE
+			  															 + " AND r.rejectDate IS NULL"
+			  															 + " AND r.desistDate IS NULL"
+			  															 + " ORDER BY r.replyDate DESC";
+	
+	private final String GET_ALL_EXCEPT_SELECTED_BY_DEMAND_ID_QUERY = "SELECT r FROM Reply r WHERE r.demand.id = :" + PARAM_ID_DEMAND
+			  																			 + " AND r.demand.actionDate >= :" + PARAM_TODAY_DATE
+			  																			 + " AND r.rejectDate IS NULL"
+			  																			 + " AND r.desistDate IS NULL"
+			  																			 + " AND r.selectionDate IS NULL";
+	
+	private final String GET_ALL_ORDER_DESC_BY_USER_ID_QUERY = "SELECT r FROM Reply r WHERE r.volunteer.id = :" + PARAM_ID_USER
+			  																	  + " AND r.demand.actionDate <= :" + PARAM_TODAY_DATE
+			  																	  + " ORDER BY r.demand.actionDate DESC";
+	
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Reply> getAllByUser(Integer id) {
+	private List<Reply> genericQueryById (String jpqlQuery, Integer id, String paramId) {
 		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.volunteer.id = :paramIdUser"
-				+ " AND r.demand.actionDate >= :paramTodayDate AND r.rejectDate IS NULL"
-				+ " AND r.desistDate IS NULL ORDER BY r.replyDate DESC"); 
-		query.setParameter("paramIdUser", id); 
-		query.setParameter("paramTodayDate", today);
+		Query query = em.createQuery(jpqlQuery); 
+		query.setParameter(paramId, id); 
+		query.setParameter(PARAM_TODAY_DATE, today);
 		List<Reply> results = query.getResultList();
-		return results.size() > 0 ? results : null;
+		return !results.isEmpty() ? results : null;
+	}
+	
+	@Override
+	public List<Reply> getAllByUser(Integer userId) {
+		return genericQueryById(GET_ALL_BY_USER_ID_QUERY, userId, PARAM_ID_USER);
+	}
+	
+	@Override
+	public List<Reply> getAllByDemandId(Integer demandId) {
+		return genericQueryById(GET_ALL_BY_DEMAND_ID_QUERY, demandId, PARAM_ID_DEMAND);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Reply> getAllByDemand(Integer demandId) {
-		
-		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.demand.id = :paramDemandId");
-		query.setParameter("paramDemandId", demandId);
-		List<Reply> results = query.getResultList();
-		return results.size() > 0 ? results : null;
-
+	public List<Reply> getAllExceptSelectedByDemandId(Integer demandId) {
+		return genericQueryById(GET_ALL_EXCEPT_SELECTED_BY_DEMAND_ID_QUERY, demandId, PARAM_ID_DEMAND);
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public List<Reply> getAllByDemandId(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.demand.id = :paramIdUser"
-				+ " AND r.demand.actionDate >= :paramTodayDate AND r.rejectDate IS NULL"
-				+ " AND r.desistDate IS NULL ORDER BY r.replyDate DESC"); 
-		query.setParameter("paramIdUser", id); 
-		query.setParameter("paramTodayDate", today);
-		List<Reply> results = query.getResultList();
-		return results.size() > 0 ? results : null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Reply> getAllExceptSelectedByDemandId(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.demand.id = :paramIdUser"
-				+ " AND r.demand.actionDate >= :paramTodayDate AND r.rejectDate IS NULL"
-				+ " AND r.desistDate IS NULL"
-				+ " AND r.selectionDate IS NULL");
-		query.setParameter("paramIdUser", id);
-		query.setParameter("paramTodayDate", today);
-		List<Reply> results = query.getResultList();
-		return results.size() > 0 ? results : null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Reply> getAllPastRepliesByUser(Integer id) {
-		LocalDate today = LocalDate.now();
-		Query query = em.createQuery("SELECT r FROM Reply r WHERE r.volunteer.id = :paramIdUser"
-				+ " AND r.demand.actionDate <= :paramTodayDate ORDER BY r.demand.actionDate DESC"); 
-		query.setParameter("paramIdUser", id); 
-		query.setParameter("paramTodayDate", today);
-		List<Reply> results = query.getResultList();
-		return results.size() > 0 ? results : null;
+	public List<Reply> getAllPastRepliesByUser(Integer userId) {
+		return genericQueryById(GET_ALL_ORDER_DESC_BY_USER_ID_QUERY, userId, PARAM_ID_USER);
 	}
 }

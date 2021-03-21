@@ -100,13 +100,13 @@ public class DemandBusiness implements DemandIBusiness{
 		Set<Reply> replies = demand.getReplies();
 		String status = "";
 		
-		if (replies.size() == 0) {
+		if (replies.isEmpty()) {
 			status = "En recherche de volontaire";
 		}else {
 
 			for (Reply reply : replies) {
 				
-				if(reply.getVolunteer().getId() != userId ) {
+				if(!reply.getVolunteer().getId().equals(userId)) {
 
 					if((reply.getSelectionDate() != null) && (reply.getDesistDate() == null) && (reply.getRejectDate() == null)) {
 						status = "Attribué à un autre utilisateur";
@@ -116,7 +116,7 @@ public class DemandBusiness implements DemandIBusiness{
 					}
 				}
 
-				if(reply.getVolunteer().getId() == userId) {
+				if(reply.getVolunteer().getId().equals(userId)) {
 
 					if((reply.getSelectionDate() != null) && (reply.getDesistDate() == null) && (reply.getRejectDate() == null)) {
 						status = "Vous a été attribué";
@@ -138,13 +138,13 @@ public class DemandBusiness implements DemandIBusiness{
 	public List<Demand> getDemandsByResearch(Research research, List<Demand> demands) {
 		
 		//Si au moins 1 critère de ville est sélectionné
-		if(research.getCities().size() > 0 && demands.size() > 0) {
+		if(!research.getCities().isEmpty() && !demands.isEmpty()) {
 			
 			for(int i = demands.size() - 1; i > -1; i--) {
 
 				for (int j = research.getCities().size() - 1; j > -1; j--) {
 					
-					if(demands.get(i).getCity().getId() == research.getCities().get(j).getId()) {
+					if(demands.get(i).getCity().getId().equals(research.getCities().get(j).getId())) {
 						break;
 					}else if(j == 0) {
 						demands.remove(demands.get(i));
@@ -154,13 +154,13 @@ public class DemandBusiness implements DemandIBusiness{
 		}
 		
 		//Si au moins 1 critère d'activité est sélectionné
-		if(research.getActivities().size() > 0 && demands.size() > 0) {
+		if(!research.getActivities().isEmpty() && !demands.isEmpty()) {
 			
 			for(int i = demands.size() - 1; i > -1; i--) {
 
 				for (int j = research.getActivities().size() - 1; j > -1; j--) {
 					
-					if(demands.get(i).getActivity().getId() == research.getActivities().get(j).getId()) {
+					if(demands.get(i).getActivity().getId().equals(research.getActivities().get(j).getId())) {
 						break;
 					}else if(j == 0) {
 						demands.remove(demands.get(i));
@@ -170,17 +170,17 @@ public class DemandBusiness implements DemandIBusiness{
 		}
 		
 		//Si au moins 1 critère d'équipement sélectionné
-		if(research.getEquipment() != null && demands.size() > 0) {
+		if(research.getEquipment() != null && !demands.isEmpty()) {
 
 			for(int i = demands.size() - 1; i > -1; i--) {
-				if(demands.get(i).getActivity().getEquipmentType().getId() != research.getEquipment().getId()) {
+				if(!demands.get(i).getActivity().getEquipmentType().getId().equals(research.getEquipment().getId())) {
 					demands.remove(demands.get(i));
 				}
 			}
 		}
 		
 		//Si au moins 1 critère de date est défini
-		if(research.getRangeDate() != null && demands.size() > 0) {
+		if(research.getRangeDate() != null && !demands.isEmpty()) {
 			
 			LocalDate researchStartDate = research.getRangeDate().get(0);
 			LocalDate researchEndDate = research.getRangeDate().get(1);
@@ -196,7 +196,7 @@ public class DemandBusiness implements DemandIBusiness{
 		}
 
 		//Si au moins 1 critère de d'heure de début est défini
-		if(research.getStartHour() != null && demands.size() > 0) {
+		if(research.getStartHour() != null && !demands.isEmpty()) {
 			
 			LocalTime researchStartHour = research.getStartHour();
 
@@ -211,7 +211,7 @@ public class DemandBusiness implements DemandIBusiness{
 		}
 		
 		//Si au moins 1 critère de d'heure de début est défini
-		if(research.getEndHour() != null && demands.size() > 0) {
+		if(research.getEndHour() != null && !demands.isEmpty()) {
 			
 			LocalTime researchEndHour = research.getEndHour();
 
@@ -249,7 +249,7 @@ public class DemandBusiness implements DemandIBusiness{
 	@Override
 	public List<Demand> displayOwnedPendingValidationByUser(Integer id) {
 		List<Demand> allDemands = proxyDemand.getAllPendingValidationByUser(id);
-		List<Demand> futuresDemands = new ArrayList<Demand>();
+		List<Demand> futuresDemands = new ArrayList<>();
 		LocalDateTime today = LocalDateTime.now();
 		for (Demand demand : allDemands) {
 			LocalDateTime actionStart = LocalDateTime.of(demand.getActionDate(), demand.getStartHour());
@@ -284,9 +284,9 @@ public class DemandBusiness implements DemandIBusiness{
 					status = "L'action a été réalisée, vous n'avez pas reporté de problèmes (finalisation automatique)";
 				}
 			}
-			else if (demand.getCloseDate() == null && demand.getReplies().size() > 0) {
+			else if (demand.getCloseDate() == null && !demand.getReplies().isEmpty()) {
 				status = "Vous n'avez jamais selectionné de bénévoles pour cette demande";
-			} else if (demand.getCloseDate() == null && demand.getReplies().size() == 0) {
+			} else if (demand.getCloseDate() == null && demand.getReplies().isEmpty()) {
 				status = "Aucun bénévole n'a postulé sur cette demande";
 			}
 		} 
@@ -296,9 +296,9 @@ public class DemandBusiness implements DemandIBusiness{
 				status = "Demande annulée";
 			} else if (demand.getCloseDate() != null) {
 				status = "Volontaire selectionné";
-			} else if (demand.getCloseDate() ==null && demand.getReplies().size() == 0) {
+			} else if (demand.getCloseDate() ==null && demand.getReplies().isEmpty()) {
 				status = "Aucun volontaire n'a postulé";
-			} else if (demand.getCloseDate() == null && demand.getReplies().size() >0) {
+			} else if (demand.getCloseDate() == null && !demand.getReplies().isEmpty()) {
 				status = "En attente de selection";
 			}
 		}

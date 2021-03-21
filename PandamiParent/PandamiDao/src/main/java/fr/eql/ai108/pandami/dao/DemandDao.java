@@ -1,7 +1,6 @@
 package fr.eql.ai108.pandami.dao;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -20,20 +19,18 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 	@PersistenceContext(unitName = "PandamiPU")
 	private EntityManager em;
 
+	private final String PARAM_ID_USER = "paramIdUser";
+	private final String PARAM_TODAY_DATE = "paramTodayDate";
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Demand> getAllNotOwnedById(Integer id) {
-
 		LocalDate today = LocalDate.now();
-		
 		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id != :paramIdUser AND d.actionDate >= :paramTodayDate AND d.cancelDate IS NULL");
-		
-		query.setParameter("paramIdUser", id);
-		query.setParameter("paramTodayDate", today);
+		query.setParameter(PARAM_ID_USER, id);
+		query.setParameter(PARAM_TODAY_DATE, today);
 		List<Demand> results = query.getResultList();
-
-		return results.size() > 0 ? results : null;
+		return !results.isEmpty() ? results : null;
 	}
 
 
@@ -42,10 +39,10 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 	public List<Demand> getAllByUser(Integer id) {
 		LocalDate today = LocalDate.now();
 		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND d.actionDate >= :paramTodayDate AND d.cancelDate IS NULL ORDER BY d.publishDate DESC");
-		query.setParameter("paramIdUser", id);
-		query.setParameter("paramTodayDate", today);
+		query.setParameter(PARAM_ID_USER, id);
+		query.setParameter(PARAM_TODAY_DATE, today);
 		List<Demand> results = query.getResultList();
-		return results.size() > 0 ? results : null;
+		return !results.isEmpty() ? results : null;
 	}
 
 
@@ -54,10 +51,10 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 	public List<Demand> getAllPastDemandsByUser(Integer id) {
 		LocalDate today = LocalDate.now();
 		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND d.actionDate <= :paramTodayDate ORDER BY d.publishDate DESC");
-		query.setParameter("paramIdUser", id);
-		query.setParameter("paramTodayDate", today);
+		query.setParameter(PARAM_ID_USER, id);
+		query.setParameter(PARAM_TODAY_DATE, today);
 		List<Demand> results = query.getResultList();
-		return results.size() > 0 ? results : null;
+		return !results.isEmpty() ? results : null;
 	}
 
 
@@ -66,29 +63,29 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 	public List<Demand> getAllValidatedByUser(Integer id) {
 		LocalDate today = LocalDate.now();
 		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND"
-				+ " d.actionDate >= :paramTodayDate AND"
-				+ " d.closeDate IS NOT NULL AND"
-				+ " d.cancelDate IS NULL"
-				+ " ORDER BY d.publishDate DESC");
-		query.setParameter("paramIdUser", id);
-		query.setParameter("paramTodayDate", today);
+															   + " d.actionDate >= :paramTodayDate AND"
+															   + " d.closeDate IS NOT NULL AND"
+															   + " d.cancelDate IS NULL"
+															   + " ORDER BY d.publishDate DESC");
+		query.setParameter(PARAM_ID_USER, id);
+		query.setParameter(PARAM_TODAY_DATE, today);
 		List<Demand> results = query.getResultList();
-		return results.size() > 0 ? results : null;
+		return !results.isEmpty() ? results : null;
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Demand> getAllPendingValidationByUser(Integer id) {
 		LocalDate today = LocalDate.now();
 		Query query = em.createQuery("SELECT d FROM Demand d WHERE d.user.id = :paramIdUser AND"
-				+ " d.actionDate >= :paramTodayDate AND"
-				+ " d.closeDate IS NULL AND"
-				+ " d.cancelDate IS NULL"
-				+ " ORDER BY d.publishDate DESC");
-		query.setParameter("paramIdUser", id);
-		query.setParameter("paramTodayDate", today);
+															   + " d.actionDate >= :paramTodayDate AND"
+															   + " d.closeDate IS NULL AND"
+															   + " d.cancelDate IS NULL"
+															   + " ORDER BY d.publishDate DESC");
+		query.setParameter(PARAM_ID_USER, id);
+		query.setParameter(PARAM_TODAY_DATE, today);
 		List<Demand> results = query.getResultList();
-		return results.size() > 0 ? results : null;
+		return !results.isEmpty() ? results : null;
 	}
-
 }

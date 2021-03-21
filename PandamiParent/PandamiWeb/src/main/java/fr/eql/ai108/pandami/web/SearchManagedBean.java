@@ -91,7 +91,7 @@ public class SearchManagedBean implements Serializable {
 			List<SelectItem> tempList = new ArrayList<SelectItem>();
 
 			for (Activity act : activities) {
-				if(act.getActivityCategory().getId() == cat.getId()) { //Regroupage par catégorie : Si la catégorie d'activité d'une activité est egale à la categorie en cours alors on rajoute cette activité au menu déroulant 
+				if(act.getActivityCategory().getId().equals(cat.getId())) { //Regroupage par catégorie : Si la catégorie d'activité d'une activité est egale à la categorie en cours alors on rajoute cette activité au menu déroulant 
 					tempList.add(new SelectItem(act, act.getLabel()));
 				}
 			}
@@ -142,18 +142,17 @@ public class SearchManagedBean implements Serializable {
 	/*
 	 * 	Mets à jour la barre de recherche de manière asynchrone
 	 */
-	@SuppressWarnings("serial")
 	private void updateResearchFields() {
 		PartialViewContext partialViewContext = FacesContext.getCurrentInstance().getPartialViewContext();
-		partialViewContext.getRenderIds().addAll(new ArrayList<String>() {{
-			add("researchForm:equipResearchCBox");
-			add("researchForm:citiesResearchCBox");
-			add("researchForm:dateResearchPicker");
-			add("researchForm:startTimeResearchPicker");
-			add("researchForm:endTimeResearchPicker");
-			add("researchForm:activityResearchCBox");
-			add("researchForm:equipResearchCBox");
-		}});
+		List<String> cBoxFields = new ArrayList<>();
+		cBoxFields.add("researchForm:equipResearchCBox");
+		cBoxFields.add("researchForm:citiesResearchCBox");
+		cBoxFields.add("researchForm:dateResearchPicker");
+		cBoxFields.add("researchForm:startTimeResearchPicker");
+		cBoxFields.add("researchForm:endTimeResearchPicker");
+		cBoxFields.add("researchForm:activityResearchCBox");
+		cBoxFields.add("researchForm:equipResearchCBox");
+		partialViewContext.getRenderIds().addAll(cBoxFields);
 	}
 
 	//getter setters

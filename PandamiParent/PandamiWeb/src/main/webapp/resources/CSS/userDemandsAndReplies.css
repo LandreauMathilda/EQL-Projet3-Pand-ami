@@ -102,7 +102,7 @@ body .ui-tabs .ui-tabs-nav li.ui-tabs-header:hover {
 }
 
 body .ui-tabs.ui-tabs-top > .ui-tabs-nav li.ui-tabs-header.ui-state-active {
-	border-size:2px;
+	border: 2px;
 	border-color: #ac1482;
 }
 

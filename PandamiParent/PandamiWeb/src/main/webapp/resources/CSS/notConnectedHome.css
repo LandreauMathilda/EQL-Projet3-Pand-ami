@@ -12,7 +12,6 @@
 	display:flex;
 	flex-grow:1;
 	flex-direction:column;
-	_background-color:hotpink;
 	_border:1px solid black;
 	align-items: center;
 	justify-content: center;

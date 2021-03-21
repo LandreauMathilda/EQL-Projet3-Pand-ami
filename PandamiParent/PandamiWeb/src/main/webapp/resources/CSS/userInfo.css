@@ -37,7 +37,6 @@ h5 {
 	flex-direction: column;
 	_background-color: orange;
 	_padding: 2vw;
-	flex-grow: 1;
 	_margin: 2vh 2vw;
 	_align-items: space-between;
 }

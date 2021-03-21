@@ -90,7 +90,7 @@ public class DemandManagedBean implements Serializable{
 			List<SelectItem> tempList = new ArrayList<SelectItem>();
 
 			for (Activity act : activities) {
-				if(act.getActivityCategory().getId() == cat.getId()) { //Regroupage par catégorie : Si la catégorie d'activité d'une activité est egale à la categorie en cours alors on rajoute cette activité au menu déroulant 
+				if(act.getActivityCategory().getId().equals(cat.getId())) { //Regroupage par catégorie : Si la catégorie d'activité d'une activité est egale à la categorie en cours alors on rajoute cette activité au menu déroulant 
 					tempList.add(new SelectItem(act, act.getLabel()));
 				}
 			}

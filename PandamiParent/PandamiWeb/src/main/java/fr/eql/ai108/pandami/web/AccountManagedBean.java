@@ -98,16 +98,13 @@ public class AccountManagedBean implements Serializable{
 		if(user == null) {
 			messagecreateAccount = "Ce login n'est pas disponible. Choisissez en un autre";
 			return "/userInfo.xhtml?faces-redirect=true";
-		} else if (user != null){
+		} else {
 			messagecreateAccount = "";
 			selectedCity = new City();
 			sessionUser = user;
 			user = new User();
 			return "/connectedHome.xhtml?faces-redirect=true";
-		} else {
-			messagecreateAccount="Tous les champs suivis de '*' doivent être renseignés";
-			return "/userInfo.xhtml?faces-redirect=true";
-		}
+		} 
 	}
 
 	public String connection(){

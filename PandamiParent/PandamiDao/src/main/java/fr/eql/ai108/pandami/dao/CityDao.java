@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.eql.ai108.pandami.entity.City;
-import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.idao.CityIDao;
 
 @Remote(CityIDao.class)
@@ -26,7 +25,7 @@ public class CityDao extends GenericDao<City> implements CityIDao {
 		query.setParameter("paramName", city.getName());
 		query.setParameter("paramZipCode", city.getZipCode());
 		List<City> cities = query.getResultList();
-		return cities.size() > 0 ? cities.get(0) : null;
+		return !cities.isEmpty() ? cities.get(0) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -34,7 +33,7 @@ public class CityDao extends GenericDao<City> implements CityIDao {
 	public List<City> findAll(){
 		Query query = em.createQuery("SELECT c FROM City c ORDER BY c.zipCode");
 		List<City> cities = query.getResultList();
-		return cities.size() > 0 ? cities : null;
+		return !cities.isEmpty() ? cities : null;
 	}
 	
 }

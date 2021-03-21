@@ -1,8 +1,6 @@
 package fr.eql.ai108.pandami.business;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +52,7 @@ public class ReplyBusiness implements ReplyIBusiness {
 	@Override
 	public List<Reply> updateRejectedReplies(List<Reply> replies) {
 		LocalDateTime today = LocalDateTime.now();
-		List<Reply> updatedList = new ArrayList<Reply>();
+		List<Reply> updatedList = new ArrayList<>();
 		for (Reply reply : replies) {
 			reply.setRejectDate(today);
 			updateReply(reply);
@@ -73,7 +71,6 @@ public class ReplyBusiness implements ReplyIBusiness {
 	@Override
 	public String displayStatusByReply(Reply reply) {
 		String status="";
-		LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.now());
 		if (reply.getDesistDate() != null) {
 			status = "Le volontaire s'est desisté";
 		} else if (reply.getSelectionDate() != null) {
@@ -83,16 +80,4 @@ public class ReplyBusiness implements ReplyIBusiness {
 		}
 		return status;
 	}
-
-	/*
-	@Override
-	public String displayReplyStatusByReply(Reply reply) {
-		String status="";
-		if (reply.getSelectionDate() != null && reply.getDesistDate() == null) {
-			status = "volontaire selectionné";
-		} 
-		return status;
-	}
-	*/
-
 }
