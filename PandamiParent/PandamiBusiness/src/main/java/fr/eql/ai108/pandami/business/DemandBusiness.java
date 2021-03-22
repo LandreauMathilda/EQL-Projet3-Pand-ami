@@ -19,6 +19,7 @@ import fr.eql.ai108.pandami.entity.EndedType;
 import fr.eql.ai108.pandami.entity.EquipmentType;
 import fr.eql.ai108.pandami.entity.Reply;
 import fr.eql.ai108.pandami.entity.Research;
+import fr.eql.ai108.pandami.entity.User;
 import fr.eql.ai108.pandami.ibusiness.DemandIBusiness;
 import fr.eql.ai108.pandami.idao.ActivityCategoryIDao;
 import fr.eql.ai108.pandami.idao.ActivityIDao;
@@ -281,22 +282,31 @@ public class DemandBusiness implements DemandIBusiness{
 		return proxyDemand.update(demand);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String displayDemandStatusForUser(Demand demand) {
 		String status="";
 		LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.now());
 		LocalDateTime demandDate = LocalDateTime.of(demand.getActionDate(), demand.getEndHour());
+		Set<Reply> replies = demand.getReplies();
+		User benevole = new User();
+		
+		for (Reply reply : replies) {
+			if(reply.getSelectionDate() != null) {
+				benevole = reply.getVolunteer();
+			}
+		}
 		
 		if(demandDate.isBefore(now)) { //historique anciennes demandes :
 			if(demand.getCancelDate() != null) {
 				status = "Vous avez annulé cette demande";
 			} else if (demand.getCloseDate() != null && demand.getEndedType().getId() == 1) {
-				status = "L'action a été réalisée, vous n'avez pas reporté de problèmes (finalisation automatique)";
+				status = "L'action a été réalisée par " + benevole.getName() + " " + benevole.getSurname();
 			} else if (demand.getCloseDate() != null && demand.getEndedType().getId() ==2) {
 				if (demand.getReportDate() != null) {
-					status = "L'action a été réalisée, vous avez rencontré un soucis avec le bénévole";
+					status = "L'action a été réalisée par " + benevole.getName() + " " + benevole.getSurname();
 				} else if (demand.getReportDate() == null){
-					status = "L'action a été réalisée, vous n'avez pas reporté de problèmes (finalisation automatique)";
+					status = "L'action a été réalisée par " + benevole.getName() + " " + benevole.getSurname();
 				}
 			}
 			else if (demand.getCloseDate() == null && !demand.getReplies().isEmpty()) {

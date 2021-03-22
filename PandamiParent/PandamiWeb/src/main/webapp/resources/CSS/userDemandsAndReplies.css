@@ -70,6 +70,9 @@ body .ui-accordion .ui-accordion-header {
     background-color:#1482ac;
     box-shadow: 1px 1px 5px rgb(126, 126, 126);
 }
+body .ui-accordion .ui-accordion-header:first-child {
+	margin-top:2vh;
+}
 
 body .ui-accordion .ui-accordion-header:hover {
 	text-decoration: none;
@@ -131,4 +134,8 @@ body .ui-tabs .ui-tabs-nav li.ui-tabs-header.ui-state-active a {
 
 .center2Panel .accordion {
 	flex-grow:1;
+}
+
+#labelHistoriqueBenevolat {
+	padding: 1vh;
 }
