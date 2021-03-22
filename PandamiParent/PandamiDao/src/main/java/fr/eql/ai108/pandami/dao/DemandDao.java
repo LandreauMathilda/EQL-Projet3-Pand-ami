@@ -33,11 +33,11 @@ public class DemandDao extends GenericDao<Demand> implements DemandIDao{
 																			   		+ " AND d.actionDate <= :paramTodayDate"
 																			   		+ " ORDER BY d.publishDate DESC";
 
-	private static final String QUERY_GET_ALL_VALIDATED_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :paramIdUser"
+	private static final String QUERY_GET_ALL_VALIDATED_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :" + PARAM_ID_USER
 																						 + " AND d.closeDate IS NOT NULL"
 																						   + QUERY_ONGOING_DEMANDS;
 	
-	private static final String QUERY_GET_ALL_PENDING_VALIDATION_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :paramIdUser"
+	private static final String QUERY_GET_ALL_PENDING_VALIDATION_BY_USER_ID = "SELECT d FROM Demand d WHERE d.user.id = :" + PARAM_ID_USER
 																								  + " AND d.closeDate IS NULL"
 			   																						+ QUERY_ONGOING_DEMANDS;
 

@@ -46,7 +46,6 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     public void init() {
     	usersValidatedDemands = proxyDemandBu.displayOwnedValidatedByUser(sessionUser.getId());
     	usersPendingValidationDemands = proxyDemandBu.displayOwnedPendingValidationByUser(sessionUser.getId());
-    	System.out.println(sessionUser.getId());
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
     	usersPastDemands = proxyDemandBu.displayAllPastOwnedDemandsByUser(sessionUser.getId());
     	usersPastReplies = proxyReplyBu.displayPastOwnedReplies(sessionUser.getId());
