@@ -68,7 +68,7 @@ INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `closeDate`, `endHour`, `
 INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `closeDate`, `endHour`, `publishDate`, `startHour`, `street`, `activity_id`, `city_id`, `endedType_id`, `user_id`) VALUES ('2', '2021-02-13', '2021-02-13', '11:00:00', '2021-02-06 14:26:10', '09:00:00', '50 Boulevard Maxime Gorki', '4', '2', '1', '2');
 INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `cancelDate`, `endHour`, `publishDate`, `startHour`, `street`, `activity_id`, `city_id`, `user_id`) VALUES ('3', '2021-02-17', '2021-02-14', '13:30:00', '2021-02-10 09:14:24', '12:00:00', '73 Avenue Maurice Thorez', '6', '3', '3');
 INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `closeDate`, `endHour`, `publishDate`, `reportDate`, `startHour`, `street`, `activity_id`, `city_id`, `endedType_id`, `reportIssue_id`, `user_id`) VALUES ('4', '2021-02-16', '2021-02-18 18:26:05', '16:30:00', '2021-02-10 16:11:28', '2021-02-18', '14:30:00', '4 Rue Diderot', '11', '4', '2', '2', '4');
-INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `closeDate`, `endHour`, `publishDate`, `startHour`, `street`, `activity_id`, `city_id`, `endedType_id`, `user_id`) VALUES ('5', '2021-02-20', '2021-02-20', '13:00:00', '2021-02-12 10:24:18', '11:30:00', '21 Rue Gabriel Péri', '8', '5', '1', '5');
+INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `closeDate`, `endHour`, `publishDate`, `startHour`, `street`, `activity_id`, `city_id`, `endedType_id`, `user_id`) VALUES ('5', '2021-02-20', '2021-02-21 14:34:21', '13:00:00', '2021-02-12 10:24:18', '11:30:00', '21 Rue Gabriel Péri', '8', '5', '2', '5');
 INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `closeDate`, `endHour`, `publishDate`, `startHour`, `street`, `activity_id`, `city_id`, `endedType_id`, `user_id`) VALUES ('6', '2021-03-08', '2021-03-08', '10:30:00', '2021-03-02 19:24:15', '09:30:00', '50 Boulevard Maxime Gorki', '15', '2', '1', '2');
 INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `closeDate`, `endHour`, `publishDate`, `startHour`, `street`, `activity_id`, `city_id`, `endedType_id`, `user_id`) VALUES ('7', '2021-03-14', '2021-03-14', '14:00:00', '2021-03-04 14:15:27', '12:00:00', '50 Boulevard Maxime Gorki', '11', '2', '1', '2');
 INSERT INTO `pandami_db`.`demand` (`id`, `actionDate`, `endHour`, `publishDate`, `startHour`, `street`, `activity_id`, `city_id`, `user_id`) VALUES ('8', '2021-03-15', '12:00:00', '2021-03-06 13:36:10', '11:00:00', '4 Boulevard de Créteil', '3', '1', '1');
@@ -107,9 +107,9 @@ INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, 
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id`, `volunteer_id`) VALUES ('11', '2021-02-11', '2021-02-12', '4', '1');
 INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('12', '2021-02-12', '2021-02-11', '4', '2');
 INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('13', '2021-02-12', '2021-02-11', '4', '5');
-INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('14', '2021-02-14', '2021-02-12', '5', '1');
+INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id`, `volunteer_id`) VALUES ('14', '2021-02-12', '2021-02-14 00:00:00', '5', '1');
 INSERT INTO `pandami_db`.`reply` (`id`, `desistDate`, `rejectDate`, `replyDate`, `selectionDate`, `demand_id`, `desistReason_id`, `volunteer_id`) VALUES ('15', '2021-02-14', '2021-02-14', '2021-02-13', '2021-02-13', '5', '1', '2');
-INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id`, `volunteer_id`) VALUES ('16', '2021-02-13', '2021-02-14', '5', '3');
+INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('16',  '2021-02-14 00:00:00', '2021-02-13', '5', '3');
 INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('17', '2021-02-14', '2021-02-13', '5', '4');
 INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('18', '2021-03-03', '2021-03-02', '6', '1');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id`, `volunteer_id`) VALUES ('19', '2021-03-02', '2021-03-03', '6', '3');
@@ -121,9 +121,9 @@ INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('25', '2021-03-09', '9', '1');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('26', '2021-03-09', '9', '2');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('27', '2021-03-09', '9', '4');
-INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('28', '2021-03-10', '2021-03-10', '10', '1');
+INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id`, `volunteer_id`) VALUES ('28', '2021-03-10', '2021-03-10 00:00:00', '10', '1');
 INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('29', '2021-03-10', '2021-03-10', '10', '2');
-INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `selectionDate`, `demand_id`, `volunteer_id`) VALUES ('30', '2021-03-10', '2021-03-10', '10', '4');
+INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('30', '2021-03-10 00:00:00', '2021-03-10', '10', '4');
 INSERT INTO `pandami_db`.`reply` (`id`, `rejectDate`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('31', '2021-03-10', '2021-03-10', '10', '5');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('32', '2021-03-10', '11', '2');
 INSERT INTO `pandami_db`.`reply` (`id`, `replyDate`, `demand_id`, `volunteer_id`) VALUES ('33', '2021-03-10', '11', '4');
