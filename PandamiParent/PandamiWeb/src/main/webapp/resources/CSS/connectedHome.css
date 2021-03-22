@@ -11,6 +11,9 @@
 	padding: 1vh;
 	_background-color: teal;
 }
+h1 {
+	margin : 0.5vh 5vw;
+}
 
 .ui-formButtons .buttons {
 	text-transform: uppercase;
@@ -27,7 +30,7 @@
     _background-color: rgba(20,130,172,0.7);
     box-shadow: 1px 1px 5px rgb(126, 126, 126);
     padding:5vh 5vw;
-    margin: 3vh 5vw;
+    margin: 1vh 5vw;
     min-width:50vw;
 }
 
