@@ -118,7 +118,7 @@ public class AccountManagedBean implements Serializable{
 			retour = "/adminHome.xhtml?faces-redirect=true";
 		}else {
 			user = new User();
-			messageConnection = "Login/Password incorrectes";
+			messageConnection = "Identifiant/Mot de passe incorrectes";
 			retour = "/connectionPage.xhtml?faces-redirect=true";
 		}
 

@@ -112,7 +112,7 @@ public class AdminManagedBean implements Serializable{
 	public void upDateActivity() {
 		proxyAdminBu.upDateActivity(selectedActivity);
 		activities = proxyAdminBu.displayActivities();
-		activeIndex = 3;
+		activeIndex = 2;
 	}
 
 	public void addActivity() {
@@ -124,7 +124,7 @@ public class AdminManagedBean implements Serializable{
 		categoryForActivity = null;
 		equipmentForActivity = null;
 		activities = proxyAdminBu.displayActivities();
-		activeIndex = 3;
+		activeIndex = 2;
 	}
 
 	public void upDateCategory() {

@@ -126,10 +126,10 @@ public class DemandManagedBean implements Serializable{
 	}
 
 	public String upDateDemand(Demand demand) {
-		demand = proxyDemandBu.upDateDemand(demand);
-		this.demand.setCity(sessionUser.getCity());
-		messageUpDate="Votre demande à bien été modifiée";
-		return "/modifDemand.xhtml?faces-redirect=true";
+	    demand = proxyDemandBu.upDateDemand(this.demand);
+        this.demand.setCity(sessionUser.getCity());
+        messageUpDate="Votre demande a bien été modifiée";
+        return "/modifDemand.xhtml?faces-redirect=true";
 	}
 
 	public String setDemo() {

@@ -62,7 +62,10 @@ public class RedirectManagedBean implements Serializable{
 	}
 	
 	public String redirectDemandsAndReplies() {
-		return "userDemandsAndReplies.xhtml?faces-redirect=true";
+		return "/userDemandsAndReplies.xhtml?faces-redirect=true";
+	}
+	public String redirectAdminToUser() {
+		return "/connectedHome.xhtml?faces-redirect=true";
 	}
 
 	public User getSessionUser() {

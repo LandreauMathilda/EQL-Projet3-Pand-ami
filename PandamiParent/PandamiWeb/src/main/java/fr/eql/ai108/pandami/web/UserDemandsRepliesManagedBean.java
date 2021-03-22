@@ -49,6 +49,7 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     	usersReplies = proxyReplyBu.displayOwnedReplies(sessionUser.getId());
     	usersPastDemands = proxyDemandBu.displayAllPastOwnedDemandsByUser(sessionUser.getId());
     	usersPastReplies = proxyReplyBu.displayPastOwnedReplies(sessionUser.getId());
+    	activeIndex = 0;
     }
     
     public String cancelDemand(Demand demand) {
@@ -66,7 +67,6 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     	reply = proxyReplyBu.updateSelectedReply(reply);
     	rejectedReplies = proxyReplyBu.getNotSelectedRepliesByDemandId(reply.getDemand().getId()); 
     	rejectedReplies = proxyReplyBu.updateRejectedReplies(rejectedReplies);
-    	activeIndex = 1;
     	return refresh();
     }
     
@@ -74,6 +74,7 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     	//reinitialiser les listes de demandes du User, filtrée :
     	usersValidatedDemands = proxyDemandBu.displayOwnedValidatedByUser(sessionUser.getId());
     	usersPendingValidationDemands = proxyDemandBu.displayOwnedPendingValidationByUser(sessionUser.getId());
+    	activeIndex = 1;
     	return "/userDemandsAndReplies.xhtml?faces-redirect=true";	
     }
     
