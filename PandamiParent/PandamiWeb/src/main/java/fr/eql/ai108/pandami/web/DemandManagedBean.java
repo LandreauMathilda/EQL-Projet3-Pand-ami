@@ -40,6 +40,8 @@ public class DemandManagedBean implements Serializable{
 	private String selectedActivity;
 	private EquipmentType selectedEquipment;
 	private String message;
+	private String messageCreate;
+	private String messageUpDate;
 
 
 	private LocalTime startHourDemo;
@@ -75,7 +77,8 @@ public class DemandManagedBean implements Serializable{
 		createActivitiesSelectCBox();
 		demand.setCity(sessionUser.getCity());
 		demand.setStreet(sessionUser.getStreet());
-		message = "";
+		messageCreate = "";
+		messageUpDate = "";
 	}
 
 	private void createActivitiesSelectCBox() {
@@ -113,7 +116,7 @@ public class DemandManagedBean implements Serializable{
 		demand.setUser(sessionUser);
 		demand = proxyDemandBu.createDemand(demand);
 		demand = new Demand();
-		message = "Votre demande a bien été prise en compte";
+		messageCreate = "Votre demande a bien été prise en compte";
 		return "/demandDeposit.xhtml?faces-redirect=true";
 	}
 
@@ -125,7 +128,7 @@ public class DemandManagedBean implements Serializable{
 	public String upDateDemand(Demand demand) {
 		demand = proxyDemandBu.upDateDemand(demand);
 		this.demand.setCity(sessionUser.getCity());
-		message="Votre demande à bien été modifiée";
+		messageUpDate="Votre demande à bien été modifiée";
 		return "/modifDemand.xhtml?faces-redirect=true";
 	}
 
@@ -339,6 +342,20 @@ public class DemandManagedBean implements Serializable{
 
 	public void setCategoryDemo(ActivityCategory categoryDemo) {
 		this.categoryDemo = categoryDemo;
+	}
+
+	public String getMessageCreate() {
+		return messageCreate;
+	}
+	public void setMessageCreate(String messageCreate) {
+		this.messageCreate = messageCreate;
+	}
+
+	public String getMessageUpDate() {
+		return messageUpDate;
+	}
+	public void setMessageUpDate(String messageUpDate) {
+		this.messageUpDate = messageUpDate;
 	}
 	
 
