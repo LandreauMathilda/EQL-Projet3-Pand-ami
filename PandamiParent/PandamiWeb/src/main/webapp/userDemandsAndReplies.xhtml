@@ -21,7 +21,6 @@
 								<p:tab styleClass="accordionChild" title="#{demand.actionDate} - #{demand.activity} - #{mbUserDemRep.getStatusByDemand(demand)}">
 									<label class="contentAcc">Horaire : de #{demand.startHour} à #{demand.endHour}</label>
 									<label class="contentAcc">adresse : #{demand.street} #{demand.city.name} - #{demand.city.zipCode}</label>
-									<p:commandButton class="contentAcc" action="#{mbUserDemRep.cancelDemand(demand)}" value="Annuler"/>
 									<p:dataTable class="repliesDataTable" value="#{demand.replies}" var="reply" widgetVar="demandTable"
 												emptyMessage="Aucun bénévole ne s'est porté volontaire à ce jour">
 										<p:column headerText="Volontaire">
