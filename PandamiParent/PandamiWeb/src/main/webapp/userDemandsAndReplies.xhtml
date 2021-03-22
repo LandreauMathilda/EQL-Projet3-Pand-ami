@@ -83,7 +83,8 @@
 								multiple="true" widgetVar="accReplies">
 								<p:tab styleClass="accordionChild"
 									title="#{reply.demand.actionDate} - #{reply.demand.activity} 
-									pour #{reply.demand.user.name} #{reply.demand.user.surname}">
+									pour #{reply.demand.user.name} #{reply.demand.user.surname}" >
+									<label class="contentAcc">Statut : #{mbUserDemRep.getStatusForOwnedRepliesByReply(reply)}</label>
 									<label class="contentAcc">Horaire : de #{reply.demand.startHour} à
 										#{reply.demand.endHour}</label>
 									<label class="contentAcc">adresse : #{reply.demand.street}
@@ -99,16 +100,17 @@
 								multiple="true" widgetVar="accPastDemands">
 								<p:tab styleClass="accordionChild"
 									title="#{pastDemand.actionDate} - #{pastDemand.activity}">
+									<label class="contentAcc">Statut : #{mbUserDemRep.getStatusByDemand(pastDemand)}</label>
 									<label class="contentAcc">Horaire : de #{pastDemand.startHour} à
 										#{pastDemand.endHour}</label>
 									<label class="contentAcc">adresse : #{pastDemand.street}
 										#{pastDemand.city.name} - #{pastDemand.city.zipCode}</label>
-									<label class="contentAcc">Statut : #{mbUserDemRep.getStatusByDemand(pastDemand)}</label>
 								</p:tab>
 							</p:accordionPanel>
 						</h:form>
 					</p:tab>
 					<p:tab styleClass="tab" title="Historique de mon bénévolat">
+						<label style="font-style: oblique;">Historique des actions où vous avez été bénévole : </label>
 						<h:form>
 							<p:accordionPanel dynamic="true" cache="true" var="pastReply"
 								value="#{mbUserDemRep.usersPastReplies}" styleClass="accordion"

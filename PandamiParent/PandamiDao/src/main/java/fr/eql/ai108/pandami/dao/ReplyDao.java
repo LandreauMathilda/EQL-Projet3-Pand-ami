@@ -38,6 +38,7 @@ public class ReplyDao extends GenericDao<Reply> implements ReplyIDao {
 	
 	private static final String QUERY_GET_ALL_ORDER_DESC_BY_USER_ID = "SELECT r FROM Reply r WHERE r.volunteer.id = :" + PARAM_ID_USER
 			  																	  		 + " AND r.demand.actionDate <= :paramTodayDate"
+			  																	  		 + " AND r.selectionDate IS NOT NULL"
 			  																	  		 + " ORDER BY r.demand.actionDate DESC";
 	
 	@Override

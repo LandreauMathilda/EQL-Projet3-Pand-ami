@@ -15,4 +15,5 @@ public interface ReplyIBusiness {
 	List<Reply> updateRejectedReplies(List<Reply> replies);
 	Reply updateSelectedReply(Reply reply);
 	String displayStatusByReply(Reply reply);
+	String displayStatusForOwnedRepliesByReply(Reply reply);
 }

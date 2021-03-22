@@ -80,4 +80,15 @@ public class ReplyBusiness implements ReplyIBusiness {
 		}
 		return status;
 	}
+	
+	@Override
+	public String displayStatusForOwnedRepliesByReply(Reply reply) {
+		String status="";
+		if (reply.getSelectionDate() != null) {
+			status = "Vous avez été selectionné";
+		} else {
+			status = "Le bénéficiaire n'a pas encore choisi son bénévole";
+		}
+		return status;
+	}
 }

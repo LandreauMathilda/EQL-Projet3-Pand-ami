@@ -85,6 +85,10 @@ public class UserDemandsRepliesManagedBean implements Serializable {
     public String getStatusByDemand(Demand demand) {
     	return proxyDemandBu.displayDemandStatusForUser(demand);
     }
+    
+    public String getStatusForOwnedRepliesByReply(Reply reply) {
+    	return proxyReplyBu.displayStatusForOwnedRepliesByReply(reply);
+    }
 
 	public User getSessionUser() {
 		return sessionUser;
